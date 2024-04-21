@@ -1,8 +1,41 @@
 .header {
     height: 10vh;
     width: 100vw;
-    background-color: rgb(236, 197, 197);
+    background-color: rgb(252, 2, 2);
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.myNavBar{
+    background-color: rgb(80, 132, 132);
+    height: 8vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.test{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: aqua;
+}
+.my-dropdown .dropdown-menu {
+    background-color: blueviolet;
+    
+}
+
+.my-dropdown .dropdown-item {
+    color: burlywood;
+}
+.my-dropdown .dropdown-toggle::after {
+    display: none;
+}
+.test2{
+    width: 90vw;
+    display: flex;
+    justify-content: end;
+    align-items: start;
+background-color: aqua;
 }

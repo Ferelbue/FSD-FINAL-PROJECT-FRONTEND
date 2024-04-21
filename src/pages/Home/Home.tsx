@@ -28,7 +28,7 @@ export const Home: React.FC = () => {
   }, [products]);
 
   return (
-    <div>
+    <div className="home">
       {products.length === 0 ? (
         <div>{error}</div>
       ) : (
