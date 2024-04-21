@@ -8,4 +8,5 @@
     height: 90vh;
     width: 100vw;
     background-color: #c985b6;
+    overflow-x: hidden;
 }
