@@ -6,7 +6,7 @@ import storage from 'redux-persist/lib/storage';
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 
-const reducers = combineReducers({
+const reducers:any = combineReducers({
     user: userSlice
 });
 

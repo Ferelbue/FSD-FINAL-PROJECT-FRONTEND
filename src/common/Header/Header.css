@@ -1,41 +1,109 @@
 .header {
     height: 10vh;
     width: 100vw;
-    background-color: rgb(252, 2, 2);
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.myNavBar{
+
+.myNavBar {
     background-color: rgb(80, 132, 132);
-    height: 8vh;
-    width: 100vw;
+    height: 13vh;
+    padding-left: 2em !important;
+    padding-right: 2em !important;
+    border-bottom: 1px solid whitesmoke;
+}
+.myNavBar0 {
+    background-color: rgb(80, 132, 132);
+    height: 7vh;
+    padding-left: 2em !important;
+    padding-right: 2em !important;
+    border-bottom: 1px solid whitesmoke;
+}
+
+.myNavBar1 {
+    width: 50vw;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.myNavBar2 {
+    background-color: rgb(234, 243, 243);
+    margin-bottom: 0.5em;
+
+}
+
+.myNavBar3 {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.test{
+
+.myNavBar4 {
+    width: 26.5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.myNavBar5 {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    margin-left: 1.5em;
+}
+
+.myNavBar7:hover{
+    color: whitesmoke !important;
+    font-weight: bold;
+
+}
+.test {
+
+    width: 80vw;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
-    background-color: aqua;
+
+}
+.my-dropdown .dropdown-toggle {
+    font-weight: bold;
+}
+.my-dropdown .dropdown-toggle:hover {
+    color: whitesmoke;
 }
 .my-dropdown .dropdown-menu {
-    background-color: blueviolet;
-    
+    background-color: ghostwhite;
 }
 
 .my-dropdown .dropdown-item {
-    color: burlywood;
+    color: rgb(69,68,66);
 }
-.my-dropdown .dropdown-toggle::after {
-    display: none;
+
+.my-dropdown .dropdown-item:hover {
+    background-color: rgb(146, 187, 187);
+    font-weight: bold;
+    transition: 0.2s;
 }
-.test2{
+
+.test2 {
     width: 90vw;
     display: flex;
     justify-content: end;
     align-items: start;
-background-color: aqua;
+    background-color: aqua;
+}
+
+.imageUser {
+    width: 1.8em;
+    height: 1.8em; /* Asegúrate de establecer una altura para que la imagen se muestre */
+    margin-right: 0.3em;
+    background: url('../../../public/user.png') no-repeat center center / cover;
+}
+
+.imageUser:hover {
+    background-image: url('../../../public/user2.png'); /* Reemplaza esto con la ruta a tu otra imagen */
 }
