@@ -7,10 +7,12 @@ import { LoginData } from "../../interfaces";
 import { LoginMe } from "../../services/apiCalls";
 import { login } from "../../app/slices/userSlice";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export const Login: React.FC = () => {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [credentials, setCredentials] = useState<LoginData>({
     email: "",
@@ -37,7 +39,7 @@ export const Login: React.FC = () => {
       };
 
       dispatch(login({ credentials: passport }));
-
+      navigate("/")
     }
   
  }

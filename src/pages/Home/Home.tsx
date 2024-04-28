@@ -66,13 +66,14 @@ export const Home: React.FC = () => {
                                     </div>
                                     <Card.Text>{product.description}</Card.Text>
                                   </Card.Body>
-                                  <div>
+                                  <div className="startCard">
                                     {product.starts === 0 ? <div className="productStart0"></div> : null}
                                     {product.starts === 1 ? <div className="productStart1"></div> : null}
                                     {product.starts === 2 ? <div className="productStart2"></div> : null}
                                     {product.starts === 3 ? <div className="productStart3"></div> : null}
                                     {product.starts === 4 ? <div className="productStart4"></div> : null}
                                     {product.starts === 5 ? <div className="productStart5"></div> : null}
+                                    ({product.totalReviews})
                                   </div>
                                 </Card>
                               </div>

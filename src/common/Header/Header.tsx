@@ -1,7 +1,7 @@
 
 import { useEffect } from 'react';
 import "./Header.css"
-import { userData , userout } from "../../app/slices/userSlice";
+import { userData, userout } from "../../app/slices/userSlice";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -24,7 +24,7 @@ const Header = () => {
     const handleLogout = async () => {
         dispatch(userout({ credentials: "" }));
         navigate("/")
-      };
+    };
 
     console.log("rdxUser", rdxUser.credentials)
 
@@ -36,7 +36,7 @@ const Header = () => {
                         <Container>
 
                             <Navbar.Brand href="#home" onClick={() => navigate('/home')}>
-                                <div className="imageLogo" />
+                                <div className="imageLogo" title="Home" />
                             </Navbar.Brand>
                             <Navbar.Toggle aria-controls="basic-navbar-nav" className="myNavBar2" />
                             <Form.Control
@@ -47,7 +47,7 @@ const Header = () => {
                             <Navbar.Collapse id="basic-navbar-nav" className="myNavBar3">
                                 <Nav className="myNavBar1">
                                     <Nav.Link href="#home" onClick={() => navigate('/login')}>
-                                        <div className="imageUser" />
+                                        <div className="imageUser" title="Login" />
                                     </Nav.Link>
                                 </Nav>
                             </Navbar.Collapse>
@@ -138,7 +138,7 @@ const Header = () => {
                                 <Container>
 
                                     <Navbar.Brand href="#home" onClick={() => navigate('/home')}>
-                                        <div className="imageLogo" />
+                                        <div className="imageLogo" title="Home" />
                                     </Navbar.Brand>
                                     <Navbar.Toggle aria-controls="basic-navbar-nav" className="myNavBar2" />
                                     <Form.Control
@@ -149,19 +149,19 @@ const Header = () => {
                                     <Navbar.Collapse id="basic-navbar-nav" className="myNavBar3">
                                         <Nav className="myNavBar1">
                                             <Nav.Link href="#home">
-                                                <div className="imagePlus" />
+                                                <div className="imagePlus" title="Upload product" />
                                             </Nav.Link>
                                             <Nav.Link href="#home">
-                                                <div className="imageCuore" />
+                                                <div className="imageCuore" title="My favorites" />
                                             </Nav.Link>
                                             <Nav.Link href="#home">
-                                                <div className="imageChat" />
+                                                <div className="imageChat" title="My chats" />
                                             </Nav.Link>
                                             <Nav.Link href="#home">
-                                                <div className="imageUser" />
+                                                <div className="imageUser" title="My profile" />
                                             </Nav.Link>
-                                            <Nav.Link href="#home" onClick={()=> handleLogout()}>
-                                                <div className="imageExit" />
+                                            <Nav.Link href="#home" onClick={() => handleLogout()}>
+                                                <div className="imageExit" title="Log Out" />
                                             </Nav.Link>
 
                                         </Nav>
@@ -251,7 +251,9 @@ const Header = () => {
                                 <Navbar expand="lg" className="myNavBar">
                                     <Container>
 
-                                        <Navbar.Brand href="#home">TOOL-RENT</Navbar.Brand>
+                                        <Navbar.Brand href="#home" onClick={() => navigate('/home')}>
+                                            <div className="imageLogo" title="Home" />
+                                        </Navbar.Brand>
                                         <Navbar.Toggle aria-controls="basic-navbar-nav" className="myNavBar2" />
                                         <Form.Control
                                             placeholder="Search a product"
@@ -261,16 +263,21 @@ const Header = () => {
                                         <Navbar.Collapse id="basic-navbar-nav" className="myNavBar3">
                                             <Nav className="myNavBar1">
                                                 <Nav.Link href="#home">
-                                                    <div className="imageUser" />
+                                                    <div className="imagePlus" title="Upload product" />
                                                 </Nav.Link>
                                                 <Nav.Link href="#home">
-                                                    hola
-                                                    {/* <div className="imageUser" /> */}
+                                                    <div className="imageCuore" title="My favorites" />
                                                 </Nav.Link>
                                                 <Nav.Link href="#home">
-                                                    adios
-                                                    {/* <div className="imageUser" /> */}
+                                                    <div className="imageChat" title="My chats" />
                                                 </Nav.Link>
+                                                <Nav.Link href="#home">
+                                                    <div className="imageUser" title="My profile" />
+                                                </Nav.Link>
+                                                <Nav.Link href="#home" onClick={() => handleLogout()}>
+                                                    <div className="imageExit" title="Log Out" />
+                                                </Nav.Link>
+
                                             </Nav>
                                         </Navbar.Collapse>
                                     </Container>
