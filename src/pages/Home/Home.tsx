@@ -3,6 +3,7 @@ import { BringProducts } from "../../services/apiCalls";
 import { DataFetched } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./Home.css";
+import { Card, Carousel } from "react-bootstrap";
 
 export const Home: React.FC = () => {
   const [products, setProducts] = useState<any[]>([]);
@@ -35,29 +36,54 @@ export const Home: React.FC = () => {
       ) : (
         <div>
           {Array.from({ length: 13 }).map((_, i) => {
-            const firstProductOfCategory = products.find(product => product?.category?.id === i);
+            const productsOfCategory = products.filter(product => product?.category?.id === i);
+            const arrayProducts = [];
+            const carouselSize = 4;
+
+            for (let j = 0; j < productsOfCategory.length; j += carouselSize) {
+              arrayProducts.push(productsOfCategory.slice(j, j + carouselSize));
+            }
 
             return (
-              <div>
-                {firstProductOfCategory && 
-                <div className="categoryTitle">
-                  {firstProductOfCategory.category.name.toUpperCase()}
-                  </div>}
+              <div key={i}>
+                {productsOfCategory[0] &&
+                  <>
+                    <div className="categoryTitle">
+                      {productsOfCategory[0].category.name.toUpperCase()}
+                    </div>
+                    <Carousel>
+                      {arrayProducts.map((block, blockIndex) => (
+                        <Carousel.Item key={blockIndex}>
+                          <div className="row justify-content-around carouselProducts">
+                            {block.map((product) => (
+                              <div className="col-sm-12 col-md-6 col-lg-3" key={product.id}>
+                                <Card className="cardProduct">
+                                  <Card.Img className="imageProductCard" src={product.image} />
+                                  <Card.Body>
+                                    <Card.Title className="cardTitle">{product.name.toUpperCase()}</Card.Title>
+                                    <div className="cardPrice">
+                                      {product.hourPrice}€/hora &nbsp;&nbsp; {product.dayPrice}€/día
+                                    </div>
+                                    <Card.Text>{product.description}</Card.Text>
+                                  </Card.Body>
+                                  <div>
+                                    {product.starts === 0 ? <div className="productStart0"></div> : null}
+                                    {product.starts === 1 ? <div className="productStart1"></div> : null}
+                                    {product.starts === 2 ? <div className="productStart2"></div> : null}
+                                    {product.starts === 3 ? <div className="productStart3"></div> : null}
+                                    {product.starts === 4 ? <div className="productStart4"></div> : null}
+                                    {product.starts === 5 ? <div className="productStart5"></div> : null}
+                                  </div>
+                                </Card>
+                              </div>
+                            ))}
+                          </div>
+                        </Carousel.Item>
+                      ))}
+                    </Carousel>
+                  </>
+                }
 
-                {products.map((product) => {
-                  return (
-                    product?.category?.id === i && (
-                      <div key={product.id} className="product">
-                        <h1>{product.name}</h1>
-                        <p>{product.description}</p>
-                        <img src={product.image} alt={product.name} />
-                        <p>{product.hourPrice}</p>
-                        <p>{product.dayPrice}</p>
-                        <p>{product.category?.name}</p>
-                      </div>
-                    )
-                  );
-                })}
               </div>
             );
           })}
