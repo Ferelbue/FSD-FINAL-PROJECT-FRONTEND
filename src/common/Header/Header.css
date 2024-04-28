@@ -21,7 +21,7 @@
     padding-left: 2em !important;
     padding-right: 2em !important;
     border-bottom: 1px solid whitesmoke;
-    z-index: 1;
+    z-index: 10;
 }
 
 .myNavBar1 {
@@ -73,6 +73,9 @@
     align-items: center;
 
 }
+.my-dropdown{
+    z-index: 10;
+}
 .my-dropdown .dropdown-toggle {
     font-weight: bold;
 }
@@ -103,57 +106,57 @@
 
 .imageUser {
     width: 1.8em;
-    height: 1.8em; /* Asegúrate de establecer una altura para que la imagen se muestre */
+    height: 1.8em;
     margin-right: 0.3em;
     background: url('../../../public/user.png') no-repeat center center / cover;
 }
 
 .imageUser:hover {
-    background-image: url('../../../public/user2.png'); /* Reemplaza esto con la ruta a tu otra imagen */
+    background-image: url('../../../public/user2.png');
 }
 .imagePlus {
     width: 1.8em;
-    height: 1.8em; /* Asegúrate de establecer una altura para que la imagen se muestre */
+    height: 1.8em;
     margin-right: 0.3em;
     background: url('../../../public/plus.png') no-repeat center center / cover;
 }
 
 .imagePlus:hover {
-    background-image: url('../../../public/plus2.png'); /* Reemplaza esto con la ruta a tu otra imagen */
+    background-image: url('../../../public/plus2.png');
 }
 .imageCuore {
     width: 1.8em;
-    height: 1.8em; /* Asegúrate de establecer una altura para que la imagen se muestre */
+    height: 1.8em;
     margin-right: 0.3em;
     background: url('../../../public/cuore.png') no-repeat center center / cover;
 }
 
 .imageCuore:hover {
-    background-image: url('../../../public/cuore2.png'); /* Reemplaza esto con la ruta a tu otra imagen */
+    background-image: url('../../../public/cuore2.png');
 }
 .imageChat {
     width: 1.8em;
-    height: 1.8em; /* Asegúrate de establecer una altura para que la imagen se muestre */
+    height: 1.8em;
     margin-right: 0.3em;
     background: url('../../../public/chat.png') no-repeat center center / cover;
 }
 
 .imageChat:hover {
-    background-image: url('../../../public/chat2.png'); /* Reemplaza esto con la ruta a tu otra imagen */
+    background-image: url('../../../public/chat2.png');
 }
 .imageExit {
     width: 1.8em;
-    height: 1.8em; /* Asegúrate de establecer una altura para que la imagen se muestre */
+    height: 1.8em;
     margin-right: 0.3em;
     background: url('../../../public/exit.png') no-repeat center center / cover;
 }
 
 .imageExit:hover {
-    background-image: url('../../../public/exit2.png'); /* Reemplaza esto con la ruta a tu otra imagen */
+    background-image: url('../../../public/exit2.png');
 }
 .imageLogo {
     width: 3.3em;
-    height: 3.3em; /* Asegúrate de establecer una altura para que la imagen se muestre */
+    height: 3.3em;
     margin-right: 0.3em;
     background: url('../../../public/logo.png') no-repeat center center / cover;
 }

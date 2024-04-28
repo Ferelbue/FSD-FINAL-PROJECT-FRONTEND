@@ -63,26 +63,24 @@ export const LoginMe = async (credentials: LoginData): Promise<any> => {
     }
   }
 
-// export const getPosts = async (token, criteria, limit, pag) => {
+export const BringCategoryProducts = async (id : number) : Promise<any> => {
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+    };
 
-//     const options = {
-//         method: "GET",
-//         headers: {
-//             "Content-Type": "application/json",
-//             "Authorization": `Bearer ${token}`
-//         },
-//     };
+    try {
+        const response = await fetch(`${ROOT}products/category/${id}`, options);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
 
-//     try {
-//         const response = await fetch(`${root}posts?title=${criteria}&page=${pag}&limit=${limit}`, options);
-//         const data = await response.json();
-//         if (!response.ok) {
-//             throw new Error(data.message);
-//         }
+        return data;
 
-//         return data;
-
-//     } catch (error) {
-//         return error;
-//     }
-// };
+    } catch (error) {
+        return error;
+    }
+};

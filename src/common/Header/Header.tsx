@@ -9,6 +9,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { updateCategory } from '../../app/slices/categorySlice';
 
 const Header = () => {
 
@@ -17,16 +18,15 @@ const Header = () => {
 
     const navigate = useNavigate();
 
-    useEffect(() => {
-        console.log("asdfasdfasdf", rdxUser.credentials)
-    }, [rdxUser])
-
     const handleLogout = async () => {
         dispatch(userout({ credentials: "" }));
         navigate("/")
     };
 
-    console.log("rdxUser", rdxUser.credentials)
+    const handleCategory = async (category: number) => {
+        dispatch(updateCategory({ category: category }));
+        navigate("/category")
+    };
 
     return (
         <>
@@ -55,76 +55,75 @@ const Header = () => {
                     </Navbar>
                     <Navbar expand="lg" className="myNavBar0">
                         <Container>
-                            {/* <img src="../../../public/test.png" alt="Logo" style={{ width: '1em', marginRight: '0.3em' }} /> */}
                             <NavDropdown title="Todas las categorias" id="basic-nav-dropdown" className="my-dropdown">
 
                                 <div className="test">
                                     <div className="myNavBar4">
-                                        <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                        <NavDropdown.Item onClick={() => handleCategory(1)}>Agricola-Forestal</NavDropdown.Item>
                                     </div >
                                     <div className="myNavBar4">
-                                        <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                        <NavDropdown.Item onClick={() => handleCategory(2)}>Construcción</NavDropdown.Item>
                                     </div>
                                     <div className="myNavBar4">
-                                        <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                        <NavDropdown.Item onClick={() => handleCategory(3)}>Bricolaje</NavDropdown.Item>
                                     </div>
                                     <NavDropdown.Divider />
                                 </div>
                                 <div className="test">
                                     <div className="myNavBar4">
-                                        <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                        <NavDropdown.Item onClick={() => handleCategory(4)}>Carpintería</NavDropdown.Item>
                                     </div >
                                     <div className="myNavBar4">
-                                        <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                        <NavDropdown.Item onClick={() => handleCategory(5)}>Electricidad</NavDropdown.Item>
                                     </div>
                                     <div className="myNavBar4">
-                                        <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                        <NavDropdown.Item onClick={() => handleCategory(6)}>Fontanería</NavDropdown.Item>
                                     </div>
                                     <NavDropdown.Divider />
                                 </div>
                                 <div className="test">
                                     <div className="myNavBar4">
-                                        <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                        <NavDropdown.Item onClick={() => handleCategory(7)}>Medición</NavDropdown.Item>
                                     </div >
                                     <div className="myNavBar4">
-                                        <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                        <NavDropdown.Item onClick={() => handleCategory(8)}>Jardinería</NavDropdown.Item>
                                     </div>
                                     <div className="myNavBar4">
-                                        <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                        <NavDropdown.Item onClick={() => handleCategory(9)}>Limpieza</NavDropdown.Item>
                                     </div>
                                     <NavDropdown.Divider />
                                 </div>
                                 <div className="test">
                                     <div className="myNavBar4">
-                                        <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                        <NavDropdown.Item onClick={() => handleCategory(10)}>Llaves Manuales</NavDropdown.Item>
                                     </div >
                                     <div className="myNavBar4">
-                                        <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                        <NavDropdown.Item onClick={() => handleCategory(11)}>Metal</NavDropdown.Item>
                                     </div>
                                     <div className="myNavBar4">
-                                        <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                        <NavDropdown.Item onClick={() => handleCategory(12)}>Pintura</NavDropdown.Item>
                                     </div>
                                     <NavDropdown.Divider />
                                 </div>
                                 <div className="test">
                                     <div className="myNavBar4">
-                                        <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                        <NavDropdown.Item onClick={() => handleCategory(13)}>Carga-Movimiento</NavDropdown.Item>
                                     </div >
                                     <div className="myNavBar4">
-                                        <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                        <NavDropdown.Item href="#action/2.1"></NavDropdown.Item>
                                     </div>
                                     <div className="myNavBar4">
-                                        <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                        <NavDropdown.Item href="#action/2.1"></NavDropdown.Item>
                                     </div>
                                     <NavDropdown.Divider />
                                 </div>
                             </NavDropdown>
                             <Navbar.Collapse id="basic-navbar-nav" className="myNavBar5">
                                 <Nav>
-                                    <Nav.Link className="myNavBar7" href="#home">Bricolaje</Nav.Link>
-                                    <Nav.Link className="myNavBar7" href="#link">Fontanería</Nav.Link>
-                                    <Nav.Link className="myNavBar7" href="#link">Construcción</Nav.Link>
-                                    <Nav.Link className="myNavBar7" href="#link">Agricola-Forestal</Nav.Link>
+                                    <Nav.Link className="myNavBar7" onClick={() => handleCategory(3)}>Bricolaje</Nav.Link>
+                                    <Nav.Link className="myNavBar7" onClick={() => handleCategory(4)}>Fontanería</Nav.Link>
+                                    <Nav.Link className="myNavBar7" onClick={() => handleCategory(2)}>Construcción</Nav.Link>
+                                    <Nav.Link className="myNavBar7" onClick={() => handleCategory(1)}>Agricola-Forestal</Nav.Link>
                                 </Nav>
                             </Navbar.Collapse>
                         </Container>
@@ -170,76 +169,75 @@ const Header = () => {
                             </Navbar>
                             <Navbar expand="lg" className="myNavBar0">
                                 <Container>
-                                    {/* <img src="../../../public/test.png" alt="Logo" style={{ width: '1em', marginRight: '0.3em' }} /> */}
                                     <NavDropdown title="Todas las categorias" id="basic-nav-dropdown" className="my-dropdown">
 
                                         <div className="test">
                                             <div className="myNavBar4">
-                                                <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                                <NavDropdown.Item onClick={() => handleCategory(1)}>Agricola-Forestal</NavDropdown.Item>
                                             </div >
                                             <div className="myNavBar4">
-                                                <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                                <NavDropdown.Item onClick={() => handleCategory(2)}>Construcción</NavDropdown.Item>
                                             </div>
                                             <div className="myNavBar4">
-                                                <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                                <NavDropdown.Item onClick={() => handleCategory(3)}>Bricolaje</NavDropdown.Item>
                                             </div>
                                             <NavDropdown.Divider />
                                         </div>
                                         <div className="test">
                                             <div className="myNavBar4">
-                                                <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                                <NavDropdown.Item onClick={() => handleCategory(4)}>Carpintería</NavDropdown.Item>
                                             </div >
                                             <div className="myNavBar4">
-                                                <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                                <NavDropdown.Item onClick={() => handleCategory(5)}>Electricidad</NavDropdown.Item>
                                             </div>
                                             <div className="myNavBar4">
-                                                <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                                <NavDropdown.Item onClick={() => handleCategory(6)}>Fontanería</NavDropdown.Item>
                                             </div>
                                             <NavDropdown.Divider />
                                         </div>
                                         <div className="test">
                                             <div className="myNavBar4">
-                                                <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                                <NavDropdown.Item onClick={() => handleCategory(7)}>Medición</NavDropdown.Item>
                                             </div >
                                             <div className="myNavBar4">
-                                                <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                                <NavDropdown.Item onClick={() => handleCategory(8)}>Jardinería</NavDropdown.Item>
                                             </div>
                                             <div className="myNavBar4">
-                                                <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                                <NavDropdown.Item onClick={() => handleCategory(9)}>Limpieza</NavDropdown.Item>
                                             </div>
                                             <NavDropdown.Divider />
                                         </div>
                                         <div className="test">
                                             <div className="myNavBar4">
-                                                <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                                <NavDropdown.Item onClick={() => handleCategory(10)}>Llaves Manuales</NavDropdown.Item>
                                             </div >
                                             <div className="myNavBar4">
-                                                <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                                <NavDropdown.Item onClick={() => handleCategory(11)}>Metal</NavDropdown.Item>
                                             </div>
                                             <div className="myNavBar4">
-                                                <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                                <NavDropdown.Item onClick={() => handleCategory(12)}>Pintura</NavDropdown.Item>
                                             </div>
                                             <NavDropdown.Divider />
                                         </div>
                                         <div className="test">
                                             <div className="myNavBar4">
-                                                <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                                <NavDropdown.Item onClick={() => handleCategory(13)}>Carga-Movimiento</NavDropdown.Item>
                                             </div >
                                             <div className="myNavBar4">
-                                                <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                                <NavDropdown.Item href="#action/2.1"></NavDropdown.Item>
                                             </div>
                                             <div className="myNavBar4">
-                                                <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                                <NavDropdown.Item href="#action/2.1"></NavDropdown.Item>
                                             </div>
                                             <NavDropdown.Divider />
                                         </div>
                                     </NavDropdown>
                                     <Navbar.Collapse id="basic-navbar-nav" className="myNavBar5">
                                         <Nav>
-                                            <Nav.Link className="myNavBar7" href="#home">Bricolaje</Nav.Link>
-                                            <Nav.Link className="myNavBar7" href="#link">Fontanería</Nav.Link>
-                                            <Nav.Link className="myNavBar7" href="#link">Construcción</Nav.Link>
-                                            <Nav.Link className="myNavBar7" href="#link">Agricola-Forestal</Nav.Link>
+                                            <Nav.Link className="myNavBar7" onClick={() => handleCategory(3)}>Bricolaje</Nav.Link>
+                                            <Nav.Link className="myNavBar7" onClick={() => handleCategory(4)}>Fontanería</Nav.Link>
+                                            <Nav.Link className="myNavBar7" onClick={() => handleCategory(2)}>Construcción</Nav.Link>
+                                            <Nav.Link className="myNavBar7" onClick={() => handleCategory(1)}>Agricola-Forestal</Nav.Link>
                                         </Nav>
                                     </Navbar.Collapse>
                                 </Container>
@@ -284,76 +282,75 @@ const Header = () => {
                                 </Navbar>
                                 <Navbar expand="lg" className="myNavBar0">
                                     <Container>
-                                        {/* <img src="../../../public/test.png" alt="Logo" style={{ width: '1em', marginRight: '0.3em' }} /> */}
                                         <NavDropdown title="Todas las categorias" id="basic-nav-dropdown" className="my-dropdown">
 
                                             <div className="test">
                                                 <div className="myNavBar4">
-                                                    <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                                    <NavDropdown.Item onClick={() => handleCategory(1)}>Agricola-Forestal</NavDropdown.Item>
                                                 </div >
                                                 <div className="myNavBar4">
-                                                    <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                                    <NavDropdown.Item onClick={() => handleCategory(2)}>Construcción</NavDropdown.Item>
                                                 </div>
                                                 <div className="myNavBar4">
-                                                    <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                                    <NavDropdown.Item onClick={() => handleCategory(3)}>Bricolaje</NavDropdown.Item>
                                                 </div>
                                                 <NavDropdown.Divider />
                                             </div>
                                             <div className="test">
                                                 <div className="myNavBar4">
-                                                    <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                                    <NavDropdown.Item onClick={() => handleCategory(4)}>Carpintería</NavDropdown.Item>
                                                 </div >
                                                 <div className="myNavBar4">
-                                                    <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                                    <NavDropdown.Item onClick={() => handleCategory(5)}>Electricidad</NavDropdown.Item>
                                                 </div>
                                                 <div className="myNavBar4">
-                                                    <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                                    <NavDropdown.Item onClick={() => handleCategory(6)}>Fontanería</NavDropdown.Item>
                                                 </div>
                                                 <NavDropdown.Divider />
                                             </div>
                                             <div className="test">
                                                 <div className="myNavBar4">
-                                                    <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                                    <NavDropdown.Item onClick={() => handleCategory(7)}>Medición</NavDropdown.Item>
                                                 </div >
                                                 <div className="myNavBar4">
-                                                    <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                                    <NavDropdown.Item onClick={() => handleCategory(8)}>Jardinería</NavDropdown.Item>
                                                 </div>
                                                 <div className="myNavBar4">
-                                                    <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                                    <NavDropdown.Item onClick={() => handleCategory(9)}>Limpieza</NavDropdown.Item>
                                                 </div>
                                                 <NavDropdown.Divider />
                                             </div>
                                             <div className="test">
                                                 <div className="myNavBar4">
-                                                    <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                                    <NavDropdown.Item onClick={() => handleCategory(10)}>Llaves Manuales</NavDropdown.Item>
                                                 </div >
                                                 <div className="myNavBar4">
-                                                    <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                                    <NavDropdown.Item onClick={() => handleCategory(11)}>Metal</NavDropdown.Item>
                                                 </div>
                                                 <div className="myNavBar4">
-                                                    <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                                    <NavDropdown.Item onClick={() => handleCategory(12)}>Pintura</NavDropdown.Item>
                                                 </div>
                                                 <NavDropdown.Divider />
                                             </div>
                                             <div className="test">
                                                 <div className="myNavBar4">
-                                                    <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                                    <NavDropdown.Item onClick={() => handleCategory(13)}>Carga-Movimiento</NavDropdown.Item>
                                                 </div >
                                                 <div className="myNavBar4">
-                                                    <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                                    <NavDropdown.Item href="#action/2.1"></NavDropdown.Item>
                                                 </div>
                                                 <div className="myNavBar4">
-                                                    <NavDropdown.Item href="#action/2.1">Agricola-Forestal</NavDropdown.Item>
+                                                    <NavDropdown.Item href="#action/2.1"></NavDropdown.Item>
                                                 </div>
                                                 <NavDropdown.Divider />
                                             </div>
                                         </NavDropdown>
                                         <Navbar.Collapse id="basic-navbar-nav" className="myNavBar5">
                                             <Nav>
-                                                <Nav.Link className="myNavBar7" href="#home">Bricolaje</Nav.Link>
-                                                <Nav.Link className="myNavBar7" href="#link">Fontanería</Nav.Link>
-                                                <Nav.Link className="myNavBar7" href="#link">Construcción</Nav.Link>
-                                                <Nav.Link className="myNavBar7" href="#link">Agricola-Forestal</Nav.Link>
+                                                <Nav.Link className="myNavBar7" onClick={() => handleCategory(3)}>Bricolaje</Nav.Link>
+                                                <Nav.Link className="myNavBar7" onClick={() => handleCategory(4)}>Fontanería</Nav.Link>
+                                                <Nav.Link className="myNavBar7" onClick={() => handleCategory(2)}>Construcción</Nav.Link>
+                                                <Nav.Link className="myNavBar7" onClick={() => handleCategory(1)}>Agricola-Forestal</Nav.Link>
                                             </Nav>
                                         </Navbar.Collapse>
                                     </Container>
