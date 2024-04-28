@@ -16,6 +16,7 @@ export const Home: React.FC = () => {
       if (fetched.success) {
         console.log(fetched, "hola soy fetched");
         setFirstFetch(true);
+
         setProducts(fetched.data);
       } else {
         setError(fetched.message);
@@ -33,18 +34,32 @@ export const Home: React.FC = () => {
         <div>{error}</div>
       ) : (
         <div>
-          {products.map((person) => {
+          {Array.from({ length: 13 }).map((_, i) => {
+            const firstProductOfCategory = products.find(product => product?.category?.id === i);
+
             return (
-              <div key={person.id} className="product">
-                <h1>{person.name}</h1>
-                <p>{person.description}</p>
-                <img src={person.image} alt={person.name} />
-                <p>{person.hourPrice}</p>
-                <p>{person.dayPrice}</p>
-                <p>{person.category?.name}</p>
+              <div>
+                {firstProductOfCategory && 
+                <div className="categoryTitle">
+                  {firstProductOfCategory.category.name.toUpperCase()}
+                  </div>}
+
+                {products.map((product) => {
+                  return (
+                    product?.category?.id === i && (
+                      <div key={product.id} className="product">
+                        <h1>{product.name}</h1>
+                        <p>{product.description}</p>
+                        <img src={product.image} alt={product.name} />
+                        <p>{product.hourPrice}</p>
+                        <p>{product.dayPrice}</p>
+                        <p>{product.category?.name}</p>
+                      </div>
+                    )
+                  );
+                })}
               </div>
             );
-         
           })}
         </div>
       )}
