@@ -1,13 +1,11 @@
 
-import { BringCategoryProducts, BringConversation, BringProductDetail, SendMessage } from "../../services/apiCalls";
-import { DataFetched, DataFetched2 } from "../../interfaces";
+import { BringConversation, BringProductDetail, SendMessage } from "../../services/apiCalls";
+import { DataFetched2 } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./Conversation.css";
-import { categoryData } from "../../app/slices/categorySlice";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, } from "react-redux";
 import { userData } from "../../app/slices/userSlice";
-import { Button, Card } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Card } from "react-bootstrap";
 import dayjs from "dayjs";
 import { productDetailData } from "../../app/slices/productDetailSlice";
 import { CInput2 } from "../../common/CInput2/CInput2";
@@ -16,16 +14,14 @@ export const Conversation: React.FC = () => {
   const [product, setProducts] = useState<any>();
   const [conversation, setConversation] = useState<any[]>([]);
   const [error, setError] = useState<string>("");
-  const dispatch = useDispatch();
   const rdxProductDetail = useSelector(productDetailData);
   const rdxUser = useSelector(userData);
-  const navigate = useNavigate();
- const [message, setMessage] = useState<any>({
+  const [message, setMessage] = useState<any>({
     text: "",
   });
 
   const inputHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setMessage((prevState:any) => ({
+    setMessage((prevState: any) => ({
       ...prevState,
       text: e.target.value,
     }));
@@ -34,12 +30,10 @@ export const Conversation: React.FC = () => {
 
   useEffect(() => {
     const bringData = async () => {
-      console.log(rdxProductDetail.productDetail, rdxUser.credentials, "rdxCategory.category")
       const fetched: DataFetched2 = await BringConversation(rdxProductDetail.productDetail.productId, rdxUser.credentials.user.userId, rdxUser.credentials.token);
 
       if (fetched.success) {
         setConversation(fetched.data);
-        console.log(fetched, "hola soy fetched");
       } else {
         setError(fetched.message);
       }
@@ -59,14 +53,33 @@ export const Conversation: React.FC = () => {
   }, [rdxProductDetail]);
 
   const handleSendMessage = async () => {
-    const fetched:DataFetched2 = await SendMessage(rdxProductDetail.productDetail.productId, rdxUser.credentials.user.userId, rdxUser.credentials.token,message.text);
+    const fetched: DataFetched2 = await SendMessage(rdxProductDetail.productDetail.productId, rdxUser.credentials.user.userId, rdxUser.credentials.token, message.text);
     console.log(fetched, "fetched");
   }
 
   return (
     <div className="conversation">
-      {conversation ? (
+      {conversation && product ? (
         <>
+          <Card className="cardProduct3">
+            <Card.Img className="imageProductCard3" src={product.image} />
+            <Card.Body>
+              <Card.Title className="cardTitle3">{product.name.toUpperCase()}</Card.Title>
+              <div className="cardPrice3">
+                {product.hourPrice}€/hora &nbsp;&nbsp; {product.dayPrice}€/día &nbsp;&nbsp; {product.depositPrice}€/fianza
+              </div>
+            
+            <div className="startCard3">
+              {product.starts === 0 ? <div className="productStart0"></div> : null}
+              {product.starts === 1 ? <div className="productStart1"></div> : null}
+              {product.starts === 2 ? <div className="productStart2"></div> : null}
+              {product.starts === 3 ? <div className="productStart3"></div> : null}
+              {product.starts === 4 ? <div className="productStart4"></div> : null}
+              {product.starts === 5 ? <div className="productStart5"></div> : null}
+              ({product.totalReviews})
+            </div>
+            </Card.Body>
+          </Card>
           <div className="categoryProducts2">
             <div className="mx-auto">
               <Card className="cardProduct2">
@@ -79,7 +92,7 @@ export const Conversation: React.FC = () => {
                     value={message.text || ""}
                     onChange={(e) => inputHandler(e)}
                   />
-                  <div className="sendMesssage" onClick={()=>handleSendMessage()}>SEND</div>
+                  <div className="sendMesssage" onClick={() => handleSendMessage()}>SEND</div>
                 </div>
 
                 {conversation.reverse().map((convers, index) => (
@@ -87,17 +100,17 @@ export const Conversation: React.FC = () => {
                     {convers.userOwner_author === true ? (
                       <Card.Body className="messageConversation1">
                         <div className="messageTitle">
-                        <Card.Title className="titleCard">{convers.userOwner.name.toUpperCase()}</Card.Title>
-                        <Card.Title className="titleCard2">{dayjs(convers.updated_at).format('YYYY-MM-DD HH:mm')}</Card.Title>
+                          <Card.Title className="titleCard">{convers.userOwner.name.toUpperCase()}</Card.Title>
+                          <Card.Title className="titleCard2">{dayjs(convers.updated_at).format('YYYY-MM-DD HH:mm')}</Card.Title>
                         </div>
 
                         <Card.Text className="descriptionCard">{convers.message}</Card.Text>
                       </Card.Body>
                     ) : (
                       <Card.Body className="messageConversation2">
-                                                <div className="messageTitle">
-                        <Card.Title className="titleCard3">{dayjs(convers.updated_at).format('YYYY-MM-DD HH:mm')}</Card.Title>
-                        <Card.Title className="titleCard">{convers.userUser.name.toUpperCase()}</Card.Title>
+                        <div className="messageTitle">
+                          <Card.Title className="titleCard3">{dayjs(convers.updated_at).format('YYYY-MM-DD HH:mm')}</Card.Title>
+                          <Card.Title className="titleCard">{convers.userUser.name.toUpperCase()}</Card.Title>
                         </div>
                         <Card.Text className="descriptionCard">{convers.message}</Card.Text>
                       </Card.Body>

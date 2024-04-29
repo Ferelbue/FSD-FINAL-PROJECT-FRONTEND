@@ -154,7 +154,7 @@ const Header = () => {
                                                 <div className="imageCuore" title="My favorites" />
                                             </Nav.Link>
                                             <Nav.Link href="#home">
-                                                <div className="imageChat" title="My chats" />
+                                                <div className="imageChat" title="My chats" onClick={() => navigate('/chats')}/>
                                             </Nav.Link>
                                             <Nav.Link href="#home">
                                                 <div className="imageUser" title="My profile" />
@@ -267,7 +267,7 @@ const Header = () => {
                                                     <div className="imageCuore" title="My favorites" />
                                                 </Nav.Link>
                                                 <Nav.Link href="#home">
-                                                    <div className="imageChat" title="My chats" />
+                                                    <div className="imageChat" title="My chats" onClick={() => navigate('/chats')}/>
                                                 </Nav.Link>
                                                 <Nav.Link href="#home">
                                                     <div className="imageUser" title="My profile" />

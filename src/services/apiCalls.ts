@@ -154,3 +154,27 @@ export const SendMessage = async (productId: number, userUserId: number, token:s
         return error;
     }
 };
+
+export const BringAllChats = async (token:string): Promise<any> => {
+    console.log(token, "BringAllChats");
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+    };
+
+    try {
+        const response = await fetch(`${ROOT}chats`, options);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+
+        return data;
+
+    } catch (error) {
+        return error;
+    }
+};
