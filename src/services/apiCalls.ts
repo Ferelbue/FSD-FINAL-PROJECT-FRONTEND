@@ -84,3 +84,25 @@ export const BringCategoryProducts = async (id : number) : Promise<any> => {
         return error;
     }
 };
+
+export const BringProductDetail = async (id : number) : Promise<any> => {
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+    };
+
+    try {
+        const response = await fetch(`${ROOT}products/${id}`, options);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+
+        return data;
+
+    } catch (error) {
+        return error;
+    }
+};

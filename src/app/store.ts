@@ -6,10 +6,12 @@ import categorySlice from './slices/categorySlice';
 import storage from 'redux-persist/lib/storage';
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
+import productDetailSlice from './slices/productDetailSlice';
 
 const reducers:any = combineReducers({
     user: userSlice,
-    category: categorySlice
+    category: categorySlice,
+    productDetail: productDetailSlice
 });
 
 
