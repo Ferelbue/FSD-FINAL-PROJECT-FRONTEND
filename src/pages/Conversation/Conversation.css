@@ -225,3 +225,38 @@
     font-size: small !important;
     margin-right: 0.5em;
 }
+.inputConversation{
+    width: 50vw;
+    height: 15vh;
+    resize:none;
+    background-color: white;
+    color: black;
+    border-radius: 0.5em;
+    border-width: 0.1em;
+    border-style: solid;
+    border-color: black;
+}
+.messageGroup{
+    width: 50vw;
+    height: 15vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1em;
+}
+.sendMesssage{
+    width: 10vw;
+    height: 5vh;
+    z-index: 10;
+    margin-left: 39vw;
+    margin-top: 8vh;
+    position: absolute;
+    background-color: rgb(66,71,76);
+    border-radius: 0.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+}

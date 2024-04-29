@@ -129,3 +129,28 @@ export const BringConversation = async (productId: number,userUserId: number, to
         return error;
     }
 };
+
+export const SendMessage = async (productId: number, userUserId: number, token:string, message:string): Promise<any> => {
+    console.log(productId, userUserId, token, "SendMessage");
+    const options = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({message})
+    };
+
+    try {
+        const response = await fetch(`${ROOT}chats/${productId}/${userUserId}`, options);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+
+        return data;
+
+    } catch (error) {
+        return error;
+    }
+};

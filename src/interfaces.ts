@@ -17,6 +17,14 @@ export interface CustomInputProps {
     value: string | undefined,
     onChange: (value: React.ChangeEvent<HTMLInputElement>) => void;
 }
+export interface CustomInputProps2 {
+    className: string,
+    placeholder: string,
+    name: string,
+    disabled: boolean,
+    value: string | undefined,  
+    onChange: (value: React.ChangeEvent<HTMLTextAreaElement>) => void;
+}
 
 export interface Product {
     id: string;

@@ -1,15 +1,16 @@
 
-import { BringCategoryProducts, BringConversation, BringProductDetail } from "../../services/apiCalls";
+import { BringCategoryProducts, BringConversation, BringProductDetail, SendMessage } from "../../services/apiCalls";
 import { DataFetched, DataFetched2 } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./Conversation.css";
 import { categoryData } from "../../app/slices/categorySlice";
 import { useSelector, useDispatch } from "react-redux";
 import { userData } from "../../app/slices/userSlice";
-import { Card } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 import { productDetailData } from "../../app/slices/productDetailSlice";
+import { CInput2 } from "../../common/CInput2/CInput2";
 
 export const Conversation: React.FC = () => {
   const [product, setProducts] = useState<any>();
@@ -19,7 +20,17 @@ export const Conversation: React.FC = () => {
   const rdxProductDetail = useSelector(productDetailData);
   const rdxUser = useSelector(userData);
   const navigate = useNavigate();
+ const [message, setMessage] = useState<any>({
+    text: "",
+  });
 
+  const inputHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setMessage((prevState:any) => ({
+      ...prevState,
+      text: e.target.value,
+    }));
+    console.log(message, "message");
+  };
 
   useEffect(() => {
     const bringData = async () => {
@@ -47,6 +58,11 @@ export const Conversation: React.FC = () => {
     bringData();
   }, [rdxProductDetail]);
 
+  const handleSendMessage = async () => {
+    const fetched:DataFetched2 = await SendMessage(rdxProductDetail.productDetail.productId, rdxUser.credentials.user.userId, rdxUser.credentials.token,message.text);
+    console.log(fetched, "fetched");
+  }
+
   return (
     <div className="conversation">
       {conversation ? (
@@ -54,7 +70,19 @@ export const Conversation: React.FC = () => {
           <div className="categoryProducts2">
             <div className="mx-auto">
               <Card className="cardProduct2">
-                {conversation.map((convers, index) => (
+                <div className="messageGroup">
+                  <CInput2
+                    className="inputConversation"
+                    placeholder="Escribe un mensaje"
+                    name="message"
+                    disabled={false}
+                    value={message.text || ""}
+                    onChange={(e) => inputHandler(e)}
+                  />
+                  <div className="sendMesssage" onClick={()=>handleSendMessage()}>SEND</div>
+                </div>
+
+                {conversation.reverse().map((convers, index) => (
                   <div key={index}>
                     {convers.userOwner_author === true ? (
                       <Card.Body className="messageConversation1">
@@ -77,7 +105,7 @@ export const Conversation: React.FC = () => {
                   </div>
                 ))}
 
-                
+
 
               </Card>
             </div>
