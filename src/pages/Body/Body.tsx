@@ -3,6 +3,7 @@ import { Home } from "../Home/Home";
 import { Login } from "../Login/Login";
 import { Category } from "../Category/Category";
 import { ProductDetail } from "../ProductDetail/ProductDetail";
+import { Conversation } from "../Conversation/Conversation";
 
 
 export const Body: React.FC = () => {
@@ -14,6 +15,7 @@ export const Body: React.FC = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/category" element={<Category />} />
         <Route path="/productDetail" element={<ProductDetail />} />
+        <Route path="/conversation" element={<Conversation />} />
       </Routes>
     </>
   );

@@ -9,21 +9,21 @@ import { userData } from "../../app/slices/userSlice";
 import { Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
+import { productDetailData } from "../../app/slices/productDetailSlice";
 
 export const ProductDetail: React.FC = () => {
   const [product, setProducts] = useState<any>();
   const [error, setError] = useState<string>("");
   const dispatch = useDispatch();
-  const rdxCategory = useSelector(categoryData);
+  const rdxProductDetail = useSelector(productDetailData);
   const rdxUser = useSelector(userData);
   const navigate = useNavigate();
 
 
   useEffect(() => {
-    console.log("asd")
     const bringData = async () => {
-
-      const fetched: DataFetched2 = await BringProductDetail(rdxCategory.category);
+      console.log(rdxProductDetail.productDetail, "rdxCategory.category")
+      const fetched: DataFetched2 = await BringProductDetail(rdxProductDetail.productDetail.productId);
 
       if (fetched.success) {
         setProducts(fetched.data);
@@ -40,18 +40,29 @@ export const ProductDetail: React.FC = () => {
 
   useEffect(() => {
     const bringData = async () => {
-      const fetched: DataFetched2 = await BringProductDetail(rdxCategory.category);
+      const fetched: DataFetched2 = await BringProductDetail(rdxProductDetail.productDetail.productId);
       setProducts(fetched.data);
     }
     bringData();
-  }, [rdxCategory]);
+  }, [rdxProductDetail]);
 
+  const handleConversation = async () => {
+    console.log(rdxUser)
+    if (!rdxUser.credentials) {
+      navigate("/login")
+    } else {
+      navigate("/conversation")
+    }
+  }
 
 
   return (
     <div className="home">
       {product ? (
         <>
+          <div className="conversationCard">
+            <div className="imageConversation" onClick={() => handleConversation()} />
+          </div>
           <div className="categoryTitle2">
             {product.name.toUpperCase()}
           </div>
@@ -78,7 +89,7 @@ export const ProductDetail: React.FC = () => {
                   </iframe>
                 </div>
                 <div className="startCard2">
-                  Valoraciones
+                  <div className="imageChat2" title="My chats" />
                   {product.starts === 0 ? <div className="productStart0"></div> : null}
                   {product.starts === 1 ? <div className="productStart1"></div> : null}
                   {product.starts === 2 ? <div className="productStart2"></div> : null}

@@ -45,14 +45,11 @@ export const Category: React.FC = () => {
     bringData();
   }, [rdxCategory]);
 
-  const handleDetail = (productId:number) => {
+  const handleDetail = (productId:number,ownerId:number) => {
     console.log(productId, "productId")
-    dispatch(updateProductDetail({ productDetail: productId}));
+    dispatch(updateProductDetail({ productDetail: {productId:productId,ownerId:ownerId}}));
     navigate("/productDetail")
   }
-
-
-
 
 
   return (
@@ -63,7 +60,7 @@ export const Category: React.FC = () => {
       <div className="row justify-content-around categoryProducts">
         {products.map((product) => (
           <div className="col-sm-12 col-md-6 col-lg-3" key={product.id}>
-            <Card className="cardProduct" onClick={() => handleDetail(product.id)}>
+            <Card className="cardProduct" onClick={() => handleDetail(product.id,product.owner.id)}>
               <Card.Img className="imageProductCard" src={product.image} />
               <Card.Body>
                 <Card.Title className="cardTitle">{product.name.toUpperCase()}</Card.Title>

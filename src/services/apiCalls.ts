@@ -35,35 +35,35 @@ export const BringProducts = async (): Promise<DataFetched> => {
 
 export const LoginMe = async (credentials: LoginData): Promise<any> => {
     const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(credentials),
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(credentials),
     };
-    
-    try {
-      const response: any = await fetch(`${ROOT}auth/login`, options);
-  
-      const data: DataFetched = await response.json();
-  
-      if(!data.success){
-        throw new Error(data.message)
-      }
-  
-      return data;
-    } catch (error: unknown) {
-      let answer: DataFetched = {
-        message: "",
-        data: [],
-        success: false,
-      };
-  
-      return answer;
-    }
-  }
 
-export const BringCategoryProducts = async (id : number) : Promise<any> => {
+    try {
+        const response: any = await fetch(`${ROOT}auth/login`, options);
+
+        const data: DataFetched = await response.json();
+
+        if (!data.success) {
+            throw new Error(data.message)
+        }
+
+        return data;
+    } catch (error: unknown) {
+        let answer: DataFetched = {
+            message: "",
+            data: [],
+            success: false,
+        };
+
+        return answer;
+    }
+}
+
+export const BringCategoryProducts = async (id: number): Promise<any> => {
     const options = {
         method: "GET",
         headers: {
@@ -85,7 +85,7 @@ export const BringCategoryProducts = async (id : number) : Promise<any> => {
     }
 };
 
-export const BringProductDetail = async (id : number) : Promise<any> => {
+export const BringProductDetail = async (id: number): Promise<any> => {
     const options = {
         method: "GET",
         headers: {
@@ -95,6 +95,29 @@ export const BringProductDetail = async (id : number) : Promise<any> => {
 
     try {
         const response = await fetch(`${ROOT}products/${id}`, options);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+
+        return data;
+
+    } catch (error) {
+        return error;
+    }
+};
+export const BringConversation = async (productId: number,userUserId: number, token:string): Promise<any> => {
+    console.log(productId, userUserId, token, "BringConversation");
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+    };
+
+    try {
+        const response = await fetch(`${ROOT}chats/${productId}/${userUserId}`, options);
         const data = await response.json();
         if (!response.ok) {
             throw new Error(data.message);
