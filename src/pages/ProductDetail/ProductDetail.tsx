@@ -7,7 +7,6 @@ import { categoryData } from "../../app/slices/categorySlice";
 import { useSelector, useDispatch } from "react-redux";
 import { userData } from "../../app/slices/userSlice";
 import { Card } from "react-bootstrap";
-import GoogleMapReact from 'google-map-react';
 import { updateProductDetail } from "../../app/slices/productDetailSlice";
 import { useNavigate } from "react-router-dom";
 
@@ -19,22 +18,6 @@ export const ProductDetail: React.FC = () => {
   const rdxUser = useSelector(userData);
   const navigate = useNavigate();
 
-  const defaultProps:any = {
-    center: {
-      lat: 10.99835602,
-      lng: 77.01502627
-    },
-    zoom: 11
-  };
-
-  interface AnyReactComponentProps {
-    text: string;
-    lat: number;
-    lng: number;
-  }
-
-
-  const AnyReactComponent: React.FC<AnyReactComponentProps> = ({ text }) => <div>{text}</div>;
 
 
   useEffect(() => {
@@ -95,20 +78,6 @@ export const ProductDetail: React.FC = () => {
                 </div>
               </Card>
             </div>
-          </div>
-          <div style={{ height: '100vh', width: '100%' }}>
-            hola
-            <GoogleMapReact
-              bootstrapURLKeys={{ key: "AIzaSyB0fV5CKp0IUVUmrvLt_k1mhIMVvICZ8oU" }}
-              defaultCenter={defaultProps.center}
-              defaultZoom={defaultProps.zoom}
-            >
-              <AnyReactComponent
-                lat={59.955413}
-                lng={30.337844}
-                text="My Marker"
-              />
-            </GoogleMapReact>
           </div>
         </>
       ) : (
