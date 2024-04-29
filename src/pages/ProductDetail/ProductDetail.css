@@ -27,7 +27,7 @@
 }
 
 .cardProduct2 {
-    width: 50vw;
+    width: 85vw;
     min-height: 80vh !important;
     height: auto;
     margin: 0.5em;
@@ -36,30 +36,123 @@
     align-items: center;
     background-color: white !important;
     padding: 0;
+    padding-bottom: 3em;
 }
 
 .imageProductCard2 {
-    height: 30vh;
+    height: 50vh;
     width: 50vw !important;
     border-radius: 0.5em;
 }
 
 .cardTitle2 {
     text-decoration: underline;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
 }
 
 .cardPrice2 {
     font-size: 1.3em;
+    height: 10vh;
     font-weight: bold;
     margin-bottom: 0.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid lightgray;
+    border-top: 1px solid lightgray;
 }
 
 .startCard2 {
-    width: 300px;
+    width: 50vw;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     font-size: 1.7em;
-    border-top: 1px solid rgb(66, 71, 76);
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+}
+
+.descriptionCard2 {
+    height: 15vh;
+    width: 50vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cardCity2{
+    width: 50vw;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding-left: 0.5em;
+    font-size: x-large;
+    font-weight: bold;
+    border-top: 1px solid lightgray;
+}
+
+.mapCard2 {
+    overflow: hidden;
+    height: 235px;
+    width: 400px;
+    margin-top: 0.5em;    
+}
+.reviewCard2 {
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+}
+.reviewTitle2 {
+    width: 50vw;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+    padding-left: 1em;
+}
+.reviewStart2 {
+    width: 50vw;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    margin-bottom: 0.5em;
+    padding-left: 1.3em;
+}
+.reviewText2 {
+    width: 50vw;
+    font-size: 1.2em;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    padding-left: 1.1em;
+}
+.imageLocation {
+    margin-top: 0.1em;
+    width: 1.5em;
+    height: 1.5em;
+    background: url('../../../public/location.png') no-repeat center center / cover;
+}
+.oneComment{
+    padding-bottom: 1em;
+    border-bottom: 1px solid lightgray;
+}
+.dateDetail{
+    font-size: 0.6em;
+    font-weight: lighter;
+
+    color: gray;
+    margin-left: 0.5em;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    height: 4.2vh;
 }
