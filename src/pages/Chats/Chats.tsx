@@ -29,11 +29,13 @@ export const Chats: React.FC = () => {
     bringData();
   }, [rdxProductDetail]);
 
-  const handleConversation = async (productId:number,userUserId:number) => {
+  const handleConversation = async (productId: number, userUserId: number) => {
     console.log(productId, userUserId, rdxUser.credentials.token, "handleConversation");
-    dispatch(updateProductDetail({ productDetail: {productId:productId,ownerId:userUserId}}));
+    dispatch(updateProductDetail({ productDetail: { productId: productId, userUserId: userUserId } }));
     navigate('/conversation')
   }
+  let mappedProductIds = new Set();
+  let mappedUserIds = new Set();
   return (
     <div className="conversation">
       {chats ? (
@@ -41,30 +43,34 @@ export const Chats: React.FC = () => {
           <div className="categoryProducts2">
             <div className="mx-auto">
               <Card className="cardProduct2">
-                {chats.map((chatObject: Record<string, Array<any>>, index: number) => {
-                  // Accede a cada objeto en chatObject
-                  return Object.entries(chatObject).map(([_, chatArray], innerIndex) => {
-                    const firstChat = chatArray[0];  // Accede al primer chat en el array
-                    return (
-                      <div key={`${index}-${innerIndex}`} >
-                        {firstChat.userOwner.id === rdxUser.credentials.user.userId ? (
-                          <Card.Body className="chatCard3" onClick={()=>handleConversation(firstChat.product.id,firstChat.userUser.id)}>
-                            <Card.Text>VENDO</Card.Text>
-                            <Card.Img className="imageProductCard3" src={firstChat.product.image} />
-                            <Card.Text>{firstChat.product.name}</Card.Text>
-                            <Card.Text>{firstChat.userUser.name}</Card.Text>
-                          </Card.Body>
-                        ) : (
-                          <Card.Body className="chatCard4" onClick={()=>handleConversation(firstChat.product.id,firstChat.userUser.id)}>
-                            <Card.Text>COMPRO</Card.Text>
-                            <Card.Img className="imageProductCard4" src={firstChat.product.image} />
-                            <Card.Text>{firstChat.product.name}</Card.Text>
-                            <Card.Text>{firstChat.userOwner.name}</Card.Text>
-                          </Card.Body>
-                        )}
-                      </div>
-                    );
-                  })
+                {chats.map((chat: any) => {
+                  if (chat.userOwner.id === rdxUser.credentials.user.userId) {
+                    if (!mappedUserIds.has(chat.userUser.id)) {
+                      // mappedProductIds.add(chat.product.id);
+                      mappedUserIds.add(chat.userUser.id);
+                      return (
+                        <Card.Body className="chatCard3" onClick={() => handleConversation(chat.product.id, chat.userUser.id)}>
+                          <Card.Text>VENDO</Card.Text>
+                          <Card.Img className="imageProductCard3" src={chat.product.image} />
+                          <Card.Text>{chat.product.name}</Card.Text>
+                          <Card.Text>{chat.userUser.name}</Card.Text>
+                        </Card.Body>
+                      );
+                    }
+                  } else {
+                    if (!mappedProductIds.has(chat.product.id)) {
+                      mappedProductIds.add(chat.product.id);
+                      return (
+                        <Card.Body className="chatCard4" onClick={() => handleConversation(chat.product.id, chat.userUser.id)}>
+                          <Card.Text>COMPRO</Card.Text>
+                          <Card.Img className="imageProductCard4" src={chat.product.image} />
+                          <Card.Text>{chat.product.name}</Card.Text>
+                          <Card.Text>{chat.userOwner.name}</Card.Text>
+                        </Card.Body>
+                      );
+                    }
+                  }
+                  return null;
                 })}
               </Card>
             </div>

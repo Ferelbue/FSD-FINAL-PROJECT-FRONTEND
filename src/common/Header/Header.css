@@ -144,6 +144,18 @@
 .imageChat:hover {
     background-image: url('../../../public/chat2.png');
 }
+
+.imageChatNot {
+    width: 1.8em;
+    height: 1.8em;
+    margin-right: 0.3em;
+    background: url('../../../public/chatNot.png') no-repeat center center / cover;
+}
+
+.imageChatNot:hover {
+    background-image: url('../../../public/chatNot2.png');
+}
+
 .imageExit {
     width: 1.8em;
     height: 1.8em;

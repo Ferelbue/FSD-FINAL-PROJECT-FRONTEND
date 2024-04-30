@@ -3,11 +3,13 @@ import { useState } from "react";
 import { CInput } from "../../common/CInput/CInput";
 import { decodeToken } from "react-jwt";
 import "./Login.css"
-import { LoginData } from "../../interfaces";
-import { LoginMe } from "../../services/apiCalls";
+import { DataFetched2, LoginData } from "../../interfaces";
+import { LoginMe, Notification } from "../../services/apiCalls";
 import { login } from "../../app/slices/userSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { updateProductDetail } from "../../app/slices/productDetailSlice";
+import { updateNotification } from "../../app/slices/notificationSlice";
 
 export const Login: React.FC = () => {
 
@@ -37,9 +39,18 @@ export const Login: React.FC = () => {
         token: fetched.token,
         user: decodificado,
       };
-
       dispatch(login({ credentials: passport }));
+      
+      const fetched2: DataFetched2 = await Notification(passport.token);
+      if(fetched2.data[0].length === 0 && fetched2.data[1].length === 0){
+        console.log("no hay notificaciones")
+        dispatch(updateNotification({ notification:false}));
+      }else{ 
+        console.log("hay notificaciones")
+        dispatch(updateNotification({ notification:true}));
+      }
       navigate("/")
+
     }
   
  }

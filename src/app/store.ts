@@ -7,11 +7,13 @@ import storage from 'redux-persist/lib/storage';
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import productDetailSlice from './slices/productDetailSlice';
+import notificationSlice from './slices/notificationSlice';
 
 const reducers:any = combineReducers({
     user: userSlice,
     category: categorySlice,
-    productDetail: productDetailSlice
+    productDetail: productDetailSlice,
+    notification: notificationSlice
 });
 
 

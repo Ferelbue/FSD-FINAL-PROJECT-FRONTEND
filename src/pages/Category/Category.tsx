@@ -47,7 +47,7 @@ export const Category: React.FC = () => {
 
   const handleDetail = (productId:number,ownerId:number) => {
     console.log(productId, "productId")
-    dispatch(updateProductDetail({ productDetail: {productId:productId,ownerId:ownerId}}));
+    dispatch(updateProductDetail({ productDetail: {productId:productId,userUserId:ownerId}}));
     navigate("/productDetail")
   }
 
