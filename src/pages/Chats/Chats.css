@@ -41,7 +41,28 @@
     padding-bottom: 3em;
     top: 7vh;
 }
-
+.cardProduct31 {
+    width: 85vw;
+    height: 25vh !important;
+    margin: 0.5em;
+    display: flex;
+    flex-direction: row !important;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(96,143,143) !important;
+    padding: 0;
+}
+.cardProduct32 {
+    width: 85vw;
+    height: 25vh !important;
+    margin: 0.5em;
+    display: flex;
+    flex-direction: row !important;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(150, 168, 170) !important;
+    padding: 0;
+}
 .imageProductCard2 {
     height: 50vh;
     width: 50vw !important;

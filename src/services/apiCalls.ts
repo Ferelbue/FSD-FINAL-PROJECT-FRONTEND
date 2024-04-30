@@ -243,3 +243,26 @@ export const acceptDeal = async (productId: number, userUserId:number, token:str
         return error;
     }
 }
+
+export const DealStatus = async (productId: number, userUserId:number, token:string): Promise<any> => {
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+    };
+
+    try {
+        const response = await fetch(`${ROOT}deals/${productId}/${userUserId}`, options);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+
+        return data;
+
+    } catch (error) {
+        return error;
+    }
+}

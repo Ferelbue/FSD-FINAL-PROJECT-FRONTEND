@@ -1,5 +1,5 @@
 
-import { BringConversation, BringProductDetail, EraseNotification, Notification, SendMessage, acceptDeal } from "../../services/apiCalls";
+import { BringConversation, BringProductDetail, DealStatus, EraseNotification, Notification, SendMessage, acceptDeal } from "../../services/apiCalls";
 import { DataFetched2 } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./Conversation.css";
@@ -7,13 +7,14 @@ import { useSelector, } from "react-redux";
 import { userData } from "../../app/slices/userSlice";
 import { Card } from "react-bootstrap";
 import dayjs from "dayjs";
-import { productDetailData, updateProductDetail } from "../../app/slices/productDetailSlice";
+import { productDetailData } from "../../app/slices/productDetailSlice";
 import { CInput2 } from "../../common/CInput2/CInput2";
 import { useDispatch } from "react-redux";
 import { updateNotification } from "../../app/slices/notificationSlice";
 
 export const Conversation: React.FC = () => {
   const [product, setProducts] = useState<any>();
+  const [statusDeal, setStatusDeal] = useState<any>();
   const [send, setSend] = useState<boolean>(false);
   const [conversation, setConversation] = useState<any[]>([]);
   const [error, setError] = useState<string>("");
@@ -49,6 +50,10 @@ export const Conversation: React.FC = () => {
     const bringData = async () => {
       const fetched: DataFetched2 = await BringConversation(rdxProductDetail.productDetail.productId, rdxProductDetail.productDetail.userUserId, rdxUser.credentials.token);
       const fetched3: DataFetched2 = await EraseNotification(rdxProductDetail.productDetail.productId, rdxProductDetail.productDetail.userUserId, rdxUser.credentials.token)
+      const fetched5: DataFetched2 = await DealStatus(rdxProductDetail.productDetail.productId, rdxProductDetail.productDetail.userUserId, rdxUser.credentials.token);
+
+      setStatusDeal(fetched5.data);
+      console.log(fetched5, "fetched");
       console.log(fetched3, "fetched");
       notiMe();
       const fetched4: DataFetched2 = await Notification(rdxUser.credentials.token);
@@ -67,6 +72,9 @@ export const Conversation: React.FC = () => {
         setMessage({ text: "" });
       } else {
         setError(fetched.message);
+      }
+      if(error){
+        console.log(error, "error");
       }
     };
     bringData();
@@ -94,9 +102,11 @@ export const Conversation: React.FC = () => {
   }
 
   const handleDeal = async (productId: number, userUserId:number) => {
-    console.log(productId, "productId");
     const fetched5: DataFetched2 = await acceptDeal(productId, userUserId, rdxUser.credentials.token);
-    console.log(fetched5, "fetched5");
+  }
+
+  const handleReview = async (productId: number, userUserId:number) => {
+    const fetched5: DataFetched2 = await acceptDeal(productId, userUserId, rdxUser.credentials.token);
   }
 console.log(product, "product");
   return (
@@ -111,7 +121,9 @@ console.log(product, "product");
                 <div className="prices">
                   {product.hourPrice}€/hora &nbsp;&nbsp; {product.dayPrice}€/día &nbsp;&nbsp; {product.depositPrice}€/fianza
                 </div>
-                <div className="dealFinished" onClick={() => handleDeal(product.id,rdxProductDetail.productDetail.userUserId)}>TRATO FINALIZADO</div>
+                {statusDeal?.userOwner_confirm === true || statusDeal?.userUser_confirm === true 
+                ? (<div className="dealFinished" onClick={() => (product.id,rdxProductDetail.productDetail.userUserId)}>ESCRIBIR RESEÑA</div>)
+                : (<div className="dealFinished" onClick={() => handleDeal(product.id,rdxProductDetail.productDetail.userUserId)}>TRATO FINALIZADO</div>)}
               </div>
 
               <div className="startCard3">
@@ -140,7 +152,7 @@ console.log(product, "product");
                   <div className="sendMesssage" onClick={() => handleSendMessage()}>SEND</div>
                 </div>
 
-                {conversation.reverse().map((convers, index) => (
+                {[...conversation].reverse().map((convers, index) => (
                   <div key={index}>
                     {convers.userOwner_author === true ? (
                       <Card.Body className="messageConversation1">
@@ -162,9 +174,6 @@ console.log(product, "product");
                     )}
                   </div>
                 ))}
-
-
-
               </Card>
             </div>
           </div>
