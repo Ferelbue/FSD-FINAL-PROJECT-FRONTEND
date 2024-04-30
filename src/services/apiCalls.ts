@@ -3,7 +3,6 @@ import { DataFetched, LoginData } from "../interfaces";
 const ROOT: string = "http://localhost:4000/api/";
 
 export const BringProducts = async (): Promise<DataFetched> => {
-    console.log("Estoy en BringProducts");
     const options = {
         method: "GET",
         headers: {
@@ -15,7 +14,6 @@ export const BringProducts = async (): Promise<DataFetched> => {
         const response: any = await fetch(`${ROOT}products`, options);
 
         const dataRes = await response.json();
-        console.log(dataRes);
         const data: DataFetched = {
             success: true,
             message: "Los datos han venido correctamente",
@@ -107,7 +105,6 @@ export const BringProductDetail = async (id: number): Promise<any> => {
     }
 };
 export const BringConversation = async (productId: number,userUserId: number, token:string): Promise<any> => {
-    console.log(productId, userUserId, token, "BringConversation");
     const options = {
         method: "GET",
         headers: {
@@ -131,7 +128,6 @@ export const BringConversation = async (productId: number,userUserId: number, to
 };
 
 export const SendMessage = async (productId: number, userUserId: number, token:string, message:string): Promise<any> => {
-    console.log(productId, userUserId, token, "SendMessage");
     const options = {
         method: "POST",
         headers: {
@@ -156,7 +152,6 @@ export const SendMessage = async (productId: number, userUserId: number, token:s
 };
 
 export const BringAllChats = async (token:string): Promise<any> => {
-    console.log(token, "BringAllChats");
     const options = {
         method: "GET",
         headers: {
@@ -180,7 +175,6 @@ export const BringAllChats = async (token:string): Promise<any> => {
 };
 
 export const Notification = async (token:string): Promise<any> => {
-    console.log(token, "Notification");
     const options = {
         method: "GET",
         headers: {
@@ -226,3 +220,26 @@ export const EraseNotification = async (productId: number, userUserId: number, t
         return error;
     }
 };
+
+export const acceptDeal = async (productId: number, userUserId:number, token:string): Promise<any> => {
+    const options = {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+    };
+
+    try {
+        const response = await fetch(`${ROOT}deals/${productId}/${userUserId}`, options);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+
+        return data;
+
+    } catch (error) {
+        return error;
+    }
+}

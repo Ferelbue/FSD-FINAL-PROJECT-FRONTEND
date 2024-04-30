@@ -69,6 +69,32 @@
     border-top: 1px solid lightgray;
 }
 
+.prices{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 45vw;
+    font-size: 1.2em;
+}
+
+.dealFinished{
+    width: 15vw;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(66,71,76);
+    color: white;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 0.5em;
+    cursor: pointer;
+}
+
+.dealFinished:hover{
+    background-color: rgb(95, 118, 118);
+}
 .startCard3 {
     width: 60vw;
     display: flex;
@@ -262,4 +288,3 @@
     color: white;
     cursor: pointer;
 }
-

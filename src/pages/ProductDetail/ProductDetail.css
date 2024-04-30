@@ -44,6 +44,7 @@
     height: 50vh;
     width: 50vw !important;
     border-radius: 0.5em;
+    margin-top: 1em;
 }
 
 .cardTitle2 {

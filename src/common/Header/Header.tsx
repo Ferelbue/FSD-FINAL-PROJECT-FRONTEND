@@ -31,11 +31,7 @@ const Header = () => {
         }
       }
 
-
-
-    console.log(rdxNotification, "rdxNotification");
-
-    const handleLogout = async () => {
+      const handleLogout = async () => {
         dispatch(userout({ credentials: "" }));
         dispatch(updateNotification({ notification: "" }));
         navigate("/")

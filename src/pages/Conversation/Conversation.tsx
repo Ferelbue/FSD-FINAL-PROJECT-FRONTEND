@@ -1,5 +1,5 @@
 
-import { BringConversation, BringProductDetail, EraseNotification, Notification, SendMessage } from "../../services/apiCalls";
+import { BringConversation, BringProductDetail, EraseNotification, Notification, SendMessage, acceptDeal } from "../../services/apiCalls";
 import { DataFetched2 } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./Conversation.css";
@@ -52,12 +52,12 @@ export const Conversation: React.FC = () => {
       console.log(fetched3, "fetched");
       notiMe();
       const fetched4: DataFetched2 = await Notification(rdxUser.credentials.token);
-      if(fetched4.data[0].length === 0 && fetched4.data[1].length === 0){
+      if (fetched4.data[0].length === 0 && fetched4.data[1].length === 0) {
         console.log("no hay notificaciones")
-        dispatch(updateNotification({ notification:false}));
-      }else{ 
+        dispatch(updateNotification({ notification: false }));
+      } else {
         console.log("hay notificaciones")
-        dispatch(updateNotification({ notification:true}));
+        dispatch(updateNotification({ notification: true }));
       }
 
 
@@ -85,14 +85,20 @@ export const Conversation: React.FC = () => {
 
   const handleSendMessage = async () => {
 
-      const fetched: DataFetched2 = await SendMessage(rdxProductDetail.productDetail.productId, rdxProductDetail.productDetail.userUserId, rdxUser.credentials.token, message.text);
-      console.log(fetched, "fetched");
+    const fetched: DataFetched2 = await SendMessage(rdxProductDetail.productDetail.productId, rdxProductDetail.productDetail.userUserId, rdxUser.credentials.token, message.text);
+    console.log(fetched, "fetched");
 
 
-      setSend(true);
- 
+    setSend(true);
+
   }
 
+  const handleDeal = async (productId: number, userUserId:number) => {
+    console.log(productId, "productId");
+    const fetched5: DataFetched2 = await acceptDeal(productId, userUserId, rdxUser.credentials.token);
+    console.log(fetched5, "fetched5");
+  }
+console.log(product, "product");
   return (
     <div className="conversation">
       {conversation && product ? (
@@ -102,7 +108,10 @@ export const Conversation: React.FC = () => {
             <Card.Body>
               <Card.Title className="cardTitle3">{product.name.toUpperCase()}&nbsp;&nbsp; {product.owner.name}</Card.Title>
               <div className="cardPrice3">
-                {product.hourPrice}€/hora &nbsp;&nbsp; {product.dayPrice}€/día &nbsp;&nbsp; {product.depositPrice}€/fianza
+                <div className="prices">
+                  {product.hourPrice}€/hora &nbsp;&nbsp; {product.dayPrice}€/día &nbsp;&nbsp; {product.depositPrice}€/fianza
+                </div>
+                <div className="dealFinished" onClick={() => handleDeal(product.id,rdxProductDetail.productDetail.userUserId)}>TRATO FINALIZADO</div>
               </div>
 
               <div className="startCard3">
