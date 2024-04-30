@@ -51,7 +51,7 @@ export const Chats: React.FC = () => {
   let mappedProductIds = new Set();
   let mappedUserIds = new Set();
   return (
-    <div className="conversation">
+    <div className="chats">
       {chats ? (
         <>
           <div className="categoryProducts2">

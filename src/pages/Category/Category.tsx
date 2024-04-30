@@ -64,7 +64,7 @@ export const Category: React.FC = () => {
 
 
   return (
-    <div className="home">
+    <div className="category">
       <div className="categoryTitle2">
         {products[0]?.category?.name.toUpperCase()}
       </div>
