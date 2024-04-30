@@ -63,7 +63,7 @@ export const ProductDetail: React.FC = () => {
           <div className="conversationCard">
             <div className="imageConversation" onClick={() => handleConversation()} />
           </div>
-          <div className="categoryTitle2">
+          <div className="categoryTitle3">
             {product.name.toUpperCase()}
           </div>
           <div className="categoryProducts2">
@@ -90,6 +90,7 @@ export const ProductDetail: React.FC = () => {
                 </div>
                 <div className="startCard2">
                   <div className="imageChat2" title="My chats" />
+                  <div className="">&nbsp;{product.owner.name} - &nbsp;</div>
                   {product.starts === 0 ? <div className="productStart0"></div> : null}
                   {product.starts === 1 ? <div className="productStart1"></div> : null}
                   {product.starts === 2 ? <div className="productStart2"></div> : null}

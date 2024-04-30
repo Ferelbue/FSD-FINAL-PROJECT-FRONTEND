@@ -8,6 +8,8 @@ import { updateNotification } from "../../app/slices/notificationSlice";
 import { useDispatch } from "react-redux";
 import { userData } from "../../app/slices/userSlice";
 import { useSelector } from "react-redux";
+import { updateProductDetail } from "../../app/slices/productDetailSlice";
+import { useNavigate } from "react-router-dom";
 
 export const Home: React.FC = () => {
   const [products, setProducts] = useState<any[]>([]);
@@ -15,6 +17,7 @@ export const Home: React.FC = () => {
   const [firstFetch, setFirstFetch] = useState<boolean>(false);
   const dispatch = useDispatch();
   const rdxUser = useSelector(userData);
+  const navigate = useNavigate();
 
   const notiMe = async (): Promise<void> => {
     const fetched2: DataFetched2 = await Notification(rdxUser.credentials.token);
@@ -44,6 +47,13 @@ export const Home: React.FC = () => {
     }
   }, [products]);
 
+  const handleDetail = (productId:number,ownerId:number) => {
+    console.log(productId, "productId")
+    dispatch(updateProductDetail({ productDetail: {productId:productId,userUserId:ownerId}}));
+    navigate("/productDetail")
+  }
+
+  console.log(products, "products")
   return (
     <div className="home">
       {products.length === 0 ? (
@@ -72,7 +82,7 @@ export const Home: React.FC = () => {
                           <div className="row justify-content-around carouselProducts">
                             {block.map((product) => (
                               <div className="col-sm-12 col-md-6 col-lg-3" key={product.id}>
-                                <Card className="cardProduct">
+                                <Card className="cardProduct" onClick={() => handleDetail(product.id,product.owner.id)}>
                                   <Card.Img className="imageProductCard" src={product.image} />
                                   <Card.Body>
                                     <Card.Title className="cardTitle">{product.name.toUpperCase()}</Card.Title>
