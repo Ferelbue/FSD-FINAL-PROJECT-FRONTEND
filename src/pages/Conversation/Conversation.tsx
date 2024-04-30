@@ -24,6 +24,16 @@ export const Conversation: React.FC = () => {
     text: "",
   });
 
+
+  const notiMe = async (): Promise<void> => {
+    const fetched2: DataFetched2 = await Notification(rdxUser.credentials.token);
+    if (fetched2.data[0].length === 0 && fetched2.data[1].length === 0) {
+      dispatch(updateNotification({ notification: false }));
+    } else {
+      dispatch(updateNotification({ notification: true }));
+    }
+  }
+
   useEffect(() => {
     console.log(message, "message");
   }, [message]);
@@ -40,7 +50,7 @@ export const Conversation: React.FC = () => {
       const fetched: DataFetched2 = await BringConversation(rdxProductDetail.productDetail.productId, rdxProductDetail.productDetail.userUserId, rdxUser.credentials.token);
       const fetched3: DataFetched2 = await EraseNotification(rdxProductDetail.productDetail.productId, rdxProductDetail.productDetail.userUserId, rdxUser.credentials.token)
       console.log(fetched3, "fetched");
-
+      notiMe();
       const fetched4: DataFetched2 = await Notification(rdxUser.credentials.token);
       if(fetched4.data[0].length === 0 && fetched4.data[1].length === 0){
         console.log("no hay notificaciones")
@@ -68,6 +78,7 @@ export const Conversation: React.FC = () => {
       console.log(rdxProductDetail.productDetail.productId, "rdxProductDetail.productDetail.productId");
       const fetched: DataFetched2 = await BringProductDetail(rdxProductDetail.productDetail.productId);
       setProducts(fetched.data);
+      notiMe();
     }
     bringData();
   }, [rdxProductDetail]);

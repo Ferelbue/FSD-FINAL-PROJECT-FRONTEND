@@ -1,6 +1,6 @@
 
-import { BringCategoryProducts } from "../../services/apiCalls";
-import { DataFetched } from "../../interfaces";
+import { BringCategoryProducts, Notification } from "../../services/apiCalls";
+import { DataFetched, DataFetched2 } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./Category.css";
 import { categoryData } from "../../app/slices/categorySlice";
@@ -9,6 +9,7 @@ import { userData } from "../../app/slices/userSlice";
 import { Card } from "react-bootstrap";
 import { updateProductDetail } from "../../app/slices/productDetailSlice";
 import { useNavigate } from "react-router-dom";
+import { updateNotification } from "../../app/slices/notificationSlice";
 
 export const Category: React.FC = () => {
   const [products, setProducts] = useState<any[]>([]);
@@ -17,6 +18,16 @@ export const Category: React.FC = () => {
   const rdxCategory = useSelector(categoryData);
   const rdxUser = useSelector(userData);
   const navigate = useNavigate();
+
+  const notiMe = async (): Promise<void> => {
+    const fetched2: DataFetched2 = await Notification(rdxUser.credentials.token);
+    if (fetched2.data[0].length === 0 && fetched2.data[1].length === 0) {
+      dispatch(updateNotification({ notification: false }));
+    } else {
+      dispatch(updateNotification({ notification: true }));
+    }
+  }
+  notiMe();
 
   useEffect(() => {
     console.log("asd")

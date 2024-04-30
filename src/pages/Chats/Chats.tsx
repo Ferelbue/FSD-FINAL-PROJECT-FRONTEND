@@ -1,5 +1,5 @@
 
-import { BringAllChats, BringConversation, BringProductDetail, SendMessage } from "../../services/apiCalls";
+import { BringAllChats, BringConversation, BringProductDetail, Notification, SendMessage } from "../../services/apiCalls";
 import { DataFetched2 } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./Chats.css";
@@ -10,7 +10,7 @@ import dayjs from "dayjs";
 import { productDetailData, updateProductDetail } from "../../app/slices/productDetailSlice";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-
+import { updateNotification } from "../../app/slices/notificationSlice";
 
 export const Chats: React.FC = () => {
   const [chats, setChats] = useState<any>();
@@ -19,6 +19,20 @@ export const Chats: React.FC = () => {
   const rdxUser = useSelector(userData);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+
+
+  const notiMe = async (): Promise<void> => {
+    const fetched2: DataFetched2 = await Notification(rdxUser.credentials.token);
+    if (fetched2.data[0].length === 0 && fetched2.data[1].length === 0) {
+      dispatch(updateNotification({ notification: false }));
+    } else {
+      dispatch(updateNotification({ notification: true }));
+    }
+  }
+  notiMe();
+
+
 
   useEffect(() => {
     const bringData = async () => {

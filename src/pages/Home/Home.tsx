@@ -1,19 +1,34 @@
 
-import { BringProducts } from "../../services/apiCalls";
-import { DataFetched } from "../../interfaces";
+import { BringProducts, Notification } from "../../services/apiCalls";
+import { DataFetched, DataFetched2 } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./Home.css";
 import { Card, Carousel } from "react-bootstrap";
+import { updateNotification } from "../../app/slices/notificationSlice";
+import { useDispatch } from "react-redux";
+import { userData } from "../../app/slices/userSlice";
+import { useSelector } from "react-redux";
 
 export const Home: React.FC = () => {
   const [products, setProducts] = useState<any[]>([]);
   const [error, setError] = useState<string>("");
   const [firstFetch, setFirstFetch] = useState<boolean>(false);
+  const dispatch = useDispatch();
+  const rdxUser = useSelector(userData);
 
+  const notiMe = async (): Promise<void> => {
+    const fetched2: DataFetched2 = await Notification(rdxUser.credentials.token);
+    if (fetched2.data[0].length === 0 && fetched2.data[1].length === 0) {
+      dispatch(updateNotification({ notification: false }));
+    } else {
+      dispatch(updateNotification({ notification: true }));
+    }
+  }
+  
   useEffect(() => {
     const bringData = async () => {
       const fetched: DataFetched = await BringProducts();
-
+      notiMe();
       if (fetched.success) {
         console.log(fetched, "hola soy fetched");
         setFirstFetch(true);

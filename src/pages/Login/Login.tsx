@@ -43,10 +43,8 @@ export const Login: React.FC = () => {
       
       const fetched2: DataFetched2 = await Notification(passport.token);
       if(fetched2.data[0].length === 0 && fetched2.data[1].length === 0){
-        console.log("no hay notificaciones")
         dispatch(updateNotification({ notification:false}));
       }else{ 
-        console.log("hay notificaciones")
         dispatch(updateNotification({ notification:true}));
       }
       navigate("/")
