@@ -180,6 +180,7 @@ export const BringAllChats = async (token:string): Promise<any> => {
 };
 
 export const Notification = async (token:string): Promise<any> => {
+    console.log(token, "Notification");
     const options = {
         method: "GET",
         headers: {
@@ -201,3 +202,27 @@ export const Notification = async (token:string): Promise<any> => {
         return error;
     }
 }
+
+export const EraseNotification = async (productId: number, userUserId: number, token:string): Promise<any> => {
+    console.log(productId, userUserId, token, "EraseNotification");
+    const options = {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+    };
+
+    try {
+        const response = await fetch(`${ROOT}chats/notification/${productId}/${userUserId}`, options);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+
+        return data;
+
+    } catch (error) {
+        return error;
+    }
+};

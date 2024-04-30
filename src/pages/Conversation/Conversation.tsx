@@ -1,5 +1,5 @@
 
-import { BringConversation, BringProductDetail, Notification, SendMessage } from "../../services/apiCalls";
+import { BringConversation, BringProductDetail, EraseNotification, Notification, SendMessage } from "../../services/apiCalls";
 import { DataFetched2 } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./Conversation.css";
@@ -38,6 +38,18 @@ export const Conversation: React.FC = () => {
   useEffect(() => {
     const bringData = async () => {
       const fetched: DataFetched2 = await BringConversation(rdxProductDetail.productDetail.productId, rdxProductDetail.productDetail.userUserId, rdxUser.credentials.token);
+      const fetched3: DataFetched2 = await EraseNotification(rdxProductDetail.productDetail.productId, rdxProductDetail.productDetail.userUserId, rdxUser.credentials.token)
+      console.log(fetched3, "fetched");
+
+      const fetched4: DataFetched2 = await Notification(rdxUser.credentials.token);
+      if(fetched4.data[0].length === 0 && fetched4.data[1].length === 0){
+        console.log("no hay notificaciones")
+        dispatch(updateNotification({ notification:false}));
+      }else{ 
+        console.log("hay notificaciones")
+        dispatch(updateNotification({ notification:true}));
+      }
+
 
       if (fetched.success) {
         setConversation(fetched.data);
