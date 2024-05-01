@@ -2,7 +2,8 @@ import { DataFetched, LoginData } from "../interfaces";
 
 const ROOT: string = "http://localhost:4000/api/";
 
-export const BringProducts = async (): Promise<DataFetched> => {
+export const BringProducts = async (criteria:string, pag:string, limit:string): Promise<any> => {
+
     const options = {
         method: "GET",
         headers: {
@@ -11,7 +12,7 @@ export const BringProducts = async (): Promise<DataFetched> => {
     };
 
     try {
-        const response: any = await fetch(`${ROOT}products`, options);
+        const response: any = await fetch(`${ROOT}products?name=${criteria}&page=${pag}&limit=${limit}`, options);
 
         const dataRes = await response.json();
         const data: DataFetched = {

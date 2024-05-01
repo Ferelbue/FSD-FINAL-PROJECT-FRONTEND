@@ -22,8 +22,17 @@ export interface CustomInputProps2 {
     placeholder: string,
     name: string,
     disabled: boolean,
-    value: string | undefined,  
+    value: string | undefined,
     onChange: (value: React.ChangeEvent<HTMLTextAreaElement>) => void;
+}
+export interface CustomInputProps3 {
+    className: string,
+    type: string,
+    placeholder: string,
+    name: string,
+    disabled: boolean,
+    value: string | undefined,
+    onChange: (value: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface Product {
@@ -65,4 +74,4 @@ interface AnyReactComponentProps {
     text: string;
     lat: number;
     lng: number;
-  }
+}

@@ -30,7 +30,7 @@ export const Home: React.FC = () => {
   
   useEffect(() => {
     const bringData = async () => {
-      const fetched: DataFetched = await BringProducts();
+      const fetched: DataFetched = await BringProducts("","", "");
       notiMe();
       if (fetched.success) {
         console.log(fetched, "hola soy fetched");
