@@ -36,7 +36,6 @@ export const Conversation: React.FC = () => {
   }
 
   useEffect(() => {
-    console.log(message, "message");
   }, [message]);
 
   const inputHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -52,16 +51,12 @@ export const Conversation: React.FC = () => {
       const fetched3: DataFetched2 = await EraseNotification(rdxProductDetail.productDetail.productId, rdxProductDetail.productDetail.userUserId, rdxUser.credentials.token)
       const fetched5: DataFetched2 = await DealStatus(rdxProductDetail.productDetail.productId, rdxProductDetail.productDetail.userUserId, rdxUser.credentials.token);
 
-      setStatusDeal(fetched5.data);
-      console.log(fetched5, "fetched");
-      console.log(fetched3, "fetched");
+      setStatusDeal(fetched5.data[0]);
       notiMe();
       const fetched4: DataFetched2 = await Notification(rdxUser.credentials.token);
       if (fetched4.data[0].length === 0 && fetched4.data[1].length === 0) {
-        console.log("no hay notificaciones")
         dispatch(updateNotification({ notification: false }));
       } else {
-        console.log("hay notificaciones")
         dispatch(updateNotification({ notification: true }));
       }
 
@@ -73,7 +68,7 @@ export const Conversation: React.FC = () => {
       } else {
         setError(fetched.message);
       }
-      if(error){
+      if (error) {
         console.log(error, "error");
       }
     };
@@ -83,7 +78,6 @@ export const Conversation: React.FC = () => {
 
   useEffect(() => {
     const bringData = async () => {
-      console.log(rdxProductDetail.productDetail.productId, "rdxProductDetail.productDetail.productId");
       const fetched: DataFetched2 = await BringProductDetail(rdxProductDetail.productDetail.productId);
       setProducts(fetched.data);
       notiMe();
@@ -94,21 +88,20 @@ export const Conversation: React.FC = () => {
   const handleSendMessage = async () => {
 
     const fetched: DataFetched2 = await SendMessage(rdxProductDetail.productDetail.productId, rdxProductDetail.productDetail.userUserId, rdxUser.credentials.token, message.text);
-    console.log(fetched, "fetched");
-
-
     setSend(true);
 
   }
 
-  const handleDeal = async (productId: number, userUserId:number) => {
+  const handleDeal = async (productId: number, userUserId: number) => {
     const fetched5: DataFetched2 = await acceptDeal(productId, userUserId, rdxUser.credentials.token);
   }
 
-  const handleReview = async (productId: number, userUserId:number) => {
+  const handleReview = async (productId: number, userUserId: number) => {
     const fetched5: DataFetched2 = await acceptDeal(productId, userUserId, rdxUser.credentials.token);
   }
-console.log(product, "product");
+  console.log(statusDeal, "DEAL");
+  console.log(product?.id, "productr");
+  console.log(rdxUser.credentials.userId, "product owner");
   return (
     <div className="conversation">
       {conversation && product ? (
@@ -121,9 +114,13 @@ console.log(product, "product");
                 <div className="prices">
                   {product.hourPrice}€/hora &nbsp;&nbsp; {product.dayPrice}€/día &nbsp;&nbsp; {product.depositPrice}€/fianza
                 </div>
-                {statusDeal?.userOwner_confirm === true || statusDeal?.userUser_confirm === true 
-                ? (<div className="dealFinished" onClick={() => (product.id,rdxProductDetail.productDetail.userUserId)}>ESCRIBIR RESEÑA</div>)
-                : (<div className="dealFinished" onClick={() => handleDeal(product.id,rdxProductDetail.productDetail.userUserId)}>TRATO FINALIZADO</div>)}
+                {statusDeal?.userOwner_confirm === true && statusDeal?.userUser_confirm === true
+                  ? (product.owner.id !== rdxUser.credentials.userId
+                    ? <div className="dealFinished">ESCRIBIR RESEÑA</div>
+                    : <div className="dealFinished"></div>
+                  )
+                  : <div className="dealFinished" onClick={() => handleDeal(product.id, rdxProductDetail.productDetail.userUserId)}>TRATO FINALIZADO</div>
+                }
               </div>
 
               <div className="startCard3">
@@ -139,7 +136,7 @@ console.log(product, "product");
           </Card>
           <div className="categoryProducts2">
             <div className="mx-auto">
-              <Card className="cardProduct2">
+              <Card className="cardProduct6">
                 <div className="messageGroup">
                   <CInput2
                     className="inputConversation"

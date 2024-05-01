@@ -28,6 +28,19 @@
 .categoryProducts2 {
     position: relative;
 }
+.cardProduct6 {
+    width: 85vw;
+    min-height: 80vh !important;
+    height: auto;
+    margin: 0.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white !important;
+    padding: 0;
+    padding-bottom: 3em;
+
+}
 
 .cardProduct3 {
     width: 85vw;
