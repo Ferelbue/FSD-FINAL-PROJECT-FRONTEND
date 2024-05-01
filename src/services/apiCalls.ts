@@ -342,3 +342,26 @@ export const AddToFavorites = async (productId: number, token: string): Promise<
         return error;
     }
 }
+
+export const FavoriteProducts = async (token: string): Promise<any> => {
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+    };
+
+    try {
+        const response = await fetch(`${ROOT}products/favorites/user`, options);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+
+        return data;
+
+    } catch (error) {
+        return error;
+    }
+}

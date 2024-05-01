@@ -157,7 +157,7 @@ const Header = () => {
                                         ) : (
                                             <>
                                                 <div className="imagePlus" title="Upload product" />
-                                                <div className="imageCuore" title="My favorites" />
+                                                <div className="imageCuore" title="My favorites" onClick={() => navigate('/favorites')}/>
                                                 {(rdxNotification.notification === true)
                                                     ? (
                                                         <div className="imageChatNot" title="My chats" onClick={() => navigate('/chats')} />
@@ -311,7 +311,7 @@ const Header = () => {
                                                 ) : (
                                                     <>
                                                         <div className="imagePlus" title="Upload product" />
-                                                        <div className="imageCuore" title="My favorites" />
+                                                        <div className="imageCuore" title="My favorites" onClick={() => navigate('/favorites')}/>
                                                         {(rdxNotification.notification === true)
                                                             ? (
                                                                 <div className="imageChatNot" title="My chats" onClick={() => navigate('/chats')} />
@@ -464,7 +464,7 @@ const Header = () => {
                                                     <>
                                                         <div className="myNavBar3">
                                                             <div className="imagePlus" title="Upload product" />
-                                                            <div className="imageCuore" title="My favorites" />
+                                                            <div className="imageCuore" title="My favorites" onClick={() => navigate('/favorites')}/>
                                                             {(rdxNotification.notification === true)
                                                                 ? (
                                                                     <div className="imageChatNot" title="My chats" onClick={() => navigate('/chats')} />
