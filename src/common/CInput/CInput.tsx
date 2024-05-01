@@ -1,6 +1,7 @@
 import { CustomInputProps } from "../../interfaces";
 
 export const CInput: React.FC<CustomInputProps> = ({
+  className,
   type,
   name,
   placeholder,
@@ -9,6 +10,7 @@ export const CInput: React.FC<CustomInputProps> = ({
 }) => {
   return (
     <input
+      className={className}
       type={type}
       name={name}
       placeholder={placeholder}

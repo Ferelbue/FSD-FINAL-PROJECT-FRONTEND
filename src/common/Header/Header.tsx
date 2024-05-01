@@ -310,7 +310,7 @@ const Header = () => {
                                                     null
                                                 ) : (
                                                     <>
-                                                        <div className="imagePlus" title="Upload product" />
+                                                        <div className="imagePlus" title="Upload product" onClick={() => navigate('/uploadProduct')}/>
                                                         <div className="imageCuore" title="My favorites" onClick={() => navigate('/favorites')}/>
                                                         {(rdxNotification.notification === true)
                                                             ? (
@@ -463,7 +463,7 @@ const Header = () => {
                                                 ) : (
                                                     <>
                                                         <div className="myNavBar3">
-                                                            <div className="imagePlus" title="Upload product" />
+                                                            <div className="imagePlus" title="Upload product" onClick={() => navigate('/uploadProduct')}/>
                                                             <div className="imageCuore" title="My favorites" onClick={() => navigate('/favorites')}/>
                                                             {(rdxNotification.notification === true)
                                                                 ? (

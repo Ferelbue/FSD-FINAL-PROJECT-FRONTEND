@@ -11,6 +11,7 @@ export interface DataFetched2 {
 }
 
 export interface CustomInputProps {
+    className: string,
     type: string,
     name: string,
     placeholder: string,
