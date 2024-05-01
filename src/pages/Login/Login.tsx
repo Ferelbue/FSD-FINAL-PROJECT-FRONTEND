@@ -54,7 +54,7 @@ export const Login: React.FC = () => {
  }
 
   return (
-  <div>
+  <div className="login">
     <CInput 
         type={"email"}
         name={"email"}

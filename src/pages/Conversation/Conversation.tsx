@@ -11,15 +11,18 @@ import { productDetailData } from "../../app/slices/productDetailSlice";
 import { CInput2 } from "../../common/CInput2/CInput2";
 import { useDispatch } from "react-redux";
 import { updateNotification } from "../../app/slices/notificationSlice";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export const Conversation: React.FC = () => {
   const [product, setProducts] = useState<any>();
   const [statusDeal, setStatusDeal] = useState<any>();
   const [send, setSend] = useState<boolean>(false);
+  const [acceptDe, setAcceptDe] = useState<boolean>(false);
   const [conversation, setConversation] = useState<any[]>([]);
   const [error, setError] = useState<string>("");
   const rdxProductDetail = useSelector(productDetailData);
   const rdxUser = useSelector(userData);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [message, setMessage] = useState<any>({
     text: "",
@@ -50,7 +53,7 @@ export const Conversation: React.FC = () => {
       const fetched: DataFetched2 = await BringConversation(rdxProductDetail.productDetail.productId, rdxProductDetail.productDetail.userUserId, rdxUser.credentials.token);
       const fetched3: DataFetched2 = await EraseNotification(rdxProductDetail.productDetail.productId, rdxProductDetail.productDetail.userUserId, rdxUser.credentials.token)
       const fetched5: DataFetched2 = await DealStatus(rdxProductDetail.productDetail.productId, rdxProductDetail.productDetail.userUserId, rdxUser.credentials.token);
-
+      setAcceptDe(false)
       setStatusDeal(fetched5.data[0]);
       notiMe();
       const fetched4: DataFetched2 = await Notification(rdxUser.credentials.token);
@@ -74,7 +77,7 @@ export const Conversation: React.FC = () => {
     };
     bringData();
 
-  }, [send]);
+  }, [send,acceptDe]);
 
   useEffect(() => {
     const bringData = async () => {
@@ -84,7 +87,7 @@ export const Conversation: React.FC = () => {
     }
     bringData();
   }, [rdxProductDetail]);
-
+  console.log(product, "produasdsaadasdasddadct")
   const handleSendMessage = async () => {
 
     const fetched: DataFetched2 = await SendMessage(rdxProductDetail.productDetail.productId, rdxProductDetail.productDetail.userUserId, rdxUser.credentials.token, message.text);
@@ -94,14 +97,16 @@ export const Conversation: React.FC = () => {
 
   const handleDeal = async (productId: number, userUserId: number) => {
     const fetched5: DataFetched2 = await acceptDeal(productId, userUserId, rdxUser.credentials.token);
+    setAcceptDe(true);
   }
 
-  const handleReview = async (productId: number, userUserId: number) => {
-    const fetched5: DataFetched2 = await acceptDeal(productId, userUserId, rdxUser.credentials.token);
+  const handleReview = async (productId: number) => {
+    // const fetched5: DataFetched2 = await productReview(productId,rdxUser.credentials.token);
+    navigate('/writeReview')
   }
   console.log(statusDeal, "DEAL");
-  console.log(product?.id, "productr");
-  console.log(rdxUser.credentials.userId, "product owner");
+  console.log(product, "produasdsaadasdasddadct")
+  console.log(rdxUser.credentials.user.userId, "product owner");
   return (
     <div className="conversation">
       {conversation && product ? (
@@ -115,9 +120,9 @@ export const Conversation: React.FC = () => {
                   {product.hourPrice}€/hora &nbsp;&nbsp; {product.dayPrice}€/día &nbsp;&nbsp; {product.depositPrice}€/fianza
                 </div>
                 {statusDeal?.userOwner_confirm === true && statusDeal?.userUser_confirm === true
-                  ? (product.owner.id !== rdxUser.credentials.userId
-                    ? <div className="dealFinished">ESCRIBIR RESEÑA</div>
-                    : <div className="dealFinished"></div>
+                  ? (product.owner.id !== rdxUser.credentials.user.userId
+                    ? <div className="dealFinished" onClick={() => handleReview(product.id)}>ESCRIBIR RESEÑA</div>
+                    : null
                   )
                   : <div className="dealFinished" onClick={() => handleDeal(product.id, rdxProductDetail.productDetail.userUserId)}>TRATO FINALIZADO</div>
                 }
@@ -130,7 +135,7 @@ export const Conversation: React.FC = () => {
                 {product.starts === 3 ? <div className="productStart3"></div> : null}
                 {product.starts === 4 ? <div className="productStart4"></div> : null}
                 {product.starts === 5 ? <div className="productStart5"></div> : null}
-                ({product.totalReviews})
+                ({product.reviews.length})
               </div>
             </Card.Body>
           </Card>

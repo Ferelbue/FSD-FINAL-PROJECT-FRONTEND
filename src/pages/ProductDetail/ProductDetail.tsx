@@ -1,5 +1,5 @@
 
-import { BringCategoryProducts, BringProductDetail } from "../../services/apiCalls";
+import { AddToFavorites, BringCategoryProducts, BringFavoriteUserProduct, BringProductDetail } from "../../services/apiCalls";
 import { DataFetched, DataFetched2 } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./ProductDetail.css";
@@ -13,6 +13,8 @@ import { productDetailData } from "../../app/slices/productDetailSlice";
 
 export const ProductDetail: React.FC = () => {
   const [product, setProducts] = useState<any>();
+  const [favorite, setFavorite] = useState<any>();
+  const [addTofavorite, setAddToFavorite] = useState<any>();
   const [error, setError] = useState<string>("");
   const dispatch = useDispatch();
   const rdxProductDetail = useSelector(productDetailData);
@@ -55,6 +57,23 @@ export const ProductDetail: React.FC = () => {
     }
   }
 
+  useEffect(() => {
+    const bringData = async () => {
+      const fetched2: DataFetched2 = await BringFavoriteUserProduct(rdxProductDetail.productDetail.productId, rdxUser.credentials.token);
+      setFavorite(fetched2.data);
+      console.log(fetched2, "fetched2")
+    }
+    bringData();
+  }, [addTofavorite]);
+
+  const handleAddFavorite = async () => {
+
+    const fetched3: DataFetched2 = await AddToFavorites(rdxProductDetail.productDetail.productId, rdxUser.credentials.token)
+    console.log(fetched3, "fetched3")
+    setAddToFavorite(fetched3.data);
+
+  }
+  console.log(favorite, "favorite")
 
   return (
     <div className="home">
@@ -69,7 +88,14 @@ export const ProductDetail: React.FC = () => {
           <div className="categoryProducts2">
             <div className="mx-auto">
               <Card className="cardProduct2">
-                <Card.Img className="imageProductCard2" src={product.image} />
+                <div>
+                  <Card.Img className="imageProductCard2" src={product.image} />
+                  <div className="sendMesssage4" onClick={() => handleAddFavorite()}>
+                    {favorite?.length === 0
+                      ? <div className="imageCuore4" title="Add to favorites" />
+                      : <div className="imageCuore5" title="Already in favorites" />}
+                  </div>
+                </div>
                 <Card.Body>
                   <Card.Title className="cardTitle2">{product.name.toUpperCase()}</Card.Title>
                   <div className="cardPrice2">
@@ -99,7 +125,7 @@ export const ProductDetail: React.FC = () => {
                   {product.starts === 5 ? <div className="productStart5"></div> : null}
                   ({product.reviews.length})
                 </div>
-                {product.reviews.map((review: any) => (
+                {[...product.reviews].reverse().map((review: any) => (
                   <div className="reviewCard2" key={review.id}>
                     <div className="oneComment">
                       <div className="reviewTitle2">{review.name} <div className="dateDetail">{dayjs(review.updated_at).format('YYYY-MM-DD')}</div></div>

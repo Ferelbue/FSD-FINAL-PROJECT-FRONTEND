@@ -2,7 +2,7 @@ import { DataFetched, LoginData } from "../interfaces";
 
 const ROOT: string = "http://localhost:4000/api/";
 
-export const BringProducts = async (criteria:string, pag:string, limit:string): Promise<any> => {
+export const BringProducts = async (criteria: string, pag: string, limit: string): Promise<any> => {
 
     const options = {
         method: "GET",
@@ -105,7 +105,7 @@ export const BringProductDetail = async (id: number): Promise<any> => {
         return error;
     }
 };
-export const BringConversation = async (productId: number,userUserId: number, token:string): Promise<any> => {
+export const BringConversation = async (productId: number, userUserId: number, token: string): Promise<any> => {
     const options = {
         method: "GET",
         headers: {
@@ -128,14 +128,14 @@ export const BringConversation = async (productId: number,userUserId: number, to
     }
 };
 
-export const SendMessage = async (productId: number, userUserId: number, token:string, message:string): Promise<any> => {
+export const SendMessage = async (productId: number, userUserId: number, token: string, message: string): Promise<any> => {
     const options = {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`
         },
-        body: JSON.stringify({message})
+        body: JSON.stringify({ message })
     };
 
     try {
@@ -152,7 +152,7 @@ export const SendMessage = async (productId: number, userUserId: number, token:s
     }
 };
 
-export const BringAllChats = async (token:string): Promise<any> => {
+export const BringAllChats = async (token: string): Promise<any> => {
     const options = {
         method: "GET",
         headers: {
@@ -175,7 +175,7 @@ export const BringAllChats = async (token:string): Promise<any> => {
     }
 };
 
-export const Notification = async (token:string): Promise<any> => {
+export const Notification = async (token: string): Promise<any> => {
     const options = {
         method: "GET",
         headers: {
@@ -198,7 +198,7 @@ export const Notification = async (token:string): Promise<any> => {
     }
 }
 
-export const EraseNotification = async (productId: number, userUserId: number, token:string): Promise<any> => {
+export const EraseNotification = async (productId: number, userUserId: number, token: string): Promise<any> => {
     console.log(productId, userUserId, token, "EraseNotification");
     const options = {
         method: "PUT",
@@ -222,7 +222,7 @@ export const EraseNotification = async (productId: number, userUserId: number, t
     }
 };
 
-export const acceptDeal = async (productId: number, userUserId:number, token:string): Promise<any> => {
+export const acceptDeal = async (productId: number, userUserId: number, token: string): Promise<any> => {
     const options = {
         method: "PUT",
         headers: {
@@ -245,7 +245,7 @@ export const acceptDeal = async (productId: number, userUserId:number, token:str
     }
 }
 
-export const DealStatus = async (productId: number, userUserId:number, token:string): Promise<any> => {
+export const DealStatus = async (productId: number, userUserId: number, token: string): Promise<any> => {
     const options = {
         method: "GET",
         headers: {
@@ -256,6 +256,81 @@ export const DealStatus = async (productId: number, userUserId:number, token:str
 
     try {
         const response = await fetch(`${ROOT}deals/${productId}/${userUserId}`, options);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+
+        return data;
+
+    } catch (error) {
+        return error;
+    }
+}
+
+export const productReview = async (productId: number, token: string, message: string, stars: string): Promise<any> => {
+    console.log(productId, token, message, stars, "productReview");
+    const options = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({
+            description: message,
+            starts: stars
+        })
+    };
+
+    try {
+        const response = await fetch(`${ROOT}products/review/${productId}`, options);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+
+        return data;
+
+    } catch (error) {
+        return error;
+    }
+}
+
+export const BringFavoriteUserProduct = async (productId: number, token: string): Promise<any> => {
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+    };
+
+    try {
+        const response = await fetch(`${ROOT}products/favorite/${productId}`, options);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+
+        return data;
+
+    } catch (error) {
+        return error;
+    }
+
+}
+
+export const AddToFavorites = async (productId: number, token: string): Promise<any> => {
+    const options = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+    };
+
+    try {
+        const response = await fetch(`${ROOT}products/favorite/${productId}`, options);
         const data = await response.json();
         if (!response.ok) {
             throw new Error(data.message);

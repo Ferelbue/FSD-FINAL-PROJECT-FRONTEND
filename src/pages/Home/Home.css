@@ -10,6 +10,7 @@
     background-color: rgb(239, 239, 239) !important;
     overflow-x: hidden;
     color: black;
+    margin-top: 24vh !important;
 }
 
 .home::-webkit-scrollbar {

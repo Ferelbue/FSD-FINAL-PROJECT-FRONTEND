@@ -1,10 +1,10 @@
 
 .header {
-    height: 10vh;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: fixed;
+    z-index: 9999;
+}
+.header::-webkit-scrollbar {
+    width: 0.5px;
 }
 
 .myNavBar {
