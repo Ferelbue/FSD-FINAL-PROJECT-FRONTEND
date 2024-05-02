@@ -1,0 +1,120 @@
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    margin: 0;
+    padding: 0;
+    height: 75vh;
+    width: 100vw;
+    background-color: rgb(239, 239, 239) !important;
+    overflow-x: hidden;
+    color: black;
+    margin-top: 24vh !important;
+}
+
+.home::-webkit-scrollbar {
+    width: 0.5px;
+}
+
+.categoryTitle {
+    background-color: rgb(73, 90, 94);
+    color: white;
+    width: 100vw;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.cardProduct {
+    width: 300px;
+    height: 500px !important;
+    margin: 0.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white!important;
+    padding: 0;
+}
+
+.imageProductCard {
+    height: 250px;
+    width: 300px;
+    border-radius: 0.5em;
+}
+
+.carouselProducts {
+    padding-left: 2em;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    width: 20px;
+    height: 20px;
+    background-color: rgb(184, 181, 181);
+}
+
+.carousel-control-prev {
+    left: 0;
+    transform: translateX(-40%);
+}
+
+.carousel-control-next {
+    right: 0;
+    transform: translateX(40%);
+}
+
+.cardTitle {
+    text-decoration: underline;
+}
+
+.cardPrice {
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+}
+
+.productStart0 {
+    width: 6em;
+    height: 2em;
+    margin-right: 0.3em;
+    background: url('../../../public/0start.png') no-repeat center center / contain;
+}
+.productStart1 {
+    width: 6em;
+    height: 2em;
+    margin-right: 0.3em;
+    background: url('../../../public/1start.png') no-repeat center center / contain;
+}
+.productStart2 {
+    width: 6em;
+    height: 2em;
+    margin-right: 0.3em;
+    background: url('../../../public/2start.png') no-repeat center center / contain;
+}
+.productStart3 {
+    width: 6em;
+    height: 2em;
+    margin-right: 0.3em;
+    background: url('../../../public/3start.png') no-repeat center center / contain;
+}
+.productStart4 {
+    width: 6em;
+    height: 2em;
+    margin-right: 0.3em;
+    background: url('../../../public/4start.png') no-repeat center center / contain;
+}
+.productStart5 {
+    width: 6em;
+    height: 2em;
+    margin-right: 0.3em;
+    background: url('../../../public/5start.png') no-repeat center center / contain;
+}
+.startCard{
+    width: 300px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.7em;
+    border-top: 1px solid rgb(66,71,76);
+}

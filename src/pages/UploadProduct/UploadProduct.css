@@ -1,0 +1,401 @@
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    margin: 0;
+    padding: 0;
+    min-height: 75vh;
+    width: 100vw;
+    background-color: rgb(239, 239, 239);
+    overflow-x: hidden;
+    color: black;
+    margin-top: 24vh !important;
+}
+
+.categoryTitle3 {
+    background-color: rgb(73, 90, 94);
+    color: white;
+    width: 100vw;
+    font-size: 2em;
+    font-weight: bold;
+    position: fixed;
+    z-index: 1;
+}
+
+.categoryProducts2 {
+    position: relative;
+}
+
+.cardProduct2 {
+    width: 85vw;
+    min-height: 80vh !important;
+    height: auto;
+    margin: 0.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white !important;
+    padding: 0;
+    padding-bottom: 3em;
+    top: 7vh;
+}
+
+.imageProductCard22 {
+    height: 50vh;
+    width: 50vw !important;
+    border-radius: 0.5em;
+    margin-top: 1em;
+    border: 1px solid lightgray;
+}
+
+.cardTitle22 {
+    height: 11vh;
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 2em;
+    border-bottom: 1px solid lightgray;
+}
+
+.cardPrice22 {
+    font-size: 1.3em;
+    height: 14vh;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid lightgray;
+    border-top: 1px solid lightgray;
+}
+
+.startCard2 {
+    width: 50vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    font-size: 1.7em;
+    border-top: 1px solid lightgray;
+    padding-left: 0.5em;
+}
+
+.descriptionCard22 {
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 0.5em;
+}
+
+.cardCity2 {
+    width: 50vw;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding-left: 0.5em;
+    font-size: x-large;
+    font-weight: bold;
+    border-top: 1px solid lightgray;
+}
+
+.mapCard2 {
+    overflow: hidden;
+    height: 235px;
+    width: 400px;
+    margin-top: 0.5em;
+}
+
+.reviewCard2 {
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+}
+
+.reviewTitle2 {
+    width: 50vw;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+    padding-left: 1em;
+}
+
+.reviewStart2 {
+    width: 50vw;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    margin-bottom: 0.5em;
+    padding-left: 1.3em;
+}
+
+.reviewText2 {
+    width: 50vw;
+    font-size: 1.2em;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    padding-left: 1.1em;
+}
+
+.imageLocation {
+    margin-top: 0.1em;
+    width: 1.5em;
+    height: 1.5em;
+    background: url('../../../public/location.png') no-repeat center center / cover;
+}
+
+.oneComment {
+    padding-bottom: 1em;
+    border-bottom: 1px solid lightgray;
+}
+
+.dateDetail {
+    font-size: 0.6em;
+    font-weight: lighter;
+
+    color: gray;
+    margin-left: 0.5em;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    height: 4.2vh;
+}
+
+.imageChat2 {
+
+    width: 1.2em;
+    height: 1.2em;
+    margin-right: 0.3em;
+    background: url('../../../public/chat.png') no-repeat center center / cover;
+
+}
+
+.conversationCard {
+    position: absolute;
+    z-index: 10;
+    top: 80vh;
+    left: 75vw;
+}
+
+.imageConversation {
+    width: 5em;
+    height: 5em;
+    margin-right: 0.3em;
+    background: url('../../../public/conversation.png') no-repeat center center / cover;
+    cursor: pointer;
+}
+
+.sendMesssage4 {
+    margin-left: 44vw;
+    margin-top: -7vh;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.imageCuore4 {
+    width: 2.3em;
+    height: 2.3em;
+    margin-right: 1em;
+    margin-left: 1em;
+    background: url('../../../public/cuore.png') no-repeat center center / cover;
+    cursor: pointer;
+
+}
+
+.imageCuore5 {
+    width: 2.3em;
+    height: 2.3em;
+    margin-right: 1em;
+    margin-left: 1em;
+    background: url('../../../public/cuore3.png') no-repeat center center / cover;
+    cursor: pointer;
+
+}
+
+.inputConversation2{
+    width: 50vw;
+    height: 15vh;
+    resize:none;
+    background-color: white;
+    color: black;
+    border-radius: 0.5em;
+    border-width: 0.1em;
+    border-style: solid;
+    border-color: black;
+}
+
+.inputConversation3 {
+    width: 5vw;
+    height: 5vh;
+    background-color: white;
+    color: black;
+    border-radius: 0.5em;
+    border-width: 0.1em;
+    border-style: solid;
+    border-color: black;
+    appearance: textfield;
+}
+
+.inputConversation3::-webkit-scrollbar {
+    width: 0.5em;
+}
+
+.pricesUpload {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.cityCard22 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonLogin2 {
+    width: 10vw;
+    height: 5vh;
+    margin-top: 3em;
+    border-radius: 0.5em;
+    background-color: rgb(73, 90, 94);
+    color: white;
+    border: 2px solid rgb(73, 90, 94);
+    padding: 0.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonLogin2:hover {
+    background-color: rgb(96, 143, 143);
+    color: rgb(73, 90, 94);
+    border: 2px solid rgb(73, 90, 94);
+}
+
+.categoryGroup {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 12vh;
+    padding-bottom: 1em;
+    border-bottom: 1px solid rgb(224, 229, 230) !important;
+}
+
+.dropdownStar3 {
+    z-index: 100;
+    width: 50vw !important;
+    height: 5vh !important;
+    color: black !important;
+    font-weight: bold !important;
+    background-color: white !important;
+    border-radius: 0.5em !important;
+    border: solid 0.1em rgb(0, 0, 0) !important;
+}
+
+.dropdownStar33 {
+    z-index: 100;
+    width: 50vw !important;
+    height: auto;
+    background-color: tomato;
+}
+
+.titleUpload {
+    height: 8vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.titleUpload2 {
+    height: 8vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 0.5em;
+}
+.titleUpload3 {
+    height: 8vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-bottom: 0.3em;
+}
+.titleUpload4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 0.3em;
+}
+.titleUpload5 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-bottom: 0.3em;
+}
+
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 0.5em;
+    color: white;
+    font-weight: bold;
+    background-color: rgb(96, 143, 143);
+}
+.custom-file-upload:hover{
+    background-color: rgb(73, 90, 94);
+}
+.imageGroup{
+    width: 80vw;
+    height: 68vh;
+    border-bottom: 2px solid rgb(224, 229, 230);
+}
+.inputConversation2 {
+    width: 50vw;
+    height: 5vh;
+    background-color: white;
+    color: black;
+    border-radius: 0.5em;
+    border-width: 0.1em;
+    border-style: solid;
+    border-color: black;
+}
+.inputConversation22 {
+    width: 50vw;
+    height: 15vh;
+    resize: none;
+    background-color: white;
+    color: black;
+    border-radius: 0.5em;
+    border-width: 0.1em;
+    border-style: solid;
+    border-color: black;
+}

@@ -1,26 +1,59 @@
-
 export interface DataFetched {
     message: string,
     data: any[],
     success: boolean
 }
 
-export interface CharactersFetchedResults {
-    info: CharactersInfo,
-    results: any[]
+export interface DataFetched2 {
+    message: string,
+    data: any,
+    success: boolean
 }
 
-export interface CharactersInfo {
-
-    count: number,
-    pages: number,
-    next: string | null,
-    prev: string | null
+export interface CustomInputProps {
+    className: string,
+    type: string,
+    name: string,
+    placeholder: string,
+    min: string,
+    value: string | undefined,
+    onChange: (value: React.ChangeEvent<HTMLInputElement>) => void;
+}
+export interface CustomInputProps1 {
+    className: string,
+    type: string,
+    name: string,
+    placeholder: string,
+    value: string | undefined,
+    onChange: (value: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export interface CharactersData {
+export interface CustomInputProps2 {
+    className: string,
+    placeholder: string,
+    name: string,
+    disabled: boolean,
+    value: string | undefined,
+    onChange: (value: React.ChangeEvent<HTMLTextAreaElement>) => void;
+}
+export interface CustomInputProps3 {
+    className: string,
+    type: string,
+    placeholder: string,
+    name: string,
+    disabled: boolean,
+    value: string | undefined,
+    onChange: (value: React.ChangeEvent<HTMLInputElement>) => void;
+}
 
-    characters: any[]
+export interface Product {
+    id: string;
+    name: string;
+    description: string;
+    image: string;
+    hourPrice: number;
+    dayPrice: number;
+    category: { name: string };
 }
 
 export interface LoginData {
@@ -28,10 +61,28 @@ export interface LoginData {
     password: string
 }
 
-export interface CustomInputProps {
-    type: string,
-    name: string,
-    placeholder: string,
-    value: string | undefined,
-    onChange: (value: React.ChangeEvent<HTMLInputElement>) => void;
+export interface ReduxData {
+    user: {
+        credentials: {
+            token: string | undefined,
+            user: {
+                userId: number | undefined,
+                roleName: string | undefined,
+                userName: string | undefined,
+                iat: number | undefined,
+                exp: number | undefined
+            }
+        }
+    },
+    category: {
+        category: {
+            id: number | undefined,
+        }
+    }
+}
+
+interface AnyReactComponentProps {
+    text: string;
+    lat: number;
+    lng: number;
 }
