@@ -73,7 +73,7 @@ export const ProductDetail: React.FC = () => {
     setAddToFavorite(fetched3.data);
 
   }
-  console.log(favorite, "favorite")
+  console.log(product, "favorite")
 
   return (
     <div className="home">

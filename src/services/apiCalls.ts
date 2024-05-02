@@ -1,6 +1,7 @@
 import { DataFetched, LoginData } from "../interfaces";
 
-const ROOT: string = "http://localhost:4000/api/";
+export const ROOT: string = "http://localhost:4000/api/";
+export const ROOT2: string = "http://localhost:4000/";
 
 export const BringProducts = async (criteria: string, pag: string, limit: string): Promise<any> => {
 
@@ -368,22 +369,22 @@ export const FavoriteProducts = async (token: string): Promise<any> => {
 
 export const UploadImage = async (formData: FormData, token: string): Promise<any> => {
     console.log(formData, token, "UploadImage");
-    try {
-        const response = await fetch(`${ROOT}products/image`, {
-          method: 'POST',
-          headers: {
+    const options = {
+        method: "POST",
+        headers: {
             "Authorization": `Bearer ${token}`
         },
-          body: formData,
-        });
-  
-        if (!response.ok) {
-          throw new Error('Error al subir la imagen');
-        }
-  
+        body: formData,
+    };
+
+    try {
+        const response = await fetch(`${ROOT}products/image`, options);
         const data = await response.json();
-        console.log(data);
-      } catch (error) {
+        if (!response.ok) {
+            throw new Error('Error al subir la imagen');
+        }
+        return data;
+    } catch (error) {
         console.error(error);
-      }
+    }
 }   

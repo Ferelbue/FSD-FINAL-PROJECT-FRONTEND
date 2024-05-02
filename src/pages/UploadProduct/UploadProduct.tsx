@@ -12,6 +12,7 @@ import dayjs from "dayjs";
 import { productDetailData } from "../../app/slices/productDetailSlice";
 import { CInput2 } from "../../common/CInput2/CInput2";
 import { CInput } from "../../common/CInput/CInput";
+import { ROOT2 } from "../../services/apiCalls"
 
 export const UploadProduct: React.FC = () => {
   const [product, setProducts] = useState<any>();
@@ -154,6 +155,8 @@ export const UploadProduct: React.FC = () => {
 
   };
 
+  console.log(dataImage, "asdasdasdsadsa")
+
   return (
     <div className="home">
       <>
@@ -164,7 +167,10 @@ export const UploadProduct: React.FC = () => {
           <div className="mx-auto">
             <Card className="cardProduct2">
               <div>
-                <Card.Img className="imageProductCard22" />
+                {dataImage
+                  ? <Card.Img className="imageProductCard22" src={`${ROOT2}${dataImage.destination}${dataImage.originalname}`} />
+                  : <Card.Img className="imageProductCard22" />
+                }
                 <form onSubmit={handleSubmit}>
                   <input type="file" ref={fileInput} />
                   <button type="submit">Upload</button>
