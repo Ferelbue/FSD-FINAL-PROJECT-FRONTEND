@@ -156,7 +156,7 @@ const Header = () => {
                                             null
                                         ) : (
                                             <>
-                                                <div className="imagePlus" title="Upload product" />
+                                                <div className="imagePlus" title="Upload product" onClick={() => navigate('/uploadProduct')}/>
                                                 <div className="imageCuore" title="My favorites" onClick={() => navigate('/favorites')}/>
                                                 {(rdxNotification.notification === true)
                                                     ? (
@@ -165,7 +165,7 @@ const Header = () => {
                                                         <div className="imageChat" title="My chats" onClick={() => navigate('/chats')} />
                                                     )
                                                 }
-                                                <div className="imageUser" title="My profile" />
+                                                <div className="imageUser" title="My profile" onClick={() => navigate('/profile')}/>
                                                 <div className="imageExit" title="Log Out" onClick={() => handleLogout()} />
                                             </>
                                         )
@@ -319,7 +319,7 @@ const Header = () => {
                                                                 <div className="imageChat" title="My chats" onClick={() => navigate('/chats')} />
                                                             )
                                                         }
-                                                        <div className="imageUser" title="My profile" />
+                                                        <div className="imageUser" title="My profile" onClick={() => navigate('/profile')}/>
                                                         <div className="imageExit" title="Log Out" onClick={() => handleLogout()} />
                                                     </>
                                                 )
