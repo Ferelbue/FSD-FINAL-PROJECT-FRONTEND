@@ -1,11 +1,10 @@
-import { CustomInputProps } from "../../interfaces";
+import { CustomInputProps1 } from "../../interfaces";
 
-export const CInput: React.FC<CustomInputProps> = ({
+export const CInput1: React.FC<CustomInputProps1> = ({
   className,
   type,
   name,
   placeholder,
-  min,
   value,
   onChange,
 }) => {
@@ -15,7 +14,6 @@ export const CInput: React.FC<CustomInputProps> = ({
       type={type}
       name={name}
       placeholder={placeholder}
-      min={min}
       value={value || ""}
       onChange={(e) => onChange(e)}
     />

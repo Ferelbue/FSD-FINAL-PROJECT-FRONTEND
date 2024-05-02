@@ -1,18 +1,17 @@
 
-import { AddToFavorites, BringCategoryProducts, BringFavoriteUserProduct, BringProductDetail, UploadImage, UploadProducto } from "../../services/apiCalls";
-import { DataFetched, DataFetched2 } from "../../interfaces";
+import { AddToFavorites, BringFavoriteUserProduct, BringProductDetail, UploadImage, UploadProducto } from "../../services/apiCalls";
+import { DataFetched2 } from "../../interfaces";
 import { useEffect, useState, useRef } from "react";
 import "./UploadProduct.css";
-import { categoryData } from "../../app/slices/categorySlice";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { userData } from "../../app/slices/userSlice";
 import { Card, Dropdown } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import dayjs from "dayjs";
 import { productDetailData } from "../../app/slices/productDetailSlice";
 import { CInput2 } from "../../common/CInput2/CInput2";
 import { CInput } from "../../common/CInput/CInput";
 import { ROOT2 } from "../../services/apiCalls"
+import { CInput1 } from "../../common/CInput1/CInput1";
 
 export const UploadProduct: React.FC = () => {
   const [product, setProducts] = useState<any>();
@@ -20,7 +19,6 @@ export const UploadProduct: React.FC = () => {
   const [dataImage, setDataImage] = useState<any>();
   const [addTofavorite, setAddToFavorite] = useState<any>();
   const [error, setError] = useState<string>("");
-  const dispatch = useDispatch();
   const rdxProductDetail = useSelector(productDetailData);
   const rdxUser = useSelector(userData);
   const navigate = useNavigate();
@@ -150,7 +148,7 @@ export const UploadProduct: React.FC = () => {
     } else {
       console.error('No file selected');
     }
-
+    console.log(formData, rdxUser.credentials.token, "formData")
     const fetched: DataFetched2 = await UploadImage(formData, rdxUser.credentials.token);
     console.log(fetched, "fetched")
 
@@ -158,15 +156,15 @@ export const UploadProduct: React.FC = () => {
 
   };
 
-  const handleCat = (cat: string, id:number) => {
-    setCategory({ 
+  const handleCat = (cat: string, id: number) => {
+    setCategory({
       category: cat,
       categoryId: id
-     });
+    });
   }
 
   const handleUploadProduct = async () => {
-    const fetched: DataFetched2 = await UploadProducto(title.text, message.text, dataImage.originalname, city.text, hourPrice.text, dayPrice.text, deposit.text,category.categoryId, rdxUser.credentials.token);
+    const fetched: DataFetched2 = await UploadProducto(title.text, message.text, dataImage.originalname, city.text, hourPrice.text, dayPrice.text, deposit.text, category.categoryId, rdxUser.credentials.token);
     console.log(fetched, "fetched")
 
   }
@@ -181,39 +179,95 @@ export const UploadProduct: React.FC = () => {
         <div className="categoryProducts2">
           <div className="mx-auto">
             <Card className="cardProduct2">
-              <div>
-                {dataImage
-                  ? <Card.Img className="imageProductCard22" src={`${ROOT2}${dataImage.destination}${dataImage.originalname}`} />
-                  : <Card.Img className="imageProductCard22" />
-                }
-                <form onSubmit={handleSubmit}>
-                  <input type="file" ref={fileInput} />
-                  <button type="submit">Upload</button>
-                </form>
-              </div>
               <Card.Body>
                 <Card.Title className="cardTitle22">
-                  TITULO
-                  <CInput
-                    className="inputConversation2"
-                    type="text"
-                    name="message"
-                    placeholder="Escribe un nombre de producto"
-                    value={title.text || ""}
-                    onChange={(e) => inputHandler2(e)}
-                  />
+                  <div className="titleUpload2">
+                    TITULO
+                  </div>
+                  <div>
+                    <CInput1
+                      className="inputConversation2"
+                      type="text"
+                      name="message"
+                      placeholder="Escribe un nombre de producto"
+                      value={title.text || ""}
+                      onChange={(e) => inputHandler2(e)}
+                    />
+                  </div>
                 </Card.Title>
+                <Card.Text className="descriptionCard22">
+                  <div className="titleUpload5">
+                    DESCRIPCION
+                  </div>
+                  <CInput2
+                    className="inputConversation22"
+                    placeholder="Escribe un mensaje"
+                    name="message"
+                    disabled={false}
+                    value={message.text || ""}
+                    onChange={(e) => inputHandler(e)}
+                  />
+                </Card.Text>
+                <Dropdown className="categoryGroup">
+                  <div className="titleUpload3">
+                    CATEGORIA
+                  </div>
+                  <div>
+                    <Dropdown.Toggle className="dropdownStar3">
+                      {category.category === ""
+                        ? "SELECCIONA UNA CATEGORIA"
+                        : (category.category)
+                      }
+                    </Dropdown.Toggle>
+                  </div>
+                  <Dropdown.Menu className="dropdownStar33">
+                    <Dropdown.Item href="#/action-1" onClick={() => handleCat("Agricola-Forestal", 1)}>Agricola-Forestal</Dropdown.Item>
+                    <Dropdown.Item href="#/action-2" onClick={() => handleCat("Construcción", 2)}>Construcción</Dropdown.Item>
+                    <Dropdown.Item href="#/action-3" onClick={() => handleCat("Bricolaje", 3)}>Bricolaje</Dropdown.Item>
+                    <Dropdown.Item href="#/action-3" onClick={() => handleCat("Carpintería", 4)}>Carpintería</Dropdown.Item>
+                    <Dropdown.Item href="#/action-3" onClick={() => handleCat("Electricidad", 5)}>Electricidad</Dropdown.Item>
+                    <Dropdown.Item href="#/action-3" onClick={() => handleCat("Fontanería", 6)}>Fontanería</Dropdown.Item>
+                    <Dropdown.Item href="#/action-3" onClick={() => handleCat("Medición", 7)}>Medición</Dropdown.Item>
+                    <Dropdown.Item href="#/action-3" onClick={() => handleCat("Jardinería", 8)}>Jardinería</Dropdown.Item>
+                    <Dropdown.Item href="#/action-3" onClick={() => handleCat("Limpieza", 9)}>Limpieza</Dropdown.Item>
+                    <Dropdown.Item href="#/action-3" onClick={() => handleCat("Llaves Manuales", 10)}>Llaves Manuales</Dropdown.Item>
+                    <Dropdown.Item href="#/action-3" onClick={() => handleCat("Metal", 11)}>Metal</Dropdown.Item>
+                    <Dropdown.Item href="#/action-3" onClick={() => handleCat("Pintura", 12)}>Pintura</Dropdown.Item>
+                    <Dropdown.Item href="#/action-3" onClick={() => handleCat("Carga-Movimiento", 13)}>Electricidad</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+                <div className="imageGroup">
+                  <div className="titleUpload">
+                    IMAGEN
+                  </div>
+                  <div>
+                    <form onSubmit={handleSubmit}>
+                      <input type="file" ref={fileInput} onChange={handleSubmit} id="fileInput" style={{ width: 0.1, height: 0.1, opacity: 0, overflow: 'hidden', position: 'absolute', zIndex: -1 }} />
+                      <label htmlFor="fileInput" className="custom-file-upload">
+                        Upload Image
+                      </label>
+                    </form>
+                  </div>
+                  <div>
+
+                    {dataImage
+                      ? <Card.Img className="imageProductCard22" src={`${ROOT2}${dataImage.destination}${dataImage.originalname}`} />
+                      : <Card.Img className="imageProductCard22" />
+                    }
+                  </div>
+                </div>
 
                 <div className="cardPrice22">
-                  <>
+                  <div className="titleUpload4">
                     TARIFAS
-                  </>
+                  </div>
                   <div className="pricesUpload">
                     <CInput
                       className="inputConversation3"
                       type="number"
                       name="message"
                       placeholder="..."
+                      min="0"
                       value={hourPrice.text || ""}
                       onChange={(e) => inputHandler3(e)}
                     />
@@ -223,6 +277,7 @@ export const UploadProduct: React.FC = () => {
                       type="number"
                       name="message"
                       placeholder="..."
+                      min="0"
                       value={dayPrice.text || ""}
                       onChange={(e) => inputHandler4(e)}
                     />
@@ -232,27 +287,19 @@ export const UploadProduct: React.FC = () => {
                       type="number"
                       name="message"
                       placeholder="..."
+                      min="0"
                       value={deposit.text || ""}
                       onChange={(e) => inputHandler5(e)}
                     />
                     €/fianza
                   </div>
                 </div>
-                <Card.Text className="descriptionCard22">
-                  DESCRIPCIÓN
-                  <CInput2
-                    className="inputConversation"
-                    placeholder="Escribe un mensaje"
-                    name="message"
-                    disabled={false}
-                    value={message.text || ""}
-                    onChange={(e) => inputHandler(e)}
-                  />
-                </Card.Text>
               </Card.Body>
               <div className="cityCard22">
-                CIUDAD
-                <CInput
+                <div className="titleUpload5">
+                  CIUDAD
+                </div>
+                <CInput1
                   className="inputConversation2"
                   type="text"
                   name="message"
@@ -261,34 +308,7 @@ export const UploadProduct: React.FC = () => {
                   onChange={(e) => inputHandler6(e)}
                 />
               </div>
-
-              <Dropdown className="categoryGroup">
-                CATEGORIA
-                <Dropdown.Toggle className="dropdownStar3">
-                  {category.category === ""
-                    ? "CATEGORIA"
-                    : (category.category)
-                  }
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu className="dropdownStar33">
-                  <Dropdown.Item href="#/action-1" onClick={() => handleCat("Agricola-Forestal",1)}>Agricola-Forestal</Dropdown.Item>
-                  <Dropdown.Item href="#/action-2" onClick={() => handleCat("Construcción",2)}>Construcción</Dropdown.Item>
-                  <Dropdown.Item href="#/action-3" onClick={() => handleCat("Bricolaje",3)}>Bricolaje</Dropdown.Item>
-                  <Dropdown.Item href="#/action-3" onClick={() => handleCat("Carpintería",4)}>Carpintería</Dropdown.Item>
-                  <Dropdown.Item href="#/action-3" onClick={() => handleCat("Electricidad",5)}>Electricidad</Dropdown.Item>
-                  <Dropdown.Item href="#/action-3" onClick={() => handleCat("Fontanería",6)}>Fontanería</Dropdown.Item>
-                  <Dropdown.Item href="#/action-3" onClick={() => handleCat("Medición",7)}>Medición</Dropdown.Item>
-                  <Dropdown.Item href="#/action-3" onClick={() => handleCat("Jardinería",8)}>Jardinería</Dropdown.Item>
-                  <Dropdown.Item href="#/action-3" onClick={() => handleCat("Limpieza",9)}>Limpieza</Dropdown.Item>
-                  <Dropdown.Item href="#/action-3" onClick={() => handleCat("Llaves Manuales",10)}>Llaves Manuales</Dropdown.Item>
-                  <Dropdown.Item href="#/action-3" onClick={() => handleCat("Metal",11)}>Metal</Dropdown.Item>
-                  <Dropdown.Item href="#/action-3" onClick={() => handleCat("Pintura",12)}>Pintura</Dropdown.Item>
-                  <Dropdown.Item href="#/action-3" onClick={() => handleCat("Carga-Movimiento",13)}>Electricidad</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-
-              <button className="buttonLogin2" onClick={()=>handleUploadProduct()}>UPLOAD</button>
+              <button className="buttonLogin2" onClick={() => handleUploadProduct()}>UPLOAD</button>
             </Card>
           </div>
         </div>
