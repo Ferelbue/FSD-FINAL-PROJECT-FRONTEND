@@ -365,3 +365,25 @@ export const FavoriteProducts = async (token: string): Promise<any> => {
         return error;
     }
 }
+
+export const UploadImage = async (formData: FormData, token: string): Promise<any> => {
+    console.log(formData, token, "UploadImage");
+    try {
+        const response = await fetch(`${ROOT}products/image`, {
+          method: 'POST',
+          headers: {
+            "Authorization": `Bearer ${token}`
+        },
+          body: formData,
+        });
+  
+        if (!response.ok) {
+          throw new Error('Error al subir la imagen');
+        }
+  
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        console.error(error);
+      }
+}   

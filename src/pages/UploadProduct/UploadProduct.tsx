@@ -1,7 +1,7 @@
 
-import { AddToFavorites, BringCategoryProducts, BringFavoriteUserProduct, BringProductDetail } from "../../services/apiCalls";
+import { AddToFavorites, BringCategoryProducts, BringFavoriteUserProduct, BringProductDetail, UploadImage } from "../../services/apiCalls";
 import { DataFetched, DataFetched2 } from "../../interfaces";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./UploadProduct.css";
 import { categoryData } from "../../app/slices/categorySlice";
 import { useSelector, useDispatch } from "react-redux";
@@ -16,12 +16,15 @@ import { CInput } from "../../common/CInput/CInput";
 export const UploadProduct: React.FC = () => {
   const [product, setProducts] = useState<any>();
   const [favorite, setFavorite] = useState<any>();
+  const [dataImage, setDataImage] = useState<any>();
   const [addTofavorite, setAddToFavorite] = useState<any>();
   const [error, setError] = useState<string>("");
   const dispatch = useDispatch();
   const rdxProductDetail = useSelector(productDetailData);
   const rdxUser = useSelector(userData);
   const navigate = useNavigate();
+  const fileInput = useRef<HTMLInputElement>(null);
+
   const [message, setMessage] = useState<any>({
     text: "",
   });
@@ -131,37 +134,60 @@ export const UploadProduct: React.FC = () => {
   }
   console.log(favorite, "favorite")
 
+
+
+  const handleSubmit = async (event: any) => {
+    event.preventDefault();
+
+    const file = fileInput?.current?.files?.[0];
+    const formData = new FormData();
+    if (file) {
+      formData.append('image', file);
+    } else {
+      console.error('No file selected');
+    }
+
+    const fetched: DataFetched2 = await UploadImage(formData, rdxUser.credentials.token);
+    console.log(fetched, "fetched")
+
+    setDataImage(fetched.data);
+
+  };
+
   return (
     <div className="home">
-        <>
-          <div className="categoryTitle3">
-            UPLOAD PRODUCT
-          </div>
-          <div className="categoryProducts2">
-            <div className="mx-auto">
-              <Card className="cardProduct2">
-                <div>
-                  <Card.Img className="imageProductCard22"/>
-                  <button>IMAGEN</button>
-                </div>
-                <Card.Body>
-                  <Card.Title className="cardTitle22">
-                    TITULO
-                    <CInput
-                      className="inputConversation2"
-                      type="text"
-                      name="message"
-                      placeholder="Escribe un nombre de producto"
-                      value={title.text || ""}
-                      onChange={(e) => inputHandler2(e)}
-                    />
-                  </Card.Title>
+      <>
+        <div className="categoryTitle3">
+          UPLOAD PRODUCT
+        </div>
+        <div className="categoryProducts2">
+          <div className="mx-auto">
+            <Card className="cardProduct2">
+              <div>
+                <Card.Img className="imageProductCard22" />
+                <form onSubmit={handleSubmit}>
+                  <input type="file" ref={fileInput} />
+                  <button type="submit">Upload</button>
+                </form>
+              </div>
+              <Card.Body>
+                <Card.Title className="cardTitle22">
+                  TITULO
+                  <CInput
+                    className="inputConversation2"
+                    type="text"
+                    name="message"
+                    placeholder="Escribe un nombre de producto"
+                    value={title.text || ""}
+                    onChange={(e) => inputHandler2(e)}
+                  />
+                </Card.Title>
 
-                  <div className="cardPrice22">
-                    <>
-                      TARIFAS
-                    </>
-                    <div className="pricesUpload">
+                <div className="cardPrice22">
+                  <>
+                    TARIFAS
+                  </>
+                  <div className="pricesUpload">
                     <CInput
                       className="inputConversation3"
                       type="number"
@@ -189,36 +215,38 @@ export const UploadProduct: React.FC = () => {
                       onChange={(e) => inputHandler5(e)}
                     />
                     €/fianza
-                    </div>
                   </div>
-                  <Card.Text className="descriptionCard22">
-                    DESCRIPCIÓN
-                    <CInput2
-                      className="inputConversation"
-                      placeholder="Escribe un mensaje"
-                      name="message"
-                      disabled={false}
-                      value={message.text || ""}
-                      onChange={(e) => inputHandler(e)}
-                    />
-                  </Card.Text>
-                </Card.Body>
-                <div>
-
-                  <CInput
-                    className="inputConversation2"
-                    type="text"
-                    name="message"
-                    placeholder="Escribe una ciudad"
-                    value={city.text || ""}
-                    onChange={(e) => inputHandler6(e)}
-                  />
                 </div>
-              </Card>
-            </div>
-          </div>
+                <Card.Text className="descriptionCard22">
+                  DESCRIPCIÓN
+                  <CInput2
+                    className="inputConversation"
+                    placeholder="Escribe un mensaje"
+                    name="message"
+                    disabled={false}
+                    value={message.text || ""}
+                    onChange={(e) => inputHandler(e)}
+                  />
+                </Card.Text>
+              </Card.Body>
+              <div className="cityCard22">
+                CIUDAD
+                <CInput
+                  className="inputConversation2"
+                  type="text"
+                  name="message"
+                  placeholder="Escribe una ciudad"
+                  value={city.text || ""}
+                  onChange={(e) => inputHandler6(e)}
+                />
+              </div>
+              <button className="buttonLogin2">UPLOAD</button>
 
-        </>
+            </Card>
+          </div>
+        </div>
+
+      </>
     </div>
   );
 };

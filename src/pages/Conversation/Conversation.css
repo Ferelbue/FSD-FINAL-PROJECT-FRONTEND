@@ -237,9 +237,10 @@
     flex-direction: column;
     justify-content: start;
     align-items: start;
+    border-radius: 0.5em;
     margin-bottom: 0.5em;
     padding-left: 1.3em;
-    background-color: aqua;
+    background-color: rgb(185, 217, 217) !important;
 }
 .messageConversation2{
     width: 50vw;
@@ -248,9 +249,10 @@
     flex-direction: column;
     justify-content: end;
     align-items: end;
+    border-radius: 0.5em;
     margin-bottom: 0.5em;
     padding-left: 1.3em;
-    background-color: rgb(95, 118, 118);
+    background-color: rgb(142, 163, 163)!important;
 }
 
 .messageTitle{
