@@ -20,15 +20,15 @@ export const Login: React.FC = () => {
     email: "",
     password: ""
   })
-  
-  const inputHandler = (e: React.ChangeEvent<HTMLInputElement>):void => {
+
+  const inputHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setCredentials((prevState) => ({
-        ...prevState,
-        [e.target.name] : e.target.value
+      ...prevState,
+      [e.target.name]: e.target.value
     }))
   }
 
-  const logeame = async ():Promise<void> => {
+  const logeame = async (): Promise<void> => {
 
     const fetched = await LoginMe(credentials);
 
@@ -40,35 +40,44 @@ export const Login: React.FC = () => {
         user: decodificado,
       };
       dispatch(login({ credentials: passport }));
-      
+
       const fetched2: DataFetched2 = await Notification(passport.token);
-      if(fetched2.data[0].length === 0 && fetched2.data[1].length === 0){
-        dispatch(updateNotification({ notification:false}));
-      }else{ 
-        dispatch(updateNotification({ notification:true}));
+      if (fetched2.data[0].length === 0 && fetched2.data[1].length === 0) {
+        dispatch(updateNotification({ notification: false }));
+      } else {
+        dispatch(updateNotification({ notification: true }));
       }
       navigate("/")
 
     }
-  
- }
+
+  }
 
   return (
-  <div className="login">
-    <CInput 
-        type={"email"}
-        name={"email"}
-        value={credentials.email || ""}
-        placeholder={""}
-        onChange={inputHandler}
-    />
-    <CInput 
-        type={"password"}
-        name={"password"}
-        value={credentials.password || ""}
-        placeholder={""}
-        onChange={inputHandler}
-    />
-    <button onClick={logeame}>LOG ME!</button>
-  </div>);
+    <>
+      <div className="categoryTitle33">
+        LOGIN
+      </div>
+      <div className="login">
+        <div className="loginInputs">
+          <CInput
+            className="inputLogin"
+            type={"email"}
+            name={"email"}
+            value={credentials.email || ""}
+            placeholder={"write your email..."}
+            onChange={inputHandler}
+          />
+          <CInput
+            className="inputLogin"
+            type={"password"}
+            name={"password"}
+            value={credentials.password || ""}
+            placeholder={"write your password..."}
+            onChange={inputHandler}
+          />
+          <button className="buttonLogin" onClick={logeame}>LOG ME!</button>
+        </div>
+      </div>
+    </>);
 };

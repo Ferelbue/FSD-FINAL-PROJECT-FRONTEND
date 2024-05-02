@@ -91,9 +91,11 @@ export const ProductDetail: React.FC = () => {
                 <div>
                   <Card.Img className="imageProductCard2" src={product.image} />
                   <div className="sendMesssage4" onClick={() => handleAddFavorite()}>
-                    {favorite?.length === 0
-                      ? <div className="imageCuore4" title="Add to favorites" />
-                      : <div className="imageCuore5" title="Already in favorites" />}
+                    {rdxUser.credentials === ""
+                      ? null
+                      : favorite?.length === 0
+                        ? <div className="imageCuore4" title="Add to favorites" />
+                        : <div className="imageCuore5" title="Already in favorites" />}
                   </div>
                 </div>
                 <Card.Body>
