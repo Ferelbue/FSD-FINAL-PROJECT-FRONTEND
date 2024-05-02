@@ -1,12 +1,12 @@
 
-import { AddToFavorites, BringCategoryProducts, BringFavoriteUserProduct, BringProductDetail, UploadImage } from "../../services/apiCalls";
+import { AddToFavorites, BringCategoryProducts, BringFavoriteUserProduct, BringProductDetail, UploadImage, UploadProducto } from "../../services/apiCalls";
 import { DataFetched, DataFetched2 } from "../../interfaces";
 import { useEffect, useState, useRef } from "react";
 import "./UploadProduct.css";
 import { categoryData } from "../../app/slices/categorySlice";
 import { useSelector, useDispatch } from "react-redux";
 import { userData } from "../../app/slices/userSlice";
-import { Card } from "react-bootstrap";
+import { Card, Dropdown } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 import { productDetailData } from "../../app/slices/productDetailSlice";
@@ -44,7 +44,10 @@ export const UploadProduct: React.FC = () => {
   const [city, setCity] = useState<any>({
     text: "",
   });
-
+  const [category, setCategory] = useState<any>({
+    category: "",
+    categoryId: 0
+  });
   const inputHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage((prevState: any) => ({
       ...prevState,
@@ -155,7 +158,19 @@ export const UploadProduct: React.FC = () => {
 
   };
 
-  console.log(dataImage, "asdasdasdsadsa")
+  const handleCat = (cat: string, id:number) => {
+    setCategory({ 
+      category: cat,
+      categoryId: id
+     });
+  }
+
+  const handleUploadProduct = async () => {
+    const fetched: DataFetched2 = await UploadProducto(title.text, message.text, dataImage.originalname, city.text, hourPrice.text, dayPrice.text, deposit.text,category.categoryId, rdxUser.credentials.token);
+    console.log(fetched, "fetched")
+
+  }
+
 
   return (
     <div className="home">
@@ -246,8 +261,34 @@ export const UploadProduct: React.FC = () => {
                   onChange={(e) => inputHandler6(e)}
                 />
               </div>
-              <button className="buttonLogin2">UPLOAD</button>
 
+              <Dropdown className="categoryGroup">
+                CATEGORIA
+                <Dropdown.Toggle className="dropdownStar3">
+                  {category.category === ""
+                    ? "CATEGORIA"
+                    : (category.category)
+                  }
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu className="dropdownStar33">
+                  <Dropdown.Item href="#/action-1" onClick={() => handleCat("Agricola-Forestal",1)}>Agricola-Forestal</Dropdown.Item>
+                  <Dropdown.Item href="#/action-2" onClick={() => handleCat("Construcción",2)}>Construcción</Dropdown.Item>
+                  <Dropdown.Item href="#/action-3" onClick={() => handleCat("Bricolaje",3)}>Bricolaje</Dropdown.Item>
+                  <Dropdown.Item href="#/action-3" onClick={() => handleCat("Carpintería",4)}>Carpintería</Dropdown.Item>
+                  <Dropdown.Item href="#/action-3" onClick={() => handleCat("Electricidad",5)}>Electricidad</Dropdown.Item>
+                  <Dropdown.Item href="#/action-3" onClick={() => handleCat("Fontanería",6)}>Fontanería</Dropdown.Item>
+                  <Dropdown.Item href="#/action-3" onClick={() => handleCat("Medición",7)}>Medición</Dropdown.Item>
+                  <Dropdown.Item href="#/action-3" onClick={() => handleCat("Jardinería",8)}>Jardinería</Dropdown.Item>
+                  <Dropdown.Item href="#/action-3" onClick={() => handleCat("Limpieza",9)}>Limpieza</Dropdown.Item>
+                  <Dropdown.Item href="#/action-3" onClick={() => handleCat("Llaves Manuales",10)}>Llaves Manuales</Dropdown.Item>
+                  <Dropdown.Item href="#/action-3" onClick={() => handleCat("Metal",11)}>Metal</Dropdown.Item>
+                  <Dropdown.Item href="#/action-3" onClick={() => handleCat("Pintura",12)}>Pintura</Dropdown.Item>
+                  <Dropdown.Item href="#/action-3" onClick={() => handleCat("Carga-Movimiento",13)}>Electricidad</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+
+              <button className="buttonLogin2" onClick={()=>handleUploadProduct()}>UPLOAD</button>
             </Card>
           </div>
         </div>

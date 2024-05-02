@@ -10,6 +10,7 @@ import { Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 import { productDetailData } from "../../app/slices/productDetailSlice";
+import { ROOT2 } from "../../services/apiCalls"
 
 export const ProductDetail: React.FC = () => {
   const [product, setProducts] = useState<any>();
@@ -89,7 +90,7 @@ export const ProductDetail: React.FC = () => {
             <div className="mx-auto">
               <Card className="cardProduct2">
                 <div>
-                  <Card.Img className="imageProductCard2" src={product.image} />
+                  <Card.Img className="imageProductCard2" src={`${ROOT2}uploads/${product.image}`} />
                   <div className="sendMesssage4" onClick={() => handleAddFavorite()}>
                     {rdxUser.credentials === ""
                       ? null

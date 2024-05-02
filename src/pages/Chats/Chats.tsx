@@ -10,6 +10,7 @@ import { productDetailData, updateProductDetail } from "../../app/slices/product
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { updateNotification } from "../../app/slices/notificationSlice";
+import { ROOT2 } from "../../services/apiCalls"
 
 export const Chats: React.FC = () => {
   const [chats, setChats] = useState<any>();
@@ -58,7 +59,7 @@ export const Chats: React.FC = () => {
                       mappedUserIds.add(chat.userUser.id);
                       return (
                         <Card key={index} className="cardProduct31" onClick={() => handleConversation(chat.product.id, chat.userUser.id)}>
-                          <Card.Img className="imageProductCard3" src={chat.product.image} />
+                          <Card.Img className="imageProductCard3" src={`${ROOT2}uploads/${chat.product.image}`} />
                           <Card.Text>&nbsp;&nbsp;VENDO</Card.Text>
                           <Card.Body>
                             <Card.Title className="cardTitle3">{chat.product.name.toUpperCase()}&nbsp;&nbsp;{chat.userUser.name.toUpperCase()}</Card.Title>
@@ -72,7 +73,7 @@ export const Chats: React.FC = () => {
                       return (
 
                         <Card key={index} className="cardProduct32" onClick={() => handleConversation(chat.product.id, chat.userUser.id)}>
-                          <Card.Img className="imageProductCard3" src={chat.product.image} />
+                          <Card.Img className="imageProductCard3" src={`${ROOT2}uploads/${chat.product.image}`} />
                           <Card.Text>&nbsp;&nbsp;COMPRO</Card.Text>
                           <Card.Body>
                             <Card.Title className="cardTitle3">{chat.product.name.toUpperCase()}&nbsp;&nbsp;{chat.userOwner.name.toUpperCase()}</Card.Title>

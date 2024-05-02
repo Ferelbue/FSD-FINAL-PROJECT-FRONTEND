@@ -12,6 +12,7 @@ import { CInput2 } from "../../common/CInput2/CInput2";
 import { useDispatch } from "react-redux";
 import { updateNotification } from "../../app/slices/notificationSlice";
 import { Navigate, useNavigate } from "react-router-dom";
+import { ROOT2 } from "../../services/apiCalls"
 
 export const Conversation: React.FC = () => {
   const [product, setProducts] = useState<any>();
@@ -112,7 +113,7 @@ export const Conversation: React.FC = () => {
       {conversation && product ? (
         <>
           <Card className="cardProduct3">
-            <Card.Img className="imageProductCard3" src={product.image} />
+            <Card.Img className="imageProductCard3" src={`${ROOT2}uploads/${product.image}`} />
             <Card.Body>
               <Card.Title className="cardTitle3">{product.name.toUpperCase()}&nbsp;&nbsp; {product.owner.name}</Card.Title>
               <div className="cardPrice3">

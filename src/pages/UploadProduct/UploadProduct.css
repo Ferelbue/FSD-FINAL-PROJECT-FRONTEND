@@ -279,3 +279,29 @@
     color: rgb(73, 90, 94);
     border: 2px solid rgb(73, 90, 94);
 }
+
+.categoryGroup{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
+
+}
+
+.dropdownStar3{
+    z-index: 100;
+    width: 50vw !important;
+    height: 5vh !important;
+    color: black !important;
+    font-weight: bold !important;
+    background-color: rgb(80,120,122)!important;
+    border-radius: 0.5em !important;
+    border: solid 0.1em rgb(0, 0, 0)  !important;
+}
+.dropdownStar33{
+    z-index: 100;
+    width: 50vw !important;
+    height: auto;
+    background-color: tomato;
+}

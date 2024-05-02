@@ -10,6 +10,7 @@ import { Card } from "react-bootstrap";
 import { updateProductDetail } from "../../app/slices/productDetailSlice";
 import { useNavigate } from "react-router-dom";
 import { updateNotification } from "../../app/slices/notificationSlice";
+import { ROOT2 } from "../../services/apiCalls"
 
 export const Favorites: React.FC = () => {
   const [products, setProducts] = useState<any[]>([]);
@@ -77,7 +78,7 @@ export const Favorites: React.FC = () => {
             {products.map((product) => (
               <div className="col-sm-12 col-md-6 col-lg-3" key={product.id}>
                 <Card className="cardProduct" onClick={() => handleDetail(product.product.id)}>
-                  <Card.Img className="imageProductCard" src={product.product.image} />
+                  <Card.Img className="imageProductCard" src={`${ROOT2}uploads/${product.product.image}`} />
                   <Card.Body>
                     <Card.Title className="cardTitle">{product.product.name ? product.product.name.toUpperCase() : ''}</Card.Title>
                     <div className="cardPrice">
