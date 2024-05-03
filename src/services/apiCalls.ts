@@ -1,4 +1,4 @@
-import { DataFetched, LoginData } from "../interfaces";
+import { DataFetched, LoginData, UserUpdateData } from "../interfaces";
 
 export const ROOT: string = "http://localhost:4000/api/";
 export const ROOT2: string = "http://localhost:4000/";
@@ -457,6 +457,31 @@ export const BringUserProducts = async (token: string): Promise<any> => {
 
     try {
         const response = await fetch(`${ROOT}products/own`, options);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+
+        return data;
+
+    } catch (error) {
+        return error;
+    }
+}
+
+export const UploadUserProfile = async(user:UserUpdateData, token: string): Promise<any> => {
+    console.log(user, token, "UploadUserProfile");
+    const options = {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify(user)
+    };
+
+    try {
+        const response = await fetch(`${ROOT}users/profile`, options);
         const data = await response.json();
         if (!response.ok) {
             throw new Error(data.message);

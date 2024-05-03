@@ -65,6 +65,7 @@ export const Login: React.FC = () => {
             type={"email"}
             name={"email"}
             value={credentials.email || ""}
+            min="0"
             placeholder={"write your email..."}
             onChange={inputHandler}
           />
@@ -73,6 +74,7 @@ export const Login: React.FC = () => {
             type={"password"}
             name={"password"}
             value={credentials.password || ""}
+            min="0"
             placeholder={"write your password..."}
             onChange={inputHandler}
           />

@@ -15,6 +15,7 @@ import { DataFetched2 } from '../../interfaces';
 import { BringProducts, Notification } from '../../services/apiCalls';
 import { searchData, updateCriteria } from '../../app/slices/searchSlice';
 import { CustomInput } from '../CustomInput/CustomInput';
+import { updateProductDetail } from '../../app/slices/productDetailSlice';
 
 const Header = () => {
 
@@ -89,6 +90,14 @@ const Header = () => {
         notiMe();
     };
 
+    const handleDetail = (productId: number, ownerId: number) => {
+        console.log(productId, "productId")
+        dispatch(updateProductDetail({ productDetail: { productId: productId, userUserId: ownerId } }));
+        setCriteria("")
+        setNameCriteria("")
+        navigate("/productDetail")
+    }
+
     return (
         <div className='header'>
             {(Object.keys(rdxUser?.credentials).length === 0) ? (
@@ -116,11 +125,11 @@ const Header = () => {
                                     <div className='searchOptions'>
                                         {productsFetched?.success && productsFetched?.data?.length > 0 ? (
                                             <div className="searchUsers">
-                                                {productsFetched.data.slice(0, 4).map((product: any) => {
+                                                {productsFetched.data.slice(0, 5).map((product: any) => {
                                                     return (
                                                         <div className="userSearched4" key={product.id}>
                                                             <div className="test3">
-                                                                {product.name}
+                                                                {product.name.toUpperCase()}
                                                             </div>
                                                         </div>
                                                     );
@@ -270,11 +279,11 @@ const Header = () => {
                                             <div className='searchOptions'>
                                                 {productsFetched?.success && productsFetched?.data?.length > 0 ? (
                                                     <div className="searchUsers">
-                                                        {productsFetched.data.slice(0, 4).map((product: any) => {
+                                                        {productsFetched.data.slice(0, 5).map((product: any) => {
                                                             return (
                                                                 <div className="userSearched4" key={product.id}>
-                                                                    <div className="test3">
-                                                                        {product.name}
+                                                                    <div className="test3" onClick={() => handleDetail(product.id, product.owner.id)}>
+                                                                        {product.name.toUpperCase()}
                                                                     </div>
                                                                 </div>
                                                             );

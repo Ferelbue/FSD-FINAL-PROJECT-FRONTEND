@@ -109,15 +109,6 @@ export const UploadProduct: React.FC = () => {
     bringData();
   }, [rdxProductDetail]);
 
-  const handleConversation = async () => {
-    console.log(rdxUser)
-    if (!rdxUser.credentials) {
-      navigate("/login")
-    } else {
-      navigate("/conversation")
-    }
-  }
-
   useEffect(() => {
     const bringData = async () => {
       const fetched2: DataFetched2 = await BringFavoriteUserProduct(rdxProductDetail.productDetail.productId, rdxUser.credentials.token);
@@ -127,24 +118,15 @@ export const UploadProduct: React.FC = () => {
     bringData();
   }, [addTofavorite]);
 
-  const handleAddFavorite = async () => {
-
-    const fetched3: DataFetched2 = await AddToFavorites(rdxProductDetail.productDetail.productId, rdxUser.credentials.token)
-    console.log(fetched3, "fetched3")
-    setAddToFavorite(fetched3.data);
-
-  }
-  console.log(favorite, "favorite")
-
-
-
   const handleSubmit = async (event: any) => {
     event.preventDefault();
-
     const file = fileInput?.current?.files?.[0];
     const formData = new FormData();
     if (file) {
-      formData.append('image', file);
+      const date = new Date();
+      const timestamp = date.getTime();
+      const newFileName = `${timestamp}-${file.name}`;
+      formData.append('image', file, newFileName);
     } else {
       console.error('No file selected');
     }

@@ -22,9 +22,16 @@ export const Home: React.FC = () => {
 
   const notiMe = async (): Promise<void> => {
     const fetched2: DataFetched2 = await Notification(rdxUser.credentials.token);
-    console.log(fetched2, "fetched2")
+    console.log(fetched2.message, "fetched2")
 
-    if (fetched2.data[0].length === 0 && fetched2.data[1].length === 0) {
+    if (fetched2.message === "JWT NOT VALID OR MALFORMED") {
+      console.log("hola soy fetched2.message")
+      dispatch(userout({ credentials: "" }));
+      dispatch(updateNotification({ notification: "" }));
+      navigate("/")
+    }
+
+    if (fetched2.data && fetched2.data[0].length === 0 && fetched2.data[1].length === 0) {
       dispatch(updateNotification({ notification: false }));
     } else {
       dispatch(updateNotification({ notification: true }));
@@ -61,7 +68,7 @@ export const Home: React.FC = () => {
   console.log(products, "products")
   return (
     <div className="home">
-      {products.length === 0 ? (
+      {products && products.length === 0 ? (
         <div>{error}</div>
       ) : (
         <div>

@@ -370,6 +370,40 @@
     background-image: url('../../../public/settings.png');
 }
 
+.imagePencil {
+    width: 1.5em;
+    height: 1.5em;
+    margin-right: 0.5em;
+    margin-left: 0.5em;
+    background: url('../../../public/pencil2.png') no-repeat center center / cover;
+    cursor: pointer;
+}
+
+.imagePencil:hover {
+    background-image: url('../../../public/pencil.png');
+}
+.imageImage {
+    width: 1.5em;
+    height: 1.5em;
+    margin-right: 0.5em;
+    margin-left: 0.5em;
+    background: url('../../../public/image2.png') no-repeat center center / cover;
+    cursor: pointer;
+    margin-top: 0.4em !important;
+}
+
+.imageImage:hover {
+    background-image: url('../../../public/image.png');
+}
+.imageTick {
+    width: 1.5em;
+    height: 1.5em;
+    margin-right: 0.5em;
+    margin-left: 0.5em;
+    background: url('../../../public/tick.png') no-repeat center center / cover;
+    cursor: pointer;
+}
+
 .iconsProfile {
     display: flex;
     flex-direction: row;
@@ -379,14 +413,14 @@
 
 .carouselProducts3 {
     padding-left: 2em;
-    height: 70vh;
+
 }
 
 .categoryTitle35 {
     background-color: rgb(73, 90, 94);
     color: white;
     width: 100vw;
-    height: 4vh;
+    height: 6vh;
     font-size: 3vh;
     font-weight: bold;
     display: flex;
@@ -414,8 +448,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    margin-right: 1em;
+    align-items: end;
+    margin-right: 1.2em;
 }
 
 .imageGroupProfile2 {
@@ -423,6 +457,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: start;
+    border-left: 1px solid lightgray;
+    width: 40%;
 }
 .imageSettings {
     width: 0.9em;
@@ -433,8 +469,111 @@
     cursor: pointer;
 }
 .imageUserProfile{
-    width: 5rem;
-    height: 5rem;
+    /* width: 25vw !important; */
+    height: 15vh !important;
     margin-top: 1em;
     margin-bottom: 1em;
+}
+
+.starsProfile{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-left: 1em;
+}
+
+.nameProfile{
+    font-size: 3vh;
+    font-weight: bold;
+    margin: 0.2em;
+}
+.cityProfile{
+    font-size: 2vh;
+    font-weight: bold;
+    margin: 0.3em;
+}
+.starsProfile{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.textProfile{
+    font-size: 2vh;
+    font-weight: bold;
+    margin: 0.3em;
+}
+
+.productStart01 {
+    width: 13vw;
+    height: 4vh;
+    margin-right: 0.3em;
+    background: url('../../../public/0start.png') no-repeat center center / contain;
+}
+.productStart11 {
+    width: 13vw;
+    height: 4vh;
+    margin-right: 0.3em;
+    background: url('../../../public/1start.png') no-repeat center center / contain;
+}
+.productStart21 {
+    width: 13vw;
+    height: 4vh;
+    margin-right: 0.3em;
+    background: url('../../../public/2start.png') no-repeat center center / contain;
+}
+.productStart31 {
+    width: 13vw;
+    height: 4vh;
+    margin-right: 0.3em;
+    background: url('../../../public/3start.png') no-repeat center center / contain;
+}
+.productStart41 {
+    width: 15vw;
+    height: 5vh;
+    margin-right: 0.3em;
+    background: url('../../../public/4start.png') no-repeat center center / contain;
+}
+.productStart51 {
+    width: 13vw;
+    height: 4vh;
+    margin-right: 0.3em;
+    background: url('../../../public/5start.png') no-repeat center center / contain;
+}
+.editIcon{
+    width: 100%;
+    height: 3vh;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+.inputProfile2{
+    width: 100%;
+    height: 3vh;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    background-color: white;
+    border: none;
+    color: black;
+    font-size: 3.5vh;
+    font-weight: bold;
+    margin: 0.2em;
+}
+.inputProfile3{
+    width: 18vw;
+    height: 3vh;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    background-color: white;
+    border: none;
+    color: black;
+    font-size: 2.5vh;
+    font-weight: bold;
+    margin: 0.4em;
+}
+.inputProfile1{
+    width: 100%;
 }
