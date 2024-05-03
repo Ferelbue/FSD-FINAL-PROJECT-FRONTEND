@@ -42,6 +42,7 @@ export const Category: React.FC = () => {
       } else {
         setError(fetched.message);
       }
+        console.log(error, "error")
     };
 
     if (!products.length) {

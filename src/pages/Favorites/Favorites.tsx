@@ -1,5 +1,5 @@
 
-import { BringCategoryProducts, FavoriteProducts, Notification } from "../../services/apiCalls";
+import { FavoriteProducts, Notification } from "../../services/apiCalls";
 import { DataFetched, DataFetched2 } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./Favorites.css";
@@ -31,7 +31,6 @@ export const Favorites: React.FC = () => {
   notiMe();
 
   useEffect(() => {
-    console.log("asd")
     const bringData = async () => {
 
       const fetched: DataFetched = await FavoriteProducts(rdxUser.credentials.token);
@@ -42,11 +41,12 @@ export const Favorites: React.FC = () => {
       } else {
         setError(fetched.message);
       }
+      console.log(error, "error") 
     };
 
-    // if (!products.length) {
-    //   bringData();
-    // }
+    if (!products.length) {
+      bringData();
+    }
   }, [products, rdxCategory]);
 
   useEffect(() => {

@@ -11,7 +11,7 @@ import { productDetailData } from "../../app/slices/productDetailSlice";
 import { CInput2 } from "../../common/CInput2/CInput2";
 import { useDispatch } from "react-redux";
 import { updateNotification } from "../../app/slices/notificationSlice";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ROOT2 } from "../../services/apiCalls"
 
 export const Conversation: React.FC = () => {
@@ -57,6 +57,7 @@ export const Conversation: React.FC = () => {
       setAcceptDe(false)
       setStatusDeal(fetched5.data[0]);
       notiMe();
+      console.log(fetched3, "erase")
       const fetched4: DataFetched2 = await Notification(rdxUser.credentials.token);
       if (fetched4.data[0].length === 0 && fetched4.data[1].length === 0) {
         dispatch(updateNotification({ notification: false }));
@@ -93,15 +94,16 @@ export const Conversation: React.FC = () => {
 
     const fetched: DataFetched2 = await SendMessage(rdxProductDetail.productDetail.productId, rdxProductDetail.productDetail.userUserId, rdxUser.credentials.token, message.text);
     setSend(true);
-
+    console.log(fetched, "fetched") 
   }
 
   const handleDeal = async (productId: number, userUserId: number) => {
     const fetched5: DataFetched2 = await acceptDeal(productId, userUserId, rdxUser.credentials.token);
     setAcceptDe(true);
+    console.log(fetched5, "fetched5")
   }
 
-  const handleReview = async (productId: number) => {
+  const handleReview = async () => {
     // const fetched5: DataFetched2 = await productReview(productId,rdxUser.credentials.token);
     navigate('/writeReview')
   }
@@ -122,7 +124,7 @@ export const Conversation: React.FC = () => {
                 </div>
                 {statusDeal?.userOwner_confirm === true && statusDeal?.userUser_confirm === true
                   ? (product.owner.id !== rdxUser.credentials.user.userId
-                    ? <div className="dealFinished" onClick={() => handleReview(product.id)}>ESCRIBIR RESEÑA</div>
+                    ? <div className="dealFinished" onClick={() => handleReview()}>ESCRIBIR RESEÑA</div>
                     : null
                   )
                   : <div className="dealFinished" onClick={() => handleDeal(product.id, rdxProductDetail.productDetail.userUserId)}>TRATO FINALIZADO</div>

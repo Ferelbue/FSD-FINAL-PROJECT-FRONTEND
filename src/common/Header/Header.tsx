@@ -6,7 +6,6 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import Form from 'react-bootstrap/Form';
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { updateCategory } from '../../app/slices/categorySlice';
@@ -15,6 +14,7 @@ import { DataFetched2 } from '../../interfaces';
 import { BringProducts, Notification } from '../../services/apiCalls';
 import { searchData, updateCriteria } from '../../app/slices/searchSlice';
 import { CustomInput } from '../CustomInput/CustomInput';
+import { updateProductDetail } from '../../app/slices/productDetailSlice';
 
 const Header = () => {
 
@@ -22,20 +22,11 @@ const Header = () => {
     const rdxNotification = useSelector(notificationData);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [searchText, setSearchText] = useState('');
-    const [products, setProducts] = useState<any>();
     const [error, setError] = useState<string>("");
-
-
-
-
-
-
     const [criteria, setCriteria] = useState("")
     const [nameCriteria, setNameCriteria] = useState("")
     const [productsFetched, setProductsFetched] = useState<any>();
     const searchRdx = useSelector(searchData);
-
 
     useEffect(() => {
         const bringUsers = async () => {
@@ -46,8 +37,9 @@ const Header = () => {
                     setProductsFetched(fetchedData);
 
                 } catch (error) {
-                    setError(products.message);
+                    setError(productsFetched.message);
                 }
+                console.log(error, "error")
             } else (
                 setProductsFetched("")
             )
@@ -71,10 +63,6 @@ const Header = () => {
         setNameCriteria(e.target.value.toLowerCase())
     }
 
-
-
-
-
     const notiMe = async (): Promise<void> => {
         const fetched2: DataFetched2 = await Notification(rdxUser.credentials.token);
         if (fetched2.data[0].length === 0 && fetched2.data[1].length === 0) {
@@ -95,6 +83,14 @@ const Header = () => {
         navigate("/category")
         notiMe();
     };
+
+    const handleDetail = (productId: number, ownerId: number) => {
+        console.log(productId, "productId")
+        dispatch(updateProductDetail({ productDetail: { productId: productId, userUserId: ownerId } }));
+        setCriteria("")
+        setNameCriteria("")
+        navigate("/productDetail")
+    }
 
     return (
         <div className='header'>
@@ -123,11 +119,11 @@ const Header = () => {
                                     <div className='searchOptions'>
                                         {productsFetched?.success && productsFetched?.data?.length > 0 ? (
                                             <div className="searchUsers">
-                                                {productsFetched.data.slice(0, 4).map((product: any) => {
+                                                {productsFetched.data.slice(0, 5).map((product: any) => {
                                                     return (
                                                         <div className="userSearched4" key={product.id}>
                                                             <div className="test3">
-                                                                {product.name}
+                                                                {product.name.toUpperCase()}
                                                             </div>
                                                         </div>
                                                     );
@@ -156,8 +152,8 @@ const Header = () => {
                                             null
                                         ) : (
                                             <>
-                                                <div className="imagePlus" title="Upload product" />
-                                                <div className="imageCuore" title="My favorites" onClick={() => navigate('/favorites')}/>
+                                                <div className="imagePlus" title="Upload product" onClick={() => navigate('/uploadProduct')} />
+                                                <div className="imageCuore" title="My favorites" onClick={() => navigate('/favorites')} />
                                                 {(rdxNotification.notification === true)
                                                     ? (
                                                         <div className="imageChatNot" title="My chats" onClick={() => navigate('/chats')} />
@@ -165,7 +161,7 @@ const Header = () => {
                                                         <div className="imageChat" title="My chats" onClick={() => navigate('/chats')} />
                                                     )
                                                 }
-                                                <div className="imageUser" title="My profile" />
+                                                <div className="imageUser" title="My profile" onClick={() => navigate('/profile')} />
                                                 <div className="imageExit" title="Log Out" onClick={() => handleLogout()} />
                                             </>
                                         )
@@ -277,11 +273,11 @@ const Header = () => {
                                             <div className='searchOptions'>
                                                 {productsFetched?.success && productsFetched?.data?.length > 0 ? (
                                                     <div className="searchUsers">
-                                                        {productsFetched.data.slice(0, 4).map((product: any) => {
+                                                        {productsFetched.data.slice(0, 5).map((product: any) => {
                                                             return (
                                                                 <div className="userSearched4" key={product.id}>
-                                                                    <div className="test3">
-                                                                        {product.name}
+                                                                    <div className="test3" onClick={() => handleDetail(product.id, product.owner.id)}>
+                                                                        {product.name.toUpperCase()}
                                                                     </div>
                                                                 </div>
                                                             );
@@ -310,8 +306,8 @@ const Header = () => {
                                                     null
                                                 ) : (
                                                     <>
-                                                        <div className="imagePlus" title="Upload product" onClick={() => navigate('/uploadProduct')}/>
-                                                        <div className="imageCuore" title="My favorites" onClick={() => navigate('/favorites')}/>
+                                                        <div className="imagePlus" title="Upload product" onClick={() => navigate('/uploadProduct')} />
+                                                        <div className="imageCuore" title="My favorites" onClick={() => navigate('/favorites')} />
                                                         {(rdxNotification.notification === true)
                                                             ? (
                                                                 <div className="imageChatNot" title="My chats" onClick={() => navigate('/chats')} />
@@ -319,7 +315,7 @@ const Header = () => {
                                                                 <div className="imageChat" title="My chats" onClick={() => navigate('/chats')} />
                                                             )
                                                         }
-                                                        <div className="imageUser" title="My profile" />
+                                                        <div className="imageUser" title="My profile" onClick={() => navigate('/profile')} />
                                                         <div className="imageExit" title="Log Out" onClick={() => handleLogout()} />
                                                     </>
                                                 )
@@ -463,8 +459,8 @@ const Header = () => {
                                                 ) : (
                                                     <>
                                                         <div className="myNavBar3">
-                                                            <div className="imagePlus" title="Upload product" onClick={() => navigate('/uploadProduct')}/>
-                                                            <div className="imageCuore" title="My favorites" onClick={() => navigate('/favorites')}/>
+                                                            <div className="imagePlus" title="Upload product" onClick={() => navigate('/uploadProduct')} />
+                                                            <div className="imageCuore" title="My favorites" onClick={() => navigate('/favorites')} />
                                                             {(rdxNotification.notification === true)
                                                                 ? (
                                                                     <div className="imageChatNot" title="My chats" onClick={() => navigate('/chats')} />

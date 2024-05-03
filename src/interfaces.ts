@@ -45,6 +45,15 @@ export interface CustomInputProps3 {
     value: string | undefined,
     onChange: (value: React.ChangeEvent<HTMLInputElement>) => void;
 }
+export interface CustomInputProps4 {
+    className: string,
+    type: string,
+    name: string,
+    placeholder: string,
+    disabled: boolean,
+    value: string | undefined,
+    onChange: (value: React.ChangeEvent<HTMLInputElement>) => void;
+}
 
 export interface Product {
     id: string;
@@ -81,8 +90,15 @@ export interface ReduxData {
     }
 }
 
-interface AnyReactComponentProps {
-    text: string;
-    lat: number;
-    lng: number;
+// interface AnyReactComponentProps {
+//     text: string;
+//     lat: number;
+//     lng: number;
+// }
+
+export interface UserUpdateData{
+    name: string,
+    lastName: string,
+    image: string,
+    city: string,
 }

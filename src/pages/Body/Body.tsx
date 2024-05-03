@@ -8,6 +8,7 @@ import { Chats } from "../Chats/Chats";
 import { WriteReview } from "../WriteReview/WriteReview";
 import { Favorites } from "../Favorites/Favorites";
 import { UploadProduct } from "../UploadProduct/UploadProduct";
+import { Profile } from "../Profile/Profile";
 
 
 export const Body: React.FC = () => {
@@ -24,6 +25,7 @@ export const Body: React.FC = () => {
         <Route path="/writeReview" element={<WriteReview/>} />
         <Route path="/favorites" element={<Favorites/>} />
         <Route path="/uploadProduct" element={<UploadProduct/>} />
+        <Route path="/profile" element={<Profile/>} />
       </Routes>
     </>
   );

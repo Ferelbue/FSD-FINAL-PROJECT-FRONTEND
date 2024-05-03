@@ -1,0 +1,579 @@
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    margin: 0;
+    padding: 0;
+    min-height: 75.5vh;
+    height: auto;
+    width: 100vw;
+    background-color: rgb(239, 239, 239);
+    overflow-x: hidden;
+    color: black;
+    margin-top: 24vh !important;
+}
+
+.profile::-webkit-scrollbar {
+    width: 0.5px !important;
+}
+
+.categoryTitle2 {
+    background-color: rgb(73, 90, 94);
+    color: white;
+    width: 100vw;
+    font-size: 2em;
+    font-weight: bold;
+    position: relative;
+    z-index: 1;
+}
+
+.cardProduct6 {
+    width: 85vw;
+    min-height: 60vh !important;
+    height: auto;
+    margin: 0.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white !important;
+    padding: 0;
+    padding-bottom: 3em;
+
+}
+
+.cardProduct33 {
+    width: 85vw;
+    height: 35vh !important;
+    margin: 0.5em;
+    display: flex;
+    flex-direction: row !important;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 0.5em;
+    padding: 0;
+    margin-top: 13vh;
+}
+
+.imageProductCard3 {
+    height: 25vh;
+    width: 20vw !important;
+    border-radius: 0.5em;
+    margin-left: 0.5em;
+}
+
+.cardTitle3 {
+    text-decoration: underline;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.cardPrice3 {
+    font-size: 1.3em;
+    height: 10vh;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid lightgray;
+    border-top: 1px solid lightgray;
+}
+
+.prices {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 45vw;
+    font-size: 1.2em;
+}
+
+.dealFinished {
+    width: 15vw;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(66, 71, 76);
+    color: white;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 0.5em;
+    cursor: pointer;
+}
+
+.dealFinished:hover {
+    background-color: rgb(95, 118, 118);
+}
+
+.startCard3 {
+    width: 60vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.7em;
+    padding-left: 0.5em;
+}
+
+.descriptionCard3 {
+    height: 15vh;
+    width: 50vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardCity2 {
+    width: 50vw;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding-left: 0.5em;
+    font-size: x-large;
+    font-weight: bold;
+    border-top: 1px solid lightgray;
+}
+
+.mapCard2 {
+    overflow: hidden;
+    height: 235px;
+    width: 400px;
+    margin-top: 0.5em;
+}
+
+.reviewCard2 {
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+}
+
+.reviewTitle2 {
+    width: 50vw;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+    padding-left: 1em;
+}
+
+.reviewStart2 {
+    width: 50vw;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    margin-bottom: 0.5em;
+    padding-left: 1.3em;
+}
+
+.reviewText2 {
+    width: 50vw;
+    font-size: 1.2em;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    padding-left: 1.1em;
+}
+
+.imageLocation {
+    margin-top: 0.1em;
+    width: 1.5em;
+    height: 1.5em;
+    background: url('../../../public/location.png') no-repeat center center / cover;
+}
+
+.oneComment {
+    padding-bottom: 1em;
+    border-bottom: 1px solid lightgray;
+}
+
+.dateDetail {
+    font-size: 0.6em;
+    font-weight: lighter;
+
+    color: gray;
+    margin-left: 0.5em;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    height: 4.2vh;
+}
+
+.imageChat2 {
+
+    width: 1.2em;
+    height: 1.2em;
+    margin-right: 0.3em;
+    background: url('../../../public/chat.png') no-repeat center center / cover;
+
+}
+
+.conversationCard {
+    position: absolute;
+    z-index: 10;
+    top: 80vh;
+    left: 75vw;
+}
+
+.imageConversation {
+    width: 5em;
+    height: 5em;
+    margin-right: 0.3em;
+    background: url('../../../public/conversation.png') no-repeat center center / cover;
+    cursor: pointer;
+}
+
+.messageConversation1 {
+    width: 50vw;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    border-radius: 0.5em;
+    margin-bottom: 0.5em;
+    padding-left: 1.3em;
+    background-color: rgb(185, 217, 217) !important;
+}
+
+.messageConversation2 {
+    width: 50vw;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: end;
+    border-radius: 0.5em;
+    margin-bottom: 0.5em;
+    padding-left: 1.3em;
+    background-color: rgb(142, 163, 163) !important;
+}
+
+.messageTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.titleCard2 {
+    font-size: small !important;
+    margin-left: 0.5em;
+}
+
+.titleCard3 {
+    font-size: small !important;
+    margin-right: 0.5em;
+}
+
+.inputConversation {
+    width: 50vw;
+    height: 15vh;
+    resize: none;
+    background-color: white;
+    color: black;
+    border-radius: 0.5em;
+    border-width: 0.1em;
+    border-style: solid;
+    border-color: black;
+}
+
+.messageGroup {
+    width: 50vw;
+    height: 15vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1em;
+    margin-top: 1em;
+}
+
+.sendMesssage {
+    width: 10vw;
+    height: 5vh;
+    z-index: 10;
+    margin-left: 39vw;
+    margin-top: 8vh;
+    position: absolute;
+    background-color: rgb(66, 71, 76);
+    border-radius: 0.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+}
+
+.categoryTitle31 {
+    background-color: rgb(73, 90, 94);
+    color: white;
+    width: 100vw;
+    height: 12vh;
+    font-size: 4vh;
+    font-weight: bold;
+    position: fixed;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.imageCloud {
+    width: 0.9em;
+    height: 0.9em;
+    margin-right: 0.5em;
+    margin-left: 0.5em;
+    background: url('../../../public/cloud2.png') no-repeat center center / cover;
+    cursor: pointer;
+}
+
+.imageCloud:hover {
+    background-image: url('../../../public/cloud.png');
+}
+
+.imageReviews {
+    width: 0.9em;
+    height: 0.9em;
+    margin-right: 0.5em;
+    margin-left: 0.5em;
+    background: url('../../../public/start3.png') no-repeat center center / cover;
+    cursor: pointer;
+
+}
+
+.imageReviews:hover {
+    background-image: url('../../../public/start2.png');
+}
+
+.imageSettings {
+    width: 0.9em;
+    height: 0.9em;
+    margin-right: 0.5em;
+    margin-left: 0.5em;
+    background: url('../../../public/settings2.png') no-repeat center center / cover;
+    cursor: pointer;
+}
+
+.imageSettings:hover {
+    background-image: url('../../../public/settings.png');
+}
+
+.imagePencil {
+    width: 1.5em;
+    height: 1.5em;
+    margin-right: 0.5em;
+    margin-left: 0.5em;
+    background: url('../../../public/pencil2.png') no-repeat center center / cover;
+    cursor: pointer;
+}
+
+.imagePencil:hover {
+    background-image: url('../../../public/pencil.png');
+}
+.imageImage {
+    width: 1.5em;
+    height: 1.5em;
+    margin-right: 0.5em;
+    margin-left: 0.5em;
+    background: url('../../../public/image2.png') no-repeat center center / cover;
+    cursor: pointer;
+    margin-top: 0.4em !important;
+}
+
+.imageImage:hover {
+    background-image: url('../../../public/image.png');
+}
+.imageTick {
+    width: 1.5em;
+    height: 1.5em;
+    margin-right: 0.5em;
+    margin-left: 0.5em;
+    background: url('../../../public/tick.png') no-repeat center center / cover;
+    cursor: pointer;
+}
+
+.iconsProfile {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.carouselProducts3 {
+    padding-left: 2em;
+
+}
+
+.categoryTitle35 {
+    background-color: rgb(73, 90, 94);
+    color: white;
+    width: 100vw;
+    height: 6vh;
+    font-size: 3vh;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardMyReviews {
+
+    width: 85vw;
+    min-height: 35vh !important;
+    height: auto;
+    margin: 0.5em;
+    display: flex;
+    flex-direction: row !important;
+    justify-content: center;
+    align-items: center;
+    background-color: white !important;
+    padding: 0;
+    margin-left: 7.5vw;
+}
+
+.imageGroupProfile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+    margin-right: 1.2em;
+}
+
+.imageGroupProfile2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    border-left: 1px solid lightgray;
+    width: 40%;
+}
+.imageSettings {
+    width: 0.9em;
+    height: 0.9em;
+    margin-right: 0.5em;
+    margin-left: 0.5em;
+    background: url('../../../public/settings2.png') no-repeat center center / cover;
+    cursor: pointer;
+}
+.imageUserProfile{
+    /* width: 25vw !important; */
+    height: 15vh !important;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.starsProfile{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-left: 1em;
+}
+
+.nameProfile{
+    font-size: 3vh;
+    font-weight: bold;
+    margin: 0.2em;
+}
+.cityProfile{
+    font-size: 2vh;
+    font-weight: bold;
+    margin: 0.3em;
+}
+.starsProfile{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.textProfile{
+    font-size: 2vh;
+    font-weight: bold;
+    margin: 0.3em;
+}
+
+.productStart01 {
+    width: 13vw;
+    height: 4vh;
+    margin-right: 0.3em;
+    background: url('../../../public/0start.png') no-repeat center center / contain;
+}
+.productStart11 {
+    width: 13vw;
+    height: 4vh;
+    margin-right: 0.3em;
+    background: url('../../../public/1start.png') no-repeat center center / contain;
+}
+.productStart21 {
+    width: 13vw;
+    height: 4vh;
+    margin-right: 0.3em;
+    background: url('../../../public/2start.png') no-repeat center center / contain;
+}
+.productStart31 {
+    width: 13vw;
+    height: 4vh;
+    margin-right: 0.3em;
+    background: url('../../../public/3start.png') no-repeat center center / contain;
+}
+.productStart41 {
+    width: 15vw;
+    height: 5vh;
+    margin-right: 0.3em;
+    background: url('../../../public/4start.png') no-repeat center center / contain;
+}
+.productStart51 {
+    width: 13vw;
+    height: 4vh;
+    margin-right: 0.3em;
+    background: url('../../../public/5start.png') no-repeat center center / contain;
+}
+.editIcon{
+    width: 100%;
+    height: 3vh;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+.inputProfile2{
+    width: 100%;
+    height: 3vh;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    background-color: white;
+    border: none;
+    color: black;
+    font-size: 3.5vh;
+    font-weight: bold;
+    margin: 0.2em;
+}
+.inputProfile3{
+    width: 18vw;
+    height: 3vh;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    background-color: white;
+    border: none;
+    color: black;
+    font-size: 2.5vh;
+    font-weight: bold;
+    margin: 0.4em;
+}
+.inputProfile1{
+    width: 100%;
+}

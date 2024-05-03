@@ -1,6 +1,5 @@
 
 import { useState } from "react";
-import { CInput } from "../../common/CInput/CInput";
 import { decodeToken } from "react-jwt";
 import "./Login.css"
 import { DataFetched2, LoginData } from "../../interfaces";
@@ -8,8 +7,8 @@ import { LoginMe, Notification } from "../../services/apiCalls";
 import { login } from "../../app/slices/userSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { updateProductDetail } from "../../app/slices/productDetailSlice";
 import { updateNotification } from "../../app/slices/notificationSlice";
+import { CInput1 } from "../../common/CInput1/CInput1";
 
 export const Login: React.FC = () => {
 
@@ -60,7 +59,7 @@ export const Login: React.FC = () => {
       </div>
       <div className="login">
         <div className="loginInputs">
-          <CInput
+          <CInput1
             className="inputLogin"
             type={"email"}
             name={"email"}
@@ -68,7 +67,7 @@ export const Login: React.FC = () => {
             placeholder={"write your email..."}
             onChange={inputHandler}
           />
-          <CInput
+          <CInput1
             className="inputLogin"
             type={"password"}
             name={"password"}
