@@ -1,5 +1,5 @@
 
-import { BringConversation, BringProductDetail, DealStatus, EraseNotification, Notification, SendMessage, acceptDeal, productReview } from "../../services/apiCalls";
+import { BringProductDetail, Notification, productReview } from "../../services/apiCalls";
 import { DataFetched2 } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./WriteReview.css";
@@ -17,9 +17,7 @@ import { ROOT2 } from "../../services/apiCalls"
 export const WriteReview: React.FC = () => {
   const [product, setProducts] = useState<any>();
   const [sendReview, setSendReview] = useState<any>();
-  const [send, setSend] = useState<boolean>(false);
-  const [conversation, setConversation] = useState<any[]>([]);
-  const [error, setError] = useState<string>("");
+
   const rdxProductDetail = useSelector(productDetailData);
   const rdxUser = useSelector(userData);
   const navigate = useNavigate();
@@ -65,6 +63,7 @@ export const WriteReview: React.FC = () => {
     const fetched5: DataFetched2 = await productReview(rdxProductDetail.productDetail.productId, rdxUser.credentials.token, message.text,stars.stars);
     setSendReview(fetched5.data);
     console.log(fetched5.data)
+    console.log(sendReview, "sendReview")
     navigate("/productDetail")
 
   }
@@ -76,7 +75,7 @@ export const WriteReview: React.FC = () => {
 
   return (
     <div className="conversation">
-      {conversation && product ? (
+      {product ? (
         <>
           <Card className="cardProduct3">
             <Card.Img className="imageProductCard3" src={`${ROOT2}uploads/${product.image}`} />

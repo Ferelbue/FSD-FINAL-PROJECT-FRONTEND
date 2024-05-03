@@ -90,11 +90,11 @@ export interface ReduxData {
     }
 }
 
-interface AnyReactComponentProps {
-    text: string;
-    lat: number;
-    lng: number;
-}
+// interface AnyReactComponentProps {
+//     text: string;
+//     lat: number;
+//     lng: number;
+// }
 
 export interface UserUpdateData{
     name: string,

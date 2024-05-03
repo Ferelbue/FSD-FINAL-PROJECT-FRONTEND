@@ -1,5 +1,5 @@
 
-import { AddToFavorites, BringFavoriteUserProduct, BringProductDetail, UploadImage, UploadProducto } from "../../services/apiCalls";
+import { BringProductDetail, UploadImage, UploadProducto } from "../../services/apiCalls";
 import { DataFetched2 } from "../../interfaces";
 import { useEffect, useState, useRef } from "react";
 import "./UploadProduct.css";
@@ -15,9 +15,7 @@ import { CInput1 } from "../../common/CInput1/CInput1";
 
 export const UploadProduct: React.FC = () => {
   const [product, setProducts] = useState<any>();
-  const [favorite, setFavorite] = useState<any>();
   const [dataImage, setDataImage] = useState<any>();
-  const [addTofavorite, setAddToFavorite] = useState<any>();
   const [error, setError] = useState<string>("");
   const rdxProductDetail = useSelector(productDetailData);
   const rdxUser = useSelector(userData);
@@ -93,6 +91,7 @@ export const UploadProduct: React.FC = () => {
         console.log(fetched, "hola soy fetched");
       } else {
         setError(fetched.message);
+        console.log(error)
       }
     };
 
@@ -108,15 +107,6 @@ export const UploadProduct: React.FC = () => {
     }
     bringData();
   }, [rdxProductDetail]);
-
-  useEffect(() => {
-    const bringData = async () => {
-      const fetched2: DataFetched2 = await BringFavoriteUserProduct(rdxProductDetail.productDetail.productId, rdxUser.credentials.token);
-      setFavorite(fetched2.data);
-      console.log(fetched2, "fetched2")
-    }
-    bringData();
-  }, [addTofavorite]);
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
@@ -148,6 +138,7 @@ export const UploadProduct: React.FC = () => {
   const handleUploadProduct = async () => {
     const fetched: DataFetched2 = await UploadProducto(title.text, message.text, dataImage.originalname, city.text, hourPrice.text, dayPrice.text, deposit.text, category.categoryId, rdxUser.credentials.token);
     console.log(fetched, "fetched")
+    navigate("/home")
 
   }
 

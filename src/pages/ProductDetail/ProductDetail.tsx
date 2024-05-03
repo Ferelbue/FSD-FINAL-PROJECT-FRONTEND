@@ -1,10 +1,10 @@
 
-import { AddToFavorites, BringCategoryProducts, BringFavoriteUserProduct, BringProductDetail } from "../../services/apiCalls";
-import { DataFetched, DataFetched2 } from "../../interfaces";
+import { AddToFavorites, BringFavoriteUserProduct, BringProductDetail } from "../../services/apiCalls";
+import { DataFetched2 } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./ProductDetail.css";
-import { categoryData } from "../../app/slices/categorySlice";
-import { useSelector, useDispatch } from "react-redux";
+
+import { useSelector } from "react-redux";
 import { userData } from "../../app/slices/userSlice";
 import { Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -17,7 +17,6 @@ export const ProductDetail: React.FC = () => {
   const [favorite, setFavorite] = useState<any>();
   const [addTofavorite, setAddToFavorite] = useState<any>();
   const [error, setError] = useState<string>("");
-  const dispatch = useDispatch();
   const rdxProductDetail = useSelector(productDetailData);
   const rdxUser = useSelector(userData);
   const navigate = useNavigate();
@@ -34,6 +33,7 @@ export const ProductDetail: React.FC = () => {
       } else {
         setError(fetched.message);
       }
+      console.log(error, "error")
     };
 
     if (!product) {

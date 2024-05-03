@@ -1,5 +1,5 @@
 
-import { BringConversation, BringProductDetail, BringUserProducts, BringUserProfile, DealStatus, EraseNotification, Notification, SendMessage, UploadImage, UploadUserProfile, acceptDeal } from "../../services/apiCalls";
+import { BringUserProducts, BringUserProfile, Notification, UploadImage, UploadUserProfile } from "../../services/apiCalls";
 import { DataFetched2, UserUpdateData } from "../../interfaces";
 import { useEffect, useRef, useState } from "react";
 import "./Profile.css";
@@ -7,11 +7,10 @@ import { useSelector, } from "react-redux";
 import { userData } from "../../app/slices/userSlice";
 import { Card, Carousel } from "react-bootstrap";
 import dayjs from "dayjs";
-import { productDetailData, updateProductDetail } from "../../app/slices/productDetailSlice";
-import { CInput2 } from "../../common/CInput2/CInput2";
+import { updateProductDetail } from "../../app/slices/productDetailSlice";
 import { useDispatch } from "react-redux";
 import { updateNotification } from "../../app/slices/notificationSlice";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ROOT2 } from "../../services/apiCalls"
 import { CInput3 } from "../../common/CInput3/CInput3";
 
@@ -19,7 +18,6 @@ export const Profile: React.FC = () => {
   const [userProfile, setUserProfile] = useState<any>();
   const [userProducts, setUserProducts] = useState<any>();
   const [error, setError] = useState<string>("");
-  const rdxProductDetail = useSelector(productDetailData);
   const [uploadProductsClick, setUploadProductsClick] = useState<boolean>(false);
   const [myReviewsClick, setMyReviewsClick] = useState<boolean>(false);
   const [editProfile, setEditProfile] = useState<boolean>(false);
@@ -29,9 +27,7 @@ export const Profile: React.FC = () => {
   const dispatch = useDispatch();
   const [dataImage, setDataImage] = useState<any>();
   const fileInput = useRef<HTMLInputElement>(null);
-  const [message, setMessage] = useState<any>({
-    text: "",
-  });
+
   const [user, setUser] = useState<UserUpdateData>({
     name: "",
     lastName: "",
@@ -49,23 +45,18 @@ export const Profile: React.FC = () => {
   };
 
   const notiMe = async (): Promise<void> => {
-    const fetched2: DataFetched2 = await Notification(rdxUser.credentials.token);
-    if (fetched2.data[0].length === 0 && fetched2.data[1].length === 0) {
-      dispatch(updateNotification({ notification: false }));
-    } else {
-      dispatch(updateNotification({ notification: true }));
+    try {
+      const fetched2: DataFetched2 = await Notification(rdxUser.credentials.token);
+      if (fetched2.data[0].length === 0 && fetched2.data[1].length === 0) {
+        dispatch(updateNotification({ notification: false }));
+      } else {
+        dispatch(updateNotification({ notification: true }));
+      }
+      setError(fetched2.message);
+    } catch (error) {
+      console.log(error, "error")
     }
   }
-
-  useEffect(() => {
-  }, [message]);
-
-  const inputHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setMessage((prevState: any) => ({
-      ...prevState,
-      text: e.target.value,
-    }));
-  };
 
   useEffect(() => {
     const bringData = async () => {
@@ -82,6 +73,7 @@ export const Profile: React.FC = () => {
       });
 
       notiMe();
+
       if (error) {
         console.log(error, "error");
       }
@@ -151,6 +143,12 @@ export const Profile: React.FC = () => {
     console.log(fetched, "fetched")
   }
 
+  const handleAdmin = () => {
+
+
+
+  }
+
   console.log(userProducts, "user")
   return (
     <div className="profile">
@@ -163,7 +161,7 @@ export const Profile: React.FC = () => {
           <div className="iconsProfile">
             <div className="imageCloud" title="My uploads product" onClick={() => handleUploadProducts()} />
             <div className="imageReviews" title="My reviews" onClick={() => handleMyReviews()} />
-            <div className="imageSettings" title="Admin APP" onClick={() => navigate('/favorites')} />
+            <div className="imageSettings" title="Admin APP" onClick={() => handleAdmin()} />
           </div>
         </div>
         <>

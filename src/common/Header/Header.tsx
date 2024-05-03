@@ -6,7 +6,6 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import Form from 'react-bootstrap/Form';
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { updateCategory } from '../../app/slices/categorySlice';
@@ -23,8 +22,6 @@ const Header = () => {
     const rdxNotification = useSelector(notificationData);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [searchText, setSearchText] = useState('');
-    const [products, setProducts] = useState<any>();
     const [error, setError] = useState<string>("");
     const [criteria, setCriteria] = useState("")
     const [nameCriteria, setNameCriteria] = useState("")
@@ -40,8 +37,9 @@ const Header = () => {
                     setProductsFetched(fetchedData);
 
                 } catch (error) {
-                    setError(products.message);
+                    setError(productsFetched.message);
                 }
+                console.log(error, "error")
             } else (
                 setProductsFetched("")
             )
@@ -73,10 +71,6 @@ const Header = () => {
             dispatch(updateNotification({ notification: true }));
         }
     }
-
-    // useEffect(() => {
-    //     handleLogout()
-    // }, [userData]);
 
     const handleLogout = async () => {
         dispatch(userout({ credentials: "" }));
