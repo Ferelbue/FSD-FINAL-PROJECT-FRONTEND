@@ -6,7 +6,7 @@ import "./Home.css";
 import { Card, Carousel } from "react-bootstrap";
 import { updateNotification } from "../../app/slices/notificationSlice";
 import { useDispatch } from "react-redux";
-import { userData } from "../../app/slices/userSlice";
+import { userData, userout } from "../../app/slices/userSlice";
 import { useSelector } from "react-redux";
 import { updateProductDetail } from "../../app/slices/productDetailSlice";
 import { useNavigate } from "react-router-dom";
@@ -22,16 +22,20 @@ export const Home: React.FC = () => {
 
   const notiMe = async (): Promise<void> => {
     const fetched2: DataFetched2 = await Notification(rdxUser.credentials.token);
+    console.log(fetched2, "fetched2")
+
     if (fetched2.data[0].length === 0 && fetched2.data[1].length === 0) {
       dispatch(updateNotification({ notification: false }));
     } else {
       dispatch(updateNotification({ notification: true }));
     }
+
+
   }
-  
+
   useEffect(() => {
     const bringData = async () => {
-      const fetched: DataFetched = await BringProducts("","", "");
+      const fetched: DataFetched = await BringProducts("", "", "");
       notiMe();
       if (fetched.success) {
         console.log(fetched, "hola soy fetched");
@@ -48,9 +52,9 @@ export const Home: React.FC = () => {
     }
   }, [products]);
 
-  const handleDetail = (productId:number,ownerId:number) => {
+  const handleDetail = (productId: number, ownerId: number) => {
     console.log(productId, "productId")
-    dispatch(updateProductDetail({ productDetail: {productId:productId,userUserId:ownerId}}));
+    dispatch(updateProductDetail({ productDetail: { productId: productId, userUserId: ownerId } }));
     navigate("/productDetail")
   }
 
@@ -83,7 +87,7 @@ export const Home: React.FC = () => {
                           <div className="row justify-content-around carouselProducts">
                             {block.map((product) => (
                               <div className="col-sm-12 col-md-6 col-lg-3" key={product.id}>
-                                <Card className="cardProduct" onClick={() => handleDetail(product.id,product.owner.id)}>
+                                <Card className="cardProduct" onClick={() => handleDetail(product.id, product.owner.id)}>
                                   <Card.Img className="imageProductCard" src={`${ROOT2}uploads/${product.image}`} />
                                   <Card.Body>
                                     <Card.Title className="cardTitle">{product.name.toUpperCase()}</Card.Title>

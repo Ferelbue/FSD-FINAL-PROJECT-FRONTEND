@@ -25,17 +25,10 @@ const Header = () => {
     const [searchText, setSearchText] = useState('');
     const [products, setProducts] = useState<any>();
     const [error, setError] = useState<string>("");
-
-
-
-
-
-
     const [criteria, setCriteria] = useState("")
     const [nameCriteria, setNameCriteria] = useState("")
     const [productsFetched, setProductsFetched] = useState<any>();
     const searchRdx = useSelector(searchData);
-
 
     useEffect(() => {
         const bringUsers = async () => {
@@ -71,10 +64,6 @@ const Header = () => {
         setNameCriteria(e.target.value.toLowerCase())
     }
 
-
-
-
-
     const notiMe = async (): Promise<void> => {
         const fetched2: DataFetched2 = await Notification(rdxUser.credentials.token);
         if (fetched2.data[0].length === 0 && fetched2.data[1].length === 0) {
@@ -83,6 +72,10 @@ const Header = () => {
             dispatch(updateNotification({ notification: true }));
         }
     }
+
+    // useEffect(() => {
+    //     handleLogout()
+    // }, [userData]);
 
     const handleLogout = async () => {
         dispatch(userout({ credentials: "" }));
@@ -156,8 +149,8 @@ const Header = () => {
                                             null
                                         ) : (
                                             <>
-                                                <div className="imagePlus" title="Upload product" onClick={() => navigate('/uploadProduct')}/>
-                                                <div className="imageCuore" title="My favorites" onClick={() => navigate('/favorites')}/>
+                                                <div className="imagePlus" title="Upload product" onClick={() => navigate('/uploadProduct')} />
+                                                <div className="imageCuore" title="My favorites" onClick={() => navigate('/favorites')} />
                                                 {(rdxNotification.notification === true)
                                                     ? (
                                                         <div className="imageChatNot" title="My chats" onClick={() => navigate('/chats')} />
@@ -165,7 +158,7 @@ const Header = () => {
                                                         <div className="imageChat" title="My chats" onClick={() => navigate('/chats')} />
                                                     )
                                                 }
-                                                <div className="imageUser" title="My profile" onClick={() => navigate('/profile')}/>
+                                                <div className="imageUser" title="My profile" onClick={() => navigate('/profile')} />
                                                 <div className="imageExit" title="Log Out" onClick={() => handleLogout()} />
                                             </>
                                         )
@@ -310,8 +303,8 @@ const Header = () => {
                                                     null
                                                 ) : (
                                                     <>
-                                                        <div className="imagePlus" title="Upload product" onClick={() => navigate('/uploadProduct')}/>
-                                                        <div className="imageCuore" title="My favorites" onClick={() => navigate('/favorites')}/>
+                                                        <div className="imagePlus" title="Upload product" onClick={() => navigate('/uploadProduct')} />
+                                                        <div className="imageCuore" title="My favorites" onClick={() => navigate('/favorites')} />
                                                         {(rdxNotification.notification === true)
                                                             ? (
                                                                 <div className="imageChatNot" title="My chats" onClick={() => navigate('/chats')} />
@@ -319,7 +312,7 @@ const Header = () => {
                                                                 <div className="imageChat" title="My chats" onClick={() => navigate('/chats')} />
                                                             )
                                                         }
-                                                        <div className="imageUser" title="My profile" onClick={() => navigate('/profile')}/>
+                                                        <div className="imageUser" title="My profile" onClick={() => navigate('/profile')} />
                                                         <div className="imageExit" title="Log Out" onClick={() => handleLogout()} />
                                                     </>
                                                 )
@@ -463,8 +456,8 @@ const Header = () => {
                                                 ) : (
                                                     <>
                                                         <div className="myNavBar3">
-                                                            <div className="imagePlus" title="Upload product" onClick={() => navigate('/uploadProduct')}/>
-                                                            <div className="imageCuore" title="My favorites" onClick={() => navigate('/favorites')}/>
+                                                            <div className="imagePlus" title="Upload product" onClick={() => navigate('/uploadProduct')} />
+                                                            <div className="imageCuore" title="My favorites" onClick={() => navigate('/favorites')} />
                                                             {(rdxNotification.notification === true)
                                                                 ? (
                                                                     <div className="imageChatNot" title="My chats" onClick={() => navigate('/chats')} />

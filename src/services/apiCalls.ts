@@ -389,7 +389,7 @@ export const UploadImage = async (formData: FormData, token: string): Promise<an
     }
 }
 
-export const UploadProducto = async (name: string, description: string, image: string, city: string, hourPrice: number, dayPrice: number, depositPrice:number, category: number, token: string, ): Promise<any> => {
+export const UploadProducto = async (name: string, description: string, image: string, city: string, hourPrice: number, dayPrice: number, depositPrice: number, category: number, token: string,): Promise<any> => {
     console.log(name, description, image, city, hourPrice, dayPrice, depositPrice, category, token, "UploadProducto");
     const options = {
         method: "POST",
@@ -411,6 +411,29 @@ export const UploadProducto = async (name: string, description: string, image: s
 
     try {
         const response = await fetch(`${ROOT}products`, options);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+
+        return data;
+
+    } catch (error) {
+        return error;
+    }
+}
+
+export const BringUserProfile = async (token: string): Promise<any> => {
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+    };
+
+    try {
+        const response = await fetch(`${ROOT}users/profile`, options);
         const data = await response.json();
         if (!response.ok) {
             throw new Error(data.message);
