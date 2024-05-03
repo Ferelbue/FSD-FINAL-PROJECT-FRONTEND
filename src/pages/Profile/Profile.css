@@ -13,6 +13,7 @@
     color: black;
     margin-top: 24vh !important;
 }
+
 .profile::-webkit-scrollbar {
     width: 0.5px !important;
 }
@@ -41,7 +42,7 @@
 
 }
 
-.cardProduct31 {
+.cardProduct33 {
     width: 85vw;
     height: 35vh !important;
     margin: 0.5em;
@@ -49,9 +50,10 @@
     flex-direction: row !important;
     justify-content: center;
     align-items: center;
-    background-color: white!important;
+    background-color: white;
+    border-radius: 0.5em;
     padding: 0;
-    margin-top: 12vh;
+    margin-top: 13vh;
 }
 
 .imageProductCard3 {
@@ -82,7 +84,7 @@
     border-top: 1px solid lightgray;
 }
 
-.prices{
+.prices {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -91,13 +93,13 @@
     font-size: 1.2em;
 }
 
-.dealFinished{
+.dealFinished {
     width: 15vw;
     height: 5vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(66,71,76);
+    background-color: rgb(66, 71, 76);
     color: white;
     font-size: 1em;
     font-weight: bold;
@@ -105,9 +107,10 @@
     cursor: pointer;
 }
 
-.dealFinished:hover{
+.dealFinished:hover {
     background-color: rgb(95, 118, 118);
 }
+
 .startCard3 {
     width: 60vw;
     display: flex;
@@ -214,7 +217,8 @@
     background: url('../../../public/chat.png') no-repeat center center / cover;
 
 }
-.conversationCard{
+
+.conversationCard {
     position: absolute;
     z-index: 10;
     top: 80vh;
@@ -229,7 +233,7 @@
     cursor: pointer;
 }
 
-.messageConversation1{
+.messageConversation1 {
     width: 50vw;
     height: auto;
     display: flex;
@@ -241,7 +245,8 @@
     padding-left: 1.3em;
     background-color: rgb(185, 217, 217) !important;
 }
-.messageConversation2{
+
+.messageConversation2 {
     width: 50vw;
     height: auto;
     display: flex;
@@ -251,27 +256,30 @@
     border-radius: 0.5em;
     margin-bottom: 0.5em;
     padding-left: 1.3em;
-    background-color: rgb(142, 163, 163)!important;
+    background-color: rgb(142, 163, 163) !important;
 }
 
-.messageTitle{
+.messageTitle {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
-.titleCard2{
+
+.titleCard2 {
     font-size: small !important;
     margin-left: 0.5em;
 }
-.titleCard3{
+
+.titleCard3 {
     font-size: small !important;
     margin-right: 0.5em;
 }
-.inputConversation{
+
+.inputConversation {
     width: 50vw;
     height: 15vh;
-    resize:none;
+    resize: none;
     background-color: white;
     color: black;
     border-radius: 0.5em;
@@ -279,7 +287,8 @@
     border-style: solid;
     border-color: black;
 }
-.messageGroup{
+
+.messageGroup {
     width: 50vw;
     height: 15vh;
     display: flex;
@@ -289,14 +298,15 @@
     margin-bottom: 1em;
     margin-top: 1em;
 }
-.sendMesssage{
+
+.sendMesssage {
     width: 10vw;
     height: 5vh;
     z-index: 10;
     margin-left: 39vw;
     margin-top: 8vh;
     position: absolute;
-    background-color: rgb(66,71,76);
+    background-color: rgb(66, 71, 76);
     border-radius: 0.5em;
     display: flex;
     justify-content: center;
@@ -304,6 +314,7 @@
     color: white;
     cursor: pointer;
 }
+
 .categoryTitle31 {
     background-color: rgb(73, 90, 94);
     color: white;
@@ -345,6 +356,7 @@
 .imageReviews:hover {
     background-image: url('../../../public/start2.png');
 }
+
 .imageSettings {
     width: 0.9em;
     height: 0.9em;
@@ -352,14 +364,13 @@
     margin-left: 0.5em;
     background: url('../../../public/settings2.png') no-repeat center center / cover;
     cursor: pointer;
-
 }
 
 .imageSettings:hover {
     background-image: url('../../../public/settings.png');
 }
 
-.iconsProfile{
+.iconsProfile {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -382,4 +393,48 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.cardMyReviews {
+
+    width: 85vw;
+    min-height: 35vh !important;
+    height: auto;
+    margin: 0.5em;
+    display: flex;
+    flex-direction: row !important;
+    justify-content: center;
+    align-items: center;
+    background-color: white !important;
+    padding: 0;
+    margin-left: 7.5vw;
+}
+
+.imageGroupProfile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1em;
+}
+
+.imageGroupProfile2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+}
+.imageSettings {
+    width: 0.9em;
+    height: 0.9em;
+    margin-right: 0.5em;
+    margin-left: 0.5em;
+    background: url('../../../public/settings2.png') no-repeat center center / cover;
+    cursor: pointer;
+}
+.imageUserProfile{
+    width: 5rem;
+    height: 5rem;
+    margin-top: 1em;
+    margin-bottom: 1em;
 }

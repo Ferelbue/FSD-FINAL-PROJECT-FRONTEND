@@ -1,5 +1,5 @@
 
-import { BringConversation, BringProductDetail, BringUserProfile, DealStatus, EraseNotification, Notification, SendMessage, acceptDeal } from "../../services/apiCalls";
+import { BringConversation, BringProductDetail, BringUserProducts, BringUserProfile, DealStatus, EraseNotification, Notification, SendMessage, acceptDeal } from "../../services/apiCalls";
 import { DataFetched2 } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./Profile.css";
@@ -16,6 +16,7 @@ import { ROOT2 } from "../../services/apiCalls"
 
 export const Profile: React.FC = () => {
   const [userProfile, setUserProfile] = useState<any>();
+  const [userProducts, setUserProducts] = useState<any>();
   const [error, setError] = useState<string>("");
   const rdxProductDetail = useSelector(productDetailData);
   const [uploadProductsClick, setUploadProductsClick] = useState<boolean>(false);
@@ -50,7 +51,9 @@ export const Profile: React.FC = () => {
   useEffect(() => {
     const bringData = async () => {
       const fetched: DataFetched2 = await BringUserProfile(rdxUser.credentials.token);
+      const fetched2: DataFetched2 = await BringUserProducts(rdxUser.credentials.token);
       setUserProfile(fetched.data[0]);
+      setUserProducts(fetched2.data);
       console.log(fetched.data[0], "fetchedadasdasdasdasdassdasds.data");
 
       notiMe();
@@ -81,12 +84,14 @@ export const Profile: React.FC = () => {
 
   const carouselSize = 4;
   const arrayProducts = [];
-  if (userProfile && userProfile.products) {
-    for (let i = 0; i < userProfile.products.length; i += carouselSize) {
-      arrayProducts.push(userProfile.products.slice(i, i + carouselSize));
+  if (userProfile && userProducts) {
+    for (let i = 0; i < userProducts.length; i += carouselSize) {
+      arrayProducts.push(userProducts.slice(i, i + carouselSize));
     }
   }
 
+
+  console.log(userProfile, "userProfile")
 
   return (
     <div className="profile">
@@ -104,23 +109,18 @@ export const Profile: React.FC = () => {
         </div>
         <>
           {userProfile ? (
-            <Card className="cardProduct31">
-              <div>
-                <div>
-                  hola
-                </div>
-                <div>
+            <Card className="cardProduct33">
 
-                </div>
-                <div>
-
-                </div>
-
+              <div className="imageGroupProfile" >
+                <Card.Img className="imageUserProfile" src={userProfile.image} />
+                <div>TOTAL PRESTADOS ({userProfile.reviews.length})</div>
+                <div>TOTAL SUBIDOS ({userProducts.length})</div>
               </div>
-
-              <Card.Body>
-
-              </Card.Body>
+              <div className="imageGroupProfile2" >
+                <div>{userProfile.name.toUpperCase()}</div>
+                <div>{userProfile.lastName.toUpperCase()}</div>
+                <div>{userProfile.city}</div>
+              </div>
             </Card>
 
           ) : (
@@ -179,13 +179,28 @@ export const Profile: React.FC = () => {
               <div className="categoryTitle35">
                 MY REVIEWS
               </div>
-              <div>
+              <Card className="cardMyReviews">
                 <div>
-                  <div className="categoryTitle35">
-                    MY REVIEWS
+                  <div >
+                    {[...userProfile.reviews].reverse().map((review: any) => (
+                      <div className="reviewCard2" key={review.id}>
+                        <div className="oneComment">
+                          <div className="reviewTitle2">{review.name} <div className="dateDetail">{dayjs(review.updated_at).format('YYYY-MM-DD')}</div></div>
+                          <div className="reviewStart2">
+                            {review.starts === 0 ? <div className="productStart0"></div> : null}
+                            {review.starts === 1 ? <div className="productStart1"></div> : null}
+                            {review.starts === 2 ? <div className="productStart2"></div> : null}
+                            {review.starts === 3 ? <div className="productStart3"></div> : null}
+                            {review.starts === 4 ? <div className="productStart4"></div> : null}
+                            {review.starts === 5 ? <div className="productStart5"></div> : null}
+                          </div>
+                          <div className="reviewText2">{review.description}</div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
-              </div>
+              </Card>
 
             </>
           )}
