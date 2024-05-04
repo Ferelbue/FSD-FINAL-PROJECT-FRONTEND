@@ -52,13 +52,13 @@
     /* Asegúrate de que el ancho mínimo de la tabla es mayor que el ancho del contenedor */
     width: 90vw !important;
     border: 1px solid #ddd;
-    margin-top: 6em;
+    margin-top: 6.5em;
     margin-left: 0.5em;
     margin-right: 0.5em;
 }
 
 .inputSearch2 {
-    width: 30vw;
+    width: 30%;
     height: 5vh;
     font-size: 0.5em;
     border-radius: 0.5em;
@@ -70,4 +70,7 @@
 }
 .categoryTitle37{
     height: 5vh;
+}
+.pagination{
+
 }

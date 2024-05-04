@@ -102,3 +102,6 @@ export interface UserUpdateData{
     image: string,
     city: string,
 }
+export interface UserUpdateRole{
+    role: string
+}

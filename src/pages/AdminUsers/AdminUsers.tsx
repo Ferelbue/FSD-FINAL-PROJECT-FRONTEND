@@ -1,6 +1,6 @@
 
-import { BringAllUsers, DeleteUserById, Notification } from "../../services/apiCalls";
-import { DataFetched2 } from "../../interfaces";
+import { BringAllUsers, BringAllUsersNumber, DeleteUserById, EditUserRole, Notification } from "../../services/apiCalls";
+import { DataFetched2, UserUpdateRole } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./AdminUsers.css";
 import { categoryData } from "../../app/slices/categorySlice";
@@ -10,6 +10,8 @@ import { updateNotification } from "../../app/slices/notificationSlice";
 import { ROOT2 } from "../../services/apiCalls"
 import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { searchData2, updateCriteria2 } from "../../app/slices/search2Slice";
+import { Pagination } from "react-bootstrap";
+import { CInput3 } from "../../common/CInput3/CInput3";
 
 export const AdminUsers: React.FC = () => {
   const [products, setProducts] = useState<any[]>([]);
@@ -22,6 +24,22 @@ export const AdminUsers: React.FC = () => {
   const [criteria2, setCriteria2] = useState("")
   const [nameCriteria2, setNameCriteria2] = useState("")
   const [currentPage, setCurrentPage] = useState(1);
+  const [maxPag, setMaxPag] = useState(0);
+  const [editRole, setEditRole] = useState<Record<string, boolean>>({});
+  const [write, setWrite] = useState<boolean>(false);
+
+  const [userRole, setUserRole] = useState<UserUpdateRole>({
+    role: ""
+  })
+
+  const inputHandler2 = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUserRole((prevState: any) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+    console.log(userRole, "userRole");
+  }
+
 
   const notiMe = async (): Promise<void> => {
     const fetched2: DataFetched2 = await Notification(rdxUser.credentials.token);
@@ -55,9 +73,14 @@ export const AdminUsers: React.FC = () => {
   useEffect(() => {
     const bringData = async () => {
 
+      console.log(currentPage, "searchRdx2.criteria");
+      const fetched: DataFetched2 = await BringAllUsers(rdxUser.credentials.token, searchRdx2.criteria, currentPage);
+      const fetched2: DataFetched2 = await BringAllUsersNumber(rdxUser.credentials.token);
 
-      const fetched: DataFetched2 = await BringAllUsers(rdxUser.credentials.token, searchRdx2.criteria);
+      console.log(fetched.data, "fetched");
+
       setUsers(fetched.data);
+      setMaxPag(Math.ceil(fetched2.data.length / 2))
 
       if (error) {
         console.log(error, "error");
@@ -67,12 +90,12 @@ export const AdminUsers: React.FC = () => {
     };
     bringData();
 
-  }, [searchRdx2.criteria]);
+  }, [searchRdx2.criteria, currentPage]);
 
   const handleDelete = async (userId: number) => {
     try {
       await DeleteUserById(rdxUser.credentials.token, userId);
-      const fetched: DataFetched2 = await BringAllUsers(rdxUser.credentials.token, "");
+      const fetched: DataFetched2 = await BringAllUsers(rdxUser.credentials.token, "", currentPage);
       setUsers(fetched.data);
     } catch (error) {
       setError(error);
@@ -80,32 +103,54 @@ export const AdminUsers: React.FC = () => {
     }
   };
 
+  const handleEditRole = async (userId: number) => {
+    console.log(userId, "userId")
+    setEditRole({
+      ...editRole,
+      [userId]: true
+    });
+  }
 
-  console.log(searchRdx2.criteria, "produsdcts");
+  const handleSendEditRole = async (userId: number) => {
+    try {
+      await EditUserRole(rdxUser.credentials.token, userId, userRole.role);
+      setEditRole({
+        ...editRole,
+        [userId]: false
+      });
+      const fetched: DataFetched2 = await BringAllUsers(rdxUser.credentials.token, "", currentPage);
+      setUsers(fetched.data);
+
+    } catch (error) {
+      setError(error);
+      console.log(error, "error")
+    }
+  }
+  console.log(rdxUser.credentials.user.roleName, "rdxUser.credentials.userRole")
 
   return (
     <div className="category">
+
+      <div className="categoryTitle3">
+        <div className="categoryTitle37">
+          ADMIN USERS
+        </div>
+        <div>
+          <div className="inputHeader">
+            <CustomInput
+              className={`inputSearch2`}
+              type="text"
+              placeholder="search a user...."
+              name="user"
+              disabled={false}
+              value={criteria2 || ""}
+              onChange={(e: any) => searchHandler(e)}
+            />
+          </div>
+        </div>
+      </div>
       {users ? (
         <>
-          <div className="categoryTitle3">
-            <div className="categoryTitle37">
-              ADMIN USERS
-            </div>
-            <div>
-              <div className="inputHeader">
-                <CustomInput
-                  className={`inputSearch2`}
-                  type="text"
-                  placeholder="search a user...."
-                  name="user"
-                  disabled={false}
-                  value={criteria2 || ""}
-                  onChange={(e: any) => searchHandler(e)}
-                />
-              </div>
-            </div>
-          </div>
-
           <div className="table-container">
             <table className="table">
               <thead>
@@ -122,27 +167,67 @@ export const AdminUsers: React.FC = () => {
               <tbody>
                 {users.map((user: any) => (
                   <tr key={user.id}>
-                    <td><img src={`${ROOT2}uploads/${user.image}`} alt={user.name} style={{ width: '50px', height: '50px' }} /></td>
-                    <td>{user.name}</td>
-                    <td>{user.lastName}</td>
-                    <td>{user.email}</td>
-                    <td>{user.city}</td>
-                    <td>{user.role.name}</td>
-                    <td><img src={`${ROOT2}uploads/pot.png`} alt={user.name} style={{ width: '30px', height: '30px', cursor: 'pointer' }} onClick={() => handleDelete(user.id)} /></td>
+                  <td><img src={`${ROOT2}uploads/${user.image}`} alt={user.name} style={{ width: '50px', height: '50px' }} /></td>
+                  <td>{user.name}</td>
+                  <td>{user.lastName}</td>
+                  <td>{user.email}</td>
+                  <td>{user.city}</td>
+                    <td>
+                      <CInput3
+                        className={editRole[user.id] ? "inputProfile1" : "inputProfile2"}
+                        type="text"
+                        name="role"
+                        placeholder="USER ADMIN SUPER-ADMIN"
+                        disabled={!editRole[user.id]}
+                        value={editRole[user.id] ? userRole.role || "" : user.role.name}
+                        onChange={(e) => inputHandler2(e)}
+                      />
+                    </td>
+                    <td>
+                      {rdxUser.credentials.user.roleName === "super-admin"
+                        ? (
+                          editRole[user.id]
+                            ? (
+                              <>
+                                <img src={`${ROOT2}uploads/tick.png`} alt={user.name} style={{ width: '30px', height: '30px', cursor: 'pointer', margin: '0.2em' }} onClick={() => handleSendEditRole(user.id)} />
+                                <img src={`${ROOT2}uploads/pencil.png`} alt={user.name} style={{ width: '25px', height: '25px', cursor: 'pointer', margin: '0.2em' }} onClick={() => handleEditRole(user.id)} />
+                                <img src={`${ROOT2}uploads/pot.png`} alt={user.name} style={{ width: '30px', height: '30px', cursor: 'pointer', margin: '0.2em' }} onClick={() => handleDelete(user.id)} />
+                              </>
+                            )
+                            : (
+                              <>
+                                <img src={`${ROOT2}uploads/pencil.png`} alt={user.name} style={{ width: '25px', height: '25px', cursor: 'pointer', margin: '0.2em' }} onClick={() => handleEditRole(user.id)} />
+                                <img src={`${ROOT2}uploads/pot.png`} alt={user.name} style={{ width: '30px', height: '30px', cursor: 'pointer', margin: '0.2em' }} onClick={() => handleDelete(user.id)} />
+                              </>
+                            )
+                        )
+                        : (
+                          <img src={`${ROOT2}uploads/pot.png`} alt={user.name} style={{ width: '30px', height: '30px', cursor: 'pointer', margin: '0.2em' }} onClick={() => handleDelete(user.id)} />
+                        )
+                      }
+                    </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
           <div className="pagination">
-            <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>Anterior</button>
-            <span>Página {currentPage}</span>
-            <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === 5}>Siguiente</button>
+
+            <Pagination>
+              <Pagination.Item onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>
+                Next
+              </Pagination.Item>
+              <Pagination.Item>{currentPage}</Pagination.Item>
+              <Pagination.Item onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === maxPag}>
+                Prev
+              </Pagination.Item>
+            </Pagination>
           </div>
         </>
       ) : (
-        <div>Cargando producto...</div>
-      )}
-    </div>
+        <div className="cardProduct33">Any user found...</div>
+      )
+      }
+    </div >
   );
 };
