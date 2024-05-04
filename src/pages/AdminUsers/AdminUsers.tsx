@@ -3,7 +3,6 @@ import { BringAllUsers, BringAllUsersNumber, DeleteUserById, EditUserRole, Notif
 import { DataFetched2, UserUpdateRole } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./AdminUsers.css";
-import { categoryData } from "../../app/slices/categorySlice";
 import { useSelector, useDispatch } from "react-redux";
 import { userData } from "../../app/slices/userSlice";
 import { updateNotification } from "../../app/slices/notificationSlice";
@@ -14,19 +13,16 @@ import { Pagination } from "react-bootstrap";
 import { CInput3 } from "../../common/CInput3/CInput3";
 
 export const AdminUsers: React.FC = () => {
-  const [products, setProducts] = useState<any[]>([]);
   const [users, setUsers] = useState<any[]>([]);
   const [error, setError] = useState<any>("");
   const dispatch = useDispatch();
   const searchRdx2 = useSelector(searchData2);
-  const rdxCategory = useSelector(categoryData);
   const rdxUser = useSelector(userData);
   const [criteria2, setCriteria2] = useState("")
   const [nameCriteria2, setNameCriteria2] = useState("")
   const [currentPage, setCurrentPage] = useState(1);
   const [maxPag, setMaxPag] = useState(0);
   const [editRole, setEditRole] = useState<Record<string, boolean>>({});
-  const [write, setWrite] = useState<boolean>(false);
 
   const [userRole, setUserRole] = useState<UserUpdateRole>({
     role: ""
@@ -215,11 +211,11 @@ export const AdminUsers: React.FC = () => {
 
             <Pagination>
               <Pagination.Item onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>
-                Next
+                Prev
               </Pagination.Item>
               <Pagination.Item>{currentPage}</Pagination.Item>
               <Pagination.Item onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === maxPag}>
-                Prev
+                Next
               </Pagination.Item>
             </Pagination>
           </div>

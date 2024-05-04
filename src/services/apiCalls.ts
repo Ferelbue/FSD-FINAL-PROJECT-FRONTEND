@@ -33,6 +33,37 @@ export const BringProducts = async (criteria: string, pag: string, limit: string
     }
 };
 
+export const BringProductsNumber = async (): Promise<any> => {
+
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+    };
+
+    try {
+        const response: any = await fetch(`${ROOT}products/number`, options);
+
+        const dataRes = await response.json();
+        const data: DataFetched = {
+            success: true,
+            message: "Los datos han venido correctamente",
+            data: dataRes.data,
+        };
+        return data;
+    } catch (error) {
+        let answer: DataFetched = {
+            message: "Ha habido un error",
+            data: [],
+            success: false,
+        };
+
+        return answer;
+    }
+};
+
+
 export const LoginMe = async (credentials: LoginData): Promise<any> => {
     const options = {
         method: "POST",
@@ -591,3 +622,26 @@ export const EditUserRole = async (token: string, userId: number, role: string):
     }
 }
 
+export const DeleteProductById = async (token: string, productId: number): Promise<any> => {
+    console.log(token, productId, "DeleteProductById");
+    const options = {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+    };
+
+    try {
+        const response = await fetch(`${ROOT}products/${productId}`, options);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+
+        return data;
+
+    } catch (error) {
+        return error;
+    }
+}

@@ -1,0 +1,88 @@
+.category {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    margin: 0;
+    padding: 0;
+    height: 76vh;
+    width: 100vw;
+    background-color: rgb(234, 243, 243);
+    overflow-x: hidden;
+    color: black;
+    margin-top: 24vh !important;
+}
+
+.category::-webkit-scrollbar {
+    width: 0.5px;
+}
+
+.categoryTitle2 {
+    background-color: rgb(73, 90, 94);
+    color: white;
+    width: 100vw;
+    font-size: 2em;
+    font-weight: bold;
+    position: fixed !important;
+    z-index: 1;
+}
+
+.categoryProducts {
+    padding-left: 2em;
+    position: relative;
+    top: 7vh;
+}
+
+.categoryProducts::-webkit-scrollbar {
+    width: 0.5px;
+}
+
+.table-container {
+    width: 100%;
+    /* Asegúrate de que el contenedor tiene un ancho definido */
+    overflow-x: auto;
+}
+
+.table-container::-webkit-scrollbar {
+    width: 0.5px;
+}
+
+.table {
+    min-width: 99vw;
+    /* Asegúrate de que el ancho mínimo de la tabla es mayor que el ancho del contenedor */
+    width: 90vw !important;
+    border: 1px solid #ddd;
+    margin-top: 6.5em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+
+.inputSearch2 {
+    width: 30%;
+    height: 5vh;
+    font-size: 0.5em;
+    border-radius: 0.5em;
+    border: 1px solid lightgrey;
+    background-color: white;
+    color: black;
+    padding-left: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.categoryTitle37 {
+    height: 5vh;
+}
+
+.inputProfile6 {
+    background-color: white;
+    width: 10vw;
+    border: none;
+    color: black;
+    text-align: center;
+}
+
+.inputProfile5 {
+    width: 10vw;
+    background-color: rgb(73, 90, 94);
+    border-radius: 0.3em;
+}
