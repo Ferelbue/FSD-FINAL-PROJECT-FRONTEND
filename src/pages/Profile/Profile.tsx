@@ -22,6 +22,7 @@ export const Profile: React.FC = () => {
   const [myReviewsClick, setMyReviewsClick] = useState<boolean>(false);
   const [editProfile, setEditProfile] = useState<boolean>(false);
   const [write, setWrite] = useState<boolean>(true);
+  const [adminApp, setAdminApp] = useState<boolean>(false);
   const rdxUser = useSelector(userData);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -33,24 +34,22 @@ export const Profile: React.FC = () => {
     lastName: "",
     image: "",
     city: "",
-  });
-
-
+  })
 
   const inputHandler2 = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUser((prevState: any) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
-  };
+  }
 
   const notiMe = async (): Promise<void> => {
     try {
       const fetched2: DataFetched2 = await Notification(rdxUser.credentials.token);
       if (fetched2.data[0].length === 0 && fetched2.data[1].length === 0) {
-        dispatch(updateNotification({ notification: false }));
+        dispatch(updateNotification({ notification: false }))
       } else {
-        dispatch(updateNotification({ notification: true }));
+        dispatch(updateNotification({ notification: true }))
       }
       setError(fetched2.message);
     } catch (error) {
@@ -91,26 +90,34 @@ export const Profile: React.FC = () => {
   const handleUploadProducts = () => {
     setUploadProductsClick(true);
     setMyReviewsClick(false);
+    setAdminApp(false);
   }
   const handleMyReviews = () => {
     setMyReviewsClick(true);
     setUploadProductsClick(false);
+    setAdminApp(false)
+  }
+
+  const handleAdmin = () => {
+    setAdminApp(true)
+    setUploadProductsClick(false);
+    setMyReviewsClick(false);
   }
 
   const handleSubmit = async (event: any) => {
-    event.preventDefault();
-    const file = fileInput?.current?.files?.[0];
-    const formData = new FormData();
+    event.preventDefault()
+    const file = fileInput?.current?.files?.[0]
+    const formData = new FormData()
     if (file) {
-      const date = new Date();
+      const date = new Date()
       const timestamp = date.getTime();
-      const newFileName = `${timestamp}-${file.name}`;
+      const newFileName = `${timestamp}-${file.name}`
       formData.append('image', file, newFileName);
     } else {
       console.error('No file selected');
     }
     console.log(formData, rdxUser.credentials.token, "formData")
-    const fetched: DataFetched2 = await UploadImage(formData, rdxUser.credentials.token);
+    const fetched: DataFetched2 = await UploadImage(formData, rdxUser.credentials.token)
     console.log(fetched, "fetched")
 
     setDataImage(fetched.data);
@@ -118,35 +125,30 @@ export const Profile: React.FC = () => {
 
   };
 
-  const carouselSize = 4;
-  const arrayProducts = [];
-  let totalStars = 0;
+  const carouselSize = 4
+  const arrayProducts = []
+  let totalStars = 0
   if (userProfile && userProducts) {
     for (let i = 0; i < userProducts.length; i += carouselSize) {
-      arrayProducts.push(userProducts.slice(i, i + carouselSize));
+      arrayProducts.push(userProducts.slice(i, i + carouselSize))
     }
 
     userProducts.forEach((product: any) => {
-      totalStars += product.starts;
+      totalStars += product.starts
     });
   }
+  console.log(totalStars, "totalStars")
   let averageStars = Math.ceil(totalStars / arrayProducts.length);
-
+  console.log(averageStars, "averageStars")
   const handleEdit = async () => {
-    setEditProfile(true);
-    setWrite(false);
+    setEditProfile(true)
+    setWrite(false)
   }
   const handleSend = async () => {
     const fetched: DataFetched2 = await UploadUserProfile(user, rdxUser.credentials.token);
-    setEditProfile(false);
-    setWrite(true);
+    setEditProfile(false)
+    setWrite(true)
     console.log(fetched, "fetched")
-  }
-
-  const handleAdmin = () => {
-
-
-
   }
 
   console.log(userProducts, "user")
@@ -318,6 +320,26 @@ export const Profile: React.FC = () => {
           )}
         </div>
 
+        <div>
+          {adminApp && (
+            <>
+              <div className="categoryTitle35">
+                ADMIN APP OPTIONS
+              </div>
+              <Card className="cardMyReviews">
+                <div className="adminAppGroup">
+                  <div className="imageUsers">
+                    <div className="imageAdminUsers" title="Admin APP" onClick={() => navigate("/adminusers")} />
+                  </div>
+                  <div className="imageProducts">
+                    <div className="imageAdminProducts" title="Admin APP" onClick={() => navigate("/adminproducts")} />
+                  </div>
+                </div>
+              </Card>
+
+            </>
+          )}
+        </div>
 
 
       </>

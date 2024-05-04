@@ -469,7 +469,7 @@ export const BringUserProducts = async (token: string): Promise<any> => {
     }
 }
 
-export const UploadUserProfile = async(user:UserUpdateData, token: string): Promise<any> => {
+export const UploadUserProfile = async (user: UserUpdateData, token: string): Promise<any> => {
     console.log(user, token, "UploadUserProfile");
     const options = {
         method: "PUT",
@@ -482,6 +482,53 @@ export const UploadUserProfile = async(user:UserUpdateData, token: string): Prom
 
     try {
         const response = await fetch(`${ROOT}users/profile`, options);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+
+        return data;
+
+    } catch (error) {
+        return error;
+    }
+}
+
+export const BringAllUsers = async (token: string, criteria: string): Promise<any> => {
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+    };
+
+    try {
+        const response = await fetch(`${ROOT}users?email=${criteria}`, options);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+        console.log(data, "BringAllUsers");
+        return data;
+
+    } catch (error) {
+        return error;
+    }
+}
+
+export const DeleteUserById = async (token: string, userId: number): Promise<any> => {
+    console.log(token, userId, "DeleteUserById");
+    const options = {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+    };
+
+    try {
+        const response = await fetch(`${ROOT}users/${userId}`, options);
         const data = await response.json();
         if (!response.ok) {
             throw new Error(data.message);
