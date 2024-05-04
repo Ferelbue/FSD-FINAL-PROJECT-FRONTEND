@@ -426,11 +426,11 @@ const Header = () => {
                                                 <div className='searchOptions'>
                                                     {productsFetched?.success && productsFetched?.data?.length > 0 ? (
                                                         <div className="searchUsers">
-                                                            {productsFetched.data.slice(0, 4).map((product: any) => {
+                                                            {productsFetched.data.slice(0, 5).map((product: any) => {
                                                                 return (
                                                                     <div className="userSearched4" key={product.id}>
-                                                                        <div className="test3">
-                                                                            {product.name}
+                                                                        <div className="test3" onClick={() => handleDetail(product.id, product.owner.id)}>
+                                                                            {product.name.toUpperCase()}
                                                                         </div>
                                                                     </div>
                                                                 );
@@ -453,12 +453,12 @@ const Header = () => {
                                             </div>
                                         </div>
                                         <div>
-                                            {(rdxUser?.credentials).length === 0
-                                                ? (
-                                                    null
-                                                ) : (
-                                                    <>
-                                                        <div className="myNavBar3">
+                                            <div className="myNavBar3">
+                                                {(rdxUser?.credentials).length === 0
+                                                    ? (
+                                                        null
+                                                    ) : (
+                                                        <>
                                                             <div className="imagePlus" title="Upload product" onClick={() => navigate('/uploadProduct')} />
                                                             <div className="imageCuore" title="My favorites" onClick={() => navigate('/favorites')} />
                                                             {(rdxNotification.notification === true)
@@ -468,18 +468,18 @@ const Header = () => {
                                                                     <div className="imageChat" title="My chats" onClick={() => navigate('/chats')} />
                                                                 )
                                                             }
-                                                            <div className="imageUser" title="My profile" />
+                                                            <div className="imageUser" title="My profile" onClick={() => navigate('/profile')} />
                                                             <div className="imageExit" title="Log Out" onClick={() => handleLogout()} />
-                                                        </div>
-                                                    </>
-                                                )
-                                            }
+                                                        </>
+                                                    )
+                                                }
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <Navbar expand="lg" className="myNavBar0">
                                     <Container>
-                                        <NavDropdown title="Todas las categorias" id="basic-nav-dropdown" className="my-dropdown" >
+                                        <NavDropdown title="Todas las categorias" id="basic-nav-dropdown" className="my-dropdown">
 
                                             <div className="test">
                                                 <div className="myNavBar4">

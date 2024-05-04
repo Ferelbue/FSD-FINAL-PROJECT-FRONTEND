@@ -411,6 +411,33 @@
     align-items: center;
 }
 
+.imageAdminUsers {
+    width: 15em;
+    height: 15em;
+    margin-right: 0.5em;
+    margin-left: 0.5em;
+    background: url('../../../public/adminUsers.png') no-repeat center center / cover;
+    cursor: pointer;
+    margin-top: 0.4em !important;
+}
+
+.imageAdminUsers:hover {
+    background-image: url('../../../public/adminUsers.png');
+}
+.imageAdminProducts {
+    width: 15em;
+    height: 15em;
+    margin-right: 0.5em;
+    margin-left: 0.5em;
+    background: url('../../../public/adminProducts.png') no-repeat center center / cover;
+    cursor: pointer;
+    margin-top: 0.4em !important;
+}
+
+.imageAdminProducts:hover {
+    background-image: url('../../../public/adminProducts.png');
+}
+
 .carouselProducts3 {
     padding-left: 2em;
 
@@ -577,3 +604,15 @@
 .inputProfile1{
     width: 100%;
 }
+
+.adminAppGroup{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+/* 
+.imageUsers{
+    height: 30vh;
+    width: 15vw;
+} */

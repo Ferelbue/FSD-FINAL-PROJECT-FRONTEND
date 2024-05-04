@@ -33,6 +33,37 @@ export const BringProducts = async (criteria: string, pag: string, limit: string
     }
 };
 
+export const BringProductsNumber = async (): Promise<any> => {
+
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+    };
+
+    try {
+        const response: any = await fetch(`${ROOT}products/number`, options);
+
+        const dataRes = await response.json();
+        const data: DataFetched = {
+            success: true,
+            message: "Los datos han venido correctamente",
+            data: dataRes.data,
+        };
+        return data;
+    } catch (error) {
+        let answer: DataFetched = {
+            message: "Ha habido un error",
+            data: [],
+            success: false,
+        };
+
+        return answer;
+    }
+};
+
+
 export const LoginMe = async (credentials: LoginData): Promise<any> => {
     const options = {
         method: "POST",
@@ -469,7 +500,7 @@ export const BringUserProducts = async (token: string): Promise<any> => {
     }
 }
 
-export const UploadUserProfile = async(user:UserUpdateData, token: string): Promise<any> => {
+export const UploadUserProfile = async (user: UserUpdateData, token: string): Promise<any> => {
     console.log(user, token, "UploadUserProfile");
     const options = {
         method: "PUT",
@@ -482,6 +513,127 @@ export const UploadUserProfile = async(user:UserUpdateData, token: string): Prom
 
     try {
         const response = await fetch(`${ROOT}users/profile`, options);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+
+        return data;
+
+    } catch (error) {
+        return error;
+    }
+}
+
+export const BringAllUsers = async (token: string, criteria: string, page: number): Promise<any> => {
+    console.log(token, criteria, page, "BringAllUsers");
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+    };
+
+    try {
+        const response = await fetch(`${ROOT}users?email=${criteria}&limit=10&page=${page}`, options);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+        console.log(data, "BringAllUsers");
+        return data;
+
+    } catch (error) {
+        return error;
+    }
+}
+export const BringAllUsersNumber = async (token: string): Promise<any> => {
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+    };
+
+    try {
+        const response = await fetch(`${ROOT}users/number`, options);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+        console.log(data, "BringAllUsers");
+        return data;
+
+    } catch (error) {
+        return error;
+    }
+}
+
+export const DeleteUserById = async (token: string, userId: number): Promise<any> => {
+    console.log(token, userId, "DeleteUserById");
+    const options = {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+    };
+
+    try {
+        const response = await fetch(`${ROOT}users/${userId}`, options);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+
+        return data;
+
+    } catch (error) {
+        return error;
+    }
+}
+
+export const EditUserRole = async (token: string, userId: number, role: string): Promise<any> => {
+    console.log(token, userId, role, "EditUserRole");
+    const options = {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({
+            role: role,
+        })
+    };
+
+    try {
+        const response = await fetch(`${ROOT}users/${userId}/role`, options);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+
+        return data;
+
+    } catch (error) {
+        return error;
+    }
+}
+
+export const DeleteProductById = async (token: string, productId: number): Promise<any> => {
+    console.log(token, productId, "DeleteProductById");
+    const options = {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+    };
+
+    try {
+        const response = await fetch(`${ROOT}products/${productId}`, options);
         const data = await response.json();
         if (!response.ok) {
             throw new Error(data.message);

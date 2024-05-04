@@ -9,13 +9,15 @@ import { persistReducer } from 'redux-persist';
 import productDetailSlice from './slices/productDetailSlice';
 import notificationSlice from './slices/notificationSlice';
 import searchSlice from './slices/searchSlice';
+import search2Slice from './slices/search2Slice';
 
 const reducers:any = combineReducers({
     user: userSlice,
     category: categorySlice,
     productDetail: productDetailSlice,
     notification: notificationSlice,
-    search: searchSlice
+    search: searchSlice,
+    search2: search2Slice
 });
 
 
