@@ -174,7 +174,7 @@ export const AdminUsers: React.FC = () => {
                   <td>{user.city}</td>
                     <td>
                       <CInput3
-                        className={editRole[user.id] ? "inputProfile1" : "inputProfile2"}
+                        className={editRole[user.id] ? "inputProfile5" : "inputProfile6"}
                         type="text"
                         name="role"
                         placeholder="USER ADMIN SUPER-ADMIN"

@@ -163,7 +163,10 @@ export const Profile: React.FC = () => {
           <div className="iconsProfile">
             <div className="imageCloud" title="My uploads product" onClick={() => handleUploadProducts()} />
             <div className="imageReviews" title="My reviews" onClick={() => handleMyReviews()} />
-            <div className="imageSettings" title="Admin APP" onClick={() => handleAdmin()} />
+            {rdxUser.credentials.user.roleName !== "user"
+              ? <div className="imageSettings" title="Admin APP" onClick={() => handleAdmin()} />
+              : null
+            }
           </div>
         </div>
         <>

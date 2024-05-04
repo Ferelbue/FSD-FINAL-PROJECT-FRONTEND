@@ -64,13 +64,25 @@
     border-radius: 0.5em;
     border: 1px solid lightgrey;
     background-color: white;
-    color:black;
+    color: black;
     padding-left: 0.5em;
     margin-bottom: 0.5em;
 }
-.categoryTitle37{
+
+.categoryTitle37 {
     height: 5vh;
 }
-.pagination{
 
+.inputProfile6 {
+    background-color: white;
+    width: 10vw;
+    border: none;
+    color: black;
+    text-align: center;
+}
+
+.inputProfile5 {
+    width: 10vw;
+    background-color: rgb(73, 90, 94);
+    border-radius: 0.3em;
 }
