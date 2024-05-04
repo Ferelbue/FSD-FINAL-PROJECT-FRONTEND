@@ -86,3 +86,17 @@
     background-color: rgb(73, 90, 94);
     border-radius: 0.3em;
 }
+
+.pagination .page-item .page-link {
+    color: rgb(73, 90, 94);
+}
+
+.pagination .page-item:hover .page-link {
+    color: rgb(80, 132, 132);
+}
+
+.pagination .page-item .page-link:focus {
+    border: 1px solid rgb(80, 132, 132); /* Cambia esto al color que quieras */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15); /* Cambia esto a la sombra que quieras */
+    outline: none; /* Esto elimina el borde azul predeterminado que algunos navegadores agregan al elemento enfocado */
+  }

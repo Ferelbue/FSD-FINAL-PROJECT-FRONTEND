@@ -56,7 +56,7 @@ export const AdminProducts: React.FC = () => {
       console.log(fetched.data, "fetched");
 
       setProducts(fetched.data);
-      setMaxPag(Math.ceil(fetched2.data.length / 2))
+      setMaxPag(Math.ceil(fetched2.data.length / 10))
 
       if (error) {
         console.log(error, "error");
@@ -149,7 +149,6 @@ export const AdminProducts: React.FC = () => {
             </table>
           </div>
           <div className="pagination">
-
             <Pagination>
               <Pagination.Item onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>
                 Prev
@@ -162,7 +161,7 @@ export const AdminProducts: React.FC = () => {
           </div>
         </>
       ) : (
-        <div className="cardProduct33">Any user found...</div>
+        <div className="cardProduct33">Any product found...</div>
       )
       }
     </div >
