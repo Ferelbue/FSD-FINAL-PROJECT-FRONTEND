@@ -27,6 +27,15 @@ export interface CustomInputProps1 {
     value: string | undefined,
     onChange: (value: React.ChangeEvent<HTMLInputElement>) => void;
 }
+export interface CustomInputProps5 {
+    className: string,
+    type: string,
+    name: string,
+    placeholder: string,
+    value: string | undefined,
+    onChange: (value: React.ChangeEvent<HTMLInputElement>) => void,
+    onBlur: (value: React.ChangeEvent<HTMLInputElement>) => void;
+}
 
 export interface CustomInputProps2 {
     className: string,

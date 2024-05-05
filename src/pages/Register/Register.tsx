@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { decodeToken } from "react-jwt";
-import "./Login.css"
+import "./Register.css"
 import { DataFetched2, LoginData } from "../../interfaces";
 import { LoginMe, Notification } from "../../services/apiCalls";
 import { login } from "../../app/slices/userSlice";
@@ -11,7 +11,7 @@ import { updateNotification } from "../../app/slices/notificationSlice";
 import { CInput4 } from "../../common/CInput4/CInput4";
 import { validame } from "../../utils/functions";
 
-export const Login: React.FC = () => {
+export const Register: React.FC = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -75,7 +75,7 @@ export const Login: React.FC = () => {
       <div className="login">
         <div className="loginInputs">
           <div className="loginText">
-            Welcome back!
+            Fill the data
           </div>
           <CInput4
             className={`inputLogin ${userError.emailError !== "" ? "inputDesignError" : ""}`}

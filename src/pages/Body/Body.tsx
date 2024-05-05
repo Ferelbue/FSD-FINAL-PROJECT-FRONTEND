@@ -11,6 +11,7 @@ import { UploadProduct } from "../UploadProduct/UploadProduct";
 import { Profile } from "../Profile/Profile";
 import { AdminUsers } from "../AdminUsers/AdminUsers";
 import { AdminProducts } from "../AdminProducts/AdminProducts";
+import { Register } from "../Register/Register";
 
 
 export const Body: React.FC = () => {
@@ -20,6 +21,7 @@ export const Body: React.FC = () => {
         <Route path="*" element={<Navigate to="/" />} />
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/category" element={<Category />} />
         <Route path="/productDetail" element={<ProductDetail />} />
         <Route path="/conversation" element={<Conversation />} />
