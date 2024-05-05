@@ -122,7 +122,7 @@ const Header = () => {
                                                 {productsFetched.data.slice(0, 5).map((product: any) => {
                                                     return (
                                                         <div className="userSearched4" key={product.id}>
-                                                            <div className="test3">
+                                                            <div className="test3" onClick={() => handleDetail(product.id, product.owner.id)}>
                                                                 {product.name.toUpperCase()}
                                                             </div>
                                                         </div>

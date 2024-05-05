@@ -2,8 +2,8 @@
 import { useState } from "react";
 import { decodeToken } from "react-jwt";
 import "./Register.css"
-import { DataFetched2, LoginData } from "../../interfaces";
-import { LoginMe, Notification } from "../../services/apiCalls";
+import { DataFetched2, LoginData, RegisterData } from "../../interfaces";
+import { LoginMe, Notification, RegisterMe } from "../../services/apiCalls";
 import { login } from "../../app/slices/userSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -16,12 +16,18 @@ export const Register: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [credentials, setCredentials] = useState<LoginData>({
+  const [credentials, setCredentials] = useState<RegisterData>({
+    name: "",
+    lastName: "",
+    city: "",
     email: "",
     password: ""
   })
 
   const [userError, setUserError] = useState({
+    nameError: "",
+    lastNameError: "",
+    cityError: "",
     emailError: "",
     passwordError: "",
   });
@@ -44,39 +50,60 @@ export const Register: React.FC = () => {
 
   const logeame = async (): Promise<void> => {
 
-    const fetched = await LoginMe(credentials);
+    const fetched = await RegisterMe(credentials);
 
-    if (fetched.token) {
-      const decodificado = decodeToken(fetched.token);
+    console.log(fetched, "fetched")
 
-      const passport = {
-        token: fetched.token,
-        user: decodificado,
-      };
-      dispatch(login({ credentials: passport }));
+    navigate("/login")
 
-      const fetched2: DataFetched2 = await Notification(passport.token);
-      if (fetched2.data[0].length === 0 && fetched2.data[1].length === 0) {
-        dispatch(updateNotification({ notification: false }));
-      } else {
-        dispatch(updateNotification({ notification: true }));
-      }
-      navigate("/")
 
-    }
 
   }
 
   return (
     <>
       <div className="categoryTitle33">
-        LOGIN
+        REGISTER
       </div>
-      <div className="login">
-        <div className="loginInputs">
+      <div className="register">
+        <div className="loginInputs2">
           <div className="loginText">
             Fill the data
           </div>
+          <div className="titleInput">NAME</div>
+          <CInput4
+            className={`inputLogin ${userError.nameError !== "" ? "inputDesignError" : ""}`}
+            type={"text"}
+            name={"name"}
+            value={credentials.name || ""}
+            placeholder={"write your email..."}
+            onChange={inputHandler}
+            onBlur={checkError}
+          />
+          <div className="errorHeader">{userError.nameError}</div>
+          <div className="titleInput">LASTNAME</div>
+          <CInput4
+            className={`inputLogin ${userError.lastNameError !== "" ? "inputDesignError" : ""}`}
+            type={"text"}
+            name={"lastName"}
+            value={credentials.lastName || ""}
+            placeholder={"write your password..."}
+            onChange={inputHandler}
+            onBlur={checkError}
+          />
+          <div className="errorHeader">{userError.lastNameError}</div>
+          <div className="titleInput">CITY</div>
+          <CInput4
+            className={`inputLogin ${userError.cityError !== "" ? "inputDesignError" : ""}`}
+            type={"text"}
+            name={"city"}
+            value={credentials.city || ""}
+            placeholder={"write your password..."}
+            onChange={inputHandler}
+            onBlur={checkError}
+          />
+          <div className="errorHeader">{userError.cityError}</div>
+          <div className="titleInput">EMAIL</div>
           <CInput4
             className={`inputLogin ${userError.emailError !== "" ? "inputDesignError" : ""}`}
             type={"email"}
@@ -86,7 +113,8 @@ export const Register: React.FC = () => {
             onChange={inputHandler}
             onBlur={checkError}
           />
-          <div className="errorHeader">{userError.emailError}</div>
+          <div className="errorHeader">{userError.passwordError}</div>
+          <div className="titleInput">PASSWORD</div>
           <CInput4
             className={`inputLogin ${userError.passwordError !== "" ? "inputDesignError" : ""}`}
             type={"password"}
@@ -98,9 +126,6 @@ export const Register: React.FC = () => {
           />
           <div className="errorHeader">{userError.passwordError}</div>
           <button className="buttonLogin" onClick={logeame}>LOG ME!</button>
-          <div className="loginText2">
-            Not registered yet? <a href="/register">Register here</a>
-          </div>
         </div>
       </div>
     </>);

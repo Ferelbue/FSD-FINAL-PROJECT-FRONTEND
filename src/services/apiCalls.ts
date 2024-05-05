@@ -94,6 +94,36 @@ export const LoginMe = async (credentials: LoginData): Promise<any> => {
     }
 }
 
+export const RegisterMe = async (credentials: LoginData): Promise<any> => {
+    const options = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(credentials),
+    };
+
+    try {
+        const response: any = await fetch(`${ROOT}auth/register`, options);
+
+        const data: DataFetched = await response.json();
+
+        if (!data.success) {
+            throw new Error(data.message)
+        }
+
+        return data;
+    } catch (error: unknown) {
+        let answer: DataFetched = {
+            message: "",
+            data: [],
+            success: false,
+        };
+
+        return answer;
+    }
+}
+
 export const BringCategoryProducts = async (id: number): Promise<any> => {
     const options = {
         method: "GET",

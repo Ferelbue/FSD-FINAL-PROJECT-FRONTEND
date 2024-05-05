@@ -1,11 +1,12 @@
-.login{
+.register {
     margin-top: 24vh !important;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
-.categoryTitle33{
+
+.categoryTitle33 {
     margin-top: 24vh !important;
     background-color: rgb(73, 90, 94);
     color: white;
@@ -17,18 +18,20 @@
 }
 
 
-.loginInputs{
-    height: 25em;
+.loginInputs2 {
+    height: 40em;
     width: 20em;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 5em !important;
+    margin-top: 3.5em !important;
     background-color: white;
     border-radius: 0.5em;
+    margin-bottom: 1EM;
 }
-.inputLogin{
+
+.inputLogin {
     width: 80%;
     height: 3em;
     margin: 1.5em;
@@ -38,7 +41,8 @@
     border: 2px solid rgb(73, 90, 94);
     padding: 0.5em;
 }
-.buttonLogin{
+
+.buttonLogin {
     width: 50%;
     height: 2em;
     margin: 2em;
@@ -52,8 +56,8 @@
     align-items: center;
 }
 
-.buttonLogin:hover{
-    background-color: rgb(96,143,143);
+.buttonLogin:hover {
+    background-color: rgb(96, 143, 143);
     color: rgb(73, 90, 94);
     border: 2px solid rgb(73, 90, 94);
 }
@@ -65,12 +69,23 @@
     font-weight: bold;
     /* margin-left: 0.5em; */
     height: 1vh;
-  }
-  .inputDesignError{
+    margin-top: -1.3em;
+    margin-bottom: 1.5em;
+}
+
+.inputDesignError {
     border-color: red;
-  }
-  .loginText{
+}
+
+.loginText {
+    margin: 1em;
     font-size: 1.5em;
     font-weight: bold;
     color: rgb(73, 90, 94);
-  }
+}
+
+.titleInput {
+    font-weight: bold;
+    color: rgb(69,68,66);
+    margin-bottom: -1.7em;
+}
