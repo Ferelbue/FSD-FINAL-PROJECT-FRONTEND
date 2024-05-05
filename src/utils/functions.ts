@@ -1,4 +1,4 @@
-export const validame = (type:string, value:string) => {
+export const validame = (type: string, value: string) => {
   switch (type) {
     case "name":
     case "firstName":
@@ -52,6 +52,11 @@ export const validame = (type:string, value:string) => {
       if (value !== "user" && value !== "admin") {
         return "Incorrect role";
       }
+
+      return "";
+
+    case "city":
+    case "ciudad":
 
       return "";
 

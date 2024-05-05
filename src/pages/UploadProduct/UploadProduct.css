@@ -28,7 +28,7 @@
 }
 
 .cardProduct2 {
-    width: 85vw;
+    width: 65vw;
     min-height: 80vh !important;
     height: auto;
     margin: 0.5em;
@@ -51,7 +51,8 @@
 
 .cardTitle22 {
     height: 11vh;
-    width: 80vw;
+    width: 50vw;
+    margin-left: 15vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -84,7 +85,8 @@
 }
 
 .descriptionCard22 {
-    width: 80vw;
+    width: 50vw;
+    margin-left: 15vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -227,10 +229,10 @@
 
 }
 
-.inputConversation2{
-    width: 50vw;
+.inputConversation2 {
+    width: 40vw !important;
     height: 15vh;
-    resize:none;
+    resize: none;
     background-color: white;
     color: black;
     border-radius: 0.5em;
@@ -325,6 +327,7 @@
     font-size: 1.5em;
     font-weight: bold;
 }
+
 .titleUpload2 {
     height: 8vh;
     display: flex;
@@ -334,6 +337,7 @@
     font-weight: bold;
     margin: 0.5em;
 }
+
 .titleUpload3 {
     height: 8vh;
     display: flex;
@@ -343,6 +347,7 @@
     font-weight: bold;
     margin-bottom: 0.3em;
 }
+
 .titleUpload4 {
     display: flex;
     justify-content: center;
@@ -351,6 +356,7 @@
     font-weight: bold;
     margin-bottom: 0.3em;
 }
+
 .titleUpload5 {
     display: flex;
     justify-content: center;
@@ -370,14 +376,17 @@
     font-weight: bold;
     background-color: rgb(96, 143, 143);
 }
-.custom-file-upload:hover{
+
+.custom-file-upload:hover {
     background-color: rgb(73, 90, 94);
 }
-.imageGroup{
+
+.imageGroup {
     width: 80vw;
     height: 68vh;
     border-bottom: 2px solid rgb(224, 229, 230);
 }
+
 .inputConversation2 {
     width: 50vw;
     height: 5vh;
@@ -388,8 +397,9 @@
     border-style: solid;
     border-color: black;
 }
+
 .inputConversation22 {
-    width: 50vw;
+    width: 40vw;
     height: 15vh;
     resize: none;
     background-color: white;
@@ -398,4 +408,21 @@
     border-width: 0.1em;
     border-style: solid;
     border-color: black;
+}
+
+@media (max-width: 600px) {
+    .imageGroup {
+        width: 90vw;
+        height: 50vh;
+    }
+
+    .inputConversation2 {
+        width: 80vw;
+        height: 10vh;
+    }
+
+    .inputConversation22 {
+        width: 80vw;
+        height: 20vh;
+    }
 }
