@@ -30,7 +30,7 @@
     position: relative;
 }
 .cardProduct6 {
-    width: 85vw;
+    width: 65vw !important;
     min-height: 80vh !important;
     height: auto;
     margin: 0.5em;
@@ -40,11 +40,12 @@
     background-color: white !important;
     padding: 0;
     padding-bottom: 3em;
+    position: relative;
 
 }
 
 .cardProduct3 {
-    width: 85vw;
+    width: 65vw !important;
     height: 25vh !important;
     margin: 0.5em;
     display: flex;
@@ -55,25 +56,39 @@
     padding: 0;
 }
 
-.imageProductCard3 {
+.imageProductCard5 {
     height: 20vh;
     width: 20vw !important;
     border-radius: 0.5em;
-    margin-left: 0.5em;
+    margin-left: 10em;
 }
 
 .cardTitle3 {
     text-decoration: underline;
-    height: 5vh;
+    height: 2vh !important;
+    width: 10vw;
     display: flex;
     justify-content: center;
     align-items: center;
 
 }
+.cardTitle33{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.cardTitle34{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
 
 .cardPrice3 {
     font-size: 1.3em;
-    height: 10vh;
+    width: 45vw;
+    height: 8vh !important;
     font-weight: bold;
     margin-bottom: 0.5em;
     display: flex;
@@ -88,7 +103,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 45vw;
+    width: 25vw;
     font-size: 1.2em;
 }
 
@@ -110,13 +125,15 @@
     background-color: rgb(95, 118, 118);
 }
 .startCard3 {
-    width: 60vw;
+    width: 10vw !important;
+    height: 2vh !important;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    font-size: 1.7em;
+    font-size: 1em !important;
     padding-left: 0.5em;
+    text-decoration: none !important;
 }
 
 .descriptionCard3 {
@@ -288,7 +305,14 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 1em;
-    margin-top: 1em;
+    margin-top: 1em !important;
+    position: absolute;
+    top:0;
+    left: 7.5vw;
+
+}
+.messagesGroup{
+    margin-top: 9vh;
 }
 .sendMesssage{
     width: 10vw;
@@ -304,4 +328,11 @@
     align-items: center;
     color: white;
     cursor: pointer;
+}
+.dealCard3{
+    width: 50vw;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

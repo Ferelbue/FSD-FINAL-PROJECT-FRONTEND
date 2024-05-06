@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { updateNotification } from "../../app/slices/notificationSlice";
 import { ROOT2 } from "../../services/apiCalls"
+import dayjs from "dayjs";
 
 export const Chats: React.FC = () => {
   const [chats, setChats] = useState<any>();
@@ -55,14 +56,16 @@ export const Chats: React.FC = () => {
                 {chats.map((chat: any, index: number) => {
                   if (chat.userOwner.id === rdxUser.credentials.user.userId) {
                     if (!mappedUserIds.has(chat.userUser.id)) {
-                      // mappedProductIds.add(chat.product.id);
                       mappedUserIds.add(chat.userUser.id);
                       return (
                         <Card key={index} className="cardProduct31" onClick={() => handleConversation(chat.product.id, chat.userUser.id)}>
-                          <Card.Img className="imageProductCard3" src={`${ROOT2}uploads/${chat.product.image}`} />
-                          <Card.Text>&nbsp;&nbsp;VENDO</Card.Text>
+                          <Card.Img className="imageProductCard4" src={`${ROOT2}uploads/${chat.product.image}`} />
                           <Card.Body>
-                            <Card.Title className="cardTitle3">{chat.product.name.toUpperCase()}&nbsp;&nbsp;{chat.userUser.name.toUpperCase()}</Card.Title>
+                            <Card.Title className="cardTitle31">VENDO A&nbsp;{chat.userUser.name.toUpperCase()}</Card.Title>
+                            <Card.Title className="cardTitle32">{chat.product.name.toUpperCase()}</Card.Title>
+                            <div className="timeChat">
+                              <Card.Text className="cardText31">Ultimo mensaje:&nbsp;{dayjs(chat.updated_at).format('YYYY-MM-DD HH:mm')}</Card.Text>
+                            </div>
                           </Card.Body>
                         </Card>
                       );
@@ -71,12 +74,14 @@ export const Chats: React.FC = () => {
                     if (!mappedProductIds.has(chat.product.id)) {
                       mappedProductIds.add(chat.product.id);
                       return (
-
                         <Card key={index} className="cardProduct32" onClick={() => handleConversation(chat.product.id, chat.userUser.id)}>
-                          <Card.Img className="imageProductCard3" src={`${ROOT2}uploads/${chat.product.image}`} />
-                          <Card.Text>&nbsp;&nbsp;COMPRO</Card.Text>
+                          <Card.Img className="imageProductCard4" src={`${ROOT2}uploads/${chat.product.image}`} />
                           <Card.Body>
-                            <Card.Title className="cardTitle3">{chat.product.name.toUpperCase()}&nbsp;&nbsp;{chat.userOwner.name.toUpperCase()}</Card.Title>
+                            <Card.Title className="cardTitle31">COMPRO A&nbsp;{chat.userOwner.name.toUpperCase()}</Card.Title>
+                            <Card.Title className="cardTitle32">{chat.product.name.toUpperCase()}</Card.Title>
+                            <div className="timeChat">
+                              <Card.Text className="cardText31">Ultimo mensaje:&nbsp;{dayjs(chat.updated_at).format('YYYY-MM-DD HH:mm')}</Card.Text>
+                            </div>
                           </Card.Body>
                         </Card>
                       );
