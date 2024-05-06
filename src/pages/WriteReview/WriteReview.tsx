@@ -56,11 +56,11 @@ export const WriteReview: React.FC = () => {
       notiMe();
     }
     bringData();
-  }, [rdxProductDetail,stars]);
+  }, [rdxProductDetail, stars]);
 
 
   const handleSendReview = async () => {
-    const fetched5: DataFetched2 = await productReview(rdxProductDetail.productDetail.productId, rdxUser.credentials.token, message.text,stars.stars);
+    const fetched5: DataFetched2 = await productReview(rdxProductDetail.productDetail.productId, rdxUser.credentials.token, message.text, stars.stars);
     setSendReview(fetched5.data);
     console.log(fetched5.data)
     console.log(sendReview, "sendReview")
@@ -71,31 +71,38 @@ export const WriteReview: React.FC = () => {
   const handleStar = (star: number) => {
     setStars({ stars: star });
   }
-    
+
 
   return (
     <div className="conversation">
       {product ? (
         <>
           <Card className="cardProduct3">
-            <Card.Img className="imageProductCard3" src={`${ROOT2}uploads/${product.image}`} />
+            <Card.Img className="imageProductCard5" src={`${ROOT2}uploads/${product.image}`} />
             <Card.Body>
-              <Card.Title className="cardTitle3">{product.name.toUpperCase()}&nbsp;&nbsp; {product.owner.name}</Card.Title>
+              <Card.Title className="cardTitle33">
+                <div className="cardTitle3">
+                  {product.name.toUpperCase()}
+                </div>
+                <div className="cardTitle34">
+                  {product.owner.name} -
+                </div>
+                <div className="startCard3">
+                  {product.starts === 0 ? <div className="productStart0"></div> : null}
+                  {product.starts === 1 ? <div className="productStart1"></div> : null}
+                  {product.starts === 2 ? <div className="productStart2"></div> : null}
+                  {product.starts === 3 ? <div className="productStart3"></div> : null}
+                  {product.starts === 4 ? <div className="productStart4"></div> : null}
+                  {product.starts === 5 ? <div className="productStart5"></div> : null}
+                  ({product.reviews.length})
+                </div>
+              </Card.Title>
               <div className="cardPrice3">
                 <div className="prices">
                   {product.hourPrice}€/hora &nbsp;&nbsp; {product.dayPrice}€/día &nbsp;&nbsp; {product.depositPrice}€/fianza
                 </div>
               </div>
 
-              <div className="startCard3">
-                {product.starts === 0 ? <div className="productStart0"></div> : null}
-                {product.starts === 1 ? <div className="productStart1"></div> : null}
-                {product.starts === 2 ? <div className="productStart2"></div> : null}
-                {product.starts === 3 ? <div className="productStart3"></div> : null}
-                {product.starts === 4 ? <div className="productStart4"></div> : null}
-                {product.starts === 5 ? <div className="productStart5"></div> : null}
-                ({product.reviews.length})
-              </div>
             </Card.Body>
           </Card>
           <div className="categoryProducts2">
@@ -116,15 +123,15 @@ export const WriteReview: React.FC = () => {
                         {stars.stars === ""
                           ? "STARS"
                           : (stars.stars)
-                      }
+                        }
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu className="dropdownStar2">
-                        <Dropdown.Item href="#/action-1" onClick={()=>handleStar(1)}>1</Dropdown.Item>
-                        <Dropdown.Item href="#/action-2" onClick={()=>handleStar(2)}>2</Dropdown.Item>
-                        <Dropdown.Item href="#/action-3" onClick={()=>handleStar(3)}>3</Dropdown.Item>
-                        <Dropdown.Item href="#/action-3" onClick={()=>handleStar(4)}>4</Dropdown.Item>
-                        <Dropdown.Item href="#/action-3" onClick={()=>handleStar(5)}>5</Dropdown.Item>
+                        <Dropdown.Item href="#/action-1" onClick={() => handleStar(1)}>1</Dropdown.Item>
+                        <Dropdown.Item href="#/action-2" onClick={() => handleStar(2)}>2</Dropdown.Item>
+                        <Dropdown.Item href="#/action-3" onClick={() => handleStar(3)}>3</Dropdown.Item>
+                        <Dropdown.Item href="#/action-3" onClick={() => handleStar(4)}>4</Dropdown.Item>
+                        <Dropdown.Item href="#/action-3" onClick={() => handleStar(5)}>5</Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
                   </div>

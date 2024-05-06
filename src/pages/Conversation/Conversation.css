@@ -12,6 +12,7 @@
     color: black;
     margin-top: 24vh !important;
 }
+
 .conversation::-webkit-scrollbar {
     width: 0.5px;
 }
@@ -29,6 +30,7 @@
 .categoryProducts2 {
     position: relative;
 }
+
 .cardProduct6 {
     width: 65vw !important;
     min-height: 80vh !important;
@@ -52,7 +54,7 @@
     flex-direction: row !important;
     justify-content: center;
     align-items: center;
-    background-color: white!important;
+    background-color: white !important;
     padding: 0;
 }
 
@@ -65,20 +67,23 @@
 
 .cardTitle3 {
     text-decoration: underline;
-    height: 2vh !important;
+    height: 6vh !important;
     width: 10vw;
+    margin-right: 3vw;
     display: flex;
     justify-content: center;
     align-items: center;
 
 }
-.cardTitle33{
+
+.cardTitle33 {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
-.cardTitle34{
+
+.cardTitle34 {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -98,7 +103,7 @@
     border-top: 1px solid lightgray;
 }
 
-.prices{
+.prices {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -107,13 +112,13 @@
     font-size: 1.2em;
 }
 
-.dealFinished{
+.dealFinished {
     width: 15vw;
     height: 5vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(66,71,76);
+    background-color: rgb(66, 71, 76);
     color: white;
     font-size: 1em;
     font-weight: bold;
@@ -121,9 +126,10 @@
     cursor: pointer;
 }
 
-.dealFinished:hover{
+.dealFinished:hover {
     background-color: rgb(95, 118, 118);
 }
+
 .startCard3 {
     width: 10vw !important;
     height: 2vh !important;
@@ -232,7 +238,8 @@
     background: url('../../../public/chat.png') no-repeat center center / cover;
 
 }
-.conversationCard{
+
+.conversationCard {
     position: absolute;
     z-index: 10;
     top: 80vh;
@@ -247,7 +254,7 @@
     cursor: pointer;
 }
 
-.messageConversation1{
+.messageConversation1 {
     width: 50vw;
     height: auto;
     display: flex;
@@ -259,7 +266,8 @@
     padding-left: 1.3em;
     background-color: rgb(185, 217, 217) !important;
 }
-.messageConversation2{
+
+.messageConversation2 {
     width: 50vw;
     height: auto;
     display: flex;
@@ -269,27 +277,30 @@
     border-radius: 0.5em;
     margin-bottom: 0.5em;
     padding-left: 1.3em;
-    background-color: rgb(142, 163, 163)!important;
+    background-color: rgb(142, 163, 163) !important;
 }
 
-.messageTitle{
+.messageTitle {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
-.titleCard2{
+
+.titleCard2 {
     font-size: small !important;
     margin-left: 0.5em;
 }
-.titleCard3{
+
+.titleCard3 {
     font-size: small !important;
     margin-right: 0.5em;
 }
-.inputConversation{
+
+.inputConversation {
     width: 50vw;
     height: 15vh;
-    resize:none;
+    resize: none;
     background-color: white;
     color: black;
     border-radius: 0.5em;
@@ -297,7 +308,8 @@
     border-style: solid;
     border-color: black;
 }
-.messageGroup{
+
+.messageGroup {
     width: 50vw;
     height: 15vh;
     display: flex;
@@ -307,21 +319,23 @@
     margin-bottom: 1em;
     margin-top: 1em !important;
     position: absolute;
-    top:0;
+    top: 0;
     left: 7.5vw;
 
 }
-.messagesGroup{
+
+.messagesGroup {
     margin-top: 9vh;
 }
-.sendMesssage{
+
+.sendMesssage {
     width: 10vw;
     height: 5vh;
     z-index: 10;
     margin-left: 39vw;
     margin-top: 8vh;
     position: absolute;
-    background-color: rgb(66,71,76);
+    background-color: rgb(66, 71, 76);
     border-radius: 0.5em;
     display: flex;
     justify-content: center;
@@ -329,7 +343,8 @@
     color: white;
     cursor: pointer;
 }
-.dealCard3{
+
+.dealCard3 {
     width: 50vw;
     height: 5vh;
     display: flex;
@@ -338,10 +353,11 @@
 }
 
 @media (max-width: 600px) {
-    .cardProduct3{
+    .cardProduct3 {
         width: 90vw !important;
     }
-    .cardPrice3{
+
+    .cardPrice3 {
         width: 60vw;
         display: flex;
         justify-content: start !important;
@@ -349,56 +365,68 @@
         padding-left: 1em;
         margin-right: 40vw;
     }
-    .cardTitle33{
+
+    .cardTitle33 {
         width: 60vw;
         font-size: 0.8em !important;
     }
-    .cardTitle34{
+
+    .cardTitle34 {
         width: 25vw;
         font-size: 1em !important;
         display: flex;
         justify-content: end;
     }
-    .cardTitle3{
+
+    .cardTitle3 {
         width: 20vw;
         font-size: 1em !important;
     }
-    .startCard3{
+
+    .startCard3 {
         width: 20vw !important;
     }
-    .dealFinished{
+
+    .dealFinished {
         width: 30vw !important;
         height: 5vh !important;
         font-size: 0.65em !important;
     }
-    .cardProduct6{
+
+    .cardProduct6 {
         width: 90vw !important;
         margin-top: 0em !important;
     }
-    .messageGroup{
+
+    .messageGroup {
         width: 85vw !important;
         left: 2vw;
     }
-    .inputConversation{
+
+    .inputConversation {
         width: 90vw !important;
     }
-    .sendMesssage{
+
+    .sendMesssage {
         width: 20vw !important;
         height: 5vh;
         z-index: 10;
         margin-left: 60vw !important;
         margin-top: 8vh;
     }
+
     .messageConversation2,
-    .messageConversation1{
+    .messageConversation1 {
         width: 85vw !important;
         font-size: small !important;
 
     }
-    .messagesGroup{
+
+    .messagesGroup {
         margin-top: 19vh;
     }
-    .descriptionCard{
+
+    .descriptionCard {
         display: flex !important;
         justify-content: end !important;
         align-items: end !important;

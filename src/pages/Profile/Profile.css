@@ -382,6 +382,7 @@
 .imagePencil:hover {
     background-image: url('../../../public/pencil.png');
 }
+
 .imageImage {
     width: 1.5em;
     height: 1.5em;
@@ -395,6 +396,7 @@
 .imageImage:hover {
     background-image: url('../../../public/image.png');
 }
+
 .imageTick {
     width: 1.5em;
     height: 1.5em;
@@ -412,8 +414,8 @@
 }
 
 .imageAdminUsers {
-    width: 15em;
-    height: 15em;
+    width: 20vw;
+    height: 30vh;
     margin-right: 0.5em;
     margin-left: 0.5em;
     background: url('../../../public/adminUsers.png') no-repeat center center / cover;
@@ -424,9 +426,10 @@
 .imageAdminUsers:hover {
     background-image: url('../../../public/adminUsers.png');
 }
+
 .imageAdminProducts {
-    width: 15em;
-    height: 15em;
+    width: 20vw;
+    height: 30vh;
     margin-right: 0.5em;
     margin-left: 0.5em;
     background: url('../../../public/adminProducts.png') no-repeat center center / cover;
@@ -487,6 +490,7 @@
     border-left: 1px solid lightgray;
     width: 40%;
 }
+
 .imageSettings {
     width: 0.9em;
     height: 0.9em;
@@ -495,14 +499,15 @@
     background: url('../../../public/settings2.png') no-repeat center center / cover;
     cursor: pointer;
 }
-.imageUserProfile{
+
+.imageUserProfile {
     /* width: 25vw !important; */
     height: 15vh !important;
     margin-top: 1em;
     margin-bottom: 1em;
 }
 
-.starsProfile{
+.starsProfile {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -510,23 +515,26 @@
     margin-left: 1em;
 }
 
-.nameProfile{
+.nameProfile {
     font-size: 3vh;
     font-weight: bold;
     margin: 0.2em;
 }
-.cityProfile{
+
+.cityProfile {
     font-size: 2vh;
     font-weight: bold;
     margin: 0.3em;
 }
-.starsProfile{
+
+.starsProfile {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
-.textProfile{
+
+.textProfile {
     font-size: 2vh;
     font-weight: bold;
     margin: 0.3em;
@@ -538,46 +546,53 @@
     margin-right: 0.3em;
     background: url('../../../public/0start.png') no-repeat center center / contain;
 }
+
 .productStart11 {
     width: 13vw;
     height: 4vh;
     margin-right: 0.3em;
     background: url('../../../public/1start.png') no-repeat center center / contain;
 }
+
 .productStart21 {
     width: 13vw;
     height: 4vh;
     margin-right: 0.3em;
     background: url('../../../public/2start.png') no-repeat center center / contain;
 }
+
 .productStart31 {
     width: 13vw;
     height: 4vh;
     margin-right: 0.3em;
     background: url('../../../public/3start.png') no-repeat center center / contain;
 }
+
 .productStart41 {
     width: 15vw;
     height: 5vh;
     margin-right: 0.3em;
     background: url('../../../public/4start.png') no-repeat center center / contain;
 }
+
 .productStart51 {
     width: 13vw;
     height: 4vh;
     margin-right: 0.3em;
     background: url('../../../public/5start.png') no-repeat center center / contain;
 }
-.editIcon{
+
+.editIcon {
     width: 100%;
     height: 3vh;
     display: flex;
     justify-content: end;
     align-items: center;
 }
-.inputProfile2{
+
+.inputProfile2 {
     width: 100%;
-    height: 3vh;
+    height: 4.5vh;
     display: flex;
     justify-content: start;
     align-items: center;
@@ -588,7 +603,8 @@
     font-weight: bold;
     margin: 0.2em;
 }
-.inputProfile3{
+
+.inputProfile3 {
     width: 18vw;
     height: 3vh;
     display: flex;
@@ -601,18 +617,29 @@
     font-weight: bold;
     margin: 0.4em;
 }
-.inputProfile1{
+
+.inputProfile1 {
     width: 100%;
 }
 
-.adminAppGroup{
+.adminAppGroup {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
-/* 
-.imageUsers{
-    height: 30vh;
-    width: 15vw;
-} */
+
+@media screen and (max-width: 600px) {
+    .imageAdminUsers {
+        width: 40vw;
+        height: 20vh;
+    }
+
+    .imageAdminProducts {
+        width: 40vw;
+        height: 20vh;
+    }
+}
+.cardProduct312{
+    margin-top: 20vh;
+}

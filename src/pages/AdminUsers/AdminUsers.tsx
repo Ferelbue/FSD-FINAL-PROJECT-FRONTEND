@@ -76,7 +76,7 @@ export const AdminUsers: React.FC = () => {
       console.log(fetched.data, "fetched");
 
       setUsers(fetched.data);
-      setMaxPag(Math.ceil(fetched2.data.length / 2))
+      setMaxPag(Math.ceil(fetched2.data.length / 10))
 
       if (error) {
         console.log(error, "error");

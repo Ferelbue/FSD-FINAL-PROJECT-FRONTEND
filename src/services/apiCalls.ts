@@ -1,7 +1,7 @@
 import { DataFetched, LoginData, UserUpdateData } from "../interfaces";
 
-export const ROOT: string = "http://localhost:4000/api/";
-export const ROOT2: string = "http://localhost:4000/";
+export const ROOT: string = "https://fsd-final-project-backend-production.up.railway.app/api/";
+export const ROOT2: string = "https://fsd-final-project-backend-production.up.railway.app/";
 
 export const BringProducts = async (criteria: string, pag: string, limit: string): Promise<any> => {
 
@@ -95,6 +95,7 @@ export const LoginMe = async (credentials: LoginData): Promise<any> => {
 }
 
 export const RegisterMe = async (credentials: LoginData): Promise<any> => {
+    console.log(credentials, "RegisterMe");
     const options = {
         method: "POST",
         headers: {

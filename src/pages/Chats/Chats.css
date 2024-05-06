@@ -25,6 +25,7 @@
     font-weight: bold;
     position: fixed !important;
     z-index: 1;
+    margin-left: -19vw;
 }
 
 .categoryProducts2 {
@@ -32,16 +33,17 @@
 }
 
 .cardProduct4 {
-    width: 100vw;
-    min-height: 80vh !important;
+    width: 65vw;
+    /* min-height: 80vh !important; */
     height: auto;
 
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 0;
-    padding-bottom: 3em;
-    top: 7vh;
+    padding-top: 1em;
+    padding-bottom: 2vw;
+    top: 20vh;
 }
 
 .cardProduct31 {
@@ -352,7 +354,8 @@
 
     .cardProduct4{
         width: 90vw;
-        margin-top: 1em;
+        margin-top: 0.5em;
+        margin-left: 4.5vw;
     }
     .categoryTitle4{
         margin-left: -5vw;
@@ -363,7 +366,7 @@
     }
 
     .cardTitle32{
-        height: 6¡7vh;
+        height: 6vh;
     }
     .cardTitle31,
     .cardTitle32{
@@ -376,5 +379,56 @@
         width: 22vw !important;
     }
 
+    .categoryTitle351,
+    .categoryTitle312{
+        margin-left: -2.7vw !important;
+    }
 
+}
+
+.categoryTitle312 {
+    background-color: rgb(73, 90, 94);
+    color: white;
+    width: 100vw;
+    height: 12vh;
+    font-size: 4vh;
+    font-weight: bold;
+    position: fixed;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: -17.5vw;
+}
+.categoryTitle351 {
+    background-color: rgb(73, 90, 94);
+    color: white;
+    width: 100vw;
+    height: 6vh;
+    font-size: 3vh;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 12vh;
+    position: fixed;
+    z-index: 10;
+    margin-left: -17.5vw;
+    border-top: 1px solid lightgray;
+}
+.imageBuying {
+    width: 1.3em;
+    height: 1.3em;
+    margin-right: 0.3em;
+    background: url('../../../public/buying.png') no-repeat center center / cover;
+    cursor: pointer;
+}
+.imageSelling {
+    width: 1.3em;
+    height: 1.3em;
+    margin-right: 0.3em;
+    background: url('../../../public/selling.png') no-repeat center center / cover;
+    cursor: pointer;
 }
