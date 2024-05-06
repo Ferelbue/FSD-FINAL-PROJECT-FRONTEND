@@ -336,3 +336,71 @@
     justify-content: center;
     align-items: center;
 }
+
+@media (max-width: 600px) {
+    .cardProduct3{
+        width: 90vw !important;
+    }
+    .cardPrice3{
+        width: 60vw;
+        display: flex;
+        justify-content: start !important;
+        font-size: 0.7em !important;
+        padding-left: 1em;
+        margin-right: 40vw;
+    }
+    .cardTitle33{
+        width: 60vw;
+        font-size: 0.8em !important;
+    }
+    .cardTitle34{
+        width: 25vw;
+        font-size: 1em !important;
+        display: flex;
+        justify-content: end;
+    }
+    .cardTitle3{
+        width: 20vw;
+        font-size: 1em !important;
+    }
+    .startCard3{
+        width: 20vw !important;
+    }
+    .dealFinished{
+        width: 30vw !important;
+        height: 5vh !important;
+        font-size: 0.65em !important;
+    }
+    .cardProduct6{
+        width: 90vw !important;
+        margin-top: 0em !important;
+    }
+    .messageGroup{
+        width: 85vw !important;
+        left: 2vw;
+    }
+    .inputConversation{
+        width: 90vw !important;
+    }
+    .sendMesssage{
+        width: 20vw !important;
+        height: 5vh;
+        z-index: 10;
+        margin-left: 60vw !important;
+        margin-top: 8vh;
+    }
+    .messageConversation2,
+    .messageConversation1{
+        width: 85vw !important;
+        font-size: small !important;
+
+    }
+    .messagesGroup{
+        margin-top: 19vh;
+    }
+    .descriptionCard{
+        display: flex !important;
+        justify-content: end !important;
+        align-items: end !important;
+    }
+}
