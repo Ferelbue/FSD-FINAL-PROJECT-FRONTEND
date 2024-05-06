@@ -52,11 +52,12 @@
 .cardTitle22 {
     height: 11vh;
     width: 50vw;
-    margin-left: 15vw;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 2em !important;
     padding-bottom: 2em;
     border-bottom: 1px solid lightgray;
 }
@@ -86,7 +87,6 @@
 
 .descriptionCard22 {
     width: 50vw;
-    margin-left: 15vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -303,8 +303,8 @@
 
 .dropdownStar3 {
     z-index: 100;
-    width: 50vw !important;
-    height: 5vh !important;
+    width: 40vw !important;
+    height: 2.2em !important;
     color: black !important;
     font-weight: bold !important;
     background-color: white !important;
@@ -313,10 +313,8 @@
 }
 
 .dropdownStar33 {
-    z-index: 100;
-    width: 50vw !important;
+    width: 40vw !important;
     height: auto;
-    background-color: tomato;
 }
 
 .titleUpload {
@@ -382,9 +380,9 @@
 }
 
 .imageGroup {
-    width: 80vw;
+    width: 50vw;
     height: 68vh;
-    border-bottom: 2px solid rgb(224, 229, 230);
+    margin-left: 1vw;
 }
 
 .inputConversation2 {
@@ -411,18 +409,49 @@
 }
 
 @media (max-width: 600px) {
-    .imageGroup {
+    .cardProduct2 {
         width: 90vw;
-        height: 50vh;
+        min-height: 80vh !important;
+        height: auto;
+    }
+
+    .cardTitle22 {
+        width: 90vw;
+
     }
 
     .inputConversation2 {
-        width: 80vw;
-        height: 10vh;
+        width: 80vw !important;
+        height: 7vh;
+    }
+
+    .descriptionCard22 {
+        width: 90vw;
     }
 
     .inputConversation22 {
         width: 80vw;
         height: 20vh;
+    }
+    .dropdownStar3{
+        width: 80vw !important;
+    }
+    .dropdownStar33{
+        width: 80vw !important;
+    }
+    .imageGroup{
+        width: 90vw;
+    }
+    .imageProductCard22{
+        width: 80vw !important;
+    }
+    .pricesUpload{
+        font-size: small;
+    }
+    .inputConversation3{
+        width: 12vw;
+    }
+    .buttonLogin2{
+        width: 20vw;
     }
 }
