@@ -3,7 +3,7 @@ import { BringProducts, Notification } from "../../services/apiCalls";
 import { DataFetched, DataFetched2 } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./Home.css";
-import { Card, Carousel, Spinner } from "react-bootstrap";
+import { Card, Carousel} from "react-bootstrap";
 import { updateNotification } from "../../app/slices/notificationSlice";
 import { useDispatch } from "react-redux";
 import { userData, userout } from "../../app/slices/userSlice";
@@ -52,6 +52,7 @@ export const Home: React.FC = () => {
       } else {
         setError(fetched.message);
       }
+      console.log(error, "error")
     };
 
     if (!firstFetch) {
