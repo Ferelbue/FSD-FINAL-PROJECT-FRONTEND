@@ -3,7 +3,6 @@ import { AddToFavorites, BringFavoriteUserProduct, BringProductDetail } from "..
 import { DataFetched2 } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./ProductDetail.css";
-
 import { useSelector } from "react-redux";
 import { userData } from "../../app/slices/userSlice";
 import { Card } from "react-bootstrap";

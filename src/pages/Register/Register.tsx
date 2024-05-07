@@ -1,19 +1,14 @@
 
 import { useState } from "react";
-import { decodeToken } from "react-jwt";
 import "./Register.css"
-import { DataFetched2, LoginData, RegisterData } from "../../interfaces";
-import { LoginMe, Notification, RegisterMe } from "../../services/apiCalls";
-import { login } from "../../app/slices/userSlice";
-import { useDispatch } from "react-redux";
+import {  RegisterData } from "../../interfaces";
+import { RegisterMe } from "../../services/apiCalls";
 import { useNavigate } from "react-router-dom";
-import { updateNotification } from "../../app/slices/notificationSlice";
 import { CInput4 } from "../../common/CInput4/CInput4";
 import { validame } from "../../utils/functions";
 
 export const Register: React.FC = () => {
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [credentials, setCredentials] = useState<RegisterData>({
