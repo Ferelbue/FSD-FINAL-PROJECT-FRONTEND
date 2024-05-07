@@ -3,7 +3,7 @@ import { BringProducts, Notification } from "../../services/apiCalls";
 import { DataFetched, DataFetched2 } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./Home.css";
-import { Card, Carousel } from "react-bootstrap";
+import { Card, Carousel, Spinner } from "react-bootstrap";
 import { updateNotification } from "../../app/slices/notificationSlice";
 import { useDispatch } from "react-redux";
 import { userData, userout } from "../../app/slices/userSlice";
@@ -69,7 +69,11 @@ export const Home: React.FC = () => {
   return (
     <div className="home">
       {products && products.length === 0 ? (
-        <div>{error}</div>
+        <div className="spinnerCenter2">
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden"></span>
+          </div>
+        </div>
       ) : (
         <div>
           {Array.from({ length: 13 }).map((_, i) => {

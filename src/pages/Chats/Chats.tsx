@@ -18,6 +18,7 @@ export const Chats: React.FC = () => {
   const [buying, setBuying] = useState<boolean>(true);
   const [buyingNoti, setBuyingNoti] = useState<boolean>(false);
   const [selling, setSelling] = useState<boolean>(false);
+  const [showNoFavorites, setShowNoFavorites] = useState(false);
   const [sellingNoti, setSellingNoti] = useState<boolean>(false);
   const rdxProductDetail = useSelector(productDetailData);
   const rdxUser = useSelector(userData);
@@ -33,6 +34,15 @@ export const Chats: React.FC = () => {
     }
   }
   notiMe();
+
+  useEffect(() => {
+    if (!chats) {
+      setTimeout(() => {
+        setShowNoFavorites(true);
+      }, 1500);
+
+    }
+  }, [chats]);
 
   useEffect(() => {
     const bringData = async () => {
@@ -161,9 +171,22 @@ export const Chats: React.FC = () => {
             </div>
           )
 
-      ) : (
-        <div>Cargando chats...</div>
-      )}
+      ) :
+        showNoFavorites
+          ?
+          (
+            <div className="spinnerCenter2">No tienes productos favoritos</div>
+          )
+          :
+          (
+            <div className="spinnerCenter2">
+              <div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          )
+
+      }
     </div>
   );
 };

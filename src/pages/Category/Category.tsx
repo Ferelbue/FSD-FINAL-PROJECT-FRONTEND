@@ -6,7 +6,7 @@ import "./Category.css";
 import { categoryData } from "../../app/slices/categorySlice";
 import { useSelector, useDispatch } from "react-redux";
 import { userData } from "../../app/slices/userSlice";
-import { Card } from "react-bootstrap";
+import { Card, Spinner } from "react-bootstrap";
 import { updateProductDetail } from "../../app/slices/productDetailSlice";
 import { useNavigate } from "react-router-dom";
 import { updateNotification } from "../../app/slices/notificationSlice";
@@ -42,7 +42,7 @@ export const Category: React.FC = () => {
       } else {
         setError(fetched.message);
       }
-        console.log(error, "error")
+      console.log(error, "error")
     };
 
     if (!products.length) {
@@ -71,32 +71,38 @@ export const Category: React.FC = () => {
         {products[0]?.category?.name.toUpperCase()}
       </div>
       <div className="row justify-content-around categoryProducts">
-        {products.map((product) => (
-          <div className="col-sm-12 col-md-6 col-lg-3" key={product.id}>
-            <Card className="cardProduct" onClick={() => handleDetail(product.id, product.owner.id)}>
-              <Card.Img className="imageProductCard" src={`${ROOT2}uploads/${product.image}`} />
-              <Card.Body>
-                <Card.Title className="cardTitle">{product.name.toUpperCase()}</Card.Title>
-                <div className="cardPrice">
-                  {product.hourPrice}€/hora &nbsp;&nbsp; {product.dayPrice}€/día
-                </div>
-                <Card.Text>{product.description}</Card.Text>
-              </Card.Body>
-              <div className="startCard">
-                {product.starts === 0 ? <div className="productStart0"></div> : null}
-                {product.starts === 1 ? <div className="productStart1"></div> : null}
-                {product.starts === 2 ? <div className="productStart2"></div> : null}
-                {product.starts === 3 ? <div className="productStart3"></div> : null}
-                {product.starts === 4 ? <div className="productStart4"></div> : null}
-                {product.starts === 5 ? <div className="productStart5"></div> : null}
-                ({product.totalReviews})
-              </div>
-            </Card>
+        {products.length === 0 ? (
+          <div className="spinnerCenter">
+            <Spinner animation="border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
           </div>
-        ))}
+        ) : (
+          products.map((product) => (
+            <div className="col-sm-12 col-md-6 col-lg-3" key={product.id}>
+              <Card className="cardProduct" onClick={() => handleDetail(product.id, product.owner.id)}>
+                <Card.Img className="imageProductCard" src={`${ROOT2}uploads/${product.image}`} />
+                <Card.Body>
+                  <Card.Title className="cardTitle">{product.name.toUpperCase()}</Card.Title>
+                  <div className="cardPrice">
+                    {product.hourPrice}€/hora &nbsp;&nbsp; {product.dayPrice}€/día
+                  </div>
+                  <Card.Text>{product.description}</Card.Text>
+                </Card.Body>
+                <div className="startCard">
+                  {product.starts === 0 ? <div className="productStart0"></div> : null}
+                  {product.starts === 1 ? <div className="productStart1"></div> : null}
+                  {product.starts === 2 ? <div className="productStart2"></div> : null}
+                  {product.starts === 3 ? <div className="productStart3"></div> : null}
+                  {product.starts === 4 ? <div className="productStart4"></div> : null}
+                  {product.starts === 5 ? <div className="productStart5"></div> : null}
+                  ({product.totalReviews})
+                </div>
+              </Card>
+            </div>
+          ))
+        )}
       </div>
-
-
     </div>
   );
 };

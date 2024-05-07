@@ -15,6 +15,7 @@ import { ROOT2 } from "../../services/apiCalls"
 export const Favorites: React.FC = () => {
   const [products, setProducts] = useState<any[]>([]);
   const [error, setError] = useState<string>("");
+  const [showNoFavorites, setShowNoFavorites] = useState(false);
   const dispatch = useDispatch();
   const rdxCategory = useSelector(categoryData);
   const rdxUser = useSelector(userData);
@@ -29,6 +30,15 @@ export const Favorites: React.FC = () => {
     }
   }
   notiMe();
+
+  useEffect(() => {
+    if (!products) {
+      setTimeout(() => {
+        setShowNoFavorites(true);
+      }, 1500);
+
+    }
+  }, [products]);
 
   useEffect(() => {
     const bringData = async () => {
@@ -46,6 +56,7 @@ export const Favorites: React.FC = () => {
     if (products && !products.length) {
       bringData();
     }
+
   }, [products, rdxCategory]);
 
   useEffect(() => {
@@ -66,11 +77,11 @@ export const Favorites: React.FC = () => {
 
   return (
     <div className="category">
-      {products ? (
+      <div className="categoryTitle2">
+        MY FAVORITES
+      </div>
+      {products && products.length > 0 ? (
         <>
-          <div className="categoryTitle2">
-            MY FAVORITES
-          </div>
           <div className="row justify-content-around categoryProducts">
             {products.map((product) => (
               <div className="col-sm-12 col-md-6 col-lg-3" key={product.id}>
@@ -97,9 +108,22 @@ export const Favorites: React.FC = () => {
             ))}
           </div>
         </>
-      ) : (
-        <div>No tienes productos favoritos</div>
-      )}
+      ) :
+        showNoFavorites
+          ?
+          (
+            <div className="spinnerCenter2">No tienes productos favoritos</div>
+          )
+          :
+          (
+            <div className="spinnerCenter2">
+              <div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          )
+
+      }
     </div>
   );
 };
