@@ -1,6 +1,6 @@
 
 import { BringAllUsers, BringAllUsersNumber, DeleteUserById, EditUserRole, Notification } from "../../services/apiCalls";
-import { DataFetched2, UserUpdateRole } from "../../interfaces";
+import { DataFetched2, DataFetched3, UserData, UserUpdateRole } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./AdminUsers.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -13,8 +13,8 @@ import { Pagination } from "react-bootstrap";
 import { CInput3 } from "../../common/CInput3/CInput3";
 
 export const AdminUsers: React.FC = () => {
-  const [users, setUsers] = useState<any[]>([]);
-  const [error, setError] = useState<any>("");
+  const [users, setUsers] = useState<UserData[]>([]);
+  const [error, setError] = useState<DataFetched3>();
   const dispatch = useDispatch();
   const searchRdx2 = useSelector(searchData2);
   const rdxUser = useSelector(userData);
@@ -29,13 +29,11 @@ export const AdminUsers: React.FC = () => {
   })
 
   const inputHandler2 = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserRole((prevState: any) => ({
+    setUserRole((prevState: UserUpdateRole) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
-    console.log(userRole, "userRole");
   }
-
 
   const notiMe = async (): Promise<void> => {
     const fetched2: DataFetched2 = await Notification(rdxUser.credentials.token);
@@ -55,16 +53,10 @@ export const AdminUsers: React.FC = () => {
     return () => clearTimeout(searching);
   }, [criteria2]);
 
-
-  const searchHandler = (e: any) => {
-
+  const searchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCriteria2(e.target.value)
     setNameCriteria2(e.target.value.toLowerCase())
-    console.log(nameCriteria2, "criteria2");
   }
-
-
-
 
   useEffect(() => {
     const bringData = async () => {
@@ -93,8 +85,13 @@ export const AdminUsers: React.FC = () => {
       await DeleteUserById(rdxUser.credentials.token, userId);
       const fetched: DataFetched2 = await BringAllUsers(rdxUser.credentials.token, "", currentPage);
       setUsers(fetched.data);
-    } catch (error) {
-      setError(error);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError({
+          message: error.message,
+          success: false
+        });
+      }
       console.log(error, "error")
     }
   };
@@ -117,8 +114,13 @@ export const AdminUsers: React.FC = () => {
       const fetched: DataFetched2 = await BringAllUsers(rdxUser.credentials.token, "", currentPage);
       setUsers(fetched.data);
 
-    } catch (error) {
-      setError(error);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError({
+          message: error.message,
+          success: false
+        });
+      }
       console.log(error, "error")
     }
   }
@@ -140,7 +142,7 @@ export const AdminUsers: React.FC = () => {
               name="user"
               disabled={false}
               value={criteria2 || ""}
-              onChange={(e: any) => searchHandler(e)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => searchHandler(e)}
             />
           </div>
         </div>

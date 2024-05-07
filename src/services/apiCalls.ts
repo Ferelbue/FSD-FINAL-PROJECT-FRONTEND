@@ -331,7 +331,7 @@ export const DealStatus = async (productId: number, userUserId: number, token: s
     }
 }
 
-export const productReview = async (productId: number, token: string, message: string, stars: string): Promise<any> => {
+export const productReview = async (productId: number, token: string, message: string, stars: number): Promise<any> => {
     console.log(productId, token, message, stars, "productReview");
     const options = {
         method: "POST",
@@ -451,8 +451,7 @@ export const UploadImage = async (formData: FormData, token: string): Promise<an
     }
 }
 
-export const UploadProducto = async (name: string, description: string, image: string, city: string, hourPrice: number, dayPrice: number, depositPrice: number, category: number, token: string,): Promise<any> => {
-    console.log(name, description, image, city, hourPrice, dayPrice, depositPrice, category, token, "UploadProducto");
+export const UploadProducto = async (name: string, description: string, image: string, city: string, hourPrice: string, dayPrice: string, depositPrice: string, category: number, token: string,): Promise<any> => {
     const options = {
         method: "POST",
         headers: {

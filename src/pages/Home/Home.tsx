@@ -1,6 +1,6 @@
 
 import { BringProducts, Notification } from "../../services/apiCalls";
-import { DataFetched, DataFetched2 } from "../../interfaces";
+import { DataFetched, DataFetched2, ProductData } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./Home.css";
 import { Card, Carousel} from "react-bootstrap";
@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { ROOT2 } from "../../services/apiCalls"
 
 export const Home: React.FC = () => {
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<ProductData[]>([]);
   const [error, setError] = useState<string>("");
   const [firstFetch, setFirstFetch] = useState<boolean>(false);
   const dispatch = useDispatch();

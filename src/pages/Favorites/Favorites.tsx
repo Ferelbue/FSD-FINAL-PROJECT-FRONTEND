@@ -1,6 +1,6 @@
 
 import { FavoriteProducts, Notification } from "../../services/apiCalls";
-import { DataFetched, DataFetched2 } from "../../interfaces";
+import { DataFetched, DataFetched2, ProductData3 } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./Favorites.css";
 import { categoryData } from "../../app/slices/categorySlice";
@@ -13,7 +13,7 @@ import { updateNotification } from "../../app/slices/notificationSlice";
 import { ROOT2 } from "../../services/apiCalls"
 
 export const Favorites: React.FC = () => {
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<ProductData3[]>([]);
   const [error, setError] = useState<string>("");
   const [showNoFavorites, setShowNoFavorites] = useState(false);
   const dispatch = useDispatch();

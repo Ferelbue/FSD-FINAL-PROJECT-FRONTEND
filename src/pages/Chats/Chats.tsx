@@ -1,6 +1,6 @@
 
 import { BringAllChats, Notification } from "../../services/apiCalls";
-import { DataFetched2 } from "../../interfaces";
+import { ChatData, DataFetched2 } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./Chats.css";
 import { useSelector, } from "react-redux";
@@ -14,7 +14,7 @@ import { ROOT2 } from "../../services/apiCalls"
 import dayjs from "dayjs";
 
 export const Chats: React.FC = () => {
-  const [chats, setChats] = useState<any>();
+  const [chats, setChats] = useState<ChatData[]>([]);
   const [buying, setBuying] = useState<boolean>(true);
   const [buyingNoti, setBuyingNoti] = useState<boolean>(false);
   const [selling, setSelling] = useState<boolean>(false);
@@ -70,16 +70,14 @@ export const Chats: React.FC = () => {
     setSelling(true);
   }
 
-  console.log(buyingNoti, sellingNoti);
-
   useEffect(() => {
     if (chats) {
       for (let i = 0; i < chats?.length; i++) {
-        if ((chats[i].userOwner.id === rdxUser.credentials.user.userId) || (chats[i].userUser.id === rdxUser.credentials.user.userId)) {
+        if (chats[i].userOwner.id === rdxUser.credentials.user.userId) {
           if (chats[i].userOwner_notification === true) {
             setSellingNoti(true);
           }
-        } else {
+        } else if (chats[i].userUser.id === rdxUser.credentials.user.userId) {
           if (chats[i].userUser_notification === true) {
             setBuyingNoti(true);
           }
@@ -87,6 +85,7 @@ export const Chats: React.FC = () => {
       }
     }
   }, [chats]);
+
   return (
     <div className="chats">
       {chats ? (
@@ -114,7 +113,7 @@ export const Chats: React.FC = () => {
                 </div>
                 <div className="mx-auto">
                   <Card className="cardProduct4">
-                    {chats.map((chat: any, index: number) => {
+                    {chats.map((chat: ChatData, index: number) => {
                       if (chat.userOwner.id === rdxUser.credentials.user.userId) {
                         if ((!mappedUserIds.has(chat.userUser.id)) && selling) {
 
@@ -129,7 +128,7 @@ export const Chats: React.FC = () => {
                                   <Card.Text className="cardText31">Ultimo mensaje:&nbsp;{dayjs(chat.updated_at).format('YYYY-MM-DD HH:mm')}</Card.Text>
                                 </div>
                                 {chat.userOwner_notification === true
-                                  ? <img src={`${ROOT2}uploads/notiChats.png`} alt={chat.id} className="notiChats" />
+                                  ? <img src={`${ROOT2}uploads/notiChats.png`} alt={chat.userOwner.name} className="notiChats" />
                                   : null
                                 }
                               </Card.Body>
@@ -149,7 +148,7 @@ export const Chats: React.FC = () => {
                                   <Card.Text className="cardText31">Ultimo mensaje:&nbsp;{dayjs(chat.updated_at).format('YYYY-MM-DD HH:mm')}</Card.Text>
                                 </div>
                                 {chat.userUser_notification === true
-                                  ? <img src={`${ROOT2}uploads/notiChats.png`} alt={chat.id} className="notiChats" />
+                                  ? <img src={`${ROOT2}uploads/notiChats.png`} alt={chat.userUser.name} className="notiChats" />
                                   : null
                                 }
                               </Card.Body>
@@ -185,7 +184,6 @@ export const Chats: React.FC = () => {
               </div>
             </div>
           )
-
       }
     </div>
   );

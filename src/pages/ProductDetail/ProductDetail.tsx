@@ -1,6 +1,6 @@
 
 import { AddToFavorites, BringFavoriteUserProduct, BringProductDetail } from "../../services/apiCalls";
-import { DataFetched2 } from "../../interfaces";
+import { DataFetched2, FavoriteData, ProductData2 } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./ProductDetail.css";
 import { useSelector } from "react-redux";
@@ -12,9 +12,9 @@ import { productDetailData } from "../../app/slices/productDetailSlice";
 import { ROOT2 } from "../../services/apiCalls"
 
 export const ProductDetail: React.FC = () => {
-  const [product, setProducts] = useState<any>();
-  const [favorite, setFavorite] = useState<any>();
-  const [addTofavorite, setAddToFavorite] = useState<any>();
+  const [product, setProducts] = useState<ProductData2>();
+  const [favorite, setFavorite] = useState<FavoriteData[]>([]);
+  const [addTofavorite, setAddToFavorite] = useState<ProductData2>();
   const [error, setError] = useState<string>("");
   const rdxProductDetail = useSelector(productDetailData);
   const rdxUser = useSelector(userData);
@@ -73,7 +73,8 @@ export const ProductDetail: React.FC = () => {
     setAddToFavorite(fetched3.data);
 
   }
-  console.log(product, "favorite")
+  console.log(favorite, "favorite")
+  console.log(addTofavorite, "product")
 
   return (
     <div className="home">

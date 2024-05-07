@@ -1,6 +1,6 @@
 
 import { BringProducts, BringProductsNumber, DeleteProductById, Notification } from "../../services/apiCalls";
-import { DataFetched2 } from "../../interfaces";
+import { DataFetched2, DataFetched3, ProductData } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./AdminProducts.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -12,15 +12,15 @@ import { searchData2, updateCriteria2 } from "../../app/slices/search2Slice";
 import { Pagination } from "react-bootstrap";
 
 export const AdminProducts: React.FC = () => {
-  const [products, setProducts] = useState<any[]>([]);
-  const [error, setError] = useState<any>("");
+  const [products, setProducts] = useState<ProductData[]>([]);
+  const [error, setError] = useState<DataFetched3>();
   const dispatch = useDispatch();
   const searchRdx2 = useSelector(searchData2);
   const rdxUser = useSelector(userData);
-  const [criteria2, setCriteria2] = useState("")
-  const [nameCriteria2, setNameCriteria2] = useState("")
+  const [criteria2, setCriteria2] = useState<string>("")
+  const [nameCriteria2, setNameCriteria2] = useState<string>("")
   const [currentPage, setCurrentPage] = useState<any>(1);
-  const [maxPag, setMaxPag] = useState(0);
+  const [maxPag, setMaxPag] = useState<number>(0);
 
   const notiMe = async (): Promise<void> => {
     const fetched2: DataFetched2 = await Notification(rdxUser.credentials.token);
@@ -40,7 +40,7 @@ export const AdminProducts: React.FC = () => {
     return () => clearTimeout(searching);
   }, [criteria2]);
 
-  const searchHandler = (e: any) => {
+  const searchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCriteria2(e.target.value)
     setNameCriteria2(e.target.value.toLowerCase())
     console.log(nameCriteria2, "criteria2");
@@ -52,9 +52,6 @@ export const AdminProducts: React.FC = () => {
       console.log(searchRdx2.criteria, "searchRdx2.criteria");
       const fetched: DataFetched2 = await BringProducts(searchRdx2.criteria, currentPage, "10");
       const fetched2: DataFetched2 = await BringProductsNumber();
-
-      console.log(fetched.data, "fetched");
-
       setProducts(fetched.data);
       setMaxPag(Math.ceil(fetched2.data.length / 10))
 
@@ -72,12 +69,16 @@ export const AdminProducts: React.FC = () => {
     try {
       await DeleteProductById(rdxUser.credentials.token, productId);
 
-
       const fetched: DataFetched2 = await BringProducts("", currentPage, "10");
       setProducts(fetched.data);
-
-    } catch (error) {
-      setError(error);
+      console.log(fetched.data, "fetched");
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError({
+          message: error.message,
+          success: false
+        });
+      }
       console.log(error, "error")
     }
   };
@@ -98,7 +99,7 @@ export const AdminProducts: React.FC = () => {
               name="product"
               disabled={false}
               value={criteria2 || ""}
-              onChange={(e: any) => searchHandler(e)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => searchHandler(e)}
             />
           </div>
         </div>
@@ -123,7 +124,7 @@ export const AdminProducts: React.FC = () => {
                 </tr>
               </thead>
               <tbody>
-                {products.map((product: any) => (
+                {products.map((product: ProductData) => (
                   <tr key={product.id}>
                     <td><img src={`${ROOT2}uploads/${product.image}`} alt={product.name} style={{ width: '50px', height: '50px' }} /></td>
                     <td>{product.name}</td>
