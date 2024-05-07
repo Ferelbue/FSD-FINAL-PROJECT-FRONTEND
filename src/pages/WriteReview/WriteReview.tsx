@@ -160,7 +160,11 @@ export const WriteReview: React.FC = () => {
 
         </>
       ) : (
-        <div>Cargando producto...</div>
+        <div className="spinnerCenter2">
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden"></span>
+          </div>
+        </div>
       )}
     </div>
   );

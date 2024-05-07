@@ -84,7 +84,11 @@ export const Conversation: React.FC = () => {
   useEffect(() => {
     const bringData = async () => {
       const fetched: DataFetched2 = await BringProductDetail(rdxProductDetail.productDetail.productId);
-      setProducts(fetched.data);
+      if (fetched.success) {
+        setTimeout(() => {
+          setProducts(fetched.data);
+        }, 4000);
+      }
       notiMe();
     }
     bringData();
@@ -191,11 +195,14 @@ export const Conversation: React.FC = () => {
               </Card>
             </div>
           </div>
-
         </>
-      ) : (
-        <div>Cargando producto...</div>
-      )}
+      ) :
+        <div className="spinnerCenter2">
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden"></span>
+          </div>
+        </div>
+      }
     </div>
   );
 };

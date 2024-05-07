@@ -34,3 +34,6 @@
 .categoryProducts::-webkit-scrollbar {
     width: 0.5px;
 }
+.spinnerCenter2{
+    margin-top: 35vh !important;
+}

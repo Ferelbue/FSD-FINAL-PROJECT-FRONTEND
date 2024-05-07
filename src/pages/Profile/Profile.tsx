@@ -20,6 +20,7 @@ export const Profile: React.FC = () => {
   const [error, setError] = useState<string>("");
   const [uploadProductsClick, setUploadProductsClick] = useState<boolean>(false);
   const [myReviewsClick, setMyReviewsClick] = useState<boolean>(false);
+  const [showNoFavorites, setShowNoFavorites] = useState(false);
   const [editProfile, setEditProfile] = useState<boolean>(false);
   const [write, setWrite] = useState<boolean>(true);
   const [adminApp, setAdminApp] = useState<boolean>(false);
@@ -56,6 +57,15 @@ export const Profile: React.FC = () => {
       console.log(error, "error")
     }
   }
+
+  useEffect(() => {
+    if (!userProfile) {
+      setTimeout(() => {
+        setShowNoFavorites(true);
+      }, 1500);
+
+    }
+  }, [userProfile]);
 
   useEffect(() => {
     const bringData = async () => {
@@ -240,11 +250,22 @@ export const Profile: React.FC = () => {
               </div>
             </Card>
 
-          ) : (
-            <Card className="cardProduct312">
-              <div>Cargando profile...</div>
-            </Card>
-          )}
+          ) :
+            showNoFavorites
+              ?
+              (
+                <div className="spinnerCenter2">Cargando profile....</div>
+              )
+              :
+              (
+                <div className="spinnerCenter2">
+                  <div className="spinner-border" role="status">
+                    <span className="visually-hidden"></span>
+                  </div>
+                </div>
+              )
+
+          }
         </>
 
         <div>
