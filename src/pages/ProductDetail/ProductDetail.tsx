@@ -119,7 +119,7 @@ export const ProductDetail: React.FC = () => {
                 </div>
                 <div className="startCard2">
                   <div className="imageChat2" title="My chats" />
-                  <div className="">&nbsp;{product.owner.name} - &nbsp;</div>
+                  <div className="nameProductDetail">&nbsp;{product.owner.name} - &nbsp;</div>
                   {product.starts === 0 ? <div className="productStart0"></div> : null}
                   {product.starts === 1 ? <div className="productStart1"></div> : null}
                   {product.starts === 2 ? <div className="productStart2"></div> : null}

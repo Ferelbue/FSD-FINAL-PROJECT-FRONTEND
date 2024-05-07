@@ -1,7 +1,7 @@
 import { DataFetched, LoginData, UserUpdateData } from "../interfaces";
 
-export const ROOT: string = "http://localhost:4000/api/";
-export const ROOT2: string = "http://localhost:4000/";
+export const ROOT: string = "https://fsd-final-project-backend-production.up.railway.app/api/";
+export const ROOT2: string = "https://fsd-final-project-backend-production.up.railway.app/";
 
 export const BringProducts = async (criteria: string, pag: string, limit: string): Promise<any> => {
 
@@ -75,6 +75,37 @@ export const LoginMe = async (credentials: LoginData): Promise<any> => {
 
     try {
         const response: any = await fetch(`${ROOT}auth/login`, options);
+
+        const data: DataFetched = await response.json();
+
+        if (!data.success) {
+            throw new Error(data.message)
+        }
+
+        return data;
+    } catch (error: unknown) {
+        let answer: DataFetched = {
+            message: "",
+            data: [],
+            success: false,
+        };
+
+        return answer;
+    }
+}
+
+export const RegisterMe = async (credentials: LoginData): Promise<any> => {
+    console.log(credentials, "RegisterMe");
+    const options = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(credentials),
+    };
+
+    try {
+        const response: any = await fetch(`${ROOT}auth/register`, options);
 
         const data: DataFetched = await response.json();
 

@@ -32,7 +32,6 @@ export const Favorites: React.FC = () => {
 
   useEffect(() => {
     const bringData = async () => {
-
       const fetched: DataFetched = await FavoriteProducts(rdxUser.credentials.token);
 
       if (fetched.success) {
@@ -41,10 +40,10 @@ export const Favorites: React.FC = () => {
       } else {
         setError(fetched.message);
       }
-      console.log(error, "error") 
+      console.log(error, "error")
     };
 
-    if (!products.length) {
+    if (products && !products.length) {
       bringData();
     }
   }, [products, rdxCategory]);
@@ -59,7 +58,7 @@ export const Favorites: React.FC = () => {
 
   const handleDetail = (productId: number) => {
     console.log(productId, "productId")
-    dispatch(updateProductDetail({ productDetail: { productId: productId} }));
+    dispatch(updateProductDetail({ productDetail: { productId: productId } }));
     navigate("/productDetail")
   }
 
@@ -67,13 +66,11 @@ export const Favorites: React.FC = () => {
 
   return (
     <div className="category">
-      {products  ? (
+      {products ? (
         <>
           <div className="categoryTitle2">
             MY FAVORITES
           </div>
-
-
           <div className="row justify-content-around categoryProducts">
             {products.map((product) => (
               <div className="col-sm-12 col-md-6 col-lg-3" key={product.id}>
@@ -99,11 +96,9 @@ export const Favorites: React.FC = () => {
               </div>
             ))}
           </div>
-
-
         </>
       ) : (
-        <div>Cargando producto...</div>
+        <div>No tienes productos favoritos</div>
       )}
     </div>
   );

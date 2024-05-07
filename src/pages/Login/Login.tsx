@@ -8,7 +8,8 @@ import { login } from "../../app/slices/userSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { updateNotification } from "../../app/slices/notificationSlice";
-import { CInput1 } from "../../common/CInput1/CInput1";
+import { CInput4 } from "../../common/CInput4/CInput4";
+import { validame } from "../../utils/functions";
 
 export const Login: React.FC = () => {
 
@@ -20,12 +21,26 @@ export const Login: React.FC = () => {
     password: ""
   })
 
+  const [userError, setUserError] = useState({
+    emailError: "",
+    passwordError: "",
+  });
+
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setCredentials((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value
     }))
   }
+
+  const checkError = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const error = validame(e.target.name, e.target.value);
+
+    setUserError((prevState) => ({
+      ...prevState,
+      [e.target.name + "Error"]: error,
+    }));
+  };
 
   const logeame = async (): Promise<void> => {
 
@@ -59,23 +74,33 @@ export const Login: React.FC = () => {
       </div>
       <div className="login">
         <div className="loginInputs">
-          <CInput1
-            className="inputLogin"
+          <div className="loginText">
+            Welcome back!
+          </div>
+          <CInput4
+            className={`inputLogin ${userError.emailError !== "" ? "inputDesignError" : ""}`}
             type={"email"}
             name={"email"}
             value={credentials.email || ""}
             placeholder={"write your email..."}
             onChange={inputHandler}
+            onBlur={checkError}
           />
-          <CInput1
-            className="inputLogin"
+          <div className="errorHeader">{userError.emailError}</div>
+          <CInput4
+            className={`inputLogin ${userError.passwordError !== "" ? "inputDesignError" : ""}`}
             type={"password"}
             name={"password"}
             value={credentials.password || ""}
             placeholder={"write your password..."}
             onChange={inputHandler}
+            onBlur={checkError}
           />
+          <div className="errorHeader">{userError.passwordError}</div>
           <button className="buttonLogin" onClick={logeame}>LOG ME!</button>
+          <div className="loginText2">
+            Not registered yet? <a href="/register">Register here</a>
+          </div>
         </div>
       </div>
     </>);

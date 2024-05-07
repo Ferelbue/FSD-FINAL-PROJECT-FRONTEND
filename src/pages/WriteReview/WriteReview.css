@@ -190,6 +190,7 @@
 }
 
 .oneComment {
+    margin-top: 5vh;
     padding-bottom: 1em;
     border-bottom: 1px solid lightgray;
 }
@@ -289,7 +290,7 @@
 .sendMesssage{
     width: 10vw;
     height: 5vh;
-    z-index: 1;
+    z-index: 1 !important;
     margin-left: 39vw;
     margin-top: 8vh;
     position: absolute;
@@ -331,4 +332,24 @@
     width: 10vw !important;
     height: auto;
     background-color: tomato;
+}
+
+
+@media (max-width: 600px) { 
+    .dropdownStar{
+        width: 20vw !important;
+        height: 2.2em !important;
+        margin-left: 5vw;
+        font-size: small !important;
+    }
+    .dropdownStar2{
+        width: 20vw !important;
+        height: auto;
+    }
+    .sendMesssage2{
+        margin-left: 55vw;
+    }
+    .oneComment{
+        margin-top: 17vh;
+    }
 }

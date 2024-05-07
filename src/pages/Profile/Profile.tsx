@@ -178,7 +178,7 @@ export const Profile: React.FC = () => {
                   : <Card.Img className="imageUserProfile" src={`${ROOT2}uploads/${user.image}`} />
                 }
                 <div className="textProfile">TOTAL PRESTADOS ({userProfile.reviews.length})</div>
-                <div className="textProfile">TOTAL SUBIDOS ({userProducts.length})</div>
+                <div className="textProfile">TOTAL SUBIDOS ({userProducts ? userProducts.length : 0})</div>
               </div>
               <div className="imageGroupProfile2" >
                 <div className="editIcon">
@@ -241,8 +241,8 @@ export const Profile: React.FC = () => {
             </Card>
 
           ) : (
-            <Card className="cardProduct31">
-              <div>Cargando producto...</div>
+            <Card className="cardProduct312">
+              <div>Cargando profile...</div>
             </Card>
           )}
         </>
@@ -251,7 +251,7 @@ export const Profile: React.FC = () => {
           {uploadProductsClick && (
             <>
               <div className="categoryTitle35">
-                MY UPLOAD PRODUCTS ({userProducts.length})
+                MY UPLOAD PRODUCTS ({userProducts && userProducts.length})
               </div>
 
               <Carousel>

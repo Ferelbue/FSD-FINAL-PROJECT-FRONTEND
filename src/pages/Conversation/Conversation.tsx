@@ -79,7 +79,7 @@ export const Conversation: React.FC = () => {
     };
     bringData();
 
-  }, [send,acceptDe]);
+  }, [send, acceptDe]);
 
   useEffect(() => {
     const bringData = async () => {
@@ -94,7 +94,7 @@ export const Conversation: React.FC = () => {
 
     const fetched: DataFetched2 = await SendMessage(rdxProductDetail.productDetail.productId, rdxProductDetail.productDetail.userUserId, rdxUser.credentials.token, message.text);
     setSend(true);
-    console.log(fetched, "fetched") 
+    console.log(fetched, "fetched")
   }
 
   const handleDeal = async (productId: number, userUserId: number) => {
@@ -115,13 +115,31 @@ export const Conversation: React.FC = () => {
       {conversation && product ? (
         <>
           <Card className="cardProduct3">
-            <Card.Img className="imageProductCard3" src={`${ROOT2}uploads/${product.image}`} />
+            <Card.Img className="imageProductCard5" src={`${ROOT2}uploads/${product.image}`} />
             <Card.Body>
-              <Card.Title className="cardTitle3">{product.name.toUpperCase()}&nbsp;&nbsp; {product.owner.name}</Card.Title>
+              <Card.Title className="cardTitle33">
+                <div className="cardTitle3">
+                  {product.name.toUpperCase()}
+                </div>
+                <div className="cardTitle34">
+                  {product.owner.name} -
+                </div>
+                <div className="startCard3">
+                  {product.starts === 0 ? <div className="productStart0"></div> : null}
+                  {product.starts === 1 ? <div className="productStart1"></div> : null}
+                  {product.starts === 2 ? <div className="productStart2"></div> : null}
+                  {product.starts === 3 ? <div className="productStart3"></div> : null}
+                  {product.starts === 4 ? <div className="productStart4"></div> : null}
+                  {product.starts === 5 ? <div className="productStart5"></div> : null}
+                  ({product.reviews.length})
+                </div>
+              </Card.Title>
               <div className="cardPrice3">
                 <div className="prices">
                   {product.hourPrice}€/hora &nbsp;&nbsp; {product.dayPrice}€/día &nbsp;&nbsp; {product.depositPrice}€/fianza
                 </div>
+              </div>
+              <div className="dealCard3">
                 {statusDeal?.userOwner_confirm === true && statusDeal?.userUser_confirm === true
                   ? (product.owner.id !== rdxUser.credentials.user.userId
                     ? <div className="dealFinished" onClick={() => handleReview()}>ESCRIBIR RESEÑA</div>
@@ -129,16 +147,6 @@ export const Conversation: React.FC = () => {
                   )
                   : <div className="dealFinished" onClick={() => handleDeal(product.id, rdxProductDetail.productDetail.userUserId)}>TRATO FINALIZADO</div>
                 }
-              </div>
-
-              <div className="startCard3">
-                {product.starts === 0 ? <div className="productStart0"></div> : null}
-                {product.starts === 1 ? <div className="productStart1"></div> : null}
-                {product.starts === 2 ? <div className="productStart2"></div> : null}
-                {product.starts === 3 ? <div className="productStart3"></div> : null}
-                {product.starts === 4 ? <div className="productStart4"></div> : null}
-                {product.starts === 5 ? <div className="productStart5"></div> : null}
-                ({product.reviews.length})
               </div>
             </Card.Body>
           </Card>
@@ -156,29 +164,30 @@ export const Conversation: React.FC = () => {
                   />
                   <div className="sendMesssage" onClick={() => handleSendMessage()}>SEND</div>
                 </div>
+                <div className="messagesGroup">
+                  {[...conversation].reverse().map((convers, index) => (
+                    <div key={index}>
+                      {convers.userOwner_author === true ? (
+                        <Card.Body className="messageConversation1">
+                          <div className="messageTitle">
+                            <Card.Title className="titleCard">{convers.userOwner.name.toUpperCase()}</Card.Title>
+                            <Card.Title className="titleCard2">{dayjs(convers.updated_at).format('YYYY-MM-DD HH:mm')}</Card.Title>
+                          </div>
 
-                {[...conversation].reverse().map((convers, index) => (
-                  <div key={index}>
-                    {convers.userOwner_author === true ? (
-                      <Card.Body className="messageConversation1">
-                        <div className="messageTitle">
-                          <Card.Title className="titleCard">{convers.userOwner.name.toUpperCase()}</Card.Title>
-                          <Card.Title className="titleCard2">{dayjs(convers.updated_at).format('YYYY-MM-DD HH:mm')}</Card.Title>
-                        </div>
-
-                        <Card.Text className="descriptionCard">{convers.message}</Card.Text>
-                      </Card.Body>
-                    ) : (
-                      <Card.Body className="messageConversation2">
-                        <div className="messageTitle">
-                          <Card.Title className="titleCard3">{dayjs(convers.updated_at).format('YYYY-MM-DD HH:mm')}</Card.Title>
-                          <Card.Title className="titleCard">{convers.userUser.name.toUpperCase()}</Card.Title>
-                        </div>
-                        <Card.Text className="descriptionCard">{convers.message}</Card.Text>
-                      </Card.Body>
-                    )}
-                  </div>
-                ))}
+                          <Card.Text className="descriptionCard">{convers.message}</Card.Text>
+                        </Card.Body>
+                      ) : (
+                        <Card.Body className="messageConversation2">
+                          <div className="messageTitle">
+                            <Card.Title className="titleCard3">{dayjs(convers.updated_at).format('YYYY-MM-DD HH:mm')}</Card.Title>
+                            <Card.Title className="titleCard">{convers.userUser.name.toUpperCase()}</Card.Title>
+                          </div>
+                          <Card.Text className="descriptionCard">{convers.message}</Card.Text>
+                        </Card.Body>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </Card>
             </div>
           </div>

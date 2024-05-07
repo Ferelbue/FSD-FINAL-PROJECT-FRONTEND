@@ -1,6 +1,6 @@
 
-import { BringProducts, BringProductsNumber, DeleteProductById, DeleteUserById, Notification } from "../../services/apiCalls";
-import { DataFetched2, UserUpdateRole } from "../../interfaces";
+import { BringProducts, BringProductsNumber, DeleteProductById, Notification } from "../../services/apiCalls";
+import { DataFetched2 } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./AdminProducts.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -73,7 +73,7 @@ export const AdminProducts: React.FC = () => {
       await DeleteProductById(rdxUser.credentials.token, productId);
 
 
-      const fetched: DataFetched2 = await BringProducts("",currentPage, "10");
+      const fetched: DataFetched2 = await BringProducts("", currentPage, "10");
       setProducts(fetched.data);
 
     } catch (error) {

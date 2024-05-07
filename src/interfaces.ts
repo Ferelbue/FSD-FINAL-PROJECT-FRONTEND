@@ -27,6 +27,15 @@ export interface CustomInputProps1 {
     value: string | undefined,
     onChange: (value: React.ChangeEvent<HTMLInputElement>) => void;
 }
+export interface CustomInputProps5 {
+    className: string,
+    type: string,
+    name: string,
+    placeholder: string,
+    value: string | undefined,
+    onChange: (value: React.ChangeEvent<HTMLInputElement>) => void,
+    onBlur: (value: React.ChangeEvent<HTMLInputElement>) => void;
+}
 
 export interface CustomInputProps2 {
     className: string,
@@ -66,6 +75,13 @@ export interface Product {
 }
 
 export interface LoginData {
+    email: string,
+    password: string
+}
+export interface RegisterData {
+    name: string,
+    lastName: string,
+    city: string,
     email: string,
     password: string
 }

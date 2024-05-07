@@ -12,6 +12,7 @@
     color: black;
     margin-top: 24vh !important;
 }
+
 .conversation::-webkit-scrollbar {
     width: 0.5px;
 }
@@ -29,8 +30,9 @@
 .categoryProducts2 {
     position: relative;
 }
+
 .cardProduct6 {
-    width: 85vw;
+    width: 65vw !important;
     min-height: 80vh !important;
     height: auto;
     margin: 0.5em;
@@ -40,40 +42,58 @@
     background-color: white !important;
     padding: 0;
     padding-bottom: 3em;
+    position: relative;
 
 }
 
 .cardProduct3 {
-    width: 85vw;
+    width: 65vw !important;
     height: 25vh !important;
     margin: 0.5em;
     display: flex;
     flex-direction: row !important;
     justify-content: center;
     align-items: center;
-    background-color: white!important;
+    background-color: white !important;
     padding: 0;
 }
 
-.imageProductCard3 {
+.imageProductCard5 {
     height: 20vh;
     width: 20vw !important;
     border-radius: 0.5em;
-    margin-left: 0.5em;
+    margin-left: 10em;
 }
 
 .cardTitle3 {
     text-decoration: underline;
-    height: 5vh;
+    height: 6vh !important;
+    width: 10vw;
+    margin-right: 3vw;
     display: flex;
     justify-content: center;
     align-items: center;
 
 }
 
+.cardTitle33 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardTitle34 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
 .cardPrice3 {
     font-size: 1.3em;
-    height: 10vh;
+    width: 45vw;
+    height: 8vh !important;
     font-weight: bold;
     margin-bottom: 0.5em;
     display: flex;
@@ -83,22 +103,22 @@
     border-top: 1px solid lightgray;
 }
 
-.prices{
+.prices {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 45vw;
+    width: 25vw;
     font-size: 1.2em;
 }
 
-.dealFinished{
+.dealFinished {
     width: 15vw;
     height: 5vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(66,71,76);
+    background-color: rgb(66, 71, 76);
     color: white;
     font-size: 1em;
     font-weight: bold;
@@ -106,17 +126,20 @@
     cursor: pointer;
 }
 
-.dealFinished:hover{
+.dealFinished:hover {
     background-color: rgb(95, 118, 118);
 }
+
 .startCard3 {
-    width: 60vw;
+    width: 10vw !important;
+    height: 2vh !important;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    font-size: 1.7em;
+    font-size: 1em !important;
     padding-left: 0.5em;
+    text-decoration: none !important;
 }
 
 .descriptionCard3 {
@@ -215,7 +238,8 @@
     background: url('../../../public/chat.png') no-repeat center center / cover;
 
 }
-.conversationCard{
+
+.conversationCard {
     position: absolute;
     z-index: 10;
     top: 80vh;
@@ -230,7 +254,7 @@
     cursor: pointer;
 }
 
-.messageConversation1{
+.messageConversation1 {
     width: 50vw;
     height: auto;
     display: flex;
@@ -242,7 +266,8 @@
     padding-left: 1.3em;
     background-color: rgb(185, 217, 217) !important;
 }
-.messageConversation2{
+
+.messageConversation2 {
     width: 50vw;
     height: auto;
     display: flex;
@@ -252,27 +277,30 @@
     border-radius: 0.5em;
     margin-bottom: 0.5em;
     padding-left: 1.3em;
-    background-color: rgb(142, 163, 163)!important;
+    background-color: rgb(142, 163, 163) !important;
 }
 
-.messageTitle{
+.messageTitle {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
-.titleCard2{
+
+.titleCard2 {
     font-size: small !important;
     margin-left: 0.5em;
 }
-.titleCard3{
+
+.titleCard3 {
     font-size: small !important;
     margin-right: 0.5em;
 }
-.inputConversation{
+
+.inputConversation {
     width: 50vw;
     height: 15vh;
-    resize:none;
+    resize: none;
     background-color: white;
     color: black;
     border-radius: 0.5em;
@@ -280,7 +308,8 @@
     border-style: solid;
     border-color: black;
 }
-.messageGroup{
+
+.messageGroup {
     width: 50vw;
     height: 15vh;
     display: flex;
@@ -288,20 +317,118 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 1em;
-    margin-top: 1em;
+    margin-top: 1em !important;
+    position: absolute;
+    top: 0;
+    left: 7.5vw;
+
 }
-.sendMesssage{
+
+.messagesGroup {
+    margin-top: 19vh;
+}
+
+.sendMesssage {
     width: 10vw;
     height: 5vh;
     z-index: 10;
     margin-left: 39vw;
     margin-top: 8vh;
     position: absolute;
-    background-color: rgb(66,71,76);
+    background-color: rgb(66, 71, 76);
     border-radius: 0.5em;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
     cursor: pointer;
+}
+
+.dealCard3 {
+    width: 50vw;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 600px) {
+    .cardProduct3 {
+        width: 90vw !important;
+    }
+
+    .cardPrice3 {
+        width: 60vw;
+        display: flex;
+        justify-content: start !important;
+        font-size: 0.7em !important;
+        padding-left: 1em;
+        margin-right: 40vw;
+    }
+
+    .cardTitle33 {
+        width: 60vw;
+        font-size: 0.8em !important;
+    }
+
+    .cardTitle34 {
+        width: 25vw;
+        font-size: 1em !important;
+        display: flex;
+        justify-content: end;
+    }
+
+    .cardTitle3 {
+        width: 20vw;
+        font-size: 1em !important;
+    }
+
+    .startCard3 {
+        width: 20vw !important;
+    }
+
+    .dealFinished {
+        width: 30vw !important;
+        height: 5vh !important;
+        font-size: 0.65em !important;
+    }
+
+    .cardProduct6 {
+        width: 90vw !important;
+        margin-top: 0em !important;
+    }
+
+    .messageGroup {
+        width: 85vw !important;
+        left: 2vw;
+    }
+
+    .inputConversation {
+        width: 90vw !important;
+    }
+
+    .sendMesssage {
+        width: 20vw !important;
+        height: 5vh;
+        z-index: 10;
+        margin-left: 60vw !important;
+        margin-top: 8vh;
+    }
+
+    .messageConversation2,
+    .messageConversation1 {
+        width: 85vw !important;
+        font-size: small !important;
+
+    }
+
+    .messagesGroup {
+        margin-top: 19vh;
+    }
+
+    .descriptionCard {
+        display: flex !important;
+        justify-content: end !important;
+        align-items: end !important;
+    }
 }
