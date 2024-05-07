@@ -383,7 +383,10 @@
     .categoryTitle312{
         margin-left: -2.7vw !important;
     }
-
+    .notiChats{
+        left: 92% !important;
+        top: -8% !important;
+    }
 }
 
 .categoryTitle312 {
@@ -419,16 +422,51 @@
     border-top: 1px solid lightgray;
 }
 .imageBuying {
-    width: 1.3em;
-    height: 1.3em;
+    width: 0.9em;
+    height: 0.9em;
     margin-right: 0.3em;
     background: url('../../../public/buying.png') no-repeat center center / cover;
     cursor: pointer;
 }
+.imageBuying:hover {
+    background-image: url('../../../public/buying2.png');
+}
 .imageSelling {
-    width: 1.3em;
-    height: 1.3em;
+    width: 0.9em;
+    height: 0.9em;
     margin-right: 0.3em;
     background: url('../../../public/selling.png') no-repeat center center / cover;
     cursor: pointer;
+}
+.imageSelling:hover {
+    background-image: url('../../../public/selling2.png');
+}
+.imageBuyingNoti {
+    width: 0.9em;
+    height: 0.9em;
+    margin-right: 0.3em;
+    background: url('../../../public/buyingNoti.png') no-repeat center center / cover;
+    cursor: pointer;
+}
+.imageBuyingNoti:hover {
+    background-image: url('../../../public/buying2Noti.png');
+}
+.imageSellingNoti {
+    width: 0.9em;
+    height: 0.9em;
+    margin-right: 0.3em;
+    background: url('../../../public/sellingNoti.png') no-repeat center center / cover;
+    cursor: pointer;
+}
+.imageSellingNoti:hover {
+    background-image: url('../../../public/selling2Noti.png');
+}
+.notiChats{
+    width: 30px; 
+    height: 30px;
+    cursor: pointer;
+    margin: 0.2em;
+    position: absolute;
+    left: 96.5%;
+    top: -7%;
 }

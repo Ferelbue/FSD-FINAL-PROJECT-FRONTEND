@@ -207,7 +207,7 @@
     width: 3.5em;
     height: 3.5em;
     z-index: 10;
-    background: url('../../../public/logo2.png') no-repeat center center / cover;
+    background: url('../../../public/logo.png') no-repeat center center / cover;
     cursor: pointer;
 }
 

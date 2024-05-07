@@ -251,7 +251,7 @@ export const Profile: React.FC = () => {
           {uploadProductsClick && (
             <>
               <div className="categoryTitle35">
-                MY UPLOAD PRODUCTS ({userProducts.length})
+                MY UPLOAD PRODUCTS ({userProducts && userProducts.length})
               </div>
 
               <Carousel>

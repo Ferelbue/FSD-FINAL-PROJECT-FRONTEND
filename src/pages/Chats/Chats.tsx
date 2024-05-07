@@ -16,7 +16,9 @@ import dayjs from "dayjs";
 export const Chats: React.FC = () => {
   const [chats, setChats] = useState<any>();
   const [buying, setBuying] = useState<boolean>(true);
+  const [buyingNoti, setBuyingNoti] = useState<boolean>(false);
   const [selling, setSelling] = useState<boolean>(false);
+  const [sellingNoti, setSellingNoti] = useState<boolean>(false);
   const rdxProductDetail = useSelector(productDetailData);
   const rdxUser = useSelector(userData);
   const navigate = useNavigate();
@@ -36,6 +38,20 @@ export const Chats: React.FC = () => {
     const bringData = async () => {
       const fetched: DataFetched2 = await BringAllChats(rdxUser.credentials.token);
       setChats(fetched.data);
+    }
+
+    if (chats) {
+      for (let i = 0; i < chats?.length; i++) {
+        if ((chats[i].userOwner.id === rdxUser.credentials.user.userId) || (chats[i].userUser.id === rdxUser.credentials.user.userId)) {
+          if (chats[i].userOwner_notification === true) {
+            setSellingNoti(true);
+          }
+        } else {
+          if (chats[i].userUser_notification === true) {
+            setBuyingNoti(true);
+          }
+        }
+      }
     }
     bringData();
   }, [rdxProductDetail]);
@@ -57,6 +73,8 @@ export const Chats: React.FC = () => {
     setSelling(true);
   }
 
+  console.log(buyingNoti, sellingNoti);
+
   return (
     <div className="chats">
       {chats ? (
@@ -69,8 +87,14 @@ export const Chats: React.FC = () => {
                     MY CHATS
                   </div>
                   <div className="iconsProfile">
-                    <div className="imageBuying" title="My buying chats" onClick={() => handleBuying()} />
-                    <div className="imageSelling" title="My sellings chats" onClick={() => handleSelling()} />
+                    {buyingNoti
+                      ? <div className="imageBuyingNoti" title="My buying chats" onClick={() => handleBuying()} />
+                      : <div className="imageBuying" title="My buying chats" onClick={() => handleBuying()} />
+                    }
+                    {sellingNoti
+                      ? <div className="imageSellingNoti" title="My selling chats" onClick={() => handleSelling()} />
+                      : <div className="imageSelling" title="My selling chats" onClick={() => handleSelling()} />
+                    }
                   </div>
                 </div>
                 <div className="categoryTitle351">
@@ -92,6 +116,10 @@ export const Chats: React.FC = () => {
                                 <div className="timeChat">
                                   <Card.Text className="cardText31">Ultimo mensaje:&nbsp;{dayjs(chat.updated_at).format('YYYY-MM-DD HH:mm')}</Card.Text>
                                 </div>
+                                {chat.userOwner_notification === true
+                                  ? <img src={`${ROOT2}uploads/notiChats.png`} alt={chat.id} className="notiChats" />
+                                  : null
+                                }
                               </Card.Body>
                             </Card>
                           );
@@ -108,6 +136,10 @@ export const Chats: React.FC = () => {
                                 <div className="timeChat">
                                   <Card.Text className="cardText31">Ultimo mensaje:&nbsp;{dayjs(chat.updated_at).format('YYYY-MM-DD HH:mm')}</Card.Text>
                                 </div>
+                                {chat.userUser_notification === true
+                                  ? <img src={`${ROOT2}uploads/notiChats.png`} alt={chat.id} className="notiChats" />
+                                  : null
+                                }
                               </Card.Body>
                             </Card>
                           );
