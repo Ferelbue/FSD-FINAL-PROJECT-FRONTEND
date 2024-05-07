@@ -176,7 +176,8 @@
     background: url('../../../public/chat.png') no-repeat center center / cover;
 
 }
-.conversationCard{
+
+.conversationCard {
     position: absolute;
     z-index: 10;
     top: 80vh;
@@ -190,7 +191,8 @@
     background: url('../../../public/conversation.png') no-repeat center center / cover;
     cursor: pointer;
 }
-.sendMesssage4{
+
+.sendMesssage4 {
     margin-left: 44vw;
     margin-top: -7vh;
     position: absolute;
@@ -218,4 +220,46 @@
     background: url('../../../public/cuore3.png') no-repeat center center / cover;
     cursor: pointer;
 
+}
+
+@media (max-width: 600px) {
+    .descriptionCard2 {
+        height: 15vh !important;
+        width: 80vw !important;
+    }
+
+    .mapCard2 {
+        height: 20vh !important;
+        width: 80vw !important;
+    }
+
+    .startCard2 {
+        width: 85vw !important;
+        font-size: 1.5em !important;
+
+    }
+
+    .imageChat2 {
+        visibility: hidden;
+    }
+
+    .nameProductDetail {
+        width: 40vw !important;
+        font-size: 1em;
+        margin-left: -5vw;
+    }
+
+    .reviewText2,
+    .oneComment {
+        width: 80vw !important;
+    }
+
+    .reviewTitle2 {
+        width: 80vw !important;
+    }
+
+    .imageConversation {
+        width: 3em !important;
+        height: 3em !important;
+    }
 }

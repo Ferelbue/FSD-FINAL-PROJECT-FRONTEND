@@ -413,11 +413,11 @@
         width: 90vw;
         min-height: 80vh !important;
         height: auto;
+        margin-top: 11vh;
     }
 
     .cardTitle22 {
         width: 90vw;
-
     }
 
     .inputConversation2 {
@@ -453,5 +453,9 @@
     }
     .buttonLogin2{
         width: 20vw;
+    }
+    .imageChat2{
+        width: 1.5em;
+        height: 1.5em;
     }
 }

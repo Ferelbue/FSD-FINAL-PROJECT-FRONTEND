@@ -40,19 +40,6 @@ export const Chats: React.FC = () => {
       setChats(fetched.data);
     }
 
-    if (chats) {
-      for (let i = 0; i < chats?.length; i++) {
-        if ((chats[i].userOwner.id === rdxUser.credentials.user.userId) || (chats[i].userUser.id === rdxUser.credentials.user.userId)) {
-          if (chats[i].userOwner_notification === true) {
-            setSellingNoti(true);
-          }
-        } else {
-          if (chats[i].userUser_notification === true) {
-            setBuyingNoti(true);
-          }
-        }
-      }
-    }
     bringData();
   }, [rdxProductDetail]);
 
@@ -75,6 +62,21 @@ export const Chats: React.FC = () => {
 
   console.log(buyingNoti, sellingNoti);
 
+  useEffect(() => {
+    if (chats) {
+      for (let i = 0; i < chats?.length; i++) {
+        if ((chats[i].userOwner.id === rdxUser.credentials.user.userId) || (chats[i].userUser.id === rdxUser.credentials.user.userId)) {
+          if (chats[i].userOwner_notification === true) {
+            setSellingNoti(true);
+          }
+        } else {
+          if (chats[i].userUser_notification === true) {
+            setBuyingNoti(true);
+          }
+        }
+      }
+    }
+  }, [chats]);
   return (
     <div className="chats">
       {chats ? (
