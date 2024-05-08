@@ -675,3 +675,73 @@ export const DeleteProductById = async (token: string, productId: number): Promi
         return error;
     }
 }
+
+export const BringAllmessages = async (token: string, criteria: string, page: number): Promise<any> => {
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+    };
+
+    try {
+        const response = await fetch(`${ROOT}chats/all?message=${criteria}&page=${page}&limit=10`, options);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+        console.log(data, "BringAllmessages");
+        return data;
+
+    } catch (error) {
+        return error;
+    }
+}       
+
+export const BringAllMessagesNumber = async (token: string): Promise<any> => {
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+    };
+
+    try {
+        const response = await fetch(`${ROOT}chats/allNumber`, options);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+        console.log(data, "BringAllmessages");
+        return data;
+
+    } catch (error) {
+        return error;
+    }
+}
+
+export const DeleteMessageById = async (token: string, messageId: number): Promise<any> => {
+    console.log(token, messageId, "DeleteUserById");
+    const options = {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+    };
+
+    try {
+        const response = await fetch(`${ROOT}chats/${messageId}`, options);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+
+        return data;
+
+    } catch (error) {
+        return error;
+    }
+}

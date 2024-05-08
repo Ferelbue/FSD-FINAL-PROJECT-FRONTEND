@@ -363,6 +363,9 @@ export const Profile: React.FC = () => {
                   <div className="imageProducts">
                     <div className="imageAdminProducts" title="Admin APP" onClick={() => navigate("/adminproducts")} />
                   </div>
+                  <div className="imageMessages">
+                    <div className="imageAdminMessages" title="Admin APP" onClick={() => navigate("/adminmessages")} />
+                  </div>
                 </div>
               </Card>
 

@@ -103,8 +103,6 @@ const Header = () => {
         navigate("/productDetail")
     }
 
-    console.log(productsFetched, "rdxUser")
-
     return (
         <div className='header'>
             {isLoading ? (
