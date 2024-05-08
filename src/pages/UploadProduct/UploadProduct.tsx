@@ -1,6 +1,6 @@
 
 import { BringProductDetail, UploadImage, UploadProducto } from "../../services/apiCalls";
-import { DataFetched2, FileImageData, MessageData, ProductData5 } from "../../interfaces";
+import { CategoryData, DataFetched2, FileImageData, MessageData, ProductData5 } from "../../interfaces";
 import { useEffect, useState, useRef } from "react";
 import "./UploadProduct.css";
 import { useSelector } from "react-redux";
@@ -40,7 +40,7 @@ export const UploadProduct: React.FC = () => {
   const [city, setCity] = useState<MessageData>({
     text: "",
   });
-  const [category, setCategory] = useState<any>({
+  const [category, setCategory] = useState<CategoryData>({
     category: "",
     categoryId: 0
   });
@@ -136,12 +136,15 @@ export const UploadProduct: React.FC = () => {
   }
 
   const handleUploadProduct = async () => {
+    if (!dataImage) {
+      console.error('dataImage is undefined');
+      return;
+    }
+
     const fetched: DataFetched2 = await UploadProducto(title.text, message.text, dataImage.originalname, city.text, hourPrice.text, dayPrice.text, deposit.text, category.categoryId, rdxUser.credentials.token);
     console.log(fetched, "fetched")
     navigate("/home")
-
   }
-
 
   return (
 

@@ -134,6 +134,9 @@ export interface ProductData {
     starts: number,
     totalReviews: number
 }
+
+export type ProductData6 = ProductData[];
+
 export interface UserData {
     city: string,
     email: string,
@@ -311,3 +314,52 @@ export interface ProductData4 {
     totalReviews: number
 }
 export type ProductData5 = ProductData4[];
+
+export interface CategoryData {
+    category: string,
+    categoryId: number
+}
+export interface UserReducer {
+    user: {
+        credentials: {
+            token: string | undefined,
+            user: {
+                userId: number | undefined,
+                roleName: string | undefined,
+                userName: string | undefined,
+                iat: number | undefined,
+                exp: number | undefined
+            }
+        }
+    }
+}
+export interface CategoryReducer {
+    category: {
+        category: number | undefined,
+
+    }
+}
+export interface ProductDetailReducer {
+    productDetail: {
+        productId: number | undefined
+    }
+}
+export interface NotificationReducer {
+    notification: {
+        notification: {
+            id: number | undefined
+        }
+    }
+}
+export interface SearchReducer {
+    search: {
+        criteria: string | undefined
+    }
+}
+export interface Search2Reducer {
+    search2: {
+        criteria2: string | undefined,
+        criteria: string | undefined
+
+    }
+}
