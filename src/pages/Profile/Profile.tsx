@@ -1,6 +1,6 @@
 
 import { BringUserProducts, BringUserProfile, Notification, UploadImage, UploadUserProfile } from "../../services/apiCalls";
-import { DataFetched2, DataReview, UserUpdateData, UserProfile, UserData, FileImageData, ProductData4, ProductData5 } from "../../interfaces";
+import { DataFetched2, DataReview, UserUpdateData, UserProfile, FileImageData, ProductData4 } from "../../interfaces";
 import { useEffect, useRef, useState } from "react";
 import "./Profile.css";
 import { useSelector, } from "react-redux";
