@@ -31,6 +31,14 @@ const Header = () => {
     const searchRdx = useSelector(searchData);
 
     useEffect(() => {
+
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 1000);
+        setIsLoading(true)
+    }, [rdxUser]);
+
+    useEffect(() => {
         const bringUsers = async () => {
             if (searchRdx.criteria !== "") {
                 try {
@@ -49,16 +57,6 @@ const Header = () => {
 
         bringUsers();
     }, [searchRdx.criteria]);
-
-
-    useEffect(() => {
-
-        setTimeout(() => {
-            setIsLoading(false);
-        }, 1000);
-
-    }, []);
-
 
     useEffect(() => {
         const searching = setTimeout(() => {

@@ -51,7 +51,7 @@ There is also an administration view where you can have an overall control of th
 - **User Authentication:** Secure signup and login processes. 🔒
 - **Product Publication:** Users can upload products to rent. 💰
 - **Search product:** Users can search an especific product. 👀
-- **Admin Dashboard:** Full control over users and appointments for administrators. 👩‍💼👨‍💼
+- **Admin Dashboard:** Full control over users, products and messsagess for administrators. 👩‍💼👨‍💼
 - **LocalStorage:** Extense use of localstorage while navigating the app. 📫
 - **Deployed with AWS and Railway:** Real functionality with backend and frontend deployed.📡
 

@@ -1,5 +1,5 @@
 
-import { BringAllMessagesNumber, BringAllmessages, BringProducts, BringProductsNumber, DeleteMessageById, DeleteProductById, Notification } from "../../services/apiCalls";
+import { BringAllMessagesNumber, BringAllmessages, DeleteMessageById, Notification } from "../../services/apiCalls";
 import { DataFetched2, DataFetched3, ProductData } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./AdminMessages.css";
@@ -12,7 +12,7 @@ import { searchData2, updateCriteria2 } from "../../app/slices/search2Slice";
 import { Pagination } from "react-bootstrap";
 
 export const AdminMessages: React.FC = () => {
-  const [products, setProducts] = useState<ProductData[]>([]);
+  const [messages, setMessages] = useState<ProductData[]>([]);
   const [error, setError] = useState<DataFetched3>();
   const dispatch = useDispatch();
   const searchRdx2 = useSelector(searchData2);
@@ -43,16 +43,15 @@ export const AdminMessages: React.FC = () => {
   const searchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCriteria2(e.target.value)
     setNameCriteria2(e.target.value.toLowerCase())
-    console.log(nameCriteria2, "criteria2");
   }
 
   useEffect(() => {
     const bringData = async () => {
 
-      const fetched: DataFetched2 = await BringAllmessages(rdxUser.credentials.token, "", currentPage);
+      const fetched: DataFetched2 = await BringAllmessages(rdxUser.credentials.token, searchRdx2.criteria, currentPage);
       const fetched2: DataFetched2 = await BringAllMessagesNumber(rdxUser.credentials.token);
 
-      setProducts(fetched.data);
+      setMessages(fetched.data);
       setMaxPag(Math.ceil(fetched2.data / 10))
       console.log(fetched2.data, "maxPag")
       if (error) {
@@ -70,7 +69,7 @@ export const AdminMessages: React.FC = () => {
       await DeleteMessageById(rdxUser.credentials.token, messageId);
 
       const fetched: DataFetched2 = await BringAllmessages(rdxUser.credentials.token, "", currentPage);
-      setProducts(fetched.data);
+      setMessages(fetched.data);
       console.log(fetched.data, "fetched");
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -84,13 +83,13 @@ export const AdminMessages: React.FC = () => {
   };
 
 
-  console.log(products, "productdasdasdasdasds");
+  console.log(messages, "productdasdasdasdasds");
 
   return (
     <div className="category">
       <div className="categoryTitle3">
         <div className="categoryTitle37">
-          ADMIN PRODUCTS
+          ADMIN MESSAGES
         </div>
         <div>
           <div className="inputHeader">
@@ -106,7 +105,7 @@ export const AdminMessages: React.FC = () => {
           </div>
         </div>
       </div>
-      {products ? (
+      {messages ? (
         <>
           <div className="table-container">
             <table className="table">
@@ -120,7 +119,7 @@ export const AdminMessages: React.FC = () => {
                 </tr>
               </thead>
               <tbody>
-                {products.map((product: any) => (
+                {messages.map((product: any) => (
                   <tr key={`${product.product.name}-${product.userOwner.name}-${product.userUser.name}-${product.created_at}`}>
                     <td>{product.product.name}</td>
                     <td>{product.userOwner.name}</td>

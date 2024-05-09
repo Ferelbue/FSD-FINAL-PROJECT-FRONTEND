@@ -3,7 +3,7 @@ import { BringProducts, Notification } from "../../services/apiCalls";
 import { DataFetched, DataFetched2, ProductData } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./Home.css";
-import { Card, Carousel} from "react-bootstrap";
+import { Card, Carousel } from "react-bootstrap";
 import { updateNotification } from "../../app/slices/notificationSlice";
 import { useDispatch } from "react-redux";
 import { userData, userout } from "../../app/slices/userSlice";
@@ -78,6 +78,9 @@ export const Home: React.FC = () => {
       ) : (
         <div>
           {Array.from({ length: 13 }).map((_, i) => {
+            if (!products) {
+              return null; 
+            }
             const productsOfCategory = products.filter(product => product?.category?.id === i);
             const arrayProducts = [];
             const carouselSize = 4;

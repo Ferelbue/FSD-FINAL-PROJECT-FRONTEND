@@ -1,5 +1,5 @@
 
-import { BringProductDetail, UploadImage, UploadProducto } from "../../services/apiCalls";
+import { BringProductDetail, Notification, UploadImage, UploadProducto } from "../../services/apiCalls";
 import { CategoryData, DataFetched2, FileImageData, MessageData, ProductData5 } from "../../interfaces";
 import { useEffect, useState, useRef } from "react";
 import "./UploadProduct.css";
@@ -12,6 +12,8 @@ import { CInput2 } from "../../common/CInput2/CInput2";
 import { CInput } from "../../common/CInput/CInput";
 import { ROOT2 } from "../../services/apiCalls"
 import { CInput1 } from "../../common/CInput1/CInput1";
+import { useDispatch } from "react-redux";
+import { updateNotification } from "../../app/slices/notificationSlice";
 
 export const UploadProduct: React.FC = () => {
   const [product, setProducts] = useState<ProductData5>();
@@ -21,6 +23,18 @@ export const UploadProduct: React.FC = () => {
   const rdxUser = useSelector(userData);
   const navigate = useNavigate();
   const fileInput = useRef<HTMLInputElement>(null);
+  const dispatch = useDispatch();
+
+  const notiMe = async (): Promise<void> => {
+    const fetched2: DataFetched2 = await Notification(rdxUser.credentials.token);
+    if (fetched2.data[0].length === 0 && fetched2.data[1].length === 0) {
+      dispatch(updateNotification({ notification: false }));
+    } else {
+      dispatch(updateNotification({ notification: true }));
+    }
+  }
+  notiMe();
+
 
   const [message, setMessage] = useState<MessageData>({
     text: "",
