@@ -32,7 +32,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: white!important;
+    background-color: white !important;
     padding: 0;
 }
 
@@ -79,45 +79,71 @@
     margin-right: 0.3em;
     background: url('../../../public/0start.png') no-repeat center center / contain;
 }
+
 .productStart1 {
     width: 6em;
     height: 2em;
     margin-right: 0.3em;
     background: url('../../../public/1start.png') no-repeat center center / contain;
 }
+
 .productStart2 {
     width: 6em;
     height: 2em;
     margin-right: 0.3em;
     background: url('../../../public/2start.png') no-repeat center center / contain;
 }
+
 .productStart3 {
     width: 6em;
     height: 2em;
     margin-right: 0.3em;
     background: url('../../../public/3start.png') no-repeat center center / contain;
 }
+
 .productStart4 {
     width: 6em;
     height: 2em;
     margin-right: 0.3em;
     background: url('../../../public/4start.png') no-repeat center center / contain;
 }
+
 .productStart5 {
     width: 6em;
     height: 2em;
     margin-right: 0.3em;
     background: url('../../../public/5start.png') no-repeat center center / contain;
 }
-.startCard{
+
+.startCard {
     width: 300px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     font-size: 1.7em;
-    border-top: 1px solid rgb(66,71,76);
+    border-top: 1px solid rgb(66, 71, 76);
 }
-.spinnerCenter{
+
+.spinnerCenter {
     margin-top: 35vh !important;
+}
+
+.toastyUploadOk {
+    position: absolute;
+    z-index: 100;
+    margin-left: 38vw;
+    margin-top: 20vh;
+}
+
+.custom-toast {
+    background-color: rgb(73, 90, 94) !important;
+    opacity: 79%;
+    color: white !important;
+    height: 15vh !important;
+    font-weight: bold;
+    font-size: 2em !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

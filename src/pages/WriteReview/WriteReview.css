@@ -151,6 +151,10 @@
     justify-content: center;
     align-items: center;
     padding: 1em;
+    margin-top: -5vh;
+}
+.reviewTest{
+    margin-top: 18vh;
 }
 
 .reviewTitle2 {
@@ -352,4 +356,8 @@
     .oneComment{
         margin-top: 17vh;
     }
+    .reviewTest{
+        margin-top: 23vh;
+    }
+
 }

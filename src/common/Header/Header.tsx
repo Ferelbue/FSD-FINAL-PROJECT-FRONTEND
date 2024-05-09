@@ -30,6 +30,7 @@ const Header = () => {
     const [productsFetched, setProductsFetched] = useState<any>();
     const searchRdx = useSelector(searchData);
 
+    
     useEffect(() => {
 
         setTimeout(() => {

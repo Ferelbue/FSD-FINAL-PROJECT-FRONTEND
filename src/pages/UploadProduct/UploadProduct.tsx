@@ -14,12 +14,12 @@ import { ROOT2 } from "../../services/apiCalls"
 import { CInput1 } from "../../common/CInput1/CInput1";
 import { useDispatch } from "react-redux";
 import { updateNotification } from "../../app/slices/notificationSlice";
+import { updateUploadOk } from "../../app/slices/uploadOkSlice";
 
 export const UploadProduct: React.FC = () => {
   const [product, setProducts] = useState<ProductData5>();
   const [dataImage, setDataImage] = useState<FileImageData>();
   const [error, setError] = useState<string>("");
-  const [uploadOk, setUploadOk] = useState<boolean>(false);
   const rdxProductDetail = useSelector(productDetailData);
   const rdxUser = useSelector(userData);
   const navigate = useNavigate();
@@ -163,12 +163,11 @@ export const UploadProduct: React.FC = () => {
     }
 
     const fetched: DataFetched2 = await UploadProducto(title.text, message.text, dataImage.originalname, city.text, hourPrice.text, dayPrice.text, deposit.text, category.categoryId, rdxUser.credentials.token);
-    setUploadOk(true)
-    console.log(fetched, "fetched")
-    setTimeout(() => {
 
-      navigate("/home")
-    }, 1500);
+    dispatch(updateUploadOk({ uploadOk: true }));
+    
+    console.log(fetched, "fetched")
+    navigate("/home")
   }
 
   return (

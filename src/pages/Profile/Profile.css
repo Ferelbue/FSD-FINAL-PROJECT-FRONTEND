@@ -652,6 +652,9 @@
         width: 40vw;
         height: 20vh;
     }
+    .oneComment{
+        margin-top: 0 !important;
+    }
 }
 .cardProduct312{
     margin-top: 20vh;

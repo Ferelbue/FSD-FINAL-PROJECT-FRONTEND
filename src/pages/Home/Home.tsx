@@ -3,7 +3,7 @@ import { BringProducts, Notification } from "../../services/apiCalls";
 import { DataFetched, DataFetched2 } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./Home.css";
-import { Card, Carousel} from "react-bootstrap";
+import { Card, Carousel, Toast } from "react-bootstrap";
 import { updateNotification } from "../../app/slices/notificationSlice";
 import { useDispatch } from "react-redux";
 import { userData, userout } from "../../app/slices/userSlice";
@@ -11,21 +11,24 @@ import { useSelector } from "react-redux";
 import { updateProductDetail } from "../../app/slices/productDetailSlice";
 import { useNavigate } from "react-router-dom";
 import { ROOT2 } from "../../services/apiCalls"
+import { updateUploadOk, uploadOkData } from "../../app/slices/uploadOkSlice";
 
 export const Home: React.FC = () => {
   const [products, setProducts] = useState<any[]>([]);
   const [error, setError] = useState<string>("");
   const [firstFetch, setFirstFetch] = useState<boolean>(false);
+  const [uploadOk, setUploadOk] = useState<boolean>(false);
   const dispatch = useDispatch();
-  const rdxUser = useSelector(userData);
   const navigate = useNavigate();
+  const rdxUser = useSelector(userData);
+  const rdxUploadOk = useSelector(uploadOkData);
+
 
   const notiMe = async (): Promise<void> => {
     const fetched2: DataFetched2 = await Notification(rdxUser.credentials.token);
     console.log(fetched2.message, "fetched2")
 
     if (fetched2.message === "JWT NOT VALID OR MALFORMED") {
-      console.log("hola soy fetched2.message")
       dispatch(userout({ credentials: "" }));
       dispatch(updateNotification({ notification: "" }));
       navigate("/")
@@ -39,6 +42,13 @@ export const Home: React.FC = () => {
 
 
   }
+  console.log(rdxUploadOk, "rdxUploadOk")
+  useEffect(() => {
+    if (rdxUploadOk.uploadOk === true) {
+      setUploadOk(true)
+      dispatch(updateUploadOk({ uploadOk: false }))
+    }
+  }, []);
 
   useEffect(() => {
     const bringData = async () => {
@@ -77,6 +87,11 @@ export const Home: React.FC = () => {
         </div>
       ) : (
         <div>
+          <div className="toastyUploadOk">
+            <Toast className="custom-toast" onClose={() => setUploadOk(false)} show={uploadOk} delay={2500} autohide>
+              <Toast.Body>Producto subido. Mucha suerte!!</Toast.Body>
+            </Toast>
+          </div>
           {Array.from({ length: 13 }).map((_, i) => {
             const productsOfCategory = products.filter(product => product?.category?.id === i);
             const arrayProducts = [];
@@ -93,6 +108,7 @@ export const Home: React.FC = () => {
                     <div className="categoryTitle">
                       {productsOfCategory[0].category.name.toUpperCase()}
                     </div>
+
                     <Carousel>
                       {arrayProducts.map((block, blockIndex) => (
                         <Carousel.Item key={blockIndex}>

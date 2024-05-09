@@ -13,10 +13,10 @@ import { useDispatch } from "react-redux";
 import { updateNotification } from "../../app/slices/notificationSlice";
 import { useNavigate } from "react-router-dom";
 import { ROOT2 } from "../../services/apiCalls"
+import { updateReviewOk } from "../../app/slices/reviewOkSlice";
 
 export const WriteReview: React.FC = () => {
   const [product, setProducts] = useState<ProductData2>();
-  const [sendReview, setSendReview] = useState<DataReview>();
 
   const rdxProductDetail = useSelector(productDetailData);
   const rdxUser = useSelector(userData);
@@ -45,7 +45,7 @@ export const WriteReview: React.FC = () => {
     }
 
   }, [rdxUser]);
-  
+
   useEffect(() => {
   }, [message]);
 
@@ -68,11 +68,10 @@ export const WriteReview: React.FC = () => {
 
   const handleSendReview = async () => {
     const fetched5: DataFetched2 = await productReview(rdxProductDetail.productDetail.productId, rdxUser.credentials.token, message.text, stars.stars);
-    setSendReview(fetched5.data);
-    console.log(fetched5.data)
-    console.log(sendReview, "sendReview")
-    navigate("/productDetail")
 
+    dispatch(updateReviewOk({ reviewOk: true }));
+    navigate("/productDetail")
+    console.log(fetched5)
   }
 
   const handleStar = (star: number) => {
@@ -142,25 +141,26 @@ export const WriteReview: React.FC = () => {
                       </Dropdown.Menu>
                     </Dropdown>
                   </div>
-                  <div className="sendMesssage" onClick={() => handleSendReview()}>SEND</div>
+                  <div className={message.text.length !== 0 ? "sendMesssage" : "sendMesssage3"} onClick={() => handleSendReview()}>SEND</div>
                 </div>
-
-                {[...product.reviews].reverse().map((review: DataReview) => (
-                  <div className="reviewCard2" key={review.id}>
-                    <div className="oneComment">
-                      <div className="reviewTitle2">{review.name} <div className="dateDetail">{dayjs(review.updated_at).format('YYYY-MM-DD')}</div></div>
-                      <div className="reviewStart2">
-                        {review.starts === 0 ? <div className="productStart0"></div> : null}
-                        {review.starts === 1 ? <div className="productStart1"></div> : null}
-                        {review.starts === 2 ? <div className="productStart2"></div> : null}
-                        {review.starts === 3 ? <div className="productStart3"></div> : null}
-                        {review.starts === 4 ? <div className="productStart4"></div> : null}
-                        {review.starts === 5 ? <div className="productStart5"></div> : null}
+                <div className="reviewTest">
+                  {[...product.reviews].reverse().map((review: DataReview) => (
+                    <div className="reviewCard2" key={review.id}>
+                      <div className="oneComment">
+                        <div className="reviewTitle2">{review.name} <div className="dateDetail">{dayjs(review.updated_at).format('YYYY-MM-DD')}</div></div>
+                        <div className="reviewStart2">
+                          {review.starts === 0 ? <div className="productStart0"></div> : null}
+                          {review.starts === 1 ? <div className="productStart1"></div> : null}
+                          {review.starts === 2 ? <div className="productStart2"></div> : null}
+                          {review.starts === 3 ? <div className="productStart3"></div> : null}
+                          {review.starts === 4 ? <div className="productStart4"></div> : null}
+                          {review.starts === 5 ? <div className="productStart5"></div> : null}
+                        </div>
+                        <div className="reviewText2">{review.description}</div>
                       </div>
-                      <div className="reviewText2">{review.description}</div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </Card>
             </div>
           </div>
