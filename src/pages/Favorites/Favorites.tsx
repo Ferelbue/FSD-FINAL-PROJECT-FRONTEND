@@ -32,6 +32,13 @@ export const Favorites: React.FC = () => {
   notiMe();
 
   useEffect(() => {
+    if (rdxUser.credentials === "") {
+      navigate("/home");
+    }
+
+  }, [rdxUser]);
+
+  useEffect(() => {
     if (!products) {
       setTimeout(() => {
         setShowNoFavorites(true);

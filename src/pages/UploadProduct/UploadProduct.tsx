@@ -14,6 +14,7 @@ import { ROOT2 } from "../../services/apiCalls"
 import { CInput1 } from "../../common/CInput1/CInput1";
 import { useDispatch } from "react-redux";
 import { updateNotification } from "../../app/slices/notificationSlice";
+import { updateUploadOk } from "../../app/slices/uploadOkSlice";
 
 export const UploadProduct: React.FC = () => {
   const [product, setProducts] = useState<ProductData5>();
@@ -35,6 +36,12 @@ export const UploadProduct: React.FC = () => {
   }
   notiMe();
 
+  useEffect(() => {
+    if (rdxUser.credentials === "") {
+      navigate("/home");
+    }
+
+  }, [rdxUser]);
 
   const [message, setMessage] = useState<MessageData>({
     text: "",
@@ -156,6 +163,9 @@ export const UploadProduct: React.FC = () => {
     }
 
     const fetched: DataFetched2 = await UploadProducto(title.text, message.text, dataImage.originalname, city.text, hourPrice.text, dayPrice.text, deposit.text, category.categoryId, rdxUser.credentials.token);
+
+    dispatch(updateUploadOk({ uploadOk: true }));
+    
     console.log(fetched, "fetched")
     navigate("/home")
   }

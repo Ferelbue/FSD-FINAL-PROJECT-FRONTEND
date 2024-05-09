@@ -263,3 +263,9 @@
         height: 3em !important;
     }
 }
+
+.toastyAddFavorite {
+    position: absolute;
+    z-index: 100;
+    margin-top: 30vh !important;
+}

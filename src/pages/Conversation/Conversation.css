@@ -125,7 +125,7 @@
     border-radius: 0.5em;
     cursor: pointer;
 }
-.sendMesssage,
+.sendMesssage:hover,
 .dealFinished:hover {
     background-color: rgb(95, 118, 118);
 }
@@ -431,4 +431,19 @@
         justify-content: end !important;
         align-items: end !important;
     }
+}
+
+.sendMesssage3{
+    width: 10vw;
+    height: 5vh;
+    z-index: 10;
+    margin-left: 39vw;
+    margin-top: 8vh;
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    cursor: pointer;
 }

@@ -10,6 +10,7 @@ import { ROOT2 } from "../../services/apiCalls"
 import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { searchData2, updateCriteria2 } from "../../app/slices/search2Slice";
 import { Pagination } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 export const AdminProducts: React.FC = () => {
   const [products, setProducts] = useState<ProductData[]>([]);
@@ -21,6 +22,7 @@ export const AdminProducts: React.FC = () => {
   const [nameCriteria2, setNameCriteria2] = useState<string>("")
   const [currentPage, setCurrentPage] = useState<any>(1);
   const [maxPag, setMaxPag] = useState<number>(0);
+  const navigate = useNavigate();
 
   const notiMe = async (): Promise<void> => {
     const fetched2: DataFetched2 = await Notification(rdxUser.credentials.token);
@@ -31,6 +33,13 @@ export const AdminProducts: React.FC = () => {
     }
   }
   notiMe();
+
+  useEffect(() => {
+    if (rdxUser.credentials === "" || rdxUser.credentials.user.roleName === "user") {
+      navigate("/home");
+    }
+
+  }, [rdxUser]);
 
   useEffect(() => {
     const searching = setTimeout(() => {

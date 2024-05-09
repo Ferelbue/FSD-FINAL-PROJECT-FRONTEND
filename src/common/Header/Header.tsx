@@ -30,6 +30,7 @@ const Header = () => {
     const [productsFetched, setProductsFetched] = useState<any>();
     const searchRdx = useSelector(searchData);
 
+    
     useEffect(() => {
 
         setTimeout(() => {
@@ -254,7 +255,7 @@ const Header = () => {
                                 <Navbar.Collapse id="basic-navbar-nav" className="myNavBar5">
                                     <Nav>
                                         <Nav.Link className="myNavBar7" onClick={() => handleCategory(3)}>Bricolaje</Nav.Link>
-                                        <Nav.Link className="myNavBar7" onClick={() => handleCategory(4)}>Fontanería</Nav.Link>
+                                        <Nav.Link className="myNavBar7" onClick={() => handleCategory(4)}>Carpintería</Nav.Link>
                                         <Nav.Link className="myNavBar7" onClick={() => handleCategory(2)}>Construcción</Nav.Link>
                                         <Nav.Link className="myNavBar7" onClick={() => handleCategory(1)}>Agricola-Forestal</Nav.Link>
                                     </Nav>

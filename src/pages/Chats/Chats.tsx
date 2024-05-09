@@ -36,6 +36,13 @@ export const Chats: React.FC = () => {
   notiMe();
 
   useEffect(() => {
+    if (rdxUser.credentials === "") {
+      navigate("/home");
+    }
+
+  }, [rdxUser]);
+
+  useEffect(() => {
     if (!chats) {
       setTimeout(() => {
         setShowNoFavorites(true);

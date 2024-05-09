@@ -332,7 +332,6 @@ export const DealStatus = async (productId: number, userUserId: number, token: s
 }
 
 export const productReview = async (productId: number, token: string, message: string, stars: number): Promise<any> => {
-    console.log(productId, token, message, stars, "productReview");
     const options = {
         method: "POST",
         headers: {

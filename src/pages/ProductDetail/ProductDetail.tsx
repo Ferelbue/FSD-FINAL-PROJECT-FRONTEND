@@ -5,23 +5,28 @@ import { useEffect, useState } from "react";
 import "./ProductDetail.css";
 import { useSelector } from "react-redux";
 import { userData } from "../../app/slices/userSlice";
-import { Card } from "react-bootstrap";
+import { Card, Toast } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 import { productDetailData } from "../../app/slices/productDetailSlice";
 import { ROOT2 } from "../../services/apiCalls"
 import { updateNotification } from "../../app/slices/notificationSlice";
 import { useDispatch } from "react-redux";
+import { reviewOkData, updateReviewOk } from "../../app/slices/reviewOkSlice";
 
 export const ProductDetail: React.FC = () => {
   const [product, setProducts] = useState<ProductData2>();
   const [favorite, setFavorite] = useState<FavoriteData[]>([]);
+  const [addFavorite, setAddFavorite] = useState(false);
   const [addTofavorite, setAddToFavorite] = useState<ProductData2>();
   const [error, setError] = useState<string>("");
+  const [toastMessage, setToastMessage] = useState<string>("");
+  const [reviewOk, setReviewOk] = useState<boolean>(false);
   const rdxProductDetail = useSelector(productDetailData);
   const rdxUser = useSelector(userData);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const rdxReviewOk = useSelector(reviewOkData);
 
   const notiMe = async (): Promise<void> => {
     const fetched2: DataFetched2 = await Notification(rdxUser.credentials.token);
@@ -40,7 +45,6 @@ export const ProductDetail: React.FC = () => {
 
       if (fetched.success) {
         setProducts(fetched.data);
-        console.log(fetched, "hola soy fetched");
       } else {
         setError(fetched.message);
       }
@@ -78,10 +82,25 @@ export const ProductDetail: React.FC = () => {
     bringData();
   }, [addTofavorite]);
 
+  useEffect(() => {
+    console.log(rdxReviewOk.reviewOk, "dasdasdasdsdasjhdkjasfdbasjasm,.fnasmdnmasndasdaskdaskdasmkdmas-dmsadlñ")
+    if (rdxReviewOk.reviewOk === true) {
+      setReviewOk(true)
+      setToastMessage("Review sent successfully")
+    }
+  }, []);
+
+
+
   const handleAddFavorite = async () => {
 
     const fetched3: DataFetched2 = await AddToFavorites(rdxProductDetail.productDetail.productId, rdxUser.credentials.token)
-    console.log(fetched3, "fetched3")
+    if (fetched3.success) {
+      setToastMessage(favorite?.length === 0 ? "Producto añadido a favoritos" : "Producto eliminado de favoritos");
+      setAddFavorite(true)
+    }
+
+    console.log(fetched3.success, "fetched3")
     setAddToFavorite(fetched3.data);
 
   }
@@ -92,6 +111,26 @@ export const ProductDetail: React.FC = () => {
     <div className="home">
       {product ? (
         <>
+          {addFavorite || reviewOk
+            ?
+            <div className="toastyAddFavorite">
+              <Toast className="custom-toast" onClose={() => setAddFavorite(false)} show={addFavorite} delay={2500} autohide>
+                <Toast.Body>{toastMessage}</Toast.Body>
+              </Toast>
+            </div>
+            : null
+          }
+
+          {reviewOk
+            ?
+            <div className="toastyAddFavorite">
+              <Toast className="custom-toast" onClose={() => { dispatch(updateReviewOk({ reviewOk: false })); setReviewOk(false); }} show={reviewOk} delay={2500} autohide>
+                <Toast.Body>{toastMessage}</Toast.Body>
+              </Toast>
+            </div>
+            : null
+          }
+
           <div className="conversationCard">
             <div className="imageConversation" onClick={() => handleConversation()} />
           </div>

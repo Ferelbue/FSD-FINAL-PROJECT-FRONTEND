@@ -59,6 +59,13 @@ export const Profile: React.FC = () => {
   }
 
   useEffect(() => {
+    if (rdxUser.credentials === "") {
+      navigate("/home");
+    }
+
+  }, [rdxUser]);
+
+  useEffect(() => {
     if (!userProfile) {
       setTimeout(() => {
         setShowNoFavorites(true);
@@ -148,7 +155,7 @@ export const Profile: React.FC = () => {
     });
   }
 
-  
+
   let averageStars = Math.ceil(totalStars / arrayProducts.length);
   console.log(averageStars, "averageStars")
   const handleEdit = async () => {
@@ -174,7 +181,7 @@ export const Profile: React.FC = () => {
           <div className="iconsProfile">
             <div className="imageCloud" title="My uploads product" onClick={() => handleUploadProducts()} />
             <div className="imageReviews" title="My reviews" onClick={() => handleMyReviews()} />
-            {rdxUser.credentials.user.roleName !== "user"
+            {rdxUser.credentials && rdxUser.credentials.user.roleName !== "user"
               ? <div className="imageSettings" title="Admin APP" onClick={() => handleAdmin()} />
               : null
             }

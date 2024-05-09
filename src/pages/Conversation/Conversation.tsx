@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import "./Conversation.css";
 import { useSelector, } from "react-redux";
 import { userData } from "../../app/slices/userSlice";
-import { Card } from "react-bootstrap";
+import { Card, Toast } from "react-bootstrap";
 import dayjs from "dayjs";
 import { productDetailData } from "../../app/slices/productDetailSlice";
 import { CInput2 } from "../../common/CInput2/CInput2";
@@ -21,6 +21,7 @@ export const Conversation: React.FC = () => {
   const [acceptDe, setAcceptDe] = useState<boolean>(false);
   const [conversation, setConversation] = useState<ChatData2[]>([]);
   const [error, setError] = useState<string>("");
+  const [toastMessage, setToastMessage] = useState<boolean>(false);
   const rdxProductDetail = useSelector(productDetailData);
   const rdxUser = useSelector(userData);
   const navigate = useNavigate();
@@ -28,7 +29,6 @@ export const Conversation: React.FC = () => {
   const [message, setMessage] = useState<MessageData>({
     text: "",
   });
-
 
   const notiMe = async (): Promise<void> => {
     const fetched2: DataFetched2 = await Notification(rdxUser.credentials.token);
@@ -38,6 +38,13 @@ export const Conversation: React.FC = () => {
       dispatch(updateNotification({ notification: true }));
     }
   }
+
+  useEffect(() => {
+    if (rdxUser.credentials === "") {
+      navigate("/home");
+    }
+
+  }, [rdxUser]);
 
   useEffect(() => {
   }, [message]);
@@ -103,14 +110,16 @@ export const Conversation: React.FC = () => {
       if (fetched.success) {
         setTimeout(() => {
           setProducts(fetched.data);
-        }, 4000);
+        }, 2000);
       }
       notiMe();
     }
     bringData();
   }, [rdxProductDetail]);
+
   const handleSendMessage = async () => {
     const fetched: DataFetched2 = await SendMessage(rdxProductDetail.productDetail.productId, rdxProductDetail.productDetail.userUserId, rdxUser.credentials.token, message.text);
+    setToastMessage(true);
     setSend(true);
     console.log(fetched, "fetched")
   }
@@ -129,6 +138,15 @@ export const Conversation: React.FC = () => {
     <div className="conversation">
       {conversation && product ? (
         <>
+          {toastMessage
+            ?
+            <div className="toastyAddFavorite">
+              <Toast className="custom-toast" onClose={() => setToastMessage(false)} show={toastMessage} delay={2500} autohide>
+                <Toast.Body>{"Mensaje enviado correctamente"}</Toast.Body>
+              </Toast>
+            </div>
+            : null
+          }
           <Card className="cardProduct3">
             <Card.Img className="imageProductCard5" src={`${ROOT2}uploads/${product.image}`} />
             <Card.Body>
@@ -177,7 +195,7 @@ export const Conversation: React.FC = () => {
                     value={message.text || ""}
                     onChange={(e) => inputHandler(e)}
                   />
-                  <div className="sendMesssage" onClick={() => handleSendMessage()}>SEND</div>
+                  <div className={message.text.length !== 0 ? "sendMesssage" : "sendMesssage3"} onClick={() => handleSendMessage()}>SEND</div>
                 </div>
                 <div className="messagesGroup">
                   {[...conversation].reverse().map((convers, index) => (
