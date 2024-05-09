@@ -11,6 +11,7 @@ import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { searchData2, updateCriteria2 } from "../../app/slices/search2Slice";
 import { Pagination } from "react-bootstrap";
 import { CInput3 } from "../../common/CInput3/CInput3";
+import { useNavigate } from "react-router-dom";
 
 export const AdminUsers: React.FC = () => {
   const [users, setUsers] = useState<UserData[]>([]);
@@ -23,6 +24,7 @@ export const AdminUsers: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [maxPag, setMaxPag] = useState(0);
   const [editRole, setEditRole] = useState<Record<string, boolean>>({});
+  const navigate = useNavigate();
 
   const [userRole, setUserRole] = useState<UserUpdateRole>({
     role: ""
@@ -44,6 +46,13 @@ export const AdminUsers: React.FC = () => {
     }
   }
   notiMe();
+
+  useEffect(() => {
+    if (rdxUser.credentials === "" || rdxUser.credentials.user.roleName === "user") {
+      navigate("/home");
+    }
+
+  }, [rdxUser]);
 
   useEffect(() => {
     const searching = setTimeout(() => {

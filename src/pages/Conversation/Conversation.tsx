@@ -29,7 +29,6 @@ export const Conversation: React.FC = () => {
     text: "",
   });
 
-
   const notiMe = async (): Promise<void> => {
     const fetched2: DataFetched2 = await Notification(rdxUser.credentials.token);
     if (fetched2.data[0].length === 0 && fetched2.data[1].length === 0) {
@@ -38,6 +37,13 @@ export const Conversation: React.FC = () => {
       dispatch(updateNotification({ notification: true }));
     }
   }
+
+  useEffect(() => {
+    if (rdxUser.credentials === "") {
+      navigate("/home");
+    }
+
+  }, [rdxUser]);
 
   useEffect(() => {
   }, [message]);

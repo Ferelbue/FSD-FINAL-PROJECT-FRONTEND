@@ -40,6 +40,13 @@ export const WriteReview: React.FC = () => {
   }
 
   useEffect(() => {
+    if (rdxUser.credentials === "") {
+      navigate("/home");
+    }
+
+  }, [rdxUser]);
+  
+  useEffect(() => {
   }, [message]);
 
   const inputHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {

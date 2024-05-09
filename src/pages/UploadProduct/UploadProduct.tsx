@@ -19,6 +19,7 @@ export const UploadProduct: React.FC = () => {
   const [product, setProducts] = useState<ProductData5>();
   const [dataImage, setDataImage] = useState<FileImageData>();
   const [error, setError] = useState<string>("");
+  const [uploadOk, setUploadOk] = useState<boolean>(false);
   const rdxProductDetail = useSelector(productDetailData);
   const rdxUser = useSelector(userData);
   const navigate = useNavigate();
@@ -35,6 +36,12 @@ export const UploadProduct: React.FC = () => {
   }
   notiMe();
 
+  useEffect(() => {
+    if (rdxUser.credentials === "") {
+      navigate("/home");
+    }
+
+  }, [rdxUser]);
 
   const [message, setMessage] = useState<MessageData>({
     text: "",
@@ -156,8 +163,12 @@ export const UploadProduct: React.FC = () => {
     }
 
     const fetched: DataFetched2 = await UploadProducto(title.text, message.text, dataImage.originalname, city.text, hourPrice.text, dayPrice.text, deposit.text, category.categoryId, rdxUser.credentials.token);
+    setUploadOk(true)
     console.log(fetched, "fetched")
-    navigate("/home")
+    setTimeout(() => {
+
+      navigate("/home")
+    }, 1500);
   }
 
   return (
