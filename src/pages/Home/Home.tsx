@@ -1,9 +1,9 @@
 
 import { BringProducts, Notification } from "../../services/apiCalls";
-import { DataFetched, DataFetched2 } from "../../interfaces";
+import { DataFetched, DataFetched2, ProductData } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./Home.css";
-import { Card, Carousel} from "react-bootstrap";
+import { Card, Carousel } from "react-bootstrap";
 import { updateNotification } from "../../app/slices/notificationSlice";
 import { useDispatch } from "react-redux";
 import { userData, userout } from "../../app/slices/userSlice";
@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { ROOT2 } from "../../services/apiCalls"
 
 export const Home: React.FC = () => {
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<ProductData[]>([]);
   const [error, setError] = useState<string>("");
   const [firstFetch, setFirstFetch] = useState<boolean>(false);
   const dispatch = useDispatch();
@@ -78,6 +78,9 @@ export const Home: React.FC = () => {
       ) : (
         <div>
           {Array.from({ length: 13 }).map((_, i) => {
+            if (!products) {
+              return null; 
+            }
             const productsOfCategory = products.filter(product => product?.category?.id === i);
             const arrayProducts = [];
             const carouselSize = 4;

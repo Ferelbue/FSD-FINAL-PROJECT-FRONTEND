@@ -1,6 +1,6 @@
 
 import { BringConversation, BringProductDetail, DealStatus, EraseNotification, Notification, SendMessage, acceptDeal } from "../../services/apiCalls";
-import { DataFetched2 } from "../../interfaces";
+import { ChatData2, DataDeal, DataFetched2, MessageData, ProductData2 } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./Conversation.css";
 import { useSelector, } from "react-redux";
@@ -15,17 +15,17 @@ import { useNavigate } from "react-router-dom";
 import { ROOT2 } from "../../services/apiCalls"
 
 export const Conversation: React.FC = () => {
-  const [product, setProducts] = useState<any>();
-  const [statusDeal, setStatusDeal] = useState<any>();
+  const [product, setProducts] = useState<ProductData2>();
+  const [statusDeal, setStatusDeal] = useState<DataDeal>();
   const [send, setSend] = useState<boolean>(false);
   const [acceptDe, setAcceptDe] = useState<boolean>(false);
-  const [conversation, setConversation] = useState<any[]>([]);
+  const [conversation, setConversation] = useState<ChatData2[]>([]);
   const [error, setError] = useState<string>("");
   const rdxProductDetail = useSelector(productDetailData);
   const rdxUser = useSelector(userData);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [message, setMessage] = useState<any>({
+  const [message, setMessage] = useState<MessageData>({
     text: "",
   });
 
@@ -43,7 +43,7 @@ export const Conversation: React.FC = () => {
   }, [message]);
 
   const inputHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setMessage((prevState: any) => ({
+    setMessage((prevState: MessageData) => ({
       ...prevState,
       text: e.target.value,
     }));
@@ -64,8 +64,6 @@ export const Conversation: React.FC = () => {
       } else {
         dispatch(updateNotification({ notification: true }));
       }
-
-
       if (fetched.success) {
         setConversation(fetched.data);
         setSend(false);
@@ -78,8 +76,26 @@ export const Conversation: React.FC = () => {
       }
     };
     bringData();
+  }, [acceptDe]);
 
-  }, [send, acceptDe]);
+  useEffect(() => {
+    const bringData = async () => {
+      const fetched: DataFetched2 = await BringConversation(rdxProductDetail.productDetail.productId, rdxProductDetail.productDetail.userUserId, rdxUser.credentials.token);
+      if (fetched.success) {
+        setConversation(fetched.data);
+        setSend(false);
+        setMessage({ text: "" });
+      } else {
+        setError(fetched.message);
+      }
+      if (error) {
+        console.log(error, "error");
+      }
+    };
+    bringData();
+  }, [send]);
+
+
 
   useEffect(() => {
     const bringData = async () => {
@@ -93,9 +109,7 @@ export const Conversation: React.FC = () => {
     }
     bringData();
   }, [rdxProductDetail]);
-  console.log(product, "produasdsaadasdasddadct")
   const handleSendMessage = async () => {
-
     const fetched: DataFetched2 = await SendMessage(rdxProductDetail.productDetail.productId, rdxProductDetail.productDetail.userUserId, rdxUser.credentials.token, message.text);
     setSend(true);
     console.log(fetched, "fetched")
@@ -108,12 +122,9 @@ export const Conversation: React.FC = () => {
   }
 
   const handleReview = async () => {
-    // const fetched5: DataFetched2 = await productReview(productId,rdxUser.credentials.token);
     navigate('/writeReview')
   }
-  console.log(statusDeal, "DEAL");
-  console.log(product, "produasdsaadasdasddadct")
-  console.log(rdxUser.credentials.user.userId, "product owner");
+
   return (
     <div className="conversation">
       {conversation && product ? (

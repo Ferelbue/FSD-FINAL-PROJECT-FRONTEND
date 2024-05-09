@@ -1,6 +1,6 @@
 
 import { BringProductDetail, Notification, productReview } from "../../services/apiCalls";
-import { DataFetched2 } from "../../interfaces";
+import { DataFetched2, DataReview, MessageData, ProductData2, StarsData } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./WriteReview.css";
 import { useSelector, } from "react-redux";
@@ -15,18 +15,18 @@ import { useNavigate } from "react-router-dom";
 import { ROOT2 } from "../../services/apiCalls"
 
 export const WriteReview: React.FC = () => {
-  const [product, setProducts] = useState<any>();
-  const [sendReview, setSendReview] = useState<any>();
+  const [product, setProducts] = useState<ProductData2>();
+  const [sendReview, setSendReview] = useState<DataReview>();
 
   const rdxProductDetail = useSelector(productDetailData);
   const rdxUser = useSelector(userData);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [message, setMessage] = useState<any>({
+  const [message, setMessage] = useState<MessageData>({
     text: "",
   });
-  const [stars, setStars] = useState<any>({
-    stars: "",
+  const [stars, setStars] = useState<StarsData>({
+    stars: 0,
   });
 
 
@@ -43,7 +43,7 @@ export const WriteReview: React.FC = () => {
   }, [message]);
 
   const inputHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setMessage((prevState: any) => ({
+    setMessage((prevState: MessageData) => ({
       ...prevState,
       text: e.target.value,
     }));
@@ -120,7 +120,7 @@ export const WriteReview: React.FC = () => {
                   <div className="sendMesssage2">
                     <Dropdown >
                       <Dropdown.Toggle className="dropdownStar">
-                        {stars.stars === ""
+                        {stars.stars === 0
                           ? "STARS"
                           : (stars.stars)
                         }
@@ -138,7 +138,7 @@ export const WriteReview: React.FC = () => {
                   <div className="sendMesssage" onClick={() => handleSendReview()}>SEND</div>
                 </div>
 
-                {[...product.reviews].reverse().map((review: any) => (
+                {[...product.reviews].reverse().map((review: DataReview) => (
                   <div className="reviewCard2" key={review.id}>
                     <div className="oneComment">
                       <div className="reviewTitle2">{review.name} <div className="dateDetail">{dayjs(review.updated_at).format('YYYY-MM-DD')}</div></div>

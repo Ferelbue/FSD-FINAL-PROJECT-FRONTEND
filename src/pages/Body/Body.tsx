@@ -12,6 +12,7 @@ import { Profile } from "../Profile/Profile";
 import { AdminUsers } from "../AdminUsers/AdminUsers";
 import { AdminProducts } from "../AdminProducts/AdminProducts";
 import { Register } from "../Register/Register";
+import { AdminMessages } from "../AdminMessages/AdminMessages";
 
 
 export const Body: React.FC = () => {
@@ -32,6 +33,7 @@ export const Body: React.FC = () => {
         <Route path="/profile" element={<Profile/>} />
         <Route path="/adminusers" element={<AdminUsers/>} />
         <Route path="/adminproducts" element={<AdminProducts/>} />
+        <Route path="/adminmessages" element={<AdminMessages/>} />
       </Routes>
     </>
   );

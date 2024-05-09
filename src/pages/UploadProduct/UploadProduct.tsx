@@ -1,6 +1,6 @@
 
-import { BringProductDetail, UploadImage, UploadProducto } from "../../services/apiCalls";
-import { DataFetched2 } from "../../interfaces";
+import { BringProductDetail, Notification, UploadImage, UploadProducto } from "../../services/apiCalls";
+import { CategoryData, DataFetched2, FileImageData, MessageData, ProductData5 } from "../../interfaces";
 import { useEffect, useState, useRef } from "react";
 import "./UploadProduct.css";
 import { useSelector } from "react-redux";
@@ -12,70 +12,84 @@ import { CInput2 } from "../../common/CInput2/CInput2";
 import { CInput } from "../../common/CInput/CInput";
 import { ROOT2 } from "../../services/apiCalls"
 import { CInput1 } from "../../common/CInput1/CInput1";
+import { useDispatch } from "react-redux";
+import { updateNotification } from "../../app/slices/notificationSlice";
 
 export const UploadProduct: React.FC = () => {
-  const [product, setProducts] = useState<any>();
-  const [dataImage, setDataImage] = useState<any>();
+  const [product, setProducts] = useState<ProductData5>();
+  const [dataImage, setDataImage] = useState<FileImageData>();
   const [error, setError] = useState<string>("");
   const rdxProductDetail = useSelector(productDetailData);
   const rdxUser = useSelector(userData);
   const navigate = useNavigate();
   const fileInput = useRef<HTMLInputElement>(null);
+  const dispatch = useDispatch();
 
-  const [message, setMessage] = useState<any>({
+  const notiMe = async (): Promise<void> => {
+    const fetched2: DataFetched2 = await Notification(rdxUser.credentials.token);
+    if (fetched2.data[0].length === 0 && fetched2.data[1].length === 0) {
+      dispatch(updateNotification({ notification: false }));
+    } else {
+      dispatch(updateNotification({ notification: true }));
+    }
+  }
+  notiMe();
+
+
+  const [message, setMessage] = useState<MessageData>({
     text: "",
   });
-  const [title, setTitle] = useState<any>({
+  const [title, setTitle] = useState<MessageData>({
     text: "",
   });
-  const [hourPrice, setHourPrice] = useState<any>({
+  const [hourPrice, setHourPrice] = useState<MessageData>({
     text: "",
   });
-  const [dayPrice, setDayPrice] = useState<any>({
+  const [dayPrice, setDayPrice] = useState<MessageData>({
     text: "",
   });
-  const [deposit, setDeposit] = useState<any>({
+  const [deposit, setDeposit] = useState<MessageData>({
     text: "",
   });
-  const [city, setCity] = useState<any>({
+  const [city, setCity] = useState<MessageData>({
     text: "",
   });
-  const [category, setCategory] = useState<any>({
+  const [category, setCategory] = useState<CategoryData>({
     category: "",
     categoryId: 0
   });
   const inputHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setMessage((prevState: any) => ({
+    setMessage((prevState: MessageData) => ({
       ...prevState,
       text: e.target.value,
     }));
   };
   const inputHandler2 = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle((prevState: any) => ({
+    setTitle((prevState: MessageData) => ({
       ...prevState,
       text: e.target.value,
     }));
   };
   const inputHandler3 = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setHourPrice((prevState: any) => ({
+    setHourPrice((prevState: MessageData) => ({
       ...prevState,
       text: e.target.value,
     }));
   };
   const inputHandler4 = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDayPrice((prevState: any) => ({
+    setDayPrice((prevState: MessageData) => ({
       ...prevState,
       text: e.target.value,
     }));
   };
   const inputHandler5 = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDeposit((prevState: any) => ({
+    setDeposit((prevState: MessageData) => ({
       ...prevState,
       text: e.target.value,
     }));
   };
   const inputHandler6 = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCity((prevState: any) => ({
+    setCity((prevState: MessageData) => ({
       ...prevState,
       text: e.target.value,
     }));
@@ -108,7 +122,7 @@ export const UploadProduct: React.FC = () => {
     bringData();
   }, [rdxProductDetail]);
 
-  const handleSubmit = async (event: any) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement> | React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     const file = fileInput?.current?.files?.[0];
     const formData = new FormData();
@@ -136,12 +150,15 @@ export const UploadProduct: React.FC = () => {
   }
 
   const handleUploadProduct = async () => {
+    if (!dataImage) {
+      console.error('dataImage is undefined');
+      return;
+    }
+
     const fetched: DataFetched2 = await UploadProducto(title.text, message.text, dataImage.originalname, city.text, hourPrice.text, dayPrice.text, deposit.text, category.categoryId, rdxUser.credentials.token);
     console.log(fetched, "fetched")
     navigate("/home")
-
   }
-
 
   return (
 

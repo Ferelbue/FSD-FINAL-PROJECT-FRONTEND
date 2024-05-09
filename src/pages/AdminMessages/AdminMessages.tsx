@@ -1,8 +1,8 @@
 
-import { BringProducts, BringProductsNumber, DeleteProductById, Notification } from "../../services/apiCalls";
+import { BringAllMessagesNumber, BringAllmessages, DeleteMessageById, Notification } from "../../services/apiCalls";
 import { DataFetched2, DataFetched3, ProductData } from "../../interfaces";
 import { useEffect, useState } from "react";
-import "./AdminProducts.css";
+import "./AdminMessages.css";
 import { useSelector, useDispatch } from "react-redux";
 import { userData } from "../../app/slices/userSlice";
 import { updateNotification } from "../../app/slices/notificationSlice";
@@ -11,8 +11,8 @@ import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { searchData2, updateCriteria2 } from "../../app/slices/search2Slice";
 import { Pagination } from "react-bootstrap";
 
-export const AdminProducts: React.FC = () => {
-  const [products, setProducts] = useState<ProductData[]>([]);
+export const AdminMessages: React.FC = () => {
+  const [messages, setMessages] = useState<ProductData[]>([]);
   const [error, setError] = useState<DataFetched3>();
   const dispatch = useDispatch();
   const searchRdx2 = useSelector(searchData2);
@@ -43,18 +43,17 @@ export const AdminProducts: React.FC = () => {
   const searchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCriteria2(e.target.value)
     setNameCriteria2(e.target.value.toLowerCase())
-    console.log(nameCriteria2, "criteria2");
   }
 
   useEffect(() => {
     const bringData = async () => {
 
-      console.log(searchRdx2.criteria, "searchRdx2.criteria");
-      const fetched: DataFetched2 = await BringProducts(searchRdx2.criteria, currentPage, "10");
-      const fetched2: DataFetched2 = await BringProductsNumber();
-      setProducts(fetched.data);
-      setMaxPag(Math.ceil(fetched2.data.length / 10))
+      const fetched: DataFetched2 = await BringAllmessages(rdxUser.credentials.token, searchRdx2.criteria, currentPage);
+      const fetched2: DataFetched2 = await BringAllMessagesNumber(rdxUser.credentials.token);
 
+      setMessages(fetched.data);
+      setMaxPag(Math.ceil(fetched2.data / 10))
+      console.log(fetched2.data, "maxPag")
       if (error) {
         console.log(error, "error");
       }
@@ -65,12 +64,12 @@ export const AdminProducts: React.FC = () => {
 
   }, [searchRdx2.criteria, currentPage]);
 
-  const handleDelete = async (productId: number) => {
+  const handleDelete = async (messageId: number) => {
     try {
-      await DeleteProductById(rdxUser.credentials.token, productId);
+      await DeleteMessageById(rdxUser.credentials.token, messageId);
 
-      const fetched: DataFetched2 = await BringProducts("", currentPage, "10");
-      setProducts(fetched.data);
+      const fetched: DataFetched2 = await BringAllmessages(rdxUser.credentials.token, "", currentPage);
+      setMessages(fetched.data);
       console.log(fetched.data, "fetched");
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -83,19 +82,21 @@ export const AdminProducts: React.FC = () => {
     }
   };
 
+
+  console.log(messages, "productdasdasdasdasds");
+
   return (
     <div className="category">
-
       <div className="categoryTitle3">
         <div className="categoryTitle37">
-          ADMIN PRODUCTS
+          ADMIN MESSAGES
         </div>
         <div>
           <div className="inputHeader">
             <CustomInput
               className={`inputSearch2`}
               type="text"
-              placeholder="search a product...."
+              placeholder="search a message...."
               name="product"
               disabled={false}
               value={criteria2 || ""}
@@ -104,42 +105,30 @@ export const AdminProducts: React.FC = () => {
           </div>
         </div>
       </div>
-      {products ? (
+      {messages ? (
         <>
           <div className="table-container">
             <table className="table">
               <thead>
                 <tr>
-                  <th>Image</th>
-                  <th>Name</th>
-                  <th>Description</th>
-                  <th>Hour Price</th>
-                  <th>Day Price</th>
-                  <th>City</th>
-                  <th>Category</th>
+                  <th>Product</th>
                   <th>Owner</th>
-                  <th>Stars</th>
-                  <th>Total Reviews</th>
+                  <th>User</th>
+                  <th>Message</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                {products.map((product: ProductData) => (
-                  <tr key={product.id}>
-                    <td><img src={`${ROOT2}uploads/${product.image}`} alt={product.name} style={{ width: '50px', height: '50px' }} /></td>
-                    <td>{product.name}</td>
-                    <td>{product.description}</td>
-                    <td>{product.hourPrice}</td>
-                    <td>{product.dayPrice}</td>
-                    <td>{product.city}</td>
-                    <td>{product.category.name}</td>
-                    <td>{product.owner.name}</td>
-                    <td>{product.starts}</td>
-                    <td>{product.totalReviews}</td>
+                {messages.map((product: any) => (
+                  <tr key={`${product.product.name}-${product.userOwner.name}-${product.userUser.name}-${product.created_at}`}>
+                    <td>{product.product.name}</td>
+                    <td>{product.userOwner.name}</td>
+                    <td>{product.userUser.name}</td>
+                    <td>{product.message}</td>
                     <td>
                       {rdxUser.credentials.user.roleName !== "user"
                         ? (
-                          <img src={`${ROOT2}uploads/pot.png`} alt={product.name} style={{ width: '30px', height: '30px', cursor: 'pointer', margin: '0.2em' }} onClick={() => handleDelete(product.id)} />
+                          <img src={`${ROOT2}uploads/pot.png`} alt={product.product.name} style={{ width: '30px', height: '30px', cursor: 'pointer', margin: '0.2em' }} onClick={() => handleDelete(product.id)} />
                         )
                         : null
                       }
@@ -165,6 +154,6 @@ export const AdminProducts: React.FC = () => {
         <div className="cardProduct33">Any product found...</div>
       )
       }
-    </div >
+    </div>
   );
 };

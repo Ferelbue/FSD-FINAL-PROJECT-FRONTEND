@@ -440,6 +440,19 @@
 .imageAdminProducts:hover {
     background-image: url('../../../public/adminProducts.png');
 }
+.imageAdminMessages {
+    width: 20vw;
+    height: 30vh;
+    margin-right: 0.5em;
+    margin-left: 0.5em;
+    background: url('../../../public/adminMessages.png') no-repeat center center / cover;
+    cursor: pointer;
+    margin-top: 0.4em !important;
+}
+
+.imageAdminMessages:hover {
+    background-image: url('../../../public/adminMessages.png');
+}
 
 .carouselProducts3 {
     padding-left: 2em;

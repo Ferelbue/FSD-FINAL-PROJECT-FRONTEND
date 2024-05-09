@@ -1,6 +1,6 @@
 
 import { BringUserProducts, BringUserProfile, Notification, UploadImage, UploadUserProfile } from "../../services/apiCalls";
-import { DataFetched2, UserUpdateData } from "../../interfaces";
+import { DataFetched2, DataReview, UserUpdateData, UserProfile, UserData, FileImageData, ProductData4, ProductData5 } from "../../interfaces";
 import { useEffect, useRef, useState } from "react";
 import "./Profile.css";
 import { useSelector, } from "react-redux";
@@ -15,8 +15,8 @@ import { ROOT2 } from "../../services/apiCalls"
 import { CInput3 } from "../../common/CInput3/CInput3";
 
 export const Profile: React.FC = () => {
-  const [userProfile, setUserProfile] = useState<any>();
-  const [userProducts, setUserProducts] = useState<any>();
+  const [userProfile, setUserProfile] = useState<UserProfile | undefined>();
+  const [userProducts, setUserProducts] = useState<ProductData4[]>([]);
   const [error, setError] = useState<string>("");
   const [uploadProductsClick, setUploadProductsClick] = useState<boolean>(false);
   const [myReviewsClick, setMyReviewsClick] = useState<boolean>(false);
@@ -27,7 +27,7 @@ export const Profile: React.FC = () => {
   const rdxUser = useSelector(userData);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [dataImage, setDataImage] = useState<any>();
+  const [dataImage, setDataImage] = useState<FileImageData>();
   const fileInput = useRef<HTMLInputElement>(null);
 
   const [user, setUser] = useState<UserUpdateData>({
@@ -38,7 +38,7 @@ export const Profile: React.FC = () => {
   })
 
   const inputHandler2 = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUser((prevState: any) => ({
+    setUser((prevState: UserUpdateData) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
@@ -114,7 +114,7 @@ export const Profile: React.FC = () => {
     setMyReviewsClick(false);
   }
 
-  const handleSubmit = async (event: any) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement> | React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()
     const file = fileInput?.current?.files?.[0]
     const formData = new FormData()
@@ -142,12 +142,13 @@ export const Profile: React.FC = () => {
     for (let i = 0; i < userProducts.length; i += carouselSize) {
       arrayProducts.push(userProducts.slice(i, i + carouselSize))
     }
-
-    userProducts.forEach((product: any) => {
+    console.log(arrayProducts, "arrayProducts")
+    userProducts.forEach((product: ProductData4) => {
       totalStars += product.starts
     });
   }
-  console.log(totalStars, "totalStars")
+
+  
   let averageStars = Math.ceil(totalStars / arrayProducts.length);
   console.log(averageStars, "averageStars")
   const handleEdit = async () => {
@@ -161,7 +162,7 @@ export const Profile: React.FC = () => {
     console.log(fetched, "fetched")
   }
 
-  console.log(userProducts, "user")
+  console.log(dataImage, "usfgfdgfdgfer")
   return (
     <div className="profile">
 
@@ -276,10 +277,10 @@ export const Profile: React.FC = () => {
               </div>
 
               <Carousel>
-                {arrayProducts && arrayProducts.map((products: any, productIndex: number) => (
+                {arrayProducts && arrayProducts.map((products: ProductData4[], productIndex: number) => (
                   <Carousel.Item key={productIndex}>
                     <div className="row justify-content-around carouselProducts3">
-                      {products.map((product: any) => (
+                      {products.map((product: ProductData4) => (
                         <div className="col-sm-12 col-md-6 col-lg-3" key={product.id}>
                           <Card className="cardProduct" onClick={() => handleDetail(product.id, product.owner.id)}>
                             <Card.Img className="imageProductCard" src={`${ROOT2}uploads/${product.image}`} />
@@ -314,31 +315,35 @@ export const Profile: React.FC = () => {
         <div>
           {myReviewsClick && (
             <>
-              <div className="categoryTitle35">
-                MY REVIEWS ({userProfile.reviews.length})
-              </div>
-              <Card className="cardMyReviews">
-                <div>
-                  <div >
-                    {[...userProfile.reviews].reverse().map((review: any) => (
-                      <div className="reviewCard2" key={review.id}>
-                        <div className="oneComment">
-                          <div className="reviewTitle2">{review.name} <div className="dateDetail">{dayjs(review.updated_at).format('YYYY-MM-DD')}</div></div>
-                          <div className="reviewStart2">
-                            {review.starts === 0 ? <div className="productStart0"></div> : null}
-                            {review.starts === 1 ? <div className="productStart1"></div> : null}
-                            {review.starts === 2 ? <div className="productStart2"></div> : null}
-                            {review.starts === 3 ? <div className="productStart3"></div> : null}
-                            {review.starts === 4 ? <div className="productStart4"></div> : null}
-                            {review.starts === 5 ? <div className="productStart5"></div> : null}
-                          </div>
-                          <div className="reviewText2">{review.description}</div>
-                        </div>
-                      </div>
-                    ))}
+              {userProfile?.reviews && (
+                <>
+                  <div className="categoryTitle35">
+                    MY REVIEWS ({userProfile.reviews.length})
                   </div>
-                </div>
-              </Card>
+                  <Card className="cardMyReviews">
+                    <div>
+                      <div>
+                        {[...userProfile.reviews].reverse().map((review: DataReview) => (
+                          <div className="reviewCard2" key={review.id}>
+                            <div className="oneComment">
+                              <div className="reviewTitle2">{review.name} <div className="dateDetail">{dayjs(review.updated_at).format('YYYY-MM-DD')}</div></div>
+                              <div className="reviewStart2">
+                                {review.starts === 0 ? <div className="productStart0"></div> : null}
+                                {review.starts === 1 ? <div className="productStart1"></div> : null}
+                                {review.starts === 2 ? <div className="productStart2"></div> : null}
+                                {review.starts === 3 ? <div className="productStart3"></div> : null}
+                                {review.starts === 4 ? <div className="productStart4"></div> : null}
+                                {review.starts === 5 ? <div className="productStart5"></div> : null}
+                              </div>
+                              <div className="reviewText2">{review.description}</div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </Card>
+                </>
+              )}
 
             </>
           )}
@@ -357,6 +362,9 @@ export const Profile: React.FC = () => {
                   </div>
                   <div className="imageProducts">
                     <div className="imageAdminProducts" title="Admin APP" onClick={() => navigate("/adminproducts")} />
+                  </div>
+                  <div className="imageMessages">
+                    <div className="imageAdminMessages" title="Admin APP" onClick={() => navigate("/adminmessages")} />
                   </div>
                 </div>
               </Card>

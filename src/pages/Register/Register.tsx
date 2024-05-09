@@ -1,16 +1,17 @@
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Register.css"
 import {  RegisterData } from "../../interfaces";
 import { RegisterMe } from "../../services/apiCalls";
 import { useNavigate } from "react-router-dom";
 import { CInput4 } from "../../common/CInput4/CInput4";
 import { validame } from "../../utils/functions";
+import { Spinner } from "react-bootstrap";
 
 export const Register: React.FC = () => {
 
   const navigate = useNavigate();
-
+  const [isLoading, setIsLoading] = useState(true);
   const [credentials, setCredentials] = useState<RegisterData>({
     name: "",
     lastName: "",
@@ -50,16 +51,26 @@ export const Register: React.FC = () => {
     console.log(fetched, "fetched")
 
     navigate("/login")
-
-
-
   }
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+  }, []);
 
   return (
     <>
       <div className="categoryTitle33">
         REGISTER
       </div>
+      {isLoading ? (
+        <div className="login2">
+          <Spinner animation="border" role="status">
+            <span className="sr-only"></span>
+          </Spinner>
+        </div>
+      ) : (
       <div className="register">
         <div className="loginInputs2">
           <div className="loginText">
@@ -123,5 +134,7 @@ export const Register: React.FC = () => {
           <button className="buttonLogin" onClick={logeame}>LOG ME!</button>
         </div>
       </div>
+      )}
+
     </>);
 };

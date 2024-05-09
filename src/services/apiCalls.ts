@@ -331,7 +331,7 @@ export const DealStatus = async (productId: number, userUserId: number, token: s
     }
 }
 
-export const productReview = async (productId: number, token: string, message: string, stars: string): Promise<any> => {
+export const productReview = async (productId: number, token: string, message: string, stars: number): Promise<any> => {
     console.log(productId, token, message, stars, "productReview");
     const options = {
         method: "POST",
@@ -451,8 +451,7 @@ export const UploadImage = async (formData: FormData, token: string): Promise<an
     }
 }
 
-export const UploadProducto = async (name: string, description: string, image: string, city: string, hourPrice: number, dayPrice: number, depositPrice: number, category: number, token: string,): Promise<any> => {
-    console.log(name, description, image, city, hourPrice, dayPrice, depositPrice, category, token, "UploadProducto");
+export const UploadProducto = async (name: string, description: string, image: string, city: string, hourPrice: string, dayPrice: string, depositPrice: string, category: number, token: string,): Promise<any> => {
     const options = {
         method: "POST",
         headers: {
@@ -665,6 +664,76 @@ export const DeleteProductById = async (token: string, productId: number): Promi
 
     try {
         const response = await fetch(`${ROOT}products/${productId}`, options);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+
+        return data;
+
+    } catch (error) {
+        return error;
+    }
+}
+
+export const BringAllmessages = async (token: string, criteria: string, page: number): Promise<any> => {
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+    };
+
+    try {
+        const response = await fetch(`${ROOT}chats/all?message=${criteria}&page=${page}&limit=10`, options);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+        console.log(data, "BringAllmessages");
+        return data;
+
+    } catch (error) {
+        return error;
+    }
+}       
+
+export const BringAllMessagesNumber = async (token: string): Promise<any> => {
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+    };
+
+    try {
+        const response = await fetch(`${ROOT}chats/allNumber`, options);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+        console.log(data, "BringAllmessages");
+        return data;
+
+    } catch (error) {
+        return error;
+    }
+}
+
+export const DeleteMessageById = async (token: string, messageId: number): Promise<any> => {
+    console.log(token, messageId, "DeleteUserById");
+    const options = {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+    };
+
+    try {
+        const response = await fetch(`${ROOT}chats/${messageId}`, options);
         const data = await response.json();
         if (!response.ok) {
             throw new Error(data.message);

@@ -1,5 +1,12 @@
 .login{
-    margin-top: 24vh !important;
+    margin-top: 25vh !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.login2{
+    margin-top: 60vh !important;
     display: flex;
     flex-direction: row;
     justify-content: center;

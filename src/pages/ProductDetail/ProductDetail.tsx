@@ -1,6 +1,6 @@
 
-import { AddToFavorites, BringFavoriteUserProduct, BringProductDetail } from "../../services/apiCalls";
-import { DataFetched2 } from "../../interfaces";
+import { AddToFavorites, BringFavoriteUserProduct, BringProductDetail, Notification } from "../../services/apiCalls";
+import { DataFetched2, FavoriteData, ProductData2 } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./ProductDetail.css";
 import { useSelector } from "react-redux";
@@ -10,16 +10,28 @@ import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 import { productDetailData } from "../../app/slices/productDetailSlice";
 import { ROOT2 } from "../../services/apiCalls"
+import { updateNotification } from "../../app/slices/notificationSlice";
+import { useDispatch } from "react-redux";
 
 export const ProductDetail: React.FC = () => {
-  const [product, setProducts] = useState<any>();
-  const [favorite, setFavorite] = useState<any>();
-  const [addTofavorite, setAddToFavorite] = useState<any>();
+  const [product, setProducts] = useState<ProductData2>();
+  const [favorite, setFavorite] = useState<FavoriteData[]>([]);
+  const [addTofavorite, setAddToFavorite] = useState<ProductData2>();
   const [error, setError] = useState<string>("");
   const rdxProductDetail = useSelector(productDetailData);
   const rdxUser = useSelector(userData);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
+  const notiMe = async (): Promise<void> => {
+    const fetched2: DataFetched2 = await Notification(rdxUser.credentials.token);
+    if (fetched2.data[0].length === 0 && fetched2.data[1].length === 0) {
+      dispatch(updateNotification({ notification: false }));
+    } else {
+      dispatch(updateNotification({ notification: true }));
+    }
+  }
+  notiMe();
 
   useEffect(() => {
     const bringData = async () => {
@@ -73,7 +85,8 @@ export const ProductDetail: React.FC = () => {
     setAddToFavorite(fetched3.data);
 
   }
-  console.log(product, "favorite")
+  console.log(favorite, "favorite")
+  console.log(addTofavorite, "product")
 
   return (
     <div className="home">
