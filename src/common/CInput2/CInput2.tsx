@@ -7,7 +7,8 @@ export const CInput2: React.FC<CustomInputProps2> = ({
     name, 
     disabled, 
     value, 
-    onChange
+    onChange,
+    maxLength
 }) => {
 
     return (
@@ -18,6 +19,7 @@ export const CInput2: React.FC<CustomInputProps2> = ({
             disabled={disabled}
             value={value}
             onChange={(e) => onChange(e)}
+            maxLength={maxLength}
         />
     )
 }

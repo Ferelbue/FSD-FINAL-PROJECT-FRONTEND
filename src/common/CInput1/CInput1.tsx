@@ -7,6 +7,7 @@ export const CInput1: React.FC<CustomInputProps1> = ({
   placeholder,
   value,
   onChange,
+  maxLength
 }) => {
   return (
     <input
@@ -16,6 +17,7 @@ export const CInput1: React.FC<CustomInputProps1> = ({
       placeholder={placeholder}
       value={value || ""}
       onChange={(e) => onChange(e)}
+      maxLength={maxLength}
     />
   );
 };

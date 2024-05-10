@@ -30,6 +30,7 @@ export interface CustomInputProps1 {
     placeholder: string,
     value: string | undefined,
     onChange: (value: React.ChangeEvent<HTMLInputElement>) => void;
+    maxLength: number
 }
 export interface CustomInputProps5 {
     className: string,
@@ -48,6 +49,7 @@ export interface CustomInputProps2 {
     disabled: boolean,
     value: string | undefined,
     onChange: (value: React.ChangeEvent<HTMLTextAreaElement>) => void;
+    maxLength: number
 }
 export interface CustomInputProps3 {
     className: string,

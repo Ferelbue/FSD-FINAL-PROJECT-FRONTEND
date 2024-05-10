@@ -12,6 +12,7 @@ import { updateProductDetail } from "../../app/slices/productDetailSlice";
 import { useNavigate } from "react-router-dom";
 import { ROOT2 } from "../../services/apiCalls"
 import { updateUploadOk, uploadOkData } from "../../app/slices/uploadOkSlice";
+import { searchData3 } from "../../app/slices/search3Slice";
 
 export const Home: React.FC = () => {
   const [products, setProducts] = useState<any[]>([]);
@@ -21,6 +22,7 @@ export const Home: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const rdxUser = useSelector(userData);
+  const rdxSearch3 = useSelector(searchData3);
   const rdxUploadOk = useSelector(uploadOkData);
 
 
@@ -52,7 +54,7 @@ export const Home: React.FC = () => {
 
   useEffect(() => {
     const bringData = async () => {
-      const fetched: DataFetched = await BringProducts("", "", "");
+      const fetched: DataFetched = await BringProducts("","", "", "");
       notiMe();
       if (fetched.success) {
         console.log(fetched, "hola soy fetched");
@@ -69,6 +71,14 @@ export const Home: React.FC = () => {
       bringData();
     }
   }, [products]);
+
+  useEffect(() => {
+    const bringData2 = async () => {
+      const fetched: DataFetched = await BringProducts("", rdxSearch3.criteria , "", "");
+      setProducts(fetched.data);
+    }
+    bringData2();
+  }, [rdxSearch3.criteria]);
 
   const handleDetail = (productId: number, ownerId: number) => {
     console.log(productId, "productId")
@@ -122,7 +132,7 @@ export const Home: React.FC = () => {
                                     <div className="cardPrice">
                                       {product.hourPrice}€/hora &nbsp;&nbsp; {product.dayPrice}€/día
                                     </div>
-                                    <Card.Text>{product.description}</Card.Text>
+                                    <Card.Text className="cardDescription">{product.description}</Card.Text>
                                   </Card.Body>
                                   <div className="startCard">
                                     {product.starts === 0 ? <div className="productStart0"></div> : null}
