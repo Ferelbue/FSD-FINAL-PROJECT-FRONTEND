@@ -54,7 +54,7 @@ export const Home: React.FC = () => {
 
   useEffect(() => {
     const bringData = async () => {
-      const fetched: DataFetched = await BringProducts("","", "", "");
+      const fetched: DataFetched = await BringProducts("", "", "", "");
       notiMe();
       if (fetched.success) {
         console.log(fetched, "hola soy fetched");
@@ -74,7 +74,7 @@ export const Home: React.FC = () => {
 
   useEffect(() => {
     const bringData2 = async () => {
-      const fetched: DataFetched = await BringProducts("", rdxSearch3.criteria , "", "");
+      const fetched: DataFetched = await BringProducts("", rdxSearch3.criteria, "", "");
       setProducts(fetched.data);
     }
     bringData2();
@@ -103,58 +103,60 @@ export const Home: React.FC = () => {
             </Toast>
           </div>
           {Array.from({ length: 13 }).map((_, i) => {
-            const productsOfCategory = products ? products.filter(product => product && product?.category?.id === i) : [];
-            const arrayProducts = [];
-            const carouselSize = 4;
+            if (products) {
+              const productsOfCategory = products.filter(product => product && product.category && product.category.id === i);
+              const arrayProducts = [];
+              const carouselSize = 4;
 
-            for (let j = 0; j < productsOfCategory.length; j += carouselSize) {
-              arrayProducts.push(productsOfCategory.slice(j, j + carouselSize));
-            }
+              for (let j = 0; j < productsOfCategory.length; j += carouselSize) {
+                arrayProducts.push(productsOfCategory.slice(j, j + carouselSize));
+              }
 
-            return (
-              <div key={i}>
-                {productsOfCategory[0] &&
-                  <>
-                    <div className="categoryTitle">
-                      {productsOfCategory[0].category.name.toUpperCase()}
-                    </div>
+              return (
+                <div key={i}>
+                  {productsOfCategory[0] &&
+                    <>
+                      <div className="categoryTitle">
+                        {productsOfCategory[0].category.name.toUpperCase()}
+                      </div>
 
-                    <Carousel>
-                      {arrayProducts.map((block, blockIndex) => (
-                        <Carousel.Item key={blockIndex}>
-                          <div className="row justify-content-around carouselProducts">
-                            {block.map((product) => (
-                              <div className="col-sm-12 col-md-6 col-lg-3" key={product.id}>
-                                <Card className="cardProduct" onClick={() => handleDetail(product.id, product.owner.id)}>
-                                  <Card.Img className="imageProductCard" src={`${ROOT2}uploads/${product.image}`} />
-                                  <Card.Body>
-                                    <Card.Title className="cardTitle">{product.name.toUpperCase()}</Card.Title>
-                                    <div className="cardPrice">
-                                      {product.hourPrice}€/hora &nbsp;&nbsp; {product.dayPrice}€/día
+                      <Carousel>
+                        {arrayProducts.map((block, blockIndex) => (
+                          <Carousel.Item key={blockIndex}>
+                            <div className="row justify-content-around carouselProducts">
+                              {block.map((product) => (
+                                <div className="col-sm-12 col-md-6 col-lg-3" key={product.id}>
+                                  <Card className="cardProduct" onClick={() => handleDetail(product.id, product.owner.id)}>
+                                    <Card.Img className="imageProductCard" src={`${ROOT2}uploads/${product.image}`} />
+                                    <Card.Body>
+                                      <Card.Title className="cardTitle">{product.name.toUpperCase()}</Card.Title>
+                                      <div className="cardPrice">
+                                        {product.hourPrice}€/hora &nbsp;&nbsp; {product.dayPrice}€/día
+                                      </div>
+                                      <Card.Text className="cardDescription">{product.description}</Card.Text>
+                                    </Card.Body>
+                                    <div className="startCard">
+                                      {product.starts === 0 ? <div className="productStart0"></div> : null}
+                                      {product.starts === 1 ? <div className="productStart1"></div> : null}
+                                      {product.starts === 2 ? <div className="productStart2"></div> : null}
+                                      {product.starts === 3 ? <div className="productStart3"></div> : null}
+                                      {product.starts === 4 ? <div className="productStart4"></div> : null}
+                                      {product.starts === 5 ? <div className="productStart5"></div> : null}
+                                      ({product.totalReviews})
                                     </div>
-                                    <Card.Text className="cardDescription">{product.description}</Card.Text>
-                                  </Card.Body>
-                                  <div className="startCard">
-                                    {product.starts === 0 ? <div className="productStart0"></div> : null}
-                                    {product.starts === 1 ? <div className="productStart1"></div> : null}
-                                    {product.starts === 2 ? <div className="productStart2"></div> : null}
-                                    {product.starts === 3 ? <div className="productStart3"></div> : null}
-                                    {product.starts === 4 ? <div className="productStart4"></div> : null}
-                                    {product.starts === 5 ? <div className="productStart5"></div> : null}
-                                    ({product.totalReviews})
-                                  </div>
-                                </Card>
-                              </div>
-                            ))}
-                          </div>
-                        </Carousel.Item>
-                      ))}
-                    </Carousel>
-                  </>
-                }
+                                  </Card>
+                                </div>
+                              ))}
+                            </div>
+                          </Carousel.Item>
+                        ))}
+                      </Carousel>
+                    </>
+                  }
 
-              </div>
-            );
+                </div>
+              );
+            }
           })}
         </div>
       )}
