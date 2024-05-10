@@ -59,7 +59,7 @@ export const AdminProducts: React.FC = () => {
     const bringData = async () => {
 
       console.log(searchRdx2.criteria, "searchRdx2.criteria");
-      const fetched: DataFetched2 = await BringProducts(searchRdx2.criteria, currentPage, "10");
+      const fetched: DataFetched2 = await BringProducts(searchRdx2.criteria, "", currentPage, "10");
       const fetched2: DataFetched2 = await BringProductsNumber();
       setProducts(fetched.data);
       setMaxPag(Math.ceil(fetched2.data.length / 10))
@@ -78,7 +78,7 @@ export const AdminProducts: React.FC = () => {
     try {
       await DeleteProductById(rdxUser.credentials.token, productId);
 
-      const fetched: DataFetched2 = await BringProducts("", currentPage, "10");
+      const fetched: DataFetched2 = await BringProducts("", "", currentPage, "10");
       setProducts(fetched.data);
       console.log(fetched.data, "fetched");
     } catch (error: unknown) {
