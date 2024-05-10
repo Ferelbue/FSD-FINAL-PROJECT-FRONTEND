@@ -201,6 +201,7 @@ export const UploadProduct: React.FC = () => {
                         placeholder="Escribe un nombre de producto"
                         value={title.text || ""}
                         onChange={(e) => inputHandler2(e)}
+                        maxLength={20}
                       />
                     </div>
                   </Card.Title>
@@ -215,6 +216,7 @@ export const UploadProduct: React.FC = () => {
                       disabled={false}
                       value={message.text || ""}
                       onChange={(e) => inputHandler(e)}
+                      maxLength={150}
                     />
                   </Card.Text>
                   <Dropdown className="categoryGroup">
@@ -315,6 +317,7 @@ export const UploadProduct: React.FC = () => {
                     placeholder="Escribe una ciudad"
                     value={city.text || ""}
                     onChange={(e) => inputHandler6(e)}
+                    maxLength={20}
                   />
                 </div>
                 <button className="buttonLogin2" onClick={() => handleUploadProduct()}>UPLOAD</button>

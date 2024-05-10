@@ -122,7 +122,7 @@ export const Home: React.FC = () => {
                                     <div className="cardPrice">
                                       {product.hourPrice}€/hora &nbsp;&nbsp; {product.dayPrice}€/día
                                     </div>
-                                    <Card.Text>{product.description}</Card.Text>
+                                    <Card.Text className="cardDescription">{product.description}</Card.Text>
                                   </Card.Body>
                                   <div className="startCard">
                                     {product.starts === 0 ? <div className="productStart0"></div> : null}
