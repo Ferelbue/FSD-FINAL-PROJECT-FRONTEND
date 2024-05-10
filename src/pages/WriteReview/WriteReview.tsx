@@ -122,6 +122,7 @@ export const WriteReview: React.FC = () => {
                     disabled={false}
                     value={message.text || ""}
                     onChange={(e) => inputHandler(e)}
+                    maxLength={150}
                   />
                   <div className="sendMesssage2">
                     <Dropdown >

@@ -194,6 +194,7 @@ export const Conversation: React.FC = () => {
                     disabled={false}
                     value={message.text || ""}
                     onChange={(e) => inputHandler(e)}
+                    maxLength={200}
                   />
                   <div className={message.text.length !== 0 ? "sendMesssage" : "sendMesssage3"} onClick={() => handleSendMessage()}>SEND</div>
                 </div>
