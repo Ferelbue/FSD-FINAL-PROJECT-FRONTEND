@@ -103,7 +103,7 @@ export const Home: React.FC = () => {
             </Toast>
           </div>
           {Array.from({ length: 13 }).map((_, i) => {
-            const productsOfCategory = products.filter(product => product && product?.category?.id === i);
+            const productsOfCategory = products ? products.filter(product => product && product?.category?.id === i) : [];
             const arrayProducts = [];
             const carouselSize = 4;
 
