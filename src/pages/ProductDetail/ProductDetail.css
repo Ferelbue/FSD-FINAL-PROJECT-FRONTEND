@@ -41,9 +41,9 @@
     top: 7vh;
 }
 
-.imageProductCard2 {
+.imageProductCard6 {
     height: 50vh;
-
+    width: 50vw !important;
     border-radius: 0.5em;
     margin-top: 1em;
 }
@@ -264,7 +264,7 @@
     }
 
     
-    .imageProductCard2 {
+    .imageProductCard6 {
         height: 30vh !important;
         width: 80vw !important;
     }
