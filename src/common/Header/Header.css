@@ -231,6 +231,17 @@
     padding-left: 0.5em;
 }
 
+.inputSearch22 {
+    width: 30vw;
+    height: 5vh;
+    border-radius: 0.5em;
+    border: 1px solid lightgrey;
+    background-color: white;
+    color:black;
+    padding-left: 0.5em;
+    margin-right: -5vw;
+}
+
 .searchOptions {
     position: absolute;
     z-index: 10;
@@ -291,5 +302,16 @@
     align-items: center;
     justify-content: center;
     width: 100vw;
+
+}
+
+@media screen and (max-width: 600px) {
+    .my-dropdown{
+        margin-left: -10vw;
+    }
+    .inputSearch22 {
+        width: 40vw;
+        margin-right: -10vw;
+    }
 
 }

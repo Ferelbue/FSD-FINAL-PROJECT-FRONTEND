@@ -12,6 +12,7 @@ import searchSlice from './slices/searchSlice';
 import search2Slice from './slices/search2Slice';
 import uploadOkSlice from './slices/uploadOkSlice';
 import reviewOkSlice from './slices/reviewOkSlice';
+import search3Slice from './slices/search3Slice';
 
 const reducers:any = combineReducers({
     user: userSlice,
@@ -20,6 +21,7 @@ const reducers:any = combineReducers({
     notification: notificationSlice,
     search: searchSlice,
     search2: search2Slice,
+    search3: search3Slice,
     uploadOk: uploadOkSlice,
     reviewOk: reviewOkSlice
 });

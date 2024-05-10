@@ -147,6 +147,7 @@
     justify-content: center;
     align-items: center;
 }
+
 .cardDescription {
     display: flex;
     justify-content: center;
@@ -157,4 +158,12 @@
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     padding: 0.1em;
-  }
+}
+
+@media screen and (max-width: 600px) {
+    .cardDescription {
+        width: 70vw;
+        padding: 0.1em;
+    }
+
+}

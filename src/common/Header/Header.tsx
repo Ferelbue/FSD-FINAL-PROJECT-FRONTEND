@@ -16,6 +16,7 @@ import { searchData, updateCriteria } from '../../app/slices/searchSlice';
 import { CustomInput } from '../CustomInput/CustomInput';
 import { updateProductDetail } from '../../app/slices/productDetailSlice';
 import { Spinner } from 'react-bootstrap';
+import { updateCriteria3 } from '../../app/slices/search3Slice';
 
 const Header = () => {
 
@@ -27,10 +28,11 @@ const Header = () => {
     const [error, setError] = useState<string>("");
     const [criteria, setCriteria] = useState("")
     const [nameCriteria, setNameCriteria] = useState("")
+    const [criteria3, setCriteria3] = useState("")
+    const [nameCriteria3, setNameCriteria3] = useState("")
     const [productsFetched, setProductsFetched] = useState<any>();
     const searchRdx = useSelector(searchData);
 
-    
     useEffect(() => {
 
         setTimeout(() => {
@@ -43,7 +45,7 @@ const Header = () => {
         const bringUsers = async () => {
             if (searchRdx.criteria !== "") {
                 try {
-                    const fetchedData: DataFetched2 = await BringProducts(searchRdx.criteria, "", "");
+                    const fetchedData: DataFetched2 = await BringProducts(searchRdx.criteria, "", "", "");
 
                     setProductsFetched(fetchedData);
                     console.log(fetchedData, "fetchedData")
@@ -72,6 +74,24 @@ const Header = () => {
         setCriteria(e.target.value)
         setNameCriteria(e.target.value.toLowerCase())
     }
+
+
+
+    useEffect(() => {
+        const searching = setTimeout(() => {
+            dispatch(updateCriteria3(nameCriteria3));
+        }, 375);
+
+        return () => clearTimeout(searching);
+    }, [criteria3]);
+
+
+    const searchHandler3 = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setCriteria3(e.target.value)
+        setNameCriteria3(e.target.value.toLowerCase())
+    }
+
+
 
     const notiMe = async (): Promise<void> => {
         const fetched2: DataFetched2 = await Notification(rdxUser.credentials.token);
@@ -260,6 +280,17 @@ const Header = () => {
                                         <Nav.Link className="myNavBar7" onClick={() => handleCategory(1)}>Agricola-Forestal</Nav.Link>
                                     </Nav>
                                 </Navbar.Collapse>
+                                <div className="inputHeader22">
+                                    <CustomInput
+                                        className={`inputSearch22`}
+                                        type="text"
+                                        placeholder="filter by city..."
+                                        name="user"
+                                        disabled={false}
+                                        value={criteria3 || ""}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => searchHandler3(e)}
+                                    />
+                                </div>
                             </Container>
                         </Navbar>
                     </>
@@ -414,6 +445,17 @@ const Header = () => {
                                                 <Nav.Link className="myNavBar7" onClick={() => handleCategory(1)}>Agricola-Forestal</Nav.Link>
                                             </Nav>
                                         </Navbar.Collapse>
+                                        <div className="inputHeader22">
+                                            <CustomInput
+                                                className={`inputSearch22`}
+                                                type="text"
+                                                placeholder="filter by city..."
+                                                name="user"
+                                                disabled={false}
+                                                value={criteria3 || ""}
+                                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => searchHandler3(e)}
+                                            />
+                                        </div>
                                     </Container>
                                 </Navbar>
                             </>
@@ -567,6 +609,17 @@ const Header = () => {
                                                     <Nav.Link className="myNavBar7" onClick={() => handleCategory(1)}>Agricola-Forestal</Nav.Link>
                                                 </Nav>
                                             </Navbar.Collapse>
+                                            <div className="inputHeader22">
+                                                <CustomInput
+                                                    className={`inputSearch22`}
+                                                    type="text"
+                                                    placeholder="filter by city..."
+                                                    name="user"
+                                                    disabled={false}
+                                                    value={criteria3 || ""}
+                                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => searchHandler3(e)}
+                                                />
+                                            </div>
                                         </Container>
                                     </Navbar>
                                 </>

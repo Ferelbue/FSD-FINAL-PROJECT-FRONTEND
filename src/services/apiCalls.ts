@@ -3,8 +3,8 @@ import { DataFetched, LoginData, UserUpdateData } from "../interfaces";
 export const ROOT: string = "https://fsd-final-project-backend-production.up.railway.app/api/";
 export const ROOT2: string = "https://fsd-final-project-backend-production.up.railway.app/";
 
-export const BringProducts = async (criteria: string, pag: string, limit: string): Promise<any> => {
-
+export const BringProducts = async (criteria: string, criteria3: string, pag: string, limit: string): Promise<any> => {
+    console.log(criteria, criteria3, pag, limit, "BringProducts");
     const options = {
         method: "GET",
         headers: {
@@ -13,7 +13,7 @@ export const BringProducts = async (criteria: string, pag: string, limit: string
     };
 
     try {
-        const response: any = await fetch(`${ROOT}products?name=${criteria}&page=${pag}&limit=${limit}`, options);
+        const response: any = await fetch(`${ROOT}products?name=${criteria}&city=${criteria3}&page=${pag}&limit=${limit}`, options);
 
         const dataRes = await response.json();
         const data: DataFetched = {
