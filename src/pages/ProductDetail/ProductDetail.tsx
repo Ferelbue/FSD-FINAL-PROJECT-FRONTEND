@@ -141,7 +141,7 @@ export const ProductDetail: React.FC = () => {
             <div className="mx-auto">
               <Card className="cardProduct2">
                 <div>
-                  <Card.Img className="imageProductCard2" src={`${ROOT2}uploads/${product.image}`} />
+                  <Card.Img className="imageProductCard6" src={`${ROOT2}uploads/${product.image}`} />
                   <div className="sendMesssage4" onClick={() => handleAddFavorite()}>
                     {rdxUser.credentials === ""
                       ? null
