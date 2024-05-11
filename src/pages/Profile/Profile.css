@@ -644,13 +644,17 @@
 
 @media screen and (max-width: 600px) {
     .imageAdminUsers {
-        width: 40vw;
-        height: 20vh;
+        width: 25vw;
+        height: 15vh;
     }
 
     .imageAdminProducts {
-        width: 40vw;
-        height: 20vh;
+        width: 25vw;
+        height: 15vh;
+    }
+    .imageAdminMessages {
+        width: 25vw;
+        height: 15vh;
     }
     .oneComment{
         margin-top: 3vh !important;
