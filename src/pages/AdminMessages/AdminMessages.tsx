@@ -4,7 +4,7 @@ import { DataFetched2, DataFetched3, ProductData } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./AdminMessages.css";
 import { useSelector, useDispatch } from "react-redux";
-import { userData } from "../../app/slices/userSlice";
+import { userData, userout } from "../../app/slices/userSlice";
 import { updateNotification } from "../../app/slices/notificationSlice";
 import { ROOT2 } from "../../services/apiCalls"
 import { CustomInput } from "../../common/CustomInput/CustomInput";
@@ -26,6 +26,11 @@ export const AdminMessages: React.FC = () => {
 
   const notiMe = async (): Promise<void> => {
     const fetched2: DataFetched2 = await Notification(rdxUser.credentials.token);
+    if (fetched2.message === "JWT NOT VALID OR MALFORMED") {
+      dispatch(userout({ credentials: "" }));
+      dispatch(updateNotification({ notification: "" }));
+      navigate("/")
+    }
     if (fetched2.data[0].length === 0 && fetched2.data[1].length === 0) {
       dispatch(updateNotification({ notification: false }));
     } else {
@@ -53,7 +58,6 @@ export const AdminMessages: React.FC = () => {
     setCriteria2(e.target.value)
     setNameCriteria2(e.target.value.toLowerCase())
   }
-
   useEffect(() => {
     const bringData = async () => {
 
@@ -62,7 +66,6 @@ export const AdminMessages: React.FC = () => {
 
       setMessages(fetched.data);
       setMaxPag(Math.ceil(fetched2.data / 10))
-      console.log(fetched2.data, "maxPag")
       if (error) {
         console.log(error, "error");
       }
@@ -79,7 +82,6 @@ export const AdminMessages: React.FC = () => {
 
       const fetched: DataFetched2 = await BringAllmessages(rdxUser.credentials.token, "", currentPage);
       setMessages(fetched.data);
-      console.log(fetched.data, "fetched");
     } catch (error: unknown) {
       if (error instanceof Error) {
         setError({
@@ -90,22 +92,19 @@ export const AdminMessages: React.FC = () => {
       console.log(error, "error")
     }
   };
-
-
-  console.log(messages, "productdasdasdasdasds");
-
+  
   return (
     <div className="category">
       <div className="categoryTitle3">
         <div className="categoryTitle37">
-          ADMIN MESSAGES
+          ADMIN MENSAJES
         </div>
         <div>
           <div className="inputHeader">
             <CustomInput
               className={`inputSearch2`}
               type="text"
-              placeholder="search a message...."
+              placeholder="busca un mensaje..."
               name="product"
               disabled={false}
               value={criteria2 || ""}

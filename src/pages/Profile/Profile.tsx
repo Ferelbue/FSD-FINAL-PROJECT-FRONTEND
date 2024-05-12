@@ -4,7 +4,7 @@ import { DataFetched2, DataReview, UserUpdateData, UserProfile, FileImageData, P
 import { useEffect, useRef, useState } from "react";
 import "./Profile.css";
 import { useSelector, } from "react-redux";
-import { userData } from "../../app/slices/userSlice";
+import { userData, userout } from "../../app/slices/userSlice";
 import { Card, Carousel } from "react-bootstrap";
 import dayjs from "dayjs";
 import { updateProductDetail } from "../../app/slices/productDetailSlice";
@@ -47,6 +47,11 @@ export const Profile: React.FC = () => {
   const notiMe = async (): Promise<void> => {
     try {
       const fetched2: DataFetched2 = await Notification(rdxUser.credentials.token);
+      if (fetched2.message === "JWT NOT VALID OR MALFORMED") {
+        dispatch(userout({ credentials: "" }));
+        dispatch(updateNotification({ notification: "" }));
+        navigate("/")
+      }
       if (fetched2.data[0].length === 0 && fetched2.data[1].length === 0) {
         dispatch(updateNotification({ notification: false }))
       } else {
@@ -99,7 +104,6 @@ export const Profile: React.FC = () => {
   }, []);
 
   const handleDetail = (productId: number, ownerId: number) => {
-    console.log(productId, "productId")
     dispatch(updateProductDetail({ productDetail: { productId: productId, userUserId: ownerId } }));
     navigate("/productDetail")
   }
@@ -133,7 +137,6 @@ export const Profile: React.FC = () => {
     } else {
       console.error('No file selected');
     }
-    console.log(formData, rdxUser.credentials.token, "formData")
     const fetched: DataFetched2 = await UploadImage(formData, rdxUser.credentials.token)
     console.log(fetched, "fetched")
 
@@ -149,15 +152,12 @@ export const Profile: React.FC = () => {
     for (let i = 0; i < userProducts.length; i += carouselSize) {
       arrayProducts.push(userProducts.slice(i, i + carouselSize))
     }
-    console.log(arrayProducts, "arrayProducts")
     userProducts.forEach((product: ProductData4) => {
       totalStars += product.starts
     });
   }
 
-
   let averageStars = Math.ceil(totalStars / arrayProducts.length);
-  console.log(averageStars, "averageStars")
   const handleEdit = async () => {
     setEditProfile(true)
     setWrite(false)
@@ -169,20 +169,19 @@ export const Profile: React.FC = () => {
     console.log(fetched, "fetched")
   }
 
-  console.log(dataImage, "usfgfdgfdgfer")
   return (
     <div className="profile">
 
       <>
         <div className="categoryTitle31">
           <div>
-            MY PROFILE
+            MI PERFIL
           </div>
           <div className="iconsProfile">
-            <div className="imageCloud" title="My uploads product" onClick={() => handleUploadProducts()} />
-            <div className="imageReviews" title="My reviews" onClick={() => handleMyReviews()} />
+            <div className="imageCloud" title="Mis productos subidos" onClick={() => handleUploadProducts()} />
+            <div className="imageReviews" title="Mis reseñas" onClick={() => handleMyReviews()} />
             {rdxUser.credentials && rdxUser.credentials.user.roleName !== "user"
-              ? <div className="imageSettings" title="Admin APP" onClick={() => handleAdmin()} />
+              ? <div className="imageSettings" title="Administración APP" onClick={() => handleAdmin()} />
               : null
             }
           </div>
@@ -203,14 +202,14 @@ export const Profile: React.FC = () => {
                   {editProfile
                     ?
                     <>
-                      <div className="imageTick" title="Accept Changes" onClick={() => handleSend()} />
+                      <div className="imageTick" title="Aceptar cambios" onClick={() => handleSend()} />
                       <form onSubmit={handleSubmit}>
                         <input type="file" ref={fileInput} onChange={handleSubmit} id="fileInput" style={{ width: 0.1, height: 0.1, opacity: 0, overflow: 'hidden', position: 'absolute', zIndex: -1 }} />
                         <label htmlFor="fileInput" className="imageImage"></label>
                       </form>
                     </>
                     : null}
-                  <div className="imagePencil" title="Edit profile" onClick={() => handleEdit()} />
+                  <div className="imagePencil" title="Editar perfil" onClick={() => handleEdit()} />
 
                 </div>
                 <div className="nameProfile">
@@ -280,7 +279,7 @@ export const Profile: React.FC = () => {
           {uploadProductsClick && (
             <>
               <div className="categoryTitle35">
-                MY UPLOAD PRODUCTS ({userProducts && userProducts.length})
+                MIS PRODUCTOS SUBIDOS ({userProducts && userProducts.length})
               </div>
 
               <Carousel>
@@ -325,7 +324,7 @@ export const Profile: React.FC = () => {
               {userProfile?.reviews && (
                 <>
                   <div className="categoryTitle35">
-                    MY REVIEWS ({userProfile.reviews.length})
+                    MIS RESEÑAS ({userProfile.reviews.length})
                   </div>
                   <Card className="cardMyReviews">
                     <div>
@@ -360,7 +359,7 @@ export const Profile: React.FC = () => {
           {adminApp && (
             <>
               <div className="categoryTitle35">
-                ADMIN APP OPTIONS
+                ADMINISTRACIÓN APP
               </div>
               <Card className="cardMyReviews">
                 <div className="adminAppGroup">

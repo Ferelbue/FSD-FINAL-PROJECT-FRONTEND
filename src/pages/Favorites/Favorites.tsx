@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import "./Favorites.css";
 import { categoryData } from "../../app/slices/categorySlice";
 import { useSelector, useDispatch } from "react-redux";
-import { userData } from "../../app/slices/userSlice";
+import { userData, userout } from "../../app/slices/userSlice";
 import { Card } from "react-bootstrap";
 import { updateProductDetail } from "../../app/slices/productDetailSlice";
 import { useNavigate } from "react-router-dom";
@@ -23,6 +23,11 @@ export const Favorites: React.FC = () => {
 
   const notiMe = async (): Promise<void> => {
     const fetched2: DataFetched2 = await Notification(rdxUser.credentials.token);
+    if (fetched2.message === "JWT NOT VALID OR MALFORMED") {
+      dispatch(userout({ credentials: "" }));
+      dispatch(updateNotification({ notification: "" }));
+      navigate("/")
+    }
     if (fetched2.data[0].length === 0 && fetched2.data[1].length === 0) {
       dispatch(updateNotification({ notification: false }));
     } else {
@@ -53,7 +58,6 @@ export const Favorites: React.FC = () => {
 
       if (fetched.success) {
         setProducts(fetched.data);
-        console.log(fetched, "hola soy fetched");
       } else {
         setError(fetched.message);
       }
@@ -75,17 +79,14 @@ export const Favorites: React.FC = () => {
   }, [rdxCategory]);
 
   const handleDetail = (productId: number) => {
-    console.log(productId, "productId")
     dispatch(updateProductDetail({ productDetail: { productId: productId } }));
     navigate("/productDetail")
   }
 
-  console.log(products, "products")
-
   return (
     <div className="category">
       <div className="categoryTitle2">
-        MY FAVORITES
+        MIS FAVORITOS
       </div>
       {products && products.length > 0 ? (
         <>

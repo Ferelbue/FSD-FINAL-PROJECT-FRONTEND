@@ -4,7 +4,7 @@ import { DataFetched2, DataReview, MessageData, ProductData2, StarsData } from "
 import { useEffect, useState } from "react";
 import "./WriteReview.css";
 import { useSelector, } from "react-redux";
-import { userData } from "../../app/slices/userSlice";
+import { userData, userout } from "../../app/slices/userSlice";
 import { Card, Dropdown } from "react-bootstrap";
 import dayjs from "dayjs";
 import { productDetailData } from "../../app/slices/productDetailSlice";
@@ -32,6 +32,11 @@ export const WriteReview: React.FC = () => {
 
   const notiMe = async (): Promise<void> => {
     const fetched2: DataFetched2 = await Notification(rdxUser.credentials.token);
+    if (fetched2.message === "JWT NOT VALID OR MALFORMED") {
+      dispatch(userout({ credentials: "" }));
+      dispatch(updateNotification({ notification: "" }));
+      navigate("/")
+    }
     if (fetched2.data[0].length === 0 && fetched2.data[1].length === 0) {
       dispatch(updateNotification({ notification: false }));
     } else {

@@ -4,7 +4,6 @@ export const ROOT: string = "https://fsd-final-project-backend-production.up.rai
 export const ROOT2: string = "https://fsd-final-project-backend-production.up.railway.app/";
 
 export const BringProducts = async (criteria: string, criteria3: string, pag: string, limit: string): Promise<any> => {
-    console.log(criteria, criteria3, pag, limit, "BringProducts");
     const options = {
         method: "GET",
         headers: {
@@ -95,7 +94,6 @@ export const LoginMe = async (credentials: LoginData): Promise<any> => {
 }
 
 export const RegisterMe = async (credentials: LoginData): Promise<any> => {
-    console.log(credentials, "RegisterMe");
     const options = {
         method: "POST",
         headers: {
@@ -262,7 +260,6 @@ export const Notification = async (token: string): Promise<any> => {
 }
 
 export const EraseNotification = async (productId: number, userUserId: number, token: string): Promise<any> => {
-    console.log(productId, userUserId, token, "EraseNotification");
     const options = {
         method: "PUT",
         headers: {
@@ -429,7 +426,6 @@ export const FavoriteProducts = async (token: string): Promise<any> => {
 }
 
 export const UploadImage = async (formData: FormData, token: string): Promise<any> => {
-    console.log(formData, token, "UploadImage");
     const options = {
         method: "POST",
         headers: {
@@ -530,7 +526,6 @@ export const BringUserProducts = async (token: string): Promise<any> => {
 }
 
 export const UploadUserProfile = async (user: UserUpdateData, token: string): Promise<any> => {
-    console.log(user, token, "UploadUserProfile");
     const options = {
         method: "PUT",
         headers: {
@@ -555,7 +550,6 @@ export const UploadUserProfile = async (user: UserUpdateData, token: string): Pr
 }
 
 export const BringAllUsers = async (token: string, criteria: string, page: number): Promise<any> => {
-    console.log(token, criteria, page, "BringAllUsers");
     const options = {
         method: "GET",
         headers: {
@@ -570,7 +564,6 @@ export const BringAllUsers = async (token: string, criteria: string, page: numbe
         if (!response.ok) {
             throw new Error(data.message);
         }
-        console.log(data, "BringAllUsers");
         return data;
 
     } catch (error) {
@@ -592,7 +585,6 @@ export const BringAllUsersNumber = async (token: string): Promise<any> => {
         if (!response.ok) {
             throw new Error(data.message);
         }
-        console.log(data, "BringAllUsers");
         return data;
 
     } catch (error) {
@@ -601,7 +593,6 @@ export const BringAllUsersNumber = async (token: string): Promise<any> => {
 }
 
 export const DeleteUserById = async (token: string, userId: number): Promise<any> => {
-    console.log(token, userId, "DeleteUserById");
     const options = {
         method: "DELETE",
         headers: {
@@ -625,7 +616,6 @@ export const DeleteUserById = async (token: string, userId: number): Promise<any
 }
 
 export const EditUserRole = async (token: string, userId: number, role: string): Promise<any> => {
-    console.log(token, userId, role, "EditUserRole");
     const options = {
         method: "PUT",
         headers: {
@@ -652,7 +642,6 @@ export const EditUserRole = async (token: string, userId: number, role: string):
 }
 
 export const DeleteProductById = async (token: string, productId: number): Promise<any> => {
-    console.log(token, productId, "DeleteProductById");
     const options = {
         method: "DELETE",
         headers: {
@@ -690,7 +679,6 @@ export const BringAllmessages = async (token: string, criteria: string, page: nu
         if (!response.ok) {
             throw new Error(data.message);
         }
-        console.log(data, "BringAllmessages");
         return data;
 
     } catch (error) {
@@ -713,7 +701,6 @@ export const BringAllMessagesNumber = async (token: string): Promise<any> => {
         if (!response.ok) {
             throw new Error(data.message);
         }
-        console.log(data, "BringAllmessages");
         return data;
 
     } catch (error) {
@@ -722,7 +709,6 @@ export const BringAllMessagesNumber = async (token: string): Promise<any> => {
 }
 
 export const DeleteMessageById = async (token: string, messageId: number): Promise<any> => {
-    console.log(token, messageId, "DeleteUserById");
     const options = {
         method: "DELETE",
         headers: {

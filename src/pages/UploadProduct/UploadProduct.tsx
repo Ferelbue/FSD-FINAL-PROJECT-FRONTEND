@@ -4,7 +4,7 @@ import { CategoryData, DataFetched2, FileImageData, MessageData, ProductData5 } 
 import { useEffect, useState, useRef } from "react";
 import "./UploadProduct.css";
 import { useSelector } from "react-redux";
-import { userData } from "../../app/slices/userSlice";
+import { userData, userout } from "../../app/slices/userSlice";
 import { Card, Dropdown, Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { productDetailData } from "../../app/slices/productDetailSlice";
@@ -28,6 +28,11 @@ export const UploadProduct: React.FC = () => {
 
   const notiMe = async (): Promise<void> => {
     const fetched2: DataFetched2 = await Notification(rdxUser.credentials.token);
+    if (fetched2.message === "JWT NOT VALID OR MALFORMED") {
+      dispatch(userout({ credentials: "" }));
+      dispatch(updateNotification({ notification: "" }));
+      navigate("/")
+    }
     if (fetched2.data[0].length === 0 && fetched2.data[1].length === 0) {
       dispatch(updateNotification({ notification: false }));
     } else {
@@ -104,12 +109,10 @@ export const UploadProduct: React.FC = () => {
 
   useEffect(() => {
     const bringData = async () => {
-      console.log(rdxProductDetail.productDetail, "rdxCategory.category")
       const fetched: DataFetched2 = await BringProductDetail(rdxProductDetail.productDetail.productId);
 
       if (fetched.success) {
         setProducts(fetched.data);
-        console.log(fetched, "hola soy fetched");
       } else {
         setError(fetched.message);
         console.log(error)
@@ -141,7 +144,6 @@ export const UploadProduct: React.FC = () => {
     } else {
       console.error('No file selected');
     }
-    console.log(formData, rdxUser.credentials.token, "formData")
     const fetched: DataFetched2 = await UploadImage(formData, rdxUser.credentials.token);
     console.log(fetched, "fetched")
 
@@ -174,7 +176,7 @@ export const UploadProduct: React.FC = () => {
 
     <div className="home">
       <div className="categoryTitle3">
-        UPLOAD PRODUCT
+        SUBE UN PRODUCTO
       </div>
       {!product ? (
         <div className="spinnerCenter">
@@ -255,7 +257,7 @@ export const UploadProduct: React.FC = () => {
                       <form onSubmit={handleSubmit}>
                         <input type="file" ref={fileInput} onChange={handleSubmit} id="fileInput" style={{ width: 0.1, height: 0.1, opacity: 0, overflow: 'hidden', position: 'absolute', zIndex: -1 }} />
                         <label htmlFor="fileInput" className="custom-file-upload">
-                          Upload Image
+                          Sube una imagen
                         </label>
                       </form>
                     </div>
@@ -320,7 +322,7 @@ export const UploadProduct: React.FC = () => {
                     maxLength={20}
                   />
                 </div>
-                <button className="buttonLogin2" onClick={() => handleUploadProduct()}>UPLOAD</button>
+                <button className="buttonLogin2" onClick={() => handleUploadProduct()}>ENVIAR!</button>
               </Card>
             </div>
           </div>

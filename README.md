@@ -2,7 +2,7 @@
 ---
 <div align="center">
 
-![Vídeo sin título ‐ Hecho con Clipchamp (1)](https://github.com/Ferelbue/FSD-PROJECT-7-FRONTEND-2/assets/154675938/d144f3a0-ac7c-48af-87d9-eaefb9646e90)
+![Vídeo sin título ‐ Hecho con Clipchamp (2)](https://github.com/Ferelbue/FSD-FINAL-PROJECT-BACKEND/assets/154675938/e4ab5f2b-d874-46e3-a941-0a474722099b)
 
  </div>
 

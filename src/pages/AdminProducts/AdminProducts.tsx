@@ -4,7 +4,7 @@ import { DataFetched2, DataFetched3, ProductData } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./AdminProducts.css";
 import { useSelector, useDispatch } from "react-redux";
-import { userData } from "../../app/slices/userSlice";
+import { userData, userout } from "../../app/slices/userSlice";
 import { updateNotification } from "../../app/slices/notificationSlice";
 import { ROOT2 } from "../../services/apiCalls"
 import { CustomInput } from "../../common/CustomInput/CustomInput";
@@ -26,6 +26,11 @@ export const AdminProducts: React.FC = () => {
 
   const notiMe = async (): Promise<void> => {
     const fetched2: DataFetched2 = await Notification(rdxUser.credentials.token);
+    if (fetched2.message === "JWT NOT VALID OR MALFORMED") {
+      dispatch(userout({ credentials: "" }));
+      dispatch(updateNotification({ notification: "" }));
+      navigate("/")
+    }
     if (fetched2.data[0].length === 0 && fetched2.data[1].length === 0) {
       dispatch(updateNotification({ notification: false }));
     } else {
@@ -52,13 +57,10 @@ export const AdminProducts: React.FC = () => {
   const searchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCriteria2(e.target.value)
     setNameCriteria2(e.target.value.toLowerCase())
-    console.log(nameCriteria2, "criteria2");
   }
 
   useEffect(() => {
     const bringData = async () => {
-
-      console.log(searchRdx2.criteria, "searchRdx2.criteria");
       const fetched: DataFetched2 = await BringProducts(searchRdx2.criteria, "", currentPage, "10");
       const fetched2: DataFetched2 = await BringProductsNumber();
       setProducts(fetched.data);
@@ -80,7 +82,6 @@ export const AdminProducts: React.FC = () => {
 
       const fetched: DataFetched2 = await BringProducts("", "", currentPage, "10");
       setProducts(fetched.data);
-      console.log(fetched.data, "fetched");
     } catch (error: unknown) {
       if (error instanceof Error) {
         setError({
@@ -97,14 +98,14 @@ export const AdminProducts: React.FC = () => {
 
       <div className="categoryTitle3">
         <div className="categoryTitle37">
-          ADMIN PRODUCTS
+          ADMIN PRODUCTOS
         </div>
         <div>
           <div className="inputHeader">
             <CustomInput
               className={`inputSearch2`}
               type="text"
-              placeholder="search a product...."
+              placeholder="busca un producto..."
               name="product"
               disabled={false}
               value={criteria2 || ""}
