@@ -4,7 +4,7 @@ import { DataFetched2, FavoriteData, ProductData2 } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./ProductDetail.css";
 import { useSelector } from "react-redux";
-import { userData, userout } from "../../app/slices/userSlice";
+import { userData } from "../../app/slices/userSlice";
 import { Card, Toast } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
@@ -30,11 +30,6 @@ export const ProductDetail: React.FC = () => {
 
   const notiMe = async (): Promise<void> => {
     const fetched2: DataFetched2 = await Notification(rdxUser.credentials.token);
-    if (fetched2.message === "JWT NOT VALID OR MALFORMED") {
-      dispatch(userout({ credentials: "" }));
-      dispatch(updateNotification({ notification: "" }));
-      navigate("/")
-    }
     if (fetched2.data[0].length === 0 && fetched2.data[1].length === 0) {
       dispatch(updateNotification({ notification: false }));
     } else {
