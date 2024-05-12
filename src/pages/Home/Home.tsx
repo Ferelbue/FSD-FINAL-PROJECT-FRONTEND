@@ -28,7 +28,6 @@ export const Home: React.FC = () => {
 
   const notiMe = async (): Promise<void> => {
     const fetched2: DataFetched2 = await Notification(rdxUser.credentials.token);
-    console.log(fetched2.message, "fetched2")
 
     if (fetched2.message === "JWT NOT VALID OR MALFORMED") {
       dispatch(userout({ credentials: "" }));
@@ -44,7 +43,6 @@ export const Home: React.FC = () => {
 
 
   }
-  console.log(rdxUploadOk, "rdxUploadOk")
   useEffect(() => {
     if (rdxUploadOk.uploadOk === true) {
       setUploadOk(true)
@@ -57,7 +55,6 @@ export const Home: React.FC = () => {
       const fetched: DataFetched = await BringProducts("", "", "", "");
       notiMe();
       if (fetched.success) {
-        console.log(fetched, "hola soy fetched");
         setFirstFetch(true);
 
         setProducts(fetched.data);
@@ -81,12 +78,10 @@ export const Home: React.FC = () => {
   }, [rdxSearch3.criteria]);
 
   const handleDetail = (productId: number, ownerId: number) => {
-    console.log(productId, "productId")
     dispatch(updateProductDetail({ productDetail: { productId: productId, userUserId: ownerId } }));
     navigate("/productDetail")
   }
 
-  console.log(products, "products")
   return (
     <div className="home">
       {products && products.length === 0 ? (

@@ -4,7 +4,7 @@ import { DataFetched2, DataFetched3, UserData, UserUpdateRole } from "../../inte
 import { useEffect, useState } from "react";
 import "./AdminUsers.css";
 import { useSelector, useDispatch } from "react-redux";
-import { userData } from "../../app/slices/userSlice";
+import { userData, userout } from "../../app/slices/userSlice";
 import { updateNotification } from "../../app/slices/notificationSlice";
 import { ROOT2 } from "../../services/apiCalls"
 import { CustomInput } from "../../common/CustomInput/CustomInput";
@@ -39,6 +39,11 @@ export const AdminUsers: React.FC = () => {
 
   const notiMe = async (): Promise<void> => {
     const fetched2: DataFetched2 = await Notification(rdxUser.credentials.token);
+    if (fetched2.message === "JWT NOT VALID OR MALFORMED") {
+      dispatch(userout({ credentials: "" }));
+      dispatch(updateNotification({ notification: "" }));
+      navigate("/")
+    }
     if (fetched2.data[0].length === 0 && fetched2.data[1].length === 0) {
       dispatch(updateNotification({ notification: false }));
     } else {
@@ -69,12 +74,8 @@ export const AdminUsers: React.FC = () => {
 
   useEffect(() => {
     const bringData = async () => {
-
-      console.log(currentPage, "searchRdx2.criteria");
       const fetched: DataFetched2 = await BringAllUsers(rdxUser.credentials.token, searchRdx2.criteria, currentPage);
       const fetched2: DataFetched2 = await BringAllUsersNumber(rdxUser.credentials.token);
-
-      console.log(fetched.data, "fetched");
 
       setUsers(fetched.data);
       setMaxPag(Math.ceil(fetched2.data.length / 10))
@@ -106,7 +107,6 @@ export const AdminUsers: React.FC = () => {
   };
 
   const handleEditRole = async (userId: number) => {
-    console.log(userId, "userId")
     setEditRole({
       ...editRole,
       [userId]: true
@@ -133,21 +133,20 @@ export const AdminUsers: React.FC = () => {
       console.log(error, "error")
     }
   }
-  console.log(rdxUser.credentials.user.roleName, "rdxUser.credentials.userRole")
 
   return (
     <div className="category">
 
       <div className="categoryTitle3">
         <div className="categoryTitle37">
-          ADMIN USERS
+          ADMIN USUARIOS
         </div>
         <div>
           <div className="inputHeader">
             <CustomInput
               className={`inputSearch2`}
               type="text"
-              placeholder="search a user...."
+              placeholder="busca un usuario..."
               name="user"
               disabled={false}
               value={criteria2 || ""}

@@ -4,7 +4,7 @@ import { DataFetched2, FavoriteData, ProductData2 } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./ProductDetail.css";
 import { useSelector } from "react-redux";
-import { userData } from "../../app/slices/userSlice";
+import { userData, userout } from "../../app/slices/userSlice";
 import { Card, Toast } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
@@ -30,6 +30,11 @@ export const ProductDetail: React.FC = () => {
 
   const notiMe = async (): Promise<void> => {
     const fetched2: DataFetched2 = await Notification(rdxUser.credentials.token);
+    if (fetched2.message === "JWT NOT VALID OR MALFORMED") {
+      dispatch(userout({ credentials: "" }));
+      dispatch(updateNotification({ notification: "" }));
+      navigate("/")
+    }
     if (fetched2.data[0].length === 0 && fetched2.data[1].length === 0) {
       dispatch(updateNotification({ notification: false }));
     } else {
@@ -40,7 +45,6 @@ export const ProductDetail: React.FC = () => {
 
   useEffect(() => {
     const bringData = async () => {
-      console.log(rdxProductDetail.productDetail, "rdxCategory.category")
       const fetched: DataFetched2 = await BringProductDetail(rdxProductDetail.productDetail.productId);
 
       if (fetched.success) {
@@ -65,7 +69,6 @@ export const ProductDetail: React.FC = () => {
   }, [rdxProductDetail]);
 
   const handleConversation = async () => {
-    console.log(rdxUser)
     if (!rdxUser.credentials) {
       navigate("/login")
     } else {
@@ -77,16 +80,14 @@ export const ProductDetail: React.FC = () => {
     const bringData = async () => {
       const fetched2: DataFetched2 = await BringFavoriteUserProduct(rdxProductDetail.productDetail.productId, rdxUser.credentials.token);
       setFavorite(fetched2.data);
-      console.log(fetched2, "fetched2")
     }
     bringData();
   }, [addTofavorite]);
 
   useEffect(() => {
-    console.log(rdxReviewOk.reviewOk, "dasdasdasdsdasjhdkjasfdbasjasm,.fnasmdnmasndasdaskdaskdasmkdmas-dmsadlñ")
     if (rdxReviewOk.reviewOk === true) {
       setReviewOk(true)
-      setToastMessage("Review sent successfully")
+      setToastMessage("Reseña enviada correctamente")
     }
   }, []);
 
@@ -99,13 +100,9 @@ export const ProductDetail: React.FC = () => {
       setToastMessage(favorite?.length === 0 ? "Producto añadido a favoritos" : "Producto eliminado de favoritos");
       setAddFavorite(true)
     }
-
-    console.log(fetched3.success, "fetched3")
     setAddToFavorite(fetched3.data);
 
   }
-  console.log(favorite, "favorite")
-  console.log(addTofavorite, "product")
 
   return (
     <div className="home">

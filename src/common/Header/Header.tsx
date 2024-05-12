@@ -48,7 +48,6 @@ const Header = () => {
                     const fetchedData: DataFetched2 = await BringProducts(searchRdx.criteria, "", "", "");
 
                     setProductsFetched(fetchedData);
-                    console.log(fetchedData, "fetchedData")
                 } catch (error) {
                     setError(productsFetched.message);
                 }
@@ -115,7 +114,6 @@ const Header = () => {
     };
 
     const handleDetail = (productId: number, ownerId: number) => {
-        console.log(productId, "productId")
         dispatch(updateProductDetail({ productDetail: { productId: productId, userUserId: ownerId } }));
         setCriteria("")
         setNameCriteria("")
@@ -146,7 +144,7 @@ const Header = () => {
                                             <CustomInput
                                                 className={`inputSearch`}
                                                 type="text"
-                                                placeholder="search a product...."
+                                                placeholder="busca un producto..."
                                                 name="user"
                                                 disabled={false}
                                                 value={criteria || ""}
@@ -189,17 +187,17 @@ const Header = () => {
                                                 null
                                             ) : (
                                                 <>
-                                                    <div className="imagePlus" title="Upload product" onClick={() => navigate('/uploadProduct')} />
-                                                    <div className="imageCuore" title="My favorites" onClick={() => navigate('/favorites')} />
+                                                    <div className="imagePlus" title="Sube un producto" onClick={() => navigate('/uploadProduct')} />
+                                                    <div className="imageCuore" title="Mis favoritos" onClick={() => navigate('/favorites')} />
                                                     {(rdxNotification.notification === true)
                                                         ? (
-                                                            <div className="imageChatNot" title="My chats" onClick={() => navigate('/chats')} />
+                                                            <div className="imageChatNot" title="Mis chats" onClick={() => navigate('/chats')} />
                                                         ) : (
-                                                            <div className="imageChat" title="My chats" onClick={() => navigate('/chats')} />
+                                                            <div className="imageChat" title="Mis chats" onClick={() => navigate('/chats')} />
                                                         )
                                                     }
-                                                    <div className="imageUser" title="My profile" onClick={() => navigate('/profile')} />
-                                                    <div className="imageExit" title="Log Out" onClick={() => handleLogout()} />
+                                                    <div className="imageUser" title="Mi perfil" onClick={() => navigate('/profile')} />
+                                                    <div className="imageExit" title="Salir" onClick={() => handleLogout()} />
                                                 </>
                                             )
                                         }
@@ -284,7 +282,7 @@ const Header = () => {
                                     <CustomInput
                                         className={`inputSearch22`}
                                         type="text"
-                                        placeholder="filter by city..."
+                                        placeholder="filtra por ciudad..."
                                         name="user"
                                         disabled={false}
                                         value={criteria3 || ""}
@@ -311,7 +309,7 @@ const Header = () => {
                                                     <CustomInput
                                                         className={`inputSearch`}
                                                         type="text"
-                                                        placeholder="search a product...."
+                                                        placeholder="busca un producto..."
                                                         name="user"
                                                         disabled={false}
                                                         value={criteria || ""}
@@ -354,17 +352,17 @@ const Header = () => {
                                                         null
                                                     ) : (
                                                         <>
-                                                            <div className="imagePlus" title="Upload product" onClick={() => navigate('/uploadProduct')} />
-                                                            <div className="imageCuore" title="My favorites" onClick={() => navigate('/favorites')} />
+                                                            <div className="imagePlus" title="Sube un producto" onClick={() => navigate('/uploadProduct')} />
+                                                            <div className="imageCuore" title="Mis favoritos" onClick={() => navigate('/favorites')} />
                                                             {(rdxNotification.notification === true)
                                                                 ? (
-                                                                    <div className="imageChatNot" title="My chats" onClick={() => navigate('/chats')} />
+                                                                    <div className="imageChatNot" title="Mis chats" onClick={() => navigate('/chats')} />
                                                                 ) : (
-                                                                    <div className="imageChat" title="My chats" onClick={() => navigate('/chats')} />
+                                                                    <div className="imageChat" title="Mis chats" onClick={() => navigate('/chats')} />
                                                                 )
                                                             }
-                                                            <div className="imageUser" title="My profile" onClick={() => navigate('/profile')} />
-                                                            <div className="imageExit" title="Log Out" onClick={() => handleLogout()} />
+                                                            <div className="imageUser" title="Mi perfil" onClick={() => navigate('/profile')} />
+                                                            <div className="imageExit" title="Salir" onClick={() => handleLogout()} />
                                                         </>
                                                     )
                                                 }
@@ -449,7 +447,7 @@ const Header = () => {
                                             <CustomInput
                                                 className={`inputSearch22`}
                                                 type="text"
-                                                placeholder="filter by city..."
+                                                placeholder="filtra por ciudad..."
                                                 name="user"
                                                 disabled={false}
                                                 value={criteria3 || ""}
@@ -475,7 +473,7 @@ const Header = () => {
                                                         <CustomInput
                                                             className={`inputSearch`}
                                                             type="text"
-                                                            placeholder="search a product...."
+                                                            placeholder="busca un producto..."
                                                             name="user"
                                                             disabled={false}
                                                             value={criteria || ""}
@@ -518,17 +516,17 @@ const Header = () => {
                                                             null
                                                         ) : (
                                                             <>
-                                                                <div className="imagePlus" title="Upload product" onClick={() => navigate('/uploadProduct')} />
-                                                                <div className="imageCuore" title="My favorites" onClick={() => navigate('/favorites')} />
+                                                                <div className="imagePlus" title="Sube un producto" onClick={() => navigate('/uploadProduct')} />
+                                                                <div className="imageCuore" title="Mis favoritos" onClick={() => navigate('/favorites')} />
                                                                 {(rdxNotification.notification === true)
                                                                     ? (
-                                                                        <div className="imageChatNot" title="My chats" onClick={() => navigate('/chats')} />
+                                                                        <div className="imageChatNot" title="Mis chats" onClick={() => navigate('/chats')} />
                                                                     ) : (
-                                                                        <div className="imageChat" title="My chats" onClick={() => navigate('/chats')} />
+                                                                        <div className="imageChat" title="Mis chats" onClick={() => navigate('/chats')} />
                                                                     )
                                                                 }
-                                                                <div className="imageUser" title="My profile" onClick={() => navigate('/profile')} />
-                                                                <div className="imageExit" title="Log Out" onClick={() => handleLogout()} />
+                                                                <div className="imageUser" title="Mi perfil" onClick={() => navigate('/profile')} />
+                                                                <div className="imageExit" title="Salir" onClick={() => handleLogout()} />
                                                             </>
                                                         )
                                                     }
@@ -613,7 +611,7 @@ const Header = () => {
                                                 <CustomInput
                                                     className={`inputSearch22`}
                                                     type="text"
-                                                    placeholder="filter by city..."
+                                                    placeholder="filtra por ciudad..."
                                                     name="user"
                                                     disabled={false}
                                                     value={criteria3 || ""}

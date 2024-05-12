@@ -4,7 +4,7 @@ import { ChatData, DataFetched2 } from "../../interfaces";
 import { useEffect, useState } from "react";
 import "./Chats.css";
 import { useSelector, } from "react-redux";
-import { userData } from "../../app/slices/userSlice";
+import { userData, userout } from "../../app/slices/userSlice";
 import { Card } from "react-bootstrap";
 import { productDetailData, updateProductDetail } from "../../app/slices/productDetailSlice";
 import { useNavigate } from "react-router-dom";
@@ -27,6 +27,11 @@ export const Chats: React.FC = () => {
 
   const notiMe = async (): Promise<void> => {
     const fetched2: DataFetched2 = await Notification(rdxUser.credentials.token);
+    if (fetched2.message === "JWT NOT VALID OR MALFORMED") {
+      dispatch(userout({ credentials: "" }));
+      dispatch(updateNotification({ notification: "" }));
+      navigate("/")
+    }
     if (fetched2.data[0].length === 0 && fetched2.data[1].length === 0) {
       dispatch(updateNotification({ notification: false }));
     } else {
@@ -102,7 +107,7 @@ export const Chats: React.FC = () => {
               <div>
                 <div className="categoryTitle312">
                   <div>
-                    MY CHATS
+                    MIS CHATS
                   </div>
                   <div className="iconsProfile">
                     {buyingNoti
@@ -116,7 +121,7 @@ export const Chats: React.FC = () => {
                   </div>
                 </div>
                 <div className="categoryTitle351">
-                  {buying ? "BUYING" : "SELLING"}
+                  {buying ? "COMPRO" : "VENDO"}
                 </div>
                 <div className="mx-auto">
                   <Card className="cardProduct4">

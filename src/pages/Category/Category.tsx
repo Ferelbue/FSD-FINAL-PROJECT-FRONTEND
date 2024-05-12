@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import "./Category.css";
 import { categoryData } from "../../app/slices/categorySlice";
 import { useSelector, useDispatch } from "react-redux";
-import { userData } from "../../app/slices/userSlice";
+import { userData, userout } from "../../app/slices/userSlice";
 import { Card, Spinner } from "react-bootstrap";
 import { updateProductDetail } from "../../app/slices/productDetailSlice";
 import { useNavigate } from "react-router-dom";
@@ -22,6 +22,11 @@ export const Category: React.FC = () => {
 
   const notiMe = async (): Promise<void> => {
     const fetched2: DataFetched2 = await Notification(rdxUser.credentials.token);
+    if (fetched2.message === "JWT NOT VALID OR MALFORMED") {
+      dispatch(userout({ credentials: "" }));
+      dispatch(updateNotification({ notification: "" }));
+      navigate("/")
+    }
     if (fetched2.data[0].length === 0 && fetched2.data[1].length === 0) {
       dispatch(updateNotification({ notification: false }));
     } else {
@@ -31,14 +36,12 @@ export const Category: React.FC = () => {
   notiMe();
 
   useEffect(() => {
-    console.log("asd")
     const bringData = async () => {
 
       const fetched: DataFetched = await BringCategoryProducts(rdxCategory.category);
 
       if (fetched.success) {
         setProducts(fetched.data);
-        console.log(fetched, "hola soy fetched");
       } else {
         setError(fetched.message);
       }
@@ -59,7 +62,6 @@ export const Category: React.FC = () => {
   }, [rdxCategory]);
 
   const handleDetail = (productId: number, ownerId: number) => {
-    console.log(productId, "productId")
     dispatch(updateProductDetail({ productDetail: { productId: productId, userUserId: ownerId } }));
     navigate("/productDetail")
   }
