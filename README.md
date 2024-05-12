@@ -20,7 +20,7 @@ There is also an administration view where you can have an overall control of th
 - [Live Test 📡](#live-test-satellite)
 - [Installation 🚀](#installation-rocket)
 - [App pages / routes 📑](#app-pages--routes-bookmark_tabs)
-- [Future version 🔮](#future-versions-crystal_ball)
+- [Future version 🔮](#next-versions-soon)
 - [Author ✒️](#author-black_nib)
 - [Acknowledgements 🎓](#acknowledgements-mortar_board)
 
@@ -35,7 +35,6 @@ There is also an administration view where you can have an overall control of th
 <img src="https://img.shields.io/badge/-Vite-747bff?style=for-the-badge&logo=vite&logoColor=white">
 <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js" />
 <img src="https://img.shields.io/badge/bootstrap-8011F5?style=for-the-badge&logo=bootstrap&logoColor=white" alt="Node.js" />
-<img src="https://img.shields.io/badge/railway-0B615E?style=for-the-badge&logo=railway&logoColor=white" alt="" />
 <img src="https://img.shields.io/badge/AWS-F39C12?style=for-the-badge&logo=amazon&logoColor=white" alt="aws" />
  </div>
 
@@ -83,14 +82,14 @@ You will need the [backend](https://github.com/Ferelbue/FSD-FINAL-PROJECT-BACKEN
 
 ## App pages / routes :bookmark_tabs:
 
-**PUBLIC**
+**PUBLIC**🌍
 - `/` - Home page.
 - `/category` - Products by category.
 - `/productDetail` - Detail of a product.
 - `/register` - Register page.
 - `/login` - Login page.
 
-**USER**
+**USER**🌒
 - `/uploadProduct` - Upload product page.
 - `/favorites` - My favorite products page.
 - `/chats`- Page with all the conversations.
@@ -99,13 +98,13 @@ You will need the [backend](https://github.com/Ferelbue/FSD-FINAL-PROJECT-BACKEN
 - `/profile` - Profile page. My products uploads. My reviews.
 - `/followprofile` - Ckeck friends profiles and posts.
 
-**ADMIN**
+**ADMIN**🌓
 
 - `/profile` - Administrator exclusive menu on profile page.
 - `/adminUsers` - See, filter and delete users.
 - `/adminProducts` - See, filter and delete products.
 
-**SUPER-ADMIN**
+**SUPER-ADMIN**🌕
 
 - `/adminUsers` - See, filter and delete users. Also only super-admin can update a role user.
 
@@ -115,13 +114,6 @@ You will need the [backend](https://github.com/Ferelbue/FSD-FINAL-PROJECT-BACKEN
 
 - **Location search**📍- Users can search products around them.
 - **Payment gateway** 💳 - Users could pay through the app.
-
----
-
-
-## Posible Bugs :alien:
-
-- **a** - 
 
 ---
 
