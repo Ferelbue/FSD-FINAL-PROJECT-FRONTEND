@@ -6,7 +6,7 @@
 
  </div>
 
-This is the frontend of the final project of the Fullstack Developer Bootcamp, showcasing real-world frontend development skills with REACT and REDUX.
+This is the frontend of the final project of the Fullstack Developer Bootcamp, showcasing real-world frontend development skills with REACT, TYPESCRIPT and REDUX.
 The project consists of a tool rental app. Where users can search and upload tools to rent. The app has a chat where users can talk and discuss details with the owner of the product.
 
 There is also an administration view where you can have an overall control of the application.
