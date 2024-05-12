@@ -152,7 +152,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 17vw;
+    width: 15vw;
     overflow: hidden !important;
     text-overflow: ellipsis;
     -webkit-line-clamp: 4;
@@ -160,7 +160,7 @@
     padding: 0.1em;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
     .cardDescription {
         width: 70vw;
         padding: 0.1em;
