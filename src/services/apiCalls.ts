@@ -1,7 +1,7 @@
 import { DataFetched, LoginData, UserUpdateData } from "../interfaces";
 
-export const ROOT: string = "https://fsd-final-project-backend-production.up.railway.app/api/";
-export const ROOT2: string = "https://fsd-final-project-backend-production.up.railway.app/";
+export const ROOT: string = "https://tattoostudiosorrymom.zeabur.app/api/";
+export const ROOT2: string = "https://tattoostudiosorrymom.zeabur.app/";
 
 export const BringProducts = async (criteria: string, criteria3: string, pag: string, limit: string): Promise<any> => {
     const options = {
